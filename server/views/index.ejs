@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>北科大选课系统第三方客户端</title>
+      <meta charset="UTF-8"/>
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+      <script type="text/javascript">
+            Date.prototype.Format = function (fmt) { //author: meizz 
+                var o = {
+                    "M+": this.getMonth() + 1, //月份 
+                    "d+": this.getDate(), //日 
+                    "h+": this.getHours(), //小时 
+                    "m+": this.getMinutes(), //分 
+                    "s+": this.getSeconds(), //秒 
+                    "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+                    "S": this.getMilliseconds() //毫秒 
+                };
+                if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+                for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                return fmt;
+            }
+      </script>
+    </head>
+    <body>
+
+    <h2>北科大选课系统第三方客户端</h2>
+    <h3>源码地址：<a href="https://github.com/nladuo/ustb_choose_course_system">https://github.com/nladuo/ustb_choose_course_system</a></h3>
+    <h3>软件说明：本软件为开源软件，仅供学习使用</h3>
+    <h3>下载列表：</h3>
+    <table border="1">
+    <tr>
+        <td>类别</td>
+        <td>当前版本</td>
+        <td>下载地址</td>
+        <td>说明</td>
+    </tr>
+    <% for(var i=0; i<app_results.length; i++) {%>
+    <tr>
+        <td><%=app_results[i].type_name %></td>
+        <td><%=app_results[i].version %></td>
+        <td><a href="/download?id=<%=app_results[i].id %>"><%=app_results[i].app_name %></a></td>
+        <td><%=app_results[i].note %></td>
+    </tr>
+    <% } %>       
+    </table>
+
+    <h3>软件不满意?吐个槽:</h3>
+    <div class="kalen_container">
+        <form name="form1" onsubmit="return isEmpty();" action="/add" method="post">
+          <ol>
+              <li>
+                  <textarea placeholder="你可以在这里输入你的吐槽" name="message"  rows="4" cols="50" ></textarea>
+              </li>
+              <li>
+                  <input placeholder="输入你的名字" name="name" class="text" />
+                  <input type="submit" value="发表吐槽" class="button" />
+              </li>
+          </ol>
+        </form>
+    </div>
+
+
+
+    <script>
+        function isEmpty(){
+            if (document.form1.message.value.trim() == "") {
+                alert("评论信息不得为空");
+                document.form1.message.focus();
+                return false;
+            }
+            
+            if (document.form1.name.value.trim() == "") {
+                alert("请输入您的姓名!");
+                document.form1.name.focus();
+                return false;
+            }
+            return true;
+        }
+        function  trim(str)
+        {
+            for(var  i  =  0  ;  i<str.length  &&  str.charAt(i)=="  "  ;  i++  )  ;
+            for(var  j  =str.length;  j>0  &&  str.charAt(j-1)=="  "  ;  j--)  ;
+                if(i>j)  return  "";  
+            return  str.substring(i,j);  
+        }
+    </script>
+
+    <h3>吐槽列表:</h3>
+    <% if ( message_results.length == 0) { %>
+        暂无吐糟
+    <% } else { %>    
+        <% for(var i = message_results.length - 1; i >= 0; i--) {%>
+            <div class="kalen_container">
+                 <ol>
+                      <li>
+                          昵称:<%= message_results[i].nickname %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;吐槽时间:<%= new Date(message_results[i].time).Format("yyyy-MM-dd hh:mm:ss") %>
+                      </li>
+                      <li>
+                          吐槽内容:<%= message_results[i].content %>
+                      </li>
+                  </ol>
+            </div>
+        <% } %>
+    <% } %>
+
+
+  </body>
+</html>
