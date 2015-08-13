@@ -17,7 +17,7 @@ extension kalen.app{
         //获取退补选修课URL
         static let SEARCH_COURSE_URL:String = "http://elearning.ustb.edu.cn/choose_courses/choosecourse/normalChooseCourse_normalPublicSelective_loadFormalNormalNotFullPublicSelectiveCourses.action?xqj=null&jc=null&kcm=&_dc=1426047666276&limit=5000&start=0&uid=";
         //post课表URL
-        static let CLASS_TABLE_PAGE_URL:String = "http://elearning.ustb.edu.cn/choose_courses/choosecourse/commonChooseCourse_courseList_loadAllCourseListPage.action"
+        static let FETCH_CLASS_TABLE_URL:String = "http://elearning.ustb.edu.cn/choose_courses/choosecourse/commonChooseCourse_courseList_loadTermCourses.action"
         
         //当前软件版本
         static let VERSION:Double = 1.00

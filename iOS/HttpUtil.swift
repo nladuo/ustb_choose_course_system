@@ -15,7 +15,8 @@ extension kalen.app{
         
         var isError:Bool = false
         var cookieData:String = ""
-        var _delegate:HttpDelegate?;
+        var _delegate:HttpDelegate?
+        
         
         init(delegate:HttpDelegate){
             self._delegate = delegate
@@ -26,13 +27,13 @@ extension kalen.app{
             类方法
         */
         class func get(url:String, cookieStr:String)->NSString{
-            var req:NSMutableURLRequest = NSMutableURLRequest(URL: NSURL(string: url));
+            var req:NSMutableURLRequest = NSMutableURLRequest(URL: NSURL(string: url)!);
             req.addValue(cookieStr, forHTTPHeaderField: "Cookie")
             req.HTTPMethod = "GET"
 
             var data = NSURLConnection.sendSynchronousRequest(req, returningResponse: nil, error: nil)
-            
-            return NSString(data: data!, encoding: NSUTF8StringEncoding)
+        
+            return NSString(data: data!, encoding: NSUTF8StringEncoding)!
             
         }
         
@@ -42,7 +43,7 @@ extension kalen.app{
             类方法
         */
         class func post(url:String, params:Dictionary<NSString, NSString>, cookieStr:String)->NSString{
-            var req = NSMutableURLRequest(URL: NSURL(string: url))
+            var req = NSMutableURLRequest(URL: NSURL(string: url)!)
             req.addValue(cookieStr, forHTTPHeaderField: "Cookie")
             req.HTTPMethod = "POST"
             req.addValue(cookieStr, forHTTPHeaderField: "Cookie")
@@ -57,7 +58,7 @@ extension kalen.app{
             }
             req.HTTPBody = str.dataUsingEncoding(NSUTF8StringEncoding)
             var data = NSURLConnection.sendSynchronousRequest(req, returningResponse: nil, error: nil)
-            return NSString(data: data!, encoding: NSUTF8StringEncoding)
+            return NSString(data: data!, encoding: NSUTF8StringEncoding)!
         }
         
         /*
@@ -75,7 +76,7 @@ extension kalen.app{
         */
         func postWithCookie(url:String, params:Dictionary<NSString, NSString>){
             
-            var req = NSMutableURLRequest(URL: NSURL(string: url))
+            var req = NSMutableURLRequest(URL: NSURL(string: url)!)
             req.HTTPMethod = "POST"
             var str:NSMutableString = NSMutableString(string: "")
             for (key,value) in params{
