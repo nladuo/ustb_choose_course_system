@@ -44,14 +44,16 @@ extension kalen.app{
             for obj2 in array {
                 //println(obj2)
                 var className = obj2.objectForKey("DYKCM") as String
-                //println(obj2)
                 
                 //获取第一个老师的姓名
-                var (tup):(AnyObject) = obj2.objectForKey("JSM")!
+                var tup:[AnyObject] = obj2.objectForKey("JSM")! as [AnyObject]
+                var teacher:String = ""
+                if tup.count != 0 {
+                    teacher = tup[0]["JSM"] as String
+                }else{
+                    teacher = "未知老师"
+                }
 
-                var teacher:String = tup[0]["JSM"] as String
-                println( "teacher --->" + teacher)
-                
                 var srcStr = obj2.objectForKey("SKSJDDSTR") as String
                 if srcStr == "" {
                     classes.append(ClassBean(_where: -1, className: className, teacher: teacher, time: "", position: ""))
@@ -61,38 +63,34 @@ extension kalen.app{
                 //把每一种课的的不同时间地点的分为不同的课程， 将这些添加到classes里面
                 for c in parseClassTable(srcStr, className: className, teacher: teacher) {
                     classes.append(c)
-                    print("JsonParser ---->getCourseTable")
-                    println(c.toString())
-
                 }
                 
-//                //添加配套课
-//                var tup2:[AnyObject] = obj2.objectForKey("PTK") as [AnyObject]
-//
-//                println("\n---------------------->>>")
-//                println("\n---------------------->>>")
-//                println(tup2.count)
-//                println("\n<<----------------------")
-//                println("\n<<----------------------")
-                //for i in 1...
-//                for obj3 in array3 {
-//                    var ClassName = obj3.objectForKey("DYKCM") as String
-//                    //获取第一个老师的姓名
-//                    var array4 = obj3.objectForKey("JSM") as [AnyObject]
-//                    var teacher:String = array4[0].objectForKey("JSM") as String
-//                    
-//                    var srcStr = obj3.objectForKey("SKSJDDSTR") as String
-//                    if srcStr == "" {
-//                        classes.append(ClassBean(_where: -1, className: className, teacher: teacher, time: "", position: ""))
-//                        continue;
-//                    }
-//                    
-//                    //把每一种课的的不同时间地点的分为不同的课程， 将这些添加到classes里面
-//                    for c in parseClassTable(srcStr, className: className, teacher: teacher) {
-//                        classes.append(c)
-//                    }
-//                    
-//                }
+                //添加配套课
+                var array3:[AnyObject] = obj2.objectForKey("PTK") as [AnyObject]
+
+                for obj3 in array3 {
+                    var ClassName = obj3.objectForKey("DYKCM") as String
+                    //获取第一个老师的姓名
+                    var array4 = obj3.objectForKey("JSM") as [AnyObject]
+                    var teacher = ""
+                    if array4.count != 0{
+                        teacher = array4[0].objectForKey("JSM") as String
+                    }else{
+                        teacher = "未知老师"
+                    }
+                    
+                    var srcStr = obj3.objectForKey("SKSJDDSTR") as String
+                    if srcStr == "" {
+                        classes.append(ClassBean(_where: -1, className: className, teacher: teacher, time: "", position: ""))
+                        continue;
+                    }
+                    
+                    //把每一种课的的不同时间地点的分为不同的课程， 将这些添加到classes里面
+                    for c in parseClassTable(srcStr, className: className, teacher: teacher) {
+                        classes.append(c)
+                    }
+                    
+                }
 
             }
             println( "课程数目：---》\(classes.count)")

@@ -26,6 +26,7 @@ class ClassTableViewController: UIViewController{
     var classCollections:[[String]] = []
     var unkownClassItem:String = ""
     var labelCollections:[[UILabel]] = []
+    var tagImgCollections:[[UIImageView]] = []
     var unkownClassLabel:UILabel!
 
     @IBAction func searchBtnClicked(sender: AnyObject) {
@@ -38,16 +39,15 @@ class ClassTableViewController: UIViewController{
 
     }
 
-    @IBAction func noteBarItemClicked(sender: AnyObject) {
-        println("说明Clicked")
-    }
-    
     override func loadView() {
         super.loadView()
         CELL_HEIGHT = (UIScreen.mainScreen().bounds.size.height - topView.frame.size.height - 70.0) / 8.0
         scrollView.contentSize.width = 8 * CELL_WIDTH
-        //scrollView.contentSize.height = UIScreen.mainScreen().bounds.size.height - topView.frame.size.height - 70.0
+        //scrollView.contentSize.height = UIScreen.mainScreen().bounds.size.height - 70.0
         searchBtn.layer.cornerRadius = 7.0   //添加圆角
+
+        println(scrollView.contentSize)
+        println(UIScreen.mainScreen().bounds.size)
 
         //添加所有标题的label
         addTitleLabels()
@@ -57,13 +57,13 @@ class ClassTableViewController: UIViewController{
 
         //添加未知课程
         addUnkownClassLabel()
+
+        //初始化课表img标签
+        initTagImageCollections()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        dispatch_sync(dispatch_get_main_queue()) {
-//            
-//        }
         
         //1、先获取当前的学期
         var url = kalen.app.ConstVal.SEARCH_COURSE_URL + kalen.app.UserInfo.getInstance().username;
@@ -88,23 +88,17 @@ class ClassTableViewController: UIViewController{
 
     //根据学期来操作课程显示
     func manipulateClassStringCollections(semesterText:String){
-        
-        println("-------------------in manipulate--------------------")
 
         //获取json数据
         var params = ["listXnxq": semesterText,"uid": kalen.app.UserInfo.getInstance().username]
         var data = kalen.app.HttpUtil.post(kalen.app.ConstVal.FETCH_CLASS_TABLE_URL, params: params, cookieStr: cookieData)
 
-        println(data)
-
         var parser = kalen.app.JsonParser(jsonStr: data)
         var beans:[kalen.app.ClassBean] = parser.getClassTableItems()
 
-        println( " count --> \(beans.count)")
-
         for bean in beans{
             var _where = bean._where
-            println("where -->\(_where)")
+            //未知时间课程
             if _where == -1 {
                 var classInfo:String = bean.className
                     + "("
@@ -114,7 +108,6 @@ class ClassTableViewController: UIViewController{
                     unkownClassItem = unkownClassItem + "  、"
                 }
 
-                println("class Info --->" + classInfo)
                 unkownClassItem = unkownClassItem + classInfo
                 continue
             }
@@ -134,7 +127,6 @@ class ClassTableViewController: UIViewController{
                 classCollections[i][j] = classCollections[i][j] + "\n\n-------------------------\n\n" + classItemStr
 
             }
-            println("classInfo-->" + classItemStr)
         }
     }
 
@@ -177,7 +169,6 @@ class ClassTableViewController: UIViewController{
                 var yPoint:CGFloat = CGFloat(j) * CELL_HEIGHT
                 var btn = UIButton(frame: CGRectMake(xPoint, yPoint, CELL_WIDTH, CELL_HEIGHT))
 
-
                 var label = UILabel(frame: CGRectMake(0, 0, CELL_WIDTH, CELL_HEIGHT))
 
                 label.textAlignment = NSTextAlignment.Center
@@ -203,14 +194,34 @@ class ClassTableViewController: UIViewController{
     }
 
     @IBAction func classBtnClicked(sender: UIButton){
+
         println(sender.tag)
-        var i = sender.tag / 6
-        var j = sender.tag % 6
-        if classCollections[i][j] != "" {
-            let alert = UIAlertView(title: nil, message: classCollections[i][j], delegate: nil, cancelButtonTitle: "确定")
+        if sender.tag == -1 {
+            let alert = UIAlertView(title: nil, message: unkownClassItem, delegate: nil, cancelButtonTitle: "确定")
             alert.show()
+        }else{
+            var i = sender.tag / 6
+            var j = sender.tag % 6
+            if classCollections[i][j] != "" {
+                let alert = UIAlertView(title: nil, message: classCollections[i][j], delegate: nil, cancelButtonTitle: "确定")
+                alert.show()
+            }
+        } 
+    }
+
+    //初始化课表的img标签
+    func initTagImageCollections(){
+        for i in 0...6{
+            var imgCollection:[UIImageView] = []
+            for j in 0...5{
+                var img = UIImageView(frame: CGRectMake(CELL_WIDTH - 13, CELL_HEIGHT - 13, 9, 9))
+                img.image = UIImage(named: "class_table_tag")
+                imgCollection.append(img)
+                labelCollections[i][j].addSubview(img)
+            }
+            tagImgCollections.append(imgCollection)
         }
-        
+
     }
 
     //添加未知课程的label
@@ -223,10 +234,11 @@ class ClassTableViewController: UIViewController{
         
 
         unkownClassLabel = UILabel(frame: CGRectMake(0, 0, 7 * CELL_WIDTH, CELL_HEIGHT))
-        unkownClassLabel.textAlignment = NSTextAlignment.Center
+        //unkownClassLabel.textAlignment = NSTextAlignment.Center
         unkownClassLabel.font = UIFont(name: "Helvetica", size: 10.0)
         unkownClassLabel.numberOfLines = 0
         unkownClassLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        btn.addSubview(unkownClassLabel)
 
         scrollView.addSubview(btn)
     }
@@ -235,6 +247,14 @@ class ClassTableViewController: UIViewController{
     func updateClassTableUI(){
         for i in 0...6{
             for j in 0...5{
+                
+                if (classCollections[i][j] != "") && isMoreThanOneCourse(classCollections[i][j]) {
+                    labelCollections[i][j].textColor = UIColor.blueColor()
+                    tagImgCollections[i][j].alpha = 1
+                }else{
+                    labelCollections[i][j].textColor = UIColor.blackColor()
+                    tagImgCollections[i][j].alpha = 0
+                }
                 labelCollections[i][j].text = classCollections[i][j]
             }
         }
@@ -262,36 +282,13 @@ class ClassTableViewController: UIViewController{
         }
         unkownClassItem = ""
     }
-
-//    //获取一行的label中，高度的那个
-//    func getMaxHeightOfARow(row: Int) -> CGFloat{
-//        var max_height:CGFloat = 0.0
-//
-//        for i in 0...7{
-//            var height:CGFloat = (labelCollections[row][i] as UILabel).frame.size.height
-//
-//            if max_height < height{
-//                max_height = height
-//            }
-//        }
-//
-//        return max_height
-//    }
-//
-//    //获取当前应该添加
-//    func getCurrentHeightByRow(row: Int) -> CGFloat{
-//        var sum:CGFloat = 0.0
-//        if row != 0{
-//            for i in 0...(row - 1){
-//                sum += getMaxHeightOfARow(i)
-//            }
-//
-//        }
-//        return sum
-//
-//    }
-
-
-
+    
+    func isMoreThanOneCourse(courseInfo: String)->Bool{
+        let arr = split(courseInfo){$0 == "\n"}
+        if arr.count == 3{
+            return false
+        }
+        return true
+    }
 
 }

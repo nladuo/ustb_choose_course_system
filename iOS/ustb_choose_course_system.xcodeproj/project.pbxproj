@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9AAFB3811B7DB3D200AE1D6F /* PrerequisiteCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAFB3801B7DB3D200AE1D6F /* PrerequisiteCourseController.swift */; };
+		9AAFB3831B7DB3FB00AE1D6F /* PublicSelctiveCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAFB3821B7DB3FB00AE1D6F /* PublicSelctiveCourseController.swift */; };
+		9AAFB3851B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAFB3841B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift */; };
 		F42B1C591B779ECB004C14A4 /* HttpDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42B1C581B779ECB004C14A4 /* HttpDelegate.swift */; };
 		F44904551B7B2B9300CB9C06 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44904541B7B2B9300CB9C06 /* MainNavigationController.swift */; };
 		F4BA6A1F1B7758CB006C8B91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA6A1E1B7758CB006C8B91 /* AppDelegate.swift */; };
@@ -37,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9AAFB3801B7DB3D200AE1D6F /* PrerequisiteCourseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrerequisiteCourseController.swift; sourceTree = "<group>"; };
+		9AAFB3821B7DB3FB00AE1D6F /* PublicSelctiveCourseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicSelctiveCourseController.swift; sourceTree = "<group>"; };
+		9AAFB3841B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecifiedSelectiveCourseController.swift; sourceTree = "<group>"; };
 		F42B1C581B779ECB004C14A4 /* HttpDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpDelegate.swift; sourceTree = "<group>"; };
 		F44904541B7B2B9300CB9C06 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		F4BA6A191B7758CB006C8B91 /* ustb_choose_course_system.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ustb_choose_course_system.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,10 +84,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9AAFB37F1B7DB30300AE1D6F /* ChooseClassController */ = {
+			isa = PBXGroup;
+			children = (
+				F4F823CE1B7B421800128B88 /* ChooseCourseTabBarController.swift */,
+				9AAFB3801B7DB3D200AE1D6F /* PrerequisiteCourseController.swift */,
+				9AAFB3821B7DB3FB00AE1D6F /* PublicSelctiveCourseController.swift */,
+				9AAFB3841B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift */,
+			);
+			name = ChooseClassController;
+			sourceTree = "<group>";
+		};
 		F4BA6A101B7758CB006C8B91 = {
 			isa = PBXGroup;
 			children = (
-				F4BA6A3E1B77590C006C8B91 /* kalen.app */,
 				F4BA6A1B1B7758CB006C8B91 /* ustb_choose_course_system */,
 				F4BA6A311B7758CB006C8B91 /* ustb_choose_course_systemTests */,
 				F4BA6A1A1B7758CB006C8B91 /* Products */,
@@ -100,6 +116,7 @@
 		F4BA6A1B1B7758CB006C8B91 /* ustb_choose_course_system */ = {
 			isa = PBXGroup;
 			children = (
+				F4BA6A3E1B77590C006C8B91 /* kalen.app */,
 				F4FA26251B78C5B100CA0F3B /* ui */,
 				F4FA261C1B78B98500CA0F3B /* view */,
 				F4FA261B1B78B97400CA0F3B /* controller */,
@@ -145,6 +162,7 @@
 				F4BA6A3F1B775930006C8B91 /* kalen.app.swift */,
 			);
 			name = kalen.app;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		F4FA26161B78B90300CA0F3B /* util */ = {
@@ -177,11 +195,11 @@
 		F4FA261B1B78B97400CA0F3B /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				9AAFB37F1B7DB30300AE1D6F /* ChooseClassController */,
 				F4BA6A201B7758CB006C8B91 /* LoginViewController.swift */,
 				F4F0F5F71B7A1D9700E9549D /* MainTableViewController.swift */,
 				F44904541B7B2B9300CB9C06 /* MainNavigationController.swift */,
 				F4F823CC1B7B41A900128B88 /* ClassTableViewController.swift */,
-				F4F823CE1B7B421800128B88 /* ChooseCourseTabBarController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -303,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F44904551B7B2B9300CB9C06 /* MainNavigationController.swift in Sources */,
+				9AAFB3831B7DB3FB00AE1D6F /* PublicSelctiveCourseController.swift in Sources */,
 				F4BA6A401B775930006C8B91 /* kalen.app.swift in Sources */,
 				F4BA6A441B775C1A006C8B91 /* ConstVal.swift in Sources */,
 				F4F823D11B7B44C700128B88 /* ClassBean.swift in Sources */,
@@ -310,6 +329,8 @@
 				F4FA26191B78B93D00CA0F3B /* JsonParser.swift in Sources */,
 				F4BA6A461B775DA6006C8B91 /* UserInfo.swift in Sources */,
 				F4F0F5F81B7A1D9700E9549D /* MainTableViewController.swift in Sources */,
+				9AAFB3851B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift in Sources */,
+				9AAFB3811B7DB3D200AE1D6F /* PrerequisiteCourseController.swift in Sources */,
 				F4BA6A211B7758CB006C8B91 /* LoginViewController.swift in Sources */,
 				F4BA6A1F1B7758CB006C8B91 /* AppDelegate.swift in Sources */,
 				F4F823CD1B7B41A900128B88 /* ClassTableViewController.swift in Sources */,

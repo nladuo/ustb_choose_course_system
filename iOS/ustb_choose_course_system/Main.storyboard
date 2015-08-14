@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--USTB选课系统-->
+        <!--主页-->
         <scene sceneID="5Y6-QI-3oZ">
             <objects>
-                <tableViewController id="PJ8-5V-g3o" customClass="MainTableViewController" customModule="ustb_choose_course_system" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="PJ8-5V-g3o" userLabel="主页" customClass="MainTableViewController" customModule="ustb_choose_course_system" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3jf-Ak-iHO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -145,20 +145,63 @@
             </objects>
             <point key="canvasLocation" x="2653" y="314"/>
         </scene>
-        <!--Item 2-->
+        <!--专选课-->
         <scene sceneID="MoY-uy-sk9">
             <objects>
-                <viewController id="6gt-1W-F7V" sceneMemberID="viewController">
+                <viewController id="6gt-1W-F7V" userLabel="专选课" customClass="SpecifiedSelectiveCourseController" customModule="ustb_choose_course_system" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jiu-Bp-dSj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="2bY-19-J50"/>
+                    <tabBarItem key="tabBarItem" title="专选课" id="2bY-19-J50"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iH6-5H-k7k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="991" y="1373"/>
+            <point key="canvasLocation" x="3251" y="1080"/>
+        </scene>
+        <!--公选课-->
+        <scene sceneID="ehR-AX-Ygj">
+            <objects>
+                <viewController id="P2q-He-KGs" userLabel="公选课" customClass="PublicSelctiveCourseController" customModule="ustb_choose_course_system" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Im4-3p-zdP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Qog-gU-Ic3">
+                                <rect key="frame" x="0.0" y="65" width="320" height="453"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="publicCourseCell" id="ODT-3i-Uuc">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ODT-3i-Uuc" id="agL-hY-VTf">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KVq-l9-YXC">
+                                                    <rect key="frame" x="8" y="0.0" width="304" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="公选课" id="chQ-8J-RgX"/>
+                    <connections>
+                        <outlet property="tableView" destination="Qog-gU-Ic3" id="tCw-E8-y9P"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3T5-Pw-dUb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3000" y="1801"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="OEv-YR-uqF">
@@ -173,28 +216,34 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fs1-bN-zBf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3495" y="571"/>
+            <point key="canvasLocation" x="3502" y="376"/>
         </scene>
-        <!--Item 1-->
+        <!--必选课-->
         <scene sceneID="xpv-zX-b2i">
             <objects>
-                <viewController id="cen-UW-aJT" sceneMemberID="viewController">
+                <viewController id="cen-UW-aJT" userLabel="必选课" customClass="PrerequisiteCourseController" customModule="ustb_choose_course_system" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XwL-PC-BnK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="eaN-2b-FF8"/>
+                    <tabBarItem key="tabBarItem" title="必选课" id="eaN-2b-FF8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hc2-2I-rhw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1475" y="1292"/>
+            <point key="canvasLocation" x="2377" y="1801"/>
         </scene>
-        <!--Choose Course Tab Bar Controller-->
+        <!--选课-->
         <scene sceneID="K1i-gO-l8h">
             <objects>
                 <tabBarController id="h6Z-Q0-zYb" customClass="ChooseCourseTabBarController" customModule="ustb_choose_course_system" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="VhQ-36-WpT"/>
+                    <navigationItem key="navigationItem" title="选课" id="VhQ-36-WpT">
+                        <barButtonItem key="rightBarButtonItem" title="课表" id="PYK-JD-LLM">
+                            <connections>
+                                <segue destination="rTu-ig-io5" kind="push" id="mCt-tp-Hkd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="rg4-vu-cE1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -204,11 +253,12 @@
                     <connections>
                         <segue destination="cen-UW-aJT" kind="relationship" relationship="viewControllers" id="paL-py-m2j"/>
                         <segue destination="6gt-1W-F7V" kind="relationship" relationship="viewControllers" id="E6q-zZ-bA0"/>
+                        <segue destination="P2q-He-KGs" kind="relationship" relationship="viewControllers" id="Z50-FH-sol"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ag-zP-UZO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="343" y="1373"/>
+            <point key="canvasLocation" x="2690" y="1072"/>
         </scene>
         <!--课程表-->
         <scene sceneID="drG-Rh-HZh">
@@ -258,13 +308,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="课程表" id="Db6-rR-bTl">
-                        <barButtonItem key="rightBarButtonItem" title="说明" id="qVd-fn-vNd">
-                            <connections>
-                                <action selector="noteBarItemClicked:" destination="rTu-ig-io5" id="QEh-hl-knc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="课程表" id="Db6-rR-bTl"/>
                     <connections>
                         <outlet property="scrollView" destination="rci-DY-cVu" id="dwh-zI-euZ"/>
                         <outlet property="searchBtn" destination="VAb-f6-Uce" id="XNN-Rf-GzI"/>
@@ -274,12 +318,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pOa-OW-TXm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3495" y="-126"/>
+            <point key="canvasLocation" x="3120" y="-130"/>
         </scene>
-        <!--USTB选课系统-->
+        <!--登陆界面-->
         <scene sceneID="Rvb-51-zwa">
             <objects>
-                <viewController id="Kra-lM-wHf" customClass="LoginViewController" customModule="ustb_choose_course_system" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Kra-lM-wHf" userLabel="登陆界面" customClass="LoginViewController" customModule="ustb_choose_course_system" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oIS-sQ-209">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -392,4 +436,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="mCt-tp-Hkd"/>
+    </inferredMetricsTieBreakers>
 </document>

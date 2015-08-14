@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ustb_choose_course_system</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="stu_number"></string>
+    <string name="password"></string>
+
+
+</resources>
