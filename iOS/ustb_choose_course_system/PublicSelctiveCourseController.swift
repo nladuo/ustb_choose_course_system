@@ -8,7 +8,7 @@
 
 import UIKit
 //公共选修课
-class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UITableViewDataSource, ChooseCourseDelegate {
+class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UITableViewDataSource, ChooseCourseDelegate, UIAlertViewDelegate {
 
     @IBOutlet var tableView: UITableView!
     //显示课程名称
@@ -19,8 +19,17 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
     let CREDIT_TAG = 103
     //显示课程上课地点或者显示得分
     let TIME_AND_POSITION_OR_SCORE_TAG = 104
+    //选课的tag
+    let ALTERNATIVE_COURSE_TAG = 0
+    //退课的tag
+    let SELECTED_COURSE_TAG = 1
+    
+    var selectedId:String = ""
+    
     var datas:[[kalen.app.ClassBean]] = [[],[],[]]
+    
     var sectionName:[String] = ["未满公选课", "已选课程", "已修公选课"]
+    
     var parentVc:ChooseCourseTabBarController!
 
     override func loadView(){
@@ -37,12 +46,24 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
         datas[2] = parentVc.learnedPublicClasses
         tableView.reloadData()
     }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+        println("tag ---> \(alertView.tag)")
+        println("now_id ----> " + selectedId)
+        println("buttonIndex ----> \(buttonIndex)")
+//        if buttonIndex == self.LOGOUT_BTN_INDEX {
+//            self.dismissViewControllerAnimated(true, completion: nil)
+//        }
+        
+    }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
         tableView.cellForRowAtIndexPath(indexPath)?.selected = false
         
         var bean = datas[indexPath.section][indexPath.row]
+        //设置当前选中课程的ID
+        selectedId = bean.id
         
         var message = "课程名称： " + bean.className
                     + "\n老师： " + bean.teacher
@@ -51,15 +72,22 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
         if indexPath.section == 2 {
             message += "\n得分： " + bean.score
             alert = UIAlertView(title: "课程详情", message: message, delegate: nil, cancelButtonTitle: "确定")
+
+            
         }else{
             message += "\n上课时间和地点： " + bean.time_and_postion
             var otherBtnStr = ""
+            var tag = 0
             if indexPath.section == 0 {
                 otherBtnStr = "添加此课程"
+                tag = 0
             }else{
                 otherBtnStr = "退选此课程"
+                tag = 1
             }
-            alert = UIAlertView(title: "课程详情", message: message, delegate: nil, cancelButtonTitle: "确定", otherButtonTitles: otherBtnStr)
+            alert = UIAlertView(title: "课程详情", message: message, delegate: self, cancelButtonTitle: "确定", otherButtonTitles: otherBtnStr)
+            //alert.tag = bean.id
+            alert.tag = tag
         }
 
         

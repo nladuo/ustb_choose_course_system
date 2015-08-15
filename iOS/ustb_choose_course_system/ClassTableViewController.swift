@@ -41,7 +41,7 @@ class ClassTableViewController: UIViewController{
 
     override func loadView() {
         super.loadView()
-        CELL_HEIGHT = (UIScreen.mainScreen().bounds.size.height - topView.frame.size.height - 70.0) / 8.0
+        CELL_HEIGHT = (UIScreen.mainScreen().bounds.size.height - topView.frame.size.height) / 8.0
         scrollView.contentSize.width = 8 * CELL_WIDTH
         //scrollView.contentSize.height = UIScreen.mainScreen().bounds.size.height - 70.0
         searchBtn.layer.cornerRadius = 7.0   //添加圆角
@@ -255,7 +255,9 @@ class ClassTableViewController: UIViewController{
                     labelCollections[i][j].textColor = UIColor.blackColor()
                     tagImgCollections[i][j].alpha = 0
                 }
-                labelCollections[i][j].text = classCollections[i][j]
+                
+                labelCollections[i][j].text = showFirstThreeLines(classCollections[i][j])
+                
             }
         }
         unkownClassLabel.text = unkownClassItem
@@ -289,6 +291,16 @@ class ClassTableViewController: UIViewController{
             return false
         }
         return true
+    }
+    
+    func showFirstThreeLines(courseStr: String) -> String{
+        let arr:[String] = split(courseStr){$0 == "\n"}
+        if arr.count > 3{
+            return arr[0] + "\n" + arr[1] + "\n" + arr[2]
+        }
+        
+        return courseStr
+        
     }
 
 }
