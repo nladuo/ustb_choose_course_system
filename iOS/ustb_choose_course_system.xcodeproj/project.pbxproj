@@ -11,7 +11,9 @@
 		9AAFB3831B7DB3FB00AE1D6F /* PublicSelctiveCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAFB3821B7DB3FB00AE1D6F /* PublicSelctiveCourseController.swift */; };
 		9AAFB3851B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAFB3841B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift */; };
 		F42B1C591B779ECB004C14A4 /* HttpDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42B1C581B779ECB004C14A4 /* HttpDelegate.swift */; };
+		F445602F1B7F333E003756DF /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F445602E1B7F333E003756DF /* Login.storyboard */; };
 		F44904551B7B2B9300CB9C06 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44904541B7B2B9300CB9C06 /* MainNavigationController.swift */; };
+		F464D5AE1B7F266C009657B6 /* ChooseCourseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F464D5AD1B7F266C009657B6 /* ChooseCourseDelegate.swift */; };
 		F4BA6A1F1B7758CB006C8B91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA6A1E1B7758CB006C8B91 /* AppDelegate.swift */; };
 		F4BA6A211B7758CB006C8B91 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA6A201B7758CB006C8B91 /* LoginViewController.swift */; };
 		F4BA6A261B7758CB006C8B91 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4BA6A251B7758CB006C8B91 /* Images.xcassets */; };
@@ -44,7 +46,9 @@
 		9AAFB3821B7DB3FB00AE1D6F /* PublicSelctiveCourseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicSelctiveCourseController.swift; sourceTree = "<group>"; };
 		9AAFB3841B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecifiedSelectiveCourseController.swift; sourceTree = "<group>"; };
 		F42B1C581B779ECB004C14A4 /* HttpDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpDelegate.swift; sourceTree = "<group>"; };
+		F445602E1B7F333E003756DF /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		F44904541B7B2B9300CB9C06 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		F464D5AD1B7F266C009657B6 /* ChooseCourseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCourseDelegate.swift; sourceTree = "<group>"; };
 		F4BA6A191B7758CB006C8B91 /* ustb_choose_course_system.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ustb_choose_course_system.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4BA6A1D1B7758CB006C8B91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4BA6A1E1B7758CB006C8B91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				F42B1C581B779ECB004C14A4 /* HttpDelegate.swift */,
+				F464D5AD1B7F266C009657B6 /* ChooseCourseDelegate.swift */,
 			);
 			name = delegate;
 			sourceTree = "<group>";
@@ -215,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				F4F0F5F51B7A1C7900E9549D /* Main.storyboard */,
+				F445602E1B7F333E003756DF /* Login.storyboard */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -300,6 +306,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F445602F1B7F333E003756DF /* Login.storyboard in Resources */,
 				F4BA6A291B7758CB006C8B91 /* LaunchScreen.xib in Resources */,
 				F4BA6A261B7758CB006C8B91 /* Images.xcassets in Resources */,
 				F4F0F5F61B7A1C7900E9549D /* Main.storyboard in Resources */,
@@ -327,6 +334,7 @@
 				F4F823D11B7B44C700128B88 /* ClassBean.swift in Sources */,
 				F4F823CF1B7B421800128B88 /* ChooseCourseTabBarController.swift in Sources */,
 				F4FA26191B78B93D00CA0F3B /* JsonParser.swift in Sources */,
+				F464D5AE1B7F266C009657B6 /* ChooseCourseDelegate.swift in Sources */,
 				F4BA6A461B775DA6006C8B91 /* UserInfo.swift in Sources */,
 				F4F0F5F81B7A1D9700E9549D /* MainTableViewController.swift in Sources */,
 				9AAFB3851B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift in Sources */,

@@ -15,7 +15,7 @@ extension kalen.app{
         //验证登陆是否成功URL
         static let CHECK_LOGIN_SUCCESS_URL:String = "http://elearning.ustb.edu.cn/choose_courses/loginsucc.action"
         //获取退补选修课URL
-        static let SEARCH_COURSE_URL:String = "http://elearning.ustb.edu.cn/choose_courses/choosecourse/normalChooseCourse_normalPublicSelective_loadFormalNormalNotFullPublicSelectiveCourses.action?xqj=null&jc=null&kcm=&_dc=1426047666276&limit=5000&start=0&uid=";
+        static let SEARCH_NOT_FULL_PUBLIC_COURSE_URL:String = "http://elearning.ustb.edu.cn/choose_courses/choosecourse/normalChooseCourse_normalPublicSelective_loadFormalNormalNotFullPublicSelectiveCourses.action?xqj=null&jc=null&kcm=&_dc=1426047666276&limit=5000&start=0&uid=";
         //post课表URL
         static let FETCH_CLASS_TABLE_URL:String = "http://elearning.ustb.edu.cn/choose_courses/choosecourse/commonChooseCourse_courseList_loadTermCourses.action"
         

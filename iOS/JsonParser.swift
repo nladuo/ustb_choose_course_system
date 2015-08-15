@@ -24,11 +24,65 @@ extension kalen.app{
             return getCourses ("selectedCourses")
         }
         
+        
+        
         //可选课
         func getAlternativeCourses() ->[ClassBean]{
             
             return getCourses ("alternativeCourses")
         }
+        
+        //已选公选课
+        func getLearnedPublicCourses() -> [ClassBean]{
+            var classes:[ClassBean] = []
+            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
+            
+            var obj : AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            var array = obj.objectForKey("learnedPublicCourses") as [AnyObject]
+            for obj2 in array {
+                var className = obj2.objectForKey("DYKCM") as String
+                var teacher = obj2.objectForKey("LRR") as String
+                var credit = obj2.objectForKey("XF") as String
+                var score = obj2.objectForKey("GPACJ") as String
+               
+                classes.append(ClassBean(className: className, teacher: teacher, credit: credit, score: score))
+                
+            }
+            return classes
+        }
+        
+        //获取选课信息
+        private func getCourses(type:String) ->[ClassBean]{
+            
+            var classes:[ClassBean] = []
+            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
+            
+            var obj : AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            var array = obj.objectForKey(type) as [AnyObject]
+            for obj2 in array {
+                var id:Int = obj2.objectForKey("ID") as Int
+                var className = obj2.objectForKey("DYKCM") as String
+                var deadline = obj2.objectForKey("TKJZRQ") as String
+                var tup:[AnyObject] = obj2.objectForKey("JSM")! as [AnyObject]
+                var teacher:String = ""
+                if tup.count != 0 {
+                    if let temp = tup[0]["JSM"] as? String{
+                        teacher = temp
+                    }else{
+                        teacher = "未知老师"
+                    }
+                }else{
+                    teacher = "未知老师"
+                }
+                var credit = obj2.objectForKey("XF") as String
+                var time_and_position = obj2.objectForKey("SKSJDDSTR") as String
+
+                classes.append(ClassBean(id: "\(id)", className: className, teacher: teacher, time_and_position: time_and_position, credit: credit))
+                
+            }
+            return classes
+        }
+        
         
         
         
@@ -108,25 +162,6 @@ extension kalen.app{
             
         }
         
-        //获取选课信息
-        private func getCourses(type:String) ->[ClassBean]{
-            
-            var classes:[ClassBean] = []
-            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
-            
-            var obj : AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-            var array = obj.objectForKey(type) as [AnyObject]
-            for obj2 in array {
-                var id:Int = obj2.objectForKey("ID") as Int
-                var className = obj2.objectForKey("DYKCM") as String
-                var deadline = obj2.objectForKey("TKJZRQ") as String
-                var teacher = (obj2.objectForKey("JSM") as [AnyObject])[0].objectForKey("JSM") as String
-                
-                classes.append(ClassBean(id: String(id), className: className, teacher: teacher, deadline: deadline))
-                
-            }
-            return [ClassBean()]
-        }
         
         
         //提取课表信息

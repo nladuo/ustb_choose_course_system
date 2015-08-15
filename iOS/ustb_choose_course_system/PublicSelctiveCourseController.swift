@@ -8,11 +8,19 @@
 
 import UIKit
 //公共选修课
-class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UITableViewDataSource, ChooseCourseDelegate {
 
     @IBOutlet var tableView: UITableView!
-    let CELL_LABEL_TAG = 101
-    var datas:[String:[String]] = [:]
+    //显示课程名称
+    let CLASSNAME_TAG = 101
+    //侠士老师姓名
+    let TEACHER_TAG = 102
+    //显示学分
+    let CREDIT_TAG = 103
+    //显示课程上课地点或者显示得分
+    let TIME_AND_POSITION_OR_SCORE_TAG = 104
+    var datas:[[kalen.app.ClassBean]] = [[],[],[]]
+    var sectionName:[String] = ["未满公选课", "已选课程", "已修公选课"]
     var parentVc:ChooseCourseTabBarController!
 
     override func loadView(){
@@ -20,14 +28,42 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
         parentVc = self.tabBarController as ChooseCourseTabBarController
         tableView.delegate = self
         tableView.dataSource = self
-        datas["可选课"] = ["微机原理及接口技术B    [王睿](必修)   (1-10周)   逸夫楼407", "微机原理及接口技术B    [王睿](必修)   (1-10周)   逸夫楼407"]
-        datas["已选课"] = ["微机原理及接口技术B    [王睿](必修)   (1-10周)   逸夫楼407", "微机原理及接口技术B    [王睿](必修)   (1-10周)   逸夫楼407","微机原理及接口技术B    [王睿](必修)   (1-10周)   逸夫楼407"]
-        datas["已修课"] = ["微机原理及接口技术B    [王睿](必修)   (1-10周)   逸夫楼407", "微机原理及接口技术B    [王睿](必修)   (1-10周)   逸夫楼407", "微机原理及接口技术B    [王睿](必修)   (1-10周)   逸夫楼407", "微机原理及接口技术B    [王睿](必修)   (1-10周)   逸夫楼407"]
+        parentVc.updateNotFullPublicSelectiveCourses(self)
+    }
+    
+    func afterParseDatas() {
+        datas[0] = parentVc.notFullPublicClasses
+        datas[1] = parentVc.selectedClasses
+        datas[2] = parentVc.learnedPublicClasses
+        tableView.reloadData()
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
         tableView.cellForRowAtIndexPath(indexPath)?.selected = false
+        
+        var bean = datas[indexPath.section][indexPath.row]
+        
+        var message = "课程名称： " + bean.className
+                    + "\n老师： " + bean.teacher
+                    + "\n学分： " + bean.credit
+        var alert:UIAlertView!
+        if indexPath.section == 2 {
+            message += "\n得分： " + bean.score
+            alert = UIAlertView(title: "课程详情", message: message, delegate: nil, cancelButtonTitle: "确定")
+        }else{
+            message += "\n上课时间和地点： " + bean.time_and_postion
+            var otherBtnStr = ""
+            if indexPath.section == 0 {
+                otherBtnStr = "添加此课程"
+            }else{
+                otherBtnStr = "退选此课程"
+            }
+            alert = UIAlertView(title: "课程详情", message: message, delegate: nil, cancelButtonTitle: "确定", otherButtonTitles: otherBtnStr)
+        }
+
+        
+        alert.show()
 
     }
 
@@ -40,20 +76,36 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
         var headerLabel = UILabel(frame: CGRectMake(0, 0, 320, 22))
         headerLabel.textColor = UIColor.grayColor()
         headerLabel.font = UIFont(name: "Helvetica-Bold", size: 15)
-        headerLabel.text = "  " + datas.keys.array[section]
+        headerLabel.text = "  " + sectionName[section]
 
         return headerLabel
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 
-        return datas.keys.array.count
+        return sectionName.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("publicCourseCell", forIndexPath: indexPath) as UITableViewCell
-        var label = cell.viewWithTag(CELL_LABEL_TAG) as UILabel
-        label.text = (datas[datas.keys.array[indexPath.section]]!)[indexPath.row]
+        
+        
+        var classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as UILabel
+        var teacherLabel = cell.viewWithTag(TEACHER_TAG) as UILabel
+        var creditLabel = cell.viewWithTag(CREDIT_TAG) as UILabel
+        var timeAndPositionOrScoreLabel = cell.viewWithTag(TIME_AND_POSITION_OR_SCORE_TAG) as UILabel
+        
+        var bean = datas[indexPath.section][indexPath.row]
+        
+        classNameLabel.text = bean.className
+        teacherLabel.text = bean.teacher
+        creditLabel.text = bean.credit + "学分"
+        if indexPath.section == 2 {
+            timeAndPositionOrScoreLabel.text = "得分:" + bean.score
+            timeAndPositionOrScoreLabel.textAlignment = NSTextAlignment.Center
+        }else{
+            timeAndPositionOrScoreLabel.text = bean.time_and_postion
+        }
 
         return cell
 
@@ -61,7 +113,7 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
 
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datas[datas.keys.array[section]]!.count
+        return datas[section].count
     }
 
 

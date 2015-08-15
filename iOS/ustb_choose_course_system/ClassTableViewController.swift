@@ -66,7 +66,7 @@ class ClassTableViewController: UIViewController{
         super.viewDidLoad()
         
         //1、先获取当前的学期
-        var url = kalen.app.ConstVal.SEARCH_COURSE_URL + kalen.app.UserInfo.getInstance().username;
+        var url = kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL + kalen.app.UserInfo.getInstance().username;
         
         var jsonStr = kalen.app.HttpUtil.get(url, cookieStr: self.cookieData)
         jsonParser = kalen.app.JsonParser(jsonStr: jsonStr)

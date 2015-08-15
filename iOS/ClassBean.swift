@@ -13,17 +13,28 @@ extension kalen.app{
         var id:String = ""
         var className:String = ""
         var teacher:String = ""
-        var deadline:String = ""
         var _where:Int = 0
         var time:String = ""
         var position:String = ""
+        var time_and_postion:String = ""
+        var credit = ""
+        var score = "0"
         
         //for search class
-        init(id: String, className: String, teacher:String, deadline:String){
+        init(id: String, className: String, teacher:String, time_and_position:String, credit:String){
             self.id = id
             self.className = className
             self.teacher = teacher
-            self.deadline = deadline
+            self.time_and_postion = time_and_position
+            self.credit = credit
+        }
+        
+        //for learned class
+        init(className: String, teacher:String, credit:String, score: String){
+            self.className = className
+            self.teacher = teacher
+            self.credit = credit
+            self.score = score
         }
         
         //for get class table

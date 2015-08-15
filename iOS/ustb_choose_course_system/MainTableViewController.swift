@@ -124,7 +124,12 @@ class MainTableViewController: UITableViewController, UIAlertViewDelegate, HttpD
         if segue.identifier == "classTableSegue"{
             var vc = segue.destinationViewController as ClassTableViewController
             vc.cookieData = cookieData
+        }else if segue.identifier == "chooseCourseSegue" {
+            var vc = segue.destinationViewController as ChooseCourseTabBarController
+            vc.cookieData = cookieData
         }
+        
+        
     }
 
 

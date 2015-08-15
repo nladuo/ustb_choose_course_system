@@ -11,8 +11,8 @@ import UIKit
 class ChooseCourseTabBarController: UITabBarController {
 
     var cookieData:String = ""
-    //已修课
-    var finishClasses:[kalen.app.ClassBean] = []
+    //已修公选课
+    var learnedPublicClasses:[kalen.app.ClassBean] = []
     //已选课
     var selectedClasses:[kalen.app.ClassBean] = []
     //未满的公选课
@@ -32,6 +32,16 @@ class ChooseCourseTabBarController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func updateNotFullPublicSelectiveCourses(_delegate:ChooseCourseDelegate){
+        var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL, cookieStr: cookieData)
+        var parser = kalen.app.JsonParser(jsonStr: data)
+        notFullPublicClasses = parser.getAlternativeCourses()
+        selectedClasses = parser.getSelectedCourses()
+        learnedPublicClasses = parser.getLearnedPublicCourses()
+        _delegate.afterParseDatas()
+        
+    }
 
 
 
@@ -39,6 +49,8 @@ class ChooseCourseTabBarController: UITabBarController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var vc = segue.destinationViewController as ClassTableViewController
+        vc.cookieData = cookieData
 
     }
 

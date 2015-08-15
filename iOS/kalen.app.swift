@@ -7,6 +7,7 @@
 //
 
 import Foundation
+//命名空间：kalen.app
 class kalen{
     class app{
         
