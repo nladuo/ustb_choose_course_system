@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/nor_concor"
+        android:orientation="vertical" >
+        <RelativeLayout
+            android:id="@+id/home_rl_after_choose_course"
+            android:layout_width="match_parent"
+            android:layout_height="55dip"
+            android:background="@drawable/nor_up_concor"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dip"
+                android:gravity="center_vertical"
+                android:text="@string/after_choose_course"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="20dip"
+                android:layout_height="20dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dip"
+                android:background="@mipmap/ic_arrow"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
+
+        <View
+            android:background="@drawable/shape_line"
+            android:layout_width="fill_parent"
+            android:layout_height="1.5px" />
+
+        <RelativeLayout
+            android:id="@+id/home_rl_pre_choose_course"
+            android:layout_width="match_parent"
+            android:layout_height="55dip"
+            android:background="@drawable/nor_up_concor"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dip"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:text="@string/pre_choose_course"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="20dip"
+                android:layout_height="20dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dip"
+                android:background="@mipmap/ic_arrow"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
+
+        <View
+            android:background="@drawable/shape_line"
+            android:layout_width="fill_parent"
+            android:layout_height="1.5px" />
+
+        <RelativeLayout
+            android:id="@+id/home_rl_search_class_table"
+            android:layout_width="match_parent"
+            android:layout_height="55dip"
+            android:background="@drawable/nor_up_concor"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dip"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:text="@string/search_class_table"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="20dip"
+                android:layout_height="20dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dip"
+                android:background="@mipmap/ic_arrow"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
+
+        <View
+            android:background="@drawable/shape_line"
+            android:layout_width="fill_parent"
+            android:layout_height="1.5px" />
+
+        <RelativeLayout
+            android:id="@+id/home_rl_search_exam_alignment"
+            android:layout_width="match_parent"
+            android:layout_height="55dip"
+            android:background="@drawable/nor_up_concor"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dip"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:text="@string/search_exam_alignment"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="20dip"
+                android:layout_height="20dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dip"
+                android:background="@mipmap/ic_arrow"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/nor_concor"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/home_rl_about_soft"
+            android:layout_width="match_parent"
+            android:layout_height="55dip"
+            android:background="@drawable/nor_up_concor"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dip"
+                android:gravity="center_vertical"
+                android:text="@string/about_soft"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="20dip"
+                android:layout_height="20dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dip"
+                android:background="@mipmap/ic_arrow"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
+
+        <View
+            android:background="@drawable/shape_line"
+            android:layout_width="fill_parent"
+            android:layout_height="1.5px" />
+
+        <RelativeLayout
+            android:id="@+id/home_rl_checkout_update"
+            android:layout_width="match_parent"
+            android:layout_height="55dip"
+            android:background="@drawable/nor_up_concor"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dip"
+                android:gravity="center_vertical"
+                android:text="@string/checkout_update"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:textColor="@color/black"
+                android:layout_width="20dip"
+                android:layout_height="20dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dip"
+                android:background="@mipmap/ic_arrow"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

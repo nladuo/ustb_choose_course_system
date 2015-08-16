@@ -9,6 +9,7 @@
     <string name="logout">注销</string>
     <string name="notice">说明</string>
     <string name="search">查询</string>
+    <string name="input_search_semester">输入查询学期:</string>
     <string name="after_choose_course">退步选课</string>
     <string name="pre_choose_course">预选课</string>
     <string name="search_class_table">课表查询</string>

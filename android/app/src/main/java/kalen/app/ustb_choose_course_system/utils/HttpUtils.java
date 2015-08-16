@@ -88,8 +88,10 @@ public class HttpUtils {
         httppost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
         //设置编码
         HttpResponse response=new DefaultHttpClient().execute(httppost, context);
-        if(response.getStatusLine().getStatusCode() == 302){
-            //如果状态码为302,就是得到了cookie
+
+        System.out.println(EntityUtils.toString(response.getEntity()));
+        if(response.getStatusLine().getStatusCode() == 200){
+            //如果状态码为200,就是得到了cookie
             return  cookieStore;
         }else{
             throw new Exception();

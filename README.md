@@ -11,6 +11,7 @@
 
 ##Android
 使用android-studio1.3开发
+完成登陆选课系统
 
 ##服务器端
 用nodejs(v0.12.4)(express+mysql)编写<br>

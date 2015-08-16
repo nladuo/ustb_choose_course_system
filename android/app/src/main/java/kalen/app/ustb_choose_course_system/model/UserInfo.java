@@ -1,12 +1,14 @@
 package kalen.app.ustb_choose_course_system.model;
 
+import org.apache.http.client.CookieStore;
+
 /**
  * Created by kalen on 15-8-11.
  *  用户单例
  */
 public class UserInfo {
-    static UserInfo userInfo = null;
-    static UserInfo getInstance(){
+
+    public static UserInfo getInstance(){
         if(userInfo == null){
             userInfo = new UserInfo();
         }
@@ -14,8 +16,18 @@ public class UserInfo {
         return userInfo;
     }
 
+    private static UserInfo userInfo = null;
     private String username;
     private String password;
+    private CookieStore cookieStore;
+
+    public CookieStore getCookieStore() {
+        return cookieStore;
+    }
+
+    public void setCookieStore(CookieStore cookieStore) {
+        this.cookieStore = cookieStore;
+    }
 
     public String getPassword() {
         return password;
