@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>USTB选课系统V0.10</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../Downloads/20150816065626967.ico</normaloff>../../../Downloads/20150816065626967.ico</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="loginBtn">
     <property name="geometry">

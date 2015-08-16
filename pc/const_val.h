@@ -13,7 +13,7 @@ const QString NOTE_MSG = "说明：\n本软件主要致力于退补选课，为�
 const QString ABOUT_MSG = "软件名称：USTB选课系统<br>当前版本：0.10<br>作者：刘嘉铭<br>软件“官网”：<a href=\"http://191.101.13.24:3000\">191.101.13.24:3000</a><br>作者博客：<a href=\"http://blog.kalen25115.cn\">http://blog.kalen25115.cn</a><br>说明：本软件为开源软件，仅供学习参考(由于本人只使用ubuntu-64位，其他linux发行版本可以通过下载源码自行编译)<br>源码地址：<a href=\"https://github.com/nladuo/ustb_choose_course_system\">https://github.com/nladuo/ustb_choose_course_system</a>";
 const double VERSION = 0.10;
 //software id  (window -> 1, ubuntu 64 -> 2, mac -> 3, android -> 4, iOS -> 5)
-const QString UPDATE_URL ="http://191.101.13.24:3000/update?id=2";
-const QString DOWNLOAD_URL = "http://191.101.13.24:3000/download?id=2";
+const QString UPDATE_URL ="http://vps.kalen25115.cn:3000/update?id=2";
+const QString DOWNLOAD_URL = "http://vps.kalen25115.cn:3000/download?id=2";
 
 #endif // CONST_URL_H

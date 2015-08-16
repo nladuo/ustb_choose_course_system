@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>选课系统后台</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../Downloads/20150816065626967.ico</normaloff>../../../Downloads/20150816065626967.ico</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="searchClassBtn">
     <property name="geometry">
