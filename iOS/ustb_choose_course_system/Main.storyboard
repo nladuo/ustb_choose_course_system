@@ -316,7 +316,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SMT-IJ-Uy8">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SMT-IJ-Uy8">
                                 <rect key="frame" x="0.0" y="64" width="320" height="57"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择查询学期:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3D-og-vPJ">
@@ -340,7 +340,7 @@
                                             <action selector="searchBtnClicked:" destination="rTu-ig-io5" eventType="touchUpInside" id="csK-dy-pP2"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bC7-cs-jgW">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bC7-cs-jgW">
                                         <rect key="frame" x="117" y="13" width="127" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -363,7 +363,7 @@
                                     <constraint firstItem="bC7-cs-jgW" firstAttribute="top" secondItem="SMT-IJ-Uy8" secondAttribute="top" constant="13" id="yne-Vk-dgP"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rci-DY-cVu">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rci-DY-cVu">
                                 <rect key="frame" x="0.0" y="122" width="320" height="446"/>
                             </scrollView>
                         </subviews>
@@ -447,7 +447,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="faR-gg-plx" kind="modal" identifier="loginSegue" id="YSs-B9-my8"/>
+                                    <action selector="loginBtnClicked:" destination="Kra-lM-wHf" eventType="touchUpInside" id="WIt-xV-VjV"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -480,6 +480,7 @@
                         <outlet property="password" destination="gwu-N6-Pfm" id="sNT-9e-zYR"/>
                         <outlet property="saveProSwitch" destination="Zb1-dg-bLg" id="JaO-2D-LKv"/>
                         <outlet property="username" destination="gjT-qg-grp" id="o9h-dY-8Y6"/>
+                        <segue destination="faR-gg-plx" kind="modal" identifier="loginSegue" id="qQj-4R-11H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D70-ot-c0d" userLabel="First Responder" sceneMemberID="firstResponder"/>

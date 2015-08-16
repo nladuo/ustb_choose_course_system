@@ -10,8 +10,7 @@ import UIKit
 
 class MainNavigationController: UINavigationController {
     
-    var username:String = ""
-    var password:String = ""
+    var cookieData = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()

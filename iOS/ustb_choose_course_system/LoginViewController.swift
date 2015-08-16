@@ -9,15 +9,18 @@
 import UIKit
 
 //Login View Controller
-class LoginViewController: UIViewController{
+class LoginViewController: UIViewController, HttpDelegate{
     
     var userDefaults = NSUserDefaults.standardUserDefaults()
-
+    var cookieData = ""
+    
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var saveProSwitch: UISwitch!
+    private var httpUtil:kalen.app.HttpUtil?
     
     @IBOutlet weak var loginBtn: UIButton!
+    
     
     
     required init(coder aDecoder: NSCoder) {
@@ -61,6 +64,55 @@ class LoginViewController: UIViewController{
         }
     }
 
+    @IBAction func loginBtnClicked(sender: AnyObject) {
+        var uname:NSString = username.text
+        var passwd:NSString = password.text
+        
+        if uname == "" {
+            MBProgressHUD.showError("请输入用户名")
+        }else if passwd == "" {
+            MBProgressHUD.showError("请输入密码")
+        }else{
+            MBProgressHUD.showMessage("正在登录中")
+            var params = ["j_username": uname + ",undergraduate","j_password": passwd]
+            httpUtil = kalen.app.HttpUtil(delegate: self)
+            httpUtil?.postWithCookie(kalen.app.ConstVal.LOGIN_URL, params: params)
+        }
+        
+    }
+    
+    func afterPostWithCookie() {
+        println("in viewController")
+        println("is Error --->\(httpUtil!.isError)")
+        
+        if httpUtil!.isError {
+            //网络请求出现错误
+            dispatch_sync(dispatch_get_main_queue()) {
+                MBProgressHUD.hideHUD()
+                MBProgressHUD.showError("网络错误")
+            }
+            
+        }else{//联网正常
+            
+            self.cookieData = httpUtil!.cookieData.componentsSeparatedByString(";")[0]
+            var result:NSString = kalen.app.HttpUtil.get(kalen.app.ConstVal.CHECK_LOGIN_SUCCESS_URL, cookieStr: self.cookieData)
+            
+            
+            dispatch_sync(dispatch_get_main_queue()) {
+                
+                if result.length > 100 {
+                    MBProgressHUD.hideHUD()//隐藏蒙版
+                    MBProgressHUD.showError("用户名或密码错误")
+                }else{
+                    MBProgressHUD.hideHUD()//隐藏蒙版
+                    MBProgressHUD.showSuccess("登陆成功")
+                    self.performSegueWithIdentifier("loginSegue", sender: nil)
+                }
+            }
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -72,20 +124,14 @@ class LoginViewController: UIViewController{
             savePro() //是否保存用户名密码
             
             var vc = segue.destinationViewController as MainNavigationController
-            vc.username = username.text
-            vc.password = password.text
-            
+            vc.cookieData = cookieData
+
             var userInfo = kalen.app.UserInfo.getInstance()
             userInfo.username = username.text
             userInfo.password = password.text
         }
         
     }
-
-
-       
-
-
 
 }
 
