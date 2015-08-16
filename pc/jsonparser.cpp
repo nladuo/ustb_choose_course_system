@@ -46,14 +46,16 @@ vector<ClassBean*> JsonParser::getCourses (QString type)
             QJsonObject obj2 = array.at (i).toObject ();
             int id = obj2["ID"].toInt ();
             QString className = obj2["DYKCM"].toString ();
-            QString deadline = obj2["TKJZRQ"].toString ();
+            QString timeAndPosition = obj2["SKSJDDSTR"].toString ();
+            QString credit = obj2["XF"].toString ().append ("学分");
             QString teacher;
             {
                 QJsonArray array2 = obj2["JSM"].toArray ();
                 QJsonObject obj3 = array2.at (0).toObject ();
                 teacher = obj3["JSM"].toString ();
             }
-            v.push_back (new ClassBean(QString::number (id), className, teacher, deadline));
+            v.push_back (new ClassBean(QString::number (id), className,
+                                       teacher, timeAndPosition, credit));
         }
     }
     return v;
@@ -163,4 +165,52 @@ QString JsonParser::getSemester (){
     return "无法定位具体学期";
 
 }
+
+QString JsonParser::getSoftWareUpdateInfo(){
+    QByteArray data = jsonStr;
+    QJsonParseError jsonError;//Qt5新类
+    QJsonDocument json = QJsonDocument::fromJson(data, &jsonError);//Qt5新类
+    QString message = "";
+    if(jsonError.error == QJsonParseError::NoError)//Qt5新类
+    {
+        QJsonObject obj = json.object();//Qt5新类
+        double version = obj["version"].toDouble ();
+        QString appName = obj["app_name"].toString ();
+        QString updateNote = obj["update_note"].toString ();
+        if ((version - VERSION) < 0.001){
+            message = "已经是最新版本";
+        }else{
+            message = QString("当前版本：")
+                    .append (QString::number (VERSION))
+                    .append ("<br>最新版本：")
+                    .append (QString::number (version))
+                    .append (" <br>更新说明：")
+                    .append (updateNote)
+                    .append ( "<br>下载地址：<a href=\"")
+                    .append (DOWNLOAD_URL)
+                    .append (" \">" )
+                    .append (appName)
+                    .append ("</a>");
+        }
+
+        return message;
+    }
+    return "发生错误";
+}
+
+//QString JsonParser::getChooseCourseResult (){
+//    QByteArray data = jsonStr;
+//    qDebug()<<data;
+//    QJsonParseError jsonError;//Qt5新类
+//    QJsonDocument json = QJsonDocument::fromJson(data, &jsonError);//Qt5新类
+//    if(jsonError.error == QJsonParseError::NoError)//Qt5新类
+//    {
+//        QJsonObject obj = json.object();//Qt5新类
+//        qDebug()<<obj.keys ();
+//        QJsonValue value = obj.value (obj.keys ().at (1));
+
+//        return value.toString ();
+//    }
+//    return "发生错误";
+//}
 

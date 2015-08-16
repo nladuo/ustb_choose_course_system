@@ -100,9 +100,9 @@
     <property name="title">
      <string>软件相关</string>
     </property>
-    <addaction name="action_update"/>
     <addaction name="action_about"/>
     <addaction name="action_notice"/>
+    <addaction name="action_update"/>
    </widget>
    <addaction name="menuXiangguan"/>
   </widget>
@@ -118,7 +118,7 @@
   </action>
   <action name="action_notice">
    <property name="text">
-    <string>注意</string>
+    <string>注意事项</string>
    </property>
   </action>
  </widget>

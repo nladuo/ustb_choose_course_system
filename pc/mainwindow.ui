@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>北科大选课系统V0.50</string>
+   <string>USTB选课系统V0.10</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="loginBtn">
@@ -86,7 +86,7 @@
      </font>
     </property>
     <property name="text">
-     <string>北科大选课系统V0.50</string>
+     <string>USTB选课系统V0.10</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="savePrpCheckBox">
@@ -119,9 +119,9 @@
     <property name="title">
      <string>软件相关</string>
     </property>
-    <addaction name="action_update"/>
     <addaction name="action_about"/>
     <addaction name="action_notice"/>
+    <addaction name="action_update"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -152,7 +152,7 @@
   </action>
   <action name="action_notice">
    <property name="text">
-    <string>注意</string>
+    <string>注意事项</string>
    </property>
   </action>
  </widget>

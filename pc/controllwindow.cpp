@@ -30,21 +30,25 @@ ControllWindow::~ControllWindow()
  * @brief ControllWindow::on_actionAbout_clicked
  */
 void ControllWindow::on_actionAbout_clicked (){
-    QMessageBox::about (this, "关于", "版本:北科大选课系统V0.10<br>作者:刘嘉铭<br>博客:<a href=\"http://blog.kalen25115.cn\">http://blog.kalen25115.cn</a><br>说明:本软件为开源软件<br>源码地址:<a href=\"https://github.com/nladuo/ustb_choose_course_system\">https://github.com/nladuo/ustb_choose_course_system</a>");
+    QMessageBox::about (this, "关于", ABOUT_MSG);
 }
 
 /**
  * @brief ControllWindow::on_actionUpdate_clicked
  */
 void ControllWindow::on_actionUpdate_clicked (){
-
+    QNetworkReply* reply = HttpUtil::get(UPDATE_URL, new QNetworkCookieJar());
+    QByteArray data = reply->readAll ();
+    JsonParser parser = JsonParser(data);
+    QString msg = parser.getSoftWareUpdateInfo ();
+    QMessageBox::about (this, "更新信息", msg);
 }
 
 /**
  * @brief ControllWindow::on_actionNotice_clicked
  */
 void ControllWindow::on_actionNotice_clicked (){
-    QMessageBox::about (this, "注意", "登陆本软件后，请不要再次登陆网页版选课系统，以防止程序崩掉。");
+    QMessageBox::about (this, "注意事项" ,NOTE_MSG);
 }
 
 /**
@@ -102,19 +106,48 @@ void ControllWindow::on_searchClassBtn_clicked()
 }
 
 /**
- * @brief ControllWindow::on_alternativeListWidget_itemDoubleClicked
- * @param item
- */
-void ControllWindow::on_alternativeListWidget_itemDoubleClicked(QListWidgetItem *item)
-{
-    QMessageBox::about (this, "title", item->text ());
-}
-
-/**
  * @brief ControllWindow::on_getClassTableBtn_clicked
  */
 void ControllWindow::on_getClassTableBtn_clicked()
 {
     searchClassTableWidget.setCookieJar (mCookieJar);
     searchClassTableWidget.show ();
+}
+
+/**
+ * 选课
+ * @brief ControllWindow::on_alternativeListWidget_itemDoubleClicked
+ * @param item
+ */
+void ControllWindow::on_alternativeListWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    QByteArray postData;
+    postData.append("id=").append (item->text ()).append ("&");
+    postData.append("uid=").append (UserInfo::getInstance ()->getName ());
+    QNetworkReply* reply = HttpUtil::post (ADD_COURSE_URL, postData, this->mCookieJar);
+
+    QByteArray data = reply->readAll ();
+    QString msg = QString(data.split (':').at (2));
+    msg.remove ( msg.length () -2 ,2);
+    msg.remove (0, 1);
+    QMessageBox::about (this, "选课结果", msg);
+}
+
+/**
+ * 退课
+ * @brief ControllWindow::on_selectedListWidget_itemDoubleClicked
+ * @param item
+ */
+void ControllWindow::on_selectedListWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    QByteArray postData;
+    postData.append("id=").append (item->text ()).append ("&");
+    postData.append("uid=").append (UserInfo::getInstance ()->getName ());
+    QNetworkReply* reply = HttpUtil::post (REMOVE_COURSE_URL, postData, this->mCookieJar);
+
+    QByteArray data = reply->readAll ();
+    QString msg = QString(data.split (':').at (2));
+    msg.remove ( msg.length () -2 ,2);
+    msg.remove (0, 1);
+    QMessageBox::about (this, "选课结果", msg);
 }

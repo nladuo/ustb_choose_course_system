@@ -5,6 +5,8 @@ SearchClassTableWidget::SearchClassTableWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SearchClassTableWidget)
 {
+    this->setMaximumSize (456, 149);
+    this->setMinimumSize (456, 149);
     //设置居中
     QDesktopWidget* pDw = QApplication::desktop();//获得桌面窗体
     QRect rect = pDw->screenGeometry ();

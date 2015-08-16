@@ -14,7 +14,8 @@ MyListItem::MyListItem(ClassBean* bean,QWidget *parent) :
     this->bean = bean;
     ui->nameLabel->setText (bean->getClassName ());
     ui->teacherLabel->setText (bean->getTeacher ());
-    ui->deadlineLabel->setText (bean->getDeadline ());
+    ui->timeAndPositionLabel->setText (bean->getTimeAndPosition ());
+    ui->creditLabel->setText (bean->getCredit ());
 }
 
 

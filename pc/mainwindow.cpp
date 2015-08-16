@@ -41,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->pswdEdit->setText (in.readLine ());
         file2.close ();
     }else{
+        file.open(QIODevice::ReadWrite | QIODevice::Text);
         file2.close ();
     }
 
@@ -51,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent) :
  */
 void MainWindow::on_actionAbout_clicked ()
 {
-    QMessageBox::about (this, "关于", "版本:北科大选课系统V0.10<br>作者:刘嘉铭<br>博客:<a href=\"http://blog.kalen25115.cn\">http://blog.kalen25115.cn</a><br>说明:本软件为开源软件<br>源码地址:<a href=\"https://github.com/nladuo/ustb_choose_course_system\">https://github.com/nladuo/ustb_choose_course_system</a>");
+    QMessageBox::about (this, "关于", ABOUT_MSG);
 }
 
 /**
@@ -59,7 +60,11 @@ void MainWindow::on_actionAbout_clicked ()
  */
 void MainWindow::on_actionUpdate_clicked ()
 {
-
+    QNetworkReply* reply = HttpUtil::get(UPDATE_URL, new QNetworkCookieJar());
+    QByteArray data = reply->readAll ();
+    JsonParser parser = JsonParser(data);
+    QString msg = parser.getSoftWareUpdateInfo ();
+    QMessageBox::about (this, "更新信息", msg);
 }
 
 /**
@@ -67,7 +72,7 @@ void MainWindow::on_actionUpdate_clicked ()
  */
 void MainWindow::on_actionNotice_clicked ()
 {
-    QMessageBox::about (this, "注意", "登陆本软件后，请不要再次登陆网页版选课系统，以防止程序崩掉。");
+    QMessageBox::about (this,"注意事项", NOTE_MSG);
 }
 
 MainWindow::~MainWindow()
@@ -98,11 +103,6 @@ void MainWindow::saveUserInfo (bool isClear){
     file2.close();
 }
 
-void MainWindow::on_savePrpCheckBox_clicked(bool checked)
-{
-    //saveUserInfo (!checked);
-}
-
 /**
  * @brief MainWindow::on_loginBtn_clicked
  *  登陆过程中,如果登陆登陆失败,显示错误信息
@@ -125,7 +125,7 @@ void MainWindow::on_loginBtn_clicked()
     //登陆,并获取登陆的cookie(session),如果没有获取成功,则是密码或用户名错误
     QNetworkReply* reply = HttpUtil::post (LOGIN_URL, postData, new QNetworkCookieJar());
     QString cookieData = reply->rawHeader ("Set-Cookie");
-    qDebug()<<cookieData;
+    //qDebug()<<cookieData;
 
     QNetworkCookieJar *cookieJar = new QNetworkCookieJar();
     QNetworkCookie *cookie = new QNetworkCookie();
@@ -135,7 +135,7 @@ void MainWindow::on_loginBtn_clicked()
     cookie->setValue ( cookieData.splitRef (';')[0].split ('=')[1].toUtf8 ());
     cookieJar->insertCookie (*cookie);
 
-    qDebug()<<cookieData.splitRef (';')[0].split ('=')[1];
+    //qDebug()<<cookieData.splitRef (';')[0].split ('=')[1];
 
     reply = HttpUtil::get (CHECK_LOGIN_SUCCESS_URL, cookieJar);
 

@@ -5,14 +5,15 @@
  * @param id
  * @param className
  * @param teacher
- * @param dealine
+ * @param timeAndPosition
  */
-ClassBean::ClassBean(QString id, QString className, QString teacher, QString dealine)
+ClassBean::ClassBean(QString id, QString className, QString teacher, QString timeAndPosition, QString credit)
 {
     this->id = id;
     this->className = className;
     this->teacher = teacher;
-    this->dealine = dealine;
+    this->timeAndPosition = timeAndPosition;
+    this->credit = credit;
 }
 
 /**

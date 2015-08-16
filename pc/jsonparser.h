@@ -4,6 +4,7 @@
 #include <QtCore>
 #include <vector>
 #include "classbean.h"
+#include "const_val.h"
 using namespace std;
 
 /**
@@ -17,6 +18,9 @@ public:
     vector<ClassBean*> getAlternativeCourses();
     vector<ClassBean*> getClassTableItems();
     QString getSemester();
+    bool isNeedUpdate();
+    QString getSoftWareUpdateInfo();
+    //QString getChooseCourseResult();
 private:
     QByteArray jsonStr;
     vector<ClassBean*> getCourses(QString type);

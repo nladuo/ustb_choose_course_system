@@ -40,6 +40,8 @@ private slots:
     void on_actionUpdate_clicked();
     void on_actionNotice_clicked();
 
+    void on_selectedListWidget_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::ControllWindow *ui;
     QNetworkCookieJar* mCookieJar;

@@ -25,7 +25,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_savePrpCheckBox_clicked(bool checked);
+   // void on_savePrpCheckBox_clicked(bool checked);
     void on_loginBtn_clicked();
     void on_actionAbout_clicked();
     void on_actionUpdate_clicked();
