@@ -11,7 +11,7 @@
 
 ##Android
 使用android-studio1.3开发
-完成登陆选课系统
+功能：课表的查询，公共选修课信息的查询
 
 ##服务器端
 用nodejs(v0.12.4)(express+mysql)编写<br>

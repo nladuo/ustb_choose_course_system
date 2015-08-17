@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import kalen.app.ustb_choose_course_system.R;
+
 /**
  * Created by kalen on 15-8-16.
  */
@@ -13,8 +15,10 @@ public class PrerequsiteCourseFragment extends Fragment {
     View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //view = inflater.inflate()
-        return super.onCreateView(inflater, container, savedInstanceState);
+        super.onCreateView(inflater, container, savedInstanceState);
+        view = inflater.inflate(R.layout.fragment_prerequisite_course, null);
+
+        return view;
 
     }
 }
