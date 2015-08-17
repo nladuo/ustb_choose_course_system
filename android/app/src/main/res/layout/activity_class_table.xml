@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
-        android:background="@color/light_gray"
+        android:background="#ffbbbbbb"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -13,14 +15,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/class_table_semester_et"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <Button
+            android:id="@+id/class_table_search_btn"
             android:textSize="17sp"
             android:text="@string/search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/class_table_recyclerview"
+        android:layout_marginTop="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </android.support.v7.widget.RecyclerView>
+
 
 </LinearLayout>

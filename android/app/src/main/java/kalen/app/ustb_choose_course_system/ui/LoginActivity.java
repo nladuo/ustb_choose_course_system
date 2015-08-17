@@ -2,6 +2,7 @@ package kalen.app.ustb_choose_course_system.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_login);
         initViews();
     }
@@ -79,7 +82,7 @@ public class LoginActivity extends Activity {
         private String username;
         private String password;
 
-        AlertDialog dialog;
+        private ProgressDialog progressDialog;
 
         public LoginAsyncTask(String username, String password){
             this.username = username;
@@ -89,11 +92,8 @@ public class LoginActivity extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-            builder.setTitle("请稍等");
-            builder.setMessage("正在登陆中....");
-            dialog = builder.create();
-            dialog.show();
+            progressDialog = ProgressDialog.show(LoginActivity.this,
+                    "Loading...", "Please wait...", true, false);
         }
 
         @Override
@@ -129,7 +129,7 @@ public class LoginActivity extends Activity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            dialog.dismiss();
+            progressDialog.dismiss();
 
             String result = s;
 
