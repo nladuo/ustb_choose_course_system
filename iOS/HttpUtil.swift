@@ -26,12 +26,17 @@ extension kalen.app{
             get方法
             类方法
         */
-        class func get(url:String, cookieStr:String)->NSString{
+        class func get(url:String, cookieStr:String)->NSString?{
             var req:NSMutableURLRequest = NSMutableURLRequest(URL: NSURL(string: url)!);
             req.addValue(cookieStr, forHTTPHeaderField: "Cookie")
             req.HTTPMethod = "GET"
+            
+            var error:NSError?;
 
-            var data = NSURLConnection.sendSynchronousRequest(req, returningResponse: nil, error: nil)
+            var data = NSURLConnection.sendSynchronousRequest(req, returningResponse: nil, error: &error)
+            if error != nil{
+                return nil;
+            }
         
             return NSString(data: data!, encoding: NSUTF8StringEncoding)!
             
@@ -42,7 +47,7 @@ extension kalen.app{
             post方法
             类方法
         */
-        class func post(url:String, params:Dictionary<NSString, NSString>, cookieStr:String)->NSString{
+        class func post(url:String, params:Dictionary<NSString, NSString>, cookieStr:String)->NSString?{
             var req = NSMutableURLRequest(URL: NSURL(string: url)!)
             req.addValue(cookieStr, forHTTPHeaderField: "Cookie")
             req.HTTPMethod = "POST"
@@ -57,7 +62,11 @@ extension kalen.app{
                 str.appendString(value)
             }
             req.HTTPBody = str.dataUsingEncoding(NSUTF8StringEncoding)
-            var data = NSURLConnection.sendSynchronousRequest(req, returningResponse: nil, error: nil)
+            var error:NSError?
+            var data = NSURLConnection.sendSynchronousRequest(req, returningResponse: nil, error: &error)
+            if error != nil{
+                return nil
+            }
             return NSString(data: data!, encoding: NSUTF8StringEncoding)!
         }
         

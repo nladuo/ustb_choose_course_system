@@ -34,9 +34,11 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
 
     override func loadView(){
         super.loadView()
-        parentVc = self.tabBarController as ChooseCourseTabBarController
+        parentVc = self.tabBarController as
+        ChooseCourseTabBarController
         tableView.delegate = self
         tableView.dataSource = self
+        
         parentVc.updateNotFullPublicSelectiveCourses(self)
     }
     

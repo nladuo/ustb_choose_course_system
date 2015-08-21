@@ -35,10 +35,20 @@ class ChooseCourseTabBarController: UITabBarController {
     
     func updateNotFullPublicSelectiveCourses(_delegate:ChooseCourseDelegate){
         var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL, cookieStr: cookieData)
-        var parser = kalen.app.JsonParser(jsonStr: data)
-        notFullPublicClasses = parser.getAlternativeCourses()
-        selectedClasses = parser.getSelectedCourses()
-        learnedPublicClasses = parser.getLearnedPublicCourses()
+        if data != nil{
+            var parser = kalen.app.JsonParser(jsonStr: data!)
+            notFullPublicClasses = parser.getAlternativeCourses()
+            selectedClasses = parser.getSelectedCourses()
+            learnedPublicClasses = parser.getLearnedPublicCourses()
+        }else{
+            notFullPublicClasses = []
+            selectedClasses = []
+            learnedPublicClasses = []
+            MBProgressHUD.showError("网络连接错误")
+        }
+        
+        
+        
         _delegate.afterParseDatas()
         
     }

@@ -70,7 +70,6 @@ class MainTableViewController: UITableViewController{
             
         }))
         
-        
         self.presentViewController(alert, animated: true, completion: nil)
         
     }
@@ -88,6 +87,7 @@ class MainTableViewController: UITableViewController{
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "classTableSegue"{
+            
             var vc = segue.destinationViewController as ClassTableViewController
             vc.cookieData = cookieData
         }else if segue.identifier == "chooseCourseSegue" {

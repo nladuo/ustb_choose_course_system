@@ -30,6 +30,7 @@ class ClassTableViewController: UIViewController{
     var unkownClassLabel:UILabel!
 
     @IBAction func searchBtnClicked(sender: AnyObject) {
+        MBProgressHUD.showMessage("加载中")
         //1、清楚课程String数组所有的内容
         clearStringsContent()
         //2、根据学期来把相应的内容放到数组里面
@@ -64,19 +65,27 @@ class ClassTableViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        MBProgressHUD.showMessage("加载中，请稍后")
         //1、先获取当前的学期
         var url = kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL + kalen.app.UserInfo.getInstance().username;
         
         var jsonStr = kalen.app.HttpUtil.get(url, cookieStr: self.cookieData)
-        jsonParser = kalen.app.JsonParser(jsonStr: jsonStr)
-        semester.text = jsonParser.getSemester()
-        //2、初始化课程数组所有的内容
-        assignStringsContent()
-        //3、根据学期来把相应的内容放到数组里面
-        manipulateClassStringCollections(semester.text)
-        //4、更新UI，把数组里面所有的内容更新到UI中
-        updateClassTableUI()
+        if jsonStr != nil{
+            jsonParser = kalen.app.JsonParser(jsonStr: jsonStr!)
+            semester.text = jsonParser.getSemester()
+            //2、初始化课程数组所有的内容
+            assignStringsContent()
+            //3、根据学期来把相应的内容放到数组里面
+            manipulateClassStringCollections(semester.text)
+            //4、更新UI，把数组里面所有的内容更新到UI中
+            updateClassTableUI()
+        }else{
+            assignStringsContent()
+            semester.text = "无法获取当前学期"
+            MBProgressHUD.hideHUD()
+            MBProgressHUD.showError("网络错误")
+        }
+        
         
     }
 
@@ -92,8 +101,14 @@ class ClassTableViewController: UIViewController{
         //获取json数据
         var params = ["listXnxq": semesterText,"uid": kalen.app.UserInfo.getInstance().username]
         var data = kalen.app.HttpUtil.post(kalen.app.ConstVal.FETCH_CLASS_TABLE_URL, params: params, cookieStr: cookieData)
+        
+        MBProgressHUD.hideHUD()
+        if data == nil{
+            MBProgressHUD.showError("网络连接错误")
+            return
+        }
 
-        var parser = kalen.app.JsonParser(jsonStr: data)
+        var parser = kalen.app.JsonParser(jsonStr: data!)
         var beans:[kalen.app.ClassBean] = parser.getClassTableItems()
 
         for bean in beans{

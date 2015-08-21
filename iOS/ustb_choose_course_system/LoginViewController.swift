@@ -95,19 +95,23 @@ class LoginViewController: UIViewController, HttpDelegate{
         }else{//联网正常
             
             self.cookieData = httpUtil!.cookieData.componentsSeparatedByString(";")[0]
-            var result:NSString = kalen.app.HttpUtil.get(kalen.app.ConstVal.CHECK_LOGIN_SUCCESS_URL, cookieStr: self.cookieData)
+            var result:NSString? = kalen.app.HttpUtil.get(kalen.app.ConstVal.CHECK_LOGIN_SUCCESS_URL, cookieStr: self.cookieData)
             
             
             dispatch_sync(dispatch_get_main_queue()) {
-                
-                if result.length > 100 {
-                    MBProgressHUD.hideHUD()//隐藏蒙版
-                    MBProgressHUD.showError("用户名或密码错误")
+                MBProgressHUD.hideHUD()//隐藏蒙版
+                if result != nil{
+                    if result!.length > 100 {
+                        MBProgressHUD.showError("用户名或密码错误")
+                    }else{
+                        MBProgressHUD.showSuccess("登陆成功")
+                        self.performSegueWithIdentifier("loginSegue", sender: nil)
+                    }
                 }else{
-                    MBProgressHUD.hideHUD()//隐藏蒙版
-                    MBProgressHUD.showSuccess("登陆成功")
-                    self.performSegueWithIdentifier("loginSegue", sender: nil)
+                    MBProgressHUD.showError("网络连接错误")
                 }
+                
+                
             }
         }
     }
