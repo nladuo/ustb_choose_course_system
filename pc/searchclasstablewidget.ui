@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>查询参数选择</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="ustb_app.qrc">
+    <normaloff>:/new/prefix1/imgs/icon.png</normaloff>:/new/prefix1/imgs/icon.png</iconset>
+  </property>
   <widget class="QPushButton" name="searchBtn">
    <property name="geometry">
     <rect>
@@ -74,6 +78,8 @@
   <zorder>label_3</zorder>
   <zorder>searchBtn</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="ustb_app.qrc"/>
+ </resources>
  <connections/>
 </ui>

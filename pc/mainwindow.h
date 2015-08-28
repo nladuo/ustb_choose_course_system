@@ -4,10 +4,12 @@
 #include <QMainWindow>
 #include <qmessagebox.h>
 #include <QDesktopWidget>
+#include <QProgressDialog>
 #include "controllwindow.h"
 #include "httputil.h"
 #include "const_val.h"
 #include "userinfo.h"
+#include "waitdialog.h"
 
 namespace Ui {
 class MainWindow;

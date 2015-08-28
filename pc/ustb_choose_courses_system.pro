@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     classbean.cpp \
     jsonparser.cpp \
     mylistitem.cpp \
-    searchclasstablewidget.cpp
+    searchclasstablewidget.cpp \
+    waitdialog.cpp
 
 HEADERS  += mainwindow.h \
     controllwindow.h \
@@ -31,10 +32,15 @@ HEADERS  += mainwindow.h \
     classbean.h \
     jsonparser.h \
     mylistitem.h \
-    searchclasstablewidget.h
+    searchclasstablewidget.h \
+    waitdialog.h
 
 FORMS    += \
     mainwindow.ui \
     controllwindow.ui \
     mylistitem.ui \
-    searchclasstablewidget.ui
+    searchclasstablewidget.ui \
+    waitdialog.ui
+
+RESOURCES += \
+    ustb_app.qrc

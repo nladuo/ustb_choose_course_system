@@ -144,4 +144,5 @@ void SearchClassTableWidget::on_searchBtn_clicked()
     classTableWidget->move( (rect.width() -classTableWidget->width ()) / 2
                             , (rect.height() -classTableWidget->height ()) / 2 );
     classTableWidget->show ();
+    classTableWidget->setWindowIcon (QIcon(":/new/prefix1/imgs/icon.png"));
 }

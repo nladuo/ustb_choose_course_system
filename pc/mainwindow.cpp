@@ -60,10 +60,13 @@ void MainWindow::on_actionAbout_clicked ()
  */
 void MainWindow::on_actionUpdate_clicked ()
 {
+   WaitDialog dialog;
+   dialog.show ();
     QNetworkReply* reply = HttpUtil::get(UPDATE_URL, new QNetworkCookieJar());
     QByteArray data = reply->readAll ();
     JsonParser parser = JsonParser(data);
     QString msg = parser.getSoftWareUpdateInfo ();
+    dialog.close ();
     QMessageBox::about (this, "更新信息", msg);
 }
 
@@ -111,8 +114,10 @@ void MainWindow::saveUserInfo (bool isClear){
  */
 void MainWindow::on_loginBtn_clicked()
 {
-    saveUserInfo( !ui->savePrpCheckBox->isChecked ());
+    WaitDialog waitDialog;
+    waitDialog.show ();
 
+    saveUserInfo( !ui->savePrpCheckBox->isChecked ());
     QString username = this->ui->usrNameEdit->text ();
     QString password = this->ui->pswdEdit->text ();
     UserInfo* userInfo = UserInfo::getInstance ();
@@ -139,12 +144,15 @@ void MainWindow::on_loginBtn_clicked()
 
     reply = HttpUtil::get (CHECK_LOGIN_SUCCESS_URL, cookieJar);
 
+    // dismiss the wait dialog
+    waitDialog.close ();
+
     //登录失败的话,后台会出异常信息
     if( reply->readAll ().size ()> 200){
         QMessageBox::about (this, "LOGIN_STATUS", "登陆失败:用户名或密码错误");
         return;
     }
-    QMessageBox::about (this, "LOGIN_STATUS", "登陆成功");
+    //QMessageBox::about (this, "LOGIN_STATUS", "登陆成功");
     this->close ();
     controllWindow.setCookieJar (cookieJar);
     controllWindow.searchClasses ();

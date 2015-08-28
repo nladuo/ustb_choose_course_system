@@ -12,6 +12,7 @@
 #include "const_val.h"
 #include "userinfo.h"
 #include "searchclasstablewidget.h"
+#include "waitdialog.h"
 
 using namespace std;
 

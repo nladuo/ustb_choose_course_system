@@ -37,10 +37,13 @@ void ControllWindow::on_actionAbout_clicked (){
  * @brief ControllWindow::on_actionUpdate_clicked
  */
 void ControllWindow::on_actionUpdate_clicked (){
+    WaitDialog dialog;
+    dialog.show ();
     QNetworkReply* reply = HttpUtil::get(UPDATE_URL, new QNetworkCookieJar());
     QByteArray data = reply->readAll ();
     JsonParser parser = JsonParser(data);
     QString msg = parser.getSoftWareUpdateInfo ();
+    dialog.close ();
     QMessageBox::about (this, "更新信息", msg);
 }
 
@@ -72,6 +75,10 @@ void ControllWindow::getBean()
  */
 void ControllWindow::searchClasses()
 {
+    QTime current_time = QTime::currentTime();
+    int second = current_time.second();
+    int msec = current_time.msec();
+
     ui->alternativeListWidget->clear ();
     ui->selectedListWidget->clear ();
     getBean ();
@@ -94,6 +101,10 @@ void ControllWindow::searchClasses()
         ui->selectedListWidget->addItem (listItem);
         ui->selectedListWidget->setItemWidget (listItem, item);
     }
+
+    //Test connect time
+    current_time = QTime::currentTime();
+    qDebug()<<"after--->"<<current_time.second() - second <<"."<<current_time.msec () - msec;
 }
 
 /**

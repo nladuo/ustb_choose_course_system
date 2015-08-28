@@ -14,8 +14,8 @@
    <string>选课系统后台</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../../../Downloads/20150816065626967.ico</normaloff>../../../Downloads/20150816065626967.ico</iconset>
+   <iconset resource="ustb_app.qrc">
+    <normaloff>:/new/prefix1/imgs/icon.png</normaloff>:/new/prefix1/imgs/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="searchClassBtn">
@@ -126,6 +126,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="ustb_app.qrc"/>
+ </resources>
  <connections/>
 </ui>

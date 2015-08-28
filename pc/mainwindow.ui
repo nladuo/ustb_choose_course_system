@@ -14,8 +14,8 @@
    <string>USTB选课系统V0.10</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../../../Downloads/20150816065626967.ico</normaloff>../../../Downloads/20150816065626967.ico</iconset>
+   <iconset resource="ustb_app.qrc">
+    <normaloff>:/new/prefix1/imgs/icon.png</normaloff>:/new/prefix1/imgs/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="loginBtn">
@@ -161,6 +161,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="ustb_app.qrc"/>
+ </resources>
  <connections/>
 </ui>
