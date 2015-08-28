@@ -29,10 +29,13 @@ router.post('/add', function(req, res, next) {
 		content: req.body.message,
 		time: new Date().Format("yyyy-MM-dd hh:mm:ss")
 	};
-	//console.log(message);
-	db.addMessage(message, function(){
-		res.redirect("/");
-	});
+	if( (message.nickname != "") && (message.content != "") ){
+		db.addMessage(message, function(){
+        	        res.redirect("/");
+	        });
+	}else{
+		res.render('404', {});
+	}
 
 });
 
@@ -51,7 +54,7 @@ router.get('/download', function(req, res, next) {
 	var id = req.query.id;
 	db.queryAPPInfo(function(results){
 		var filename = results[id - 1].app_name;
-		var filepath = path.join('public', 'downloads', filename);
+		var filepath = path.join('../public', 'downloads', filename);
 		res.download(filepath);
 	});
 });

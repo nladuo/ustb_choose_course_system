@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015-08-11 23:02:02
+-- 生成日期: 2015-08-28 11:37:24
 -- 服务器版本: 5.5.44-0ubuntu0.14.04.1
 -- PHP 版本: 5.5.9-1ubuntu4.11
 
@@ -41,11 +41,11 @@ CREATE TABLE IF NOT EXISTS `app` (
 --
 
 INSERT INTO `app` (`id`, `type_name`, `app_name`, `version`, `note`, `update_note`) VALUES
-(1, 'Windows', NULL, 0.5, 'PC版', NULL),
-(2, 'Linux', 'ustb_choose_course_ubuntu-64bit-v0.50.tar.gz', 0.5, 'PC版 64bit(仅在ubuntu14.04-destop-LTS做过测试)使用方法:进入解压后的目录,输入命令:chmod +x ./install.sh & sudo bash ./install.sh & chmod +x USTB选课系统', NULL),
-(3, 'Mac', NULL, 0.5, 'PC版', NULL),
-(4, 'Android', NULL, 0, '移动版', NULL),
-(5, 'iOS', NULL, 0, '移动版', NULL);
+(1, 'Windows', NULL, 0.1, 'PC版', NULL),
+(2, 'Ubuntu', 'ubuntu-64bit-v0.10.tar.gz', 0.1, 'PC版 64bit(仅在ubuntu14.04-destop-LTS做过测试)使用方法:进入解压后的目录,输入命令:chmod +x ./install.sh & sudo bash ./install.sh & chmod +x USTB选课系统', '0.10版本发布'),
+(3, 'Mac', NULL, 0.1, 'PC版 clang-64bit（mac版记住密码不管用，尝试解决方法：打开命令行，输入sudo chmod -R 777，然后把程序拖到控制台中，输入电脑root密码，就可以了）（如果实在不行的话，可以联系我。）', NULL),
+(4, 'Android', NULL, 0, '移动版(正在完善中)', NULL),
+(5, 'iOS', NULL, 0, '移动版(正在完善中)', NULL);
 
 -- --------------------------------------------------------
 
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `message_board` (
   `content` text NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -25,8 +25,9 @@
     <body>
 
     <h2>北科大选课系统第三方客户端</h2>
+    <h3>作者：叁公子</h3>
+    <h3>软件说明：本软件为开源软件，仅供学习参考</h3>
     <h3>源码地址：<a href="https://github.com/nladuo/ustb_choose_course_system">https://github.com/nladuo/ustb_choose_course_system</a></h3>
-    <h3>软件说明：本软件为开源软件，仅供学习使用</h3>
     <h3>下载列表：</h3>
     <table border="1">
     <tr>
@@ -38,7 +39,7 @@
     <% for(var i=0; i<app_results.length; i++) {%>
     <tr>
         <td><%=app_results[i].type_name %></td>
-        <td><%=app_results[i].version %></td>
+        <td><%=app_results[i].version.toFixed(2) %></td>
         <td><a href="/download?id=<%=app_results[i].id %>"><%=app_results[i].app_name %></a></td>
         <td><%=app_results[i].note %></td>
     </tr>
