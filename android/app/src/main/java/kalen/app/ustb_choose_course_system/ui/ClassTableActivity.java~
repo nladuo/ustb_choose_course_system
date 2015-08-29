@@ -1,22 +1,18 @@
 package kalen.app.ustb_choose_course_system.ui;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -35,7 +31,7 @@ import kalen.app.ustb_choose_course_system.utils.JsonParser;
 /**
  * Created by kalen on 15-8-12.
  */
-public class ClassTableActivity extends ActionBarActivity{
+public class ClassTableActivity extends Activity{
 
     //List<ClassBean> classes;
     private String[] mDatas;
@@ -50,37 +46,13 @@ public class ClassTableActivity extends ActionBarActivity{
         setContentView(R.layout.activity_class_table);
         initDatas();
         initViews();
-        initToolBar();
-
         semesterEdit.setText(getIntent().getStringExtra("semester"));
 
         //search class table from internet
         GetClassItemAsyncTask task = new GetClassItemAsyncTask(
                 semesterEdit.getText().toString());
         task.execute();
-
     }
-
-    private void initToolBar() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.top_bar);
-        TextView mToolBarTextView = (TextView) findViewById(R.id.top_bar_title);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mToolbar.setNavigationIcon(R.mipmap.btn_back);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-        mToolBarTextView.setText(R.string.app_name);
-    }
-
-
-
 
     private void initViews() {
         recyclerView = (RecyclerView) findViewById(R.id.class_table_recyclerview);
@@ -130,7 +102,7 @@ public class ClassTableActivity extends ActionBarActivity{
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = ProgressDialog.show(ClassTableActivity.this,
-                    "请等待...", "正在获取数据...", true, false);
+                    "Loading...", "Please wait...", true, false);
         }
 
         @Override

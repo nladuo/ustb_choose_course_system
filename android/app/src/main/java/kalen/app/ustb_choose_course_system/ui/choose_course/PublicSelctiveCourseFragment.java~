@@ -65,9 +65,6 @@ public class PublicSelctiveCourseFragment extends Fragment {
         mDataChild.put(mHeaders.get(2), mLearnedCourses);
     }
 
-    /**
-     * init the views and events
-     */
     private void initViews() {
         // get the listview
         expListView = (ExpandableListView) view.findViewById(
@@ -79,16 +76,6 @@ public class PublicSelctiveCourseFragment extends Fragment {
         // setting list adapter
         expListView.setAdapter(mAdapter);
 
-        expandAllGroups();
-    }
-
-    /**
-     * to expand every group
-     */
-    private void expandAllGroups(){
-        for(int i = 0; i < mAdapter.getGroupCount(); i++){
-            expListView.expandGroup(i);
-        }
     }
 
     class GetDataAsyncTask extends AsyncTask<Void, Void, Boolean>{
@@ -99,7 +86,7 @@ public class PublicSelctiveCourseFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = ProgressDialog.show(getActivity(),
-                    "请等待...", "正在抓取数据...", true, false);
+                    "Loading...", "Please wait...", true, false);
         }
 
         @Override

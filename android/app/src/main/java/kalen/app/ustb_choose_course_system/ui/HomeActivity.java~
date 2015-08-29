@@ -1,28 +1,18 @@
 package kalen.app.ustb_choose_course_system.ui;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import kalen.app.ustb_choose_course_system.R;
 import kalen.app.ustb_choose_course_system.model.ConstVal;
 import kalen.app.ustb_choose_course_system.model.UserInfo;
-import kalen.app.ustb_choose_course_system.service.DownLoadService;
 import kalen.app.ustb_choose_course_system.ui.choose_course.ChooseCourseActivity;
 import kalen.app.ustb_choose_course_system.utils.HttpUtils;
 import kalen.app.ustb_choose_course_system.utils.JsonParser;
@@ -30,28 +20,16 @@ import kalen.app.ustb_choose_course_system.utils.JsonParser;
 /**
  * Created by kalen on 15-8-12.
  */
-public class HomeActivity extends ActionBarActivity implements View.OnClickListener{
+public class HomeActivity extends Activity implements View.OnClickListener{
 
+    //RelativeLayout
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_home);
         initViews();
-        initToolBar();
-    }
-
-    private void initToolBar() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.top_bar);
-        TextView mToolBarTextView = (TextView) findViewById(R.id.top_bar_title);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mToolbar.setNavigationIcon(null);
-        //mToolbar.setLogo(R.mipmap.ic_launcher);
-        //mToolbar.set
-        mToolBarTextView.setText(R.string.app_name);
     }
 
     private void initViews() {
@@ -61,7 +39,6 @@ public class HomeActivity extends ActionBarActivity implements View.OnClickListe
         findViewById(R.id.home_rl_pre_choose_course).setOnClickListener(this);
         findViewById(R.id.home_rl_search_class_table).setOnClickListener(this);
         findViewById(R.id.home_rl_search_exam_alignment).setOnClickListener(this);
-        findViewById(R.id.home_rl_logout).setOnClickListener(this);
     }
 
     @Override
@@ -75,17 +52,14 @@ public class HomeActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.home_rl_search_class_table:
                 GetSemesterAsyncTask task = new GetSemesterAsyncTask();
                 task.execute();
-
+//                startActivity(new Intent(HomeActivity.this,
+//                        ClassTableActivity.class));
                 break;
 
             case R.id.home_rl_about_soft:
-                startActivity(new Intent(this, AboutActivity.class));
                 break;
 
             case R.id.home_rl_checkout_update:
-                Toast.makeText(this, "开始下载...", Toast.LENGTH_SHORT).show();
-                startDownload("android-v0.10.apk",
-                        ConstVal.APP_UPDATE_DOWNLOAD_URL);
                 break;
 
             case R.id.home_rl_pre_choose_course:
@@ -97,28 +71,6 @@ public class HomeActivity extends ActionBarActivity implements View.OnClickListe
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
                 break;
-            case R.id.home_rl_logout:
-                AlertDialog.Builder builder2 = new AlertDialog.Builder(HomeActivity.this);
-                builder2.setTitle("提示");
-                builder2.setMessage("你确定要退出账户吗？");
-                builder2.setNegativeButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //reset the userInfo
-                        UserInfo userInfo = UserInfo.getInstance();
-                        userInfo.setCookieStore(null);
-                        userInfo.setPassword("");
-                        userInfo.setUsername("");
-                        startActivity(new Intent(HomeActivity.this,
-                                LoginActivity.class));
-                        finish();
-
-                    }
-                });
-                builder2.setPositiveButton("取消", null);
-                AlertDialog alertDialog2 = builder2.create();
-                alertDialog2.show();
-
         }
     }
 
@@ -129,7 +81,7 @@ public class HomeActivity extends ActionBarActivity implements View.OnClickListe
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = ProgressDialog.show(HomeActivity.this,
-                    "请等待...", "正在登陆中...", true, false);
+                    "Loading...", "Please wait...", true, false);
         }
 
         @Override
@@ -155,33 +107,9 @@ public class HomeActivity extends ActionBarActivity implements View.OnClickListe
                 startActivity(intent);
             }else {
                 Toast.makeText(HomeActivity.this,
-                        "加载失败，请检查网络配置", Toast.LENGTH_SHORT).show();
+                        "failed", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    void startDownload(String filename, String url){
-
-        final String downloadFilename = filename;
-        final String downloadUrl = url;
-
-
-        Intent intent=new Intent(this,DownLoadService.class);
-        bindService(intent, new ServiceConnection(){
-            @Override
-            public void onServiceConnected(ComponentName componentName,
-                                           IBinder binder) {
-
-                DownLoadService downLoadService=((DownLoadService.MyBinder)binder)
-                        .getService();
-                downLoadService.getTask().execute(downloadFilename,
-                        downloadUrl);
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName componentName) {}
-        }, Context.BIND_AUTO_CREATE);
-
     }
 
 }

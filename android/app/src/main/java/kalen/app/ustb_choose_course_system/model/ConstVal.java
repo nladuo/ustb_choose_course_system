@@ -13,5 +13,9 @@ public class ConstVal {
 
     public static final String USER_SHARE_PREFERENCE = "user";
 
+    public  static final String APP_WEBSIT_URL = "http://vps.kalen25115.cn:3000/";
+
+    public static final String APP_UPDATE_DOWNLOAD_URL = "http://vps.kalen25115.cn/android-v0.10.apk";
+
 
 }
