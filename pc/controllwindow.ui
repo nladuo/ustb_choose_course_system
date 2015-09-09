@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>490</width>
+    <width>542</width>
     <height>367</height>
    </rect>
   </property>
@@ -21,7 +21,7 @@
    <widget class="QPushButton" name="searchClassBtn">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>70</x>
       <y>10</y>
       <width>161</width>
       <height>31</height>
@@ -34,7 +34,7 @@
    <widget class="QPushButton" name="getClassTableBtn">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>300</x>
       <y>10</y>
       <width>161</width>
       <height>31</height>
@@ -75,7 +75,7 @@
      <rect>
       <x>10</x>
       <y>240</y>
-      <width>471</width>
+      <width>521</width>
       <height>91</height>
      </rect>
     </property>
@@ -85,7 +85,7 @@
      <rect>
       <x>10</x>
       <y>70</y>
-      <width>471</width>
+      <width>521</width>
       <height>141</height>
      </rect>
     </property>
@@ -96,7 +96,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>490</width>
+     <width>542</width>
      <height>28</height>
     </rect>
    </property>

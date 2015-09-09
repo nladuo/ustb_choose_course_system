@@ -48,14 +48,20 @@ vector<ClassBean*> JsonParser::getCourses (QString type)
             QString className = obj2["DYKCM"].toString ();
             QString timeAndPosition = obj2["SKSJDDSTR"].toString ();
             QString credit = obj2["XF"].toString ().append ("学分");
+            QString KXH = obj2["KXH"].toString ();
+            QString DYKCH = obj2["DYKCH"].toString ();
+            QString ratio =QString::number (obj2["SKRS"].toInt ())
+                    .append ("/")
+                    .append (QString::number (obj2["KRL"].toInt ()));
             QString teacher;
             {
                 QJsonArray array2 = obj2["JSM"].toArray ();
                 QJsonObject obj3 = array2.at (0).toObject ();
                 teacher = obj3["JSM"].toString ();
             }
+
             v.push_back (new ClassBean(QString::number (id), className,
-                                       teacher, timeAndPosition, credit));
+                                       teacher, timeAndPosition, credit, ratio, KXH, DYKCH));
         }
     }
     return v;
@@ -69,11 +75,11 @@ vector<ClassBean*> JsonParser::getClassTableItems ()
 {
     vector<ClassBean*> v;
     QByteArray data = jsonStr;
-    QJsonParseError jsonError;//Qt5新类
-    QJsonDocument json = QJsonDocument::fromJson(data, &jsonError);//Qt5新类
-    if(jsonError.error == QJsonParseError::NoError)//Qt5新类
+    QJsonParseError jsonError;
+    QJsonDocument json = QJsonDocument::fromJson(data, &jsonError);
+    if(jsonError.error == QJsonParseError::NoError)
     {
-        QJsonObject obj = json.object();//Qt5新类
+        QJsonObject obj = json.object();
         QJsonArray array = obj["selectedCourses"].toArray ();
         for (int i = 0; i < array.size ();i++){
             QJsonObject obj2 = array.at (i).toObject ();
@@ -150,11 +156,11 @@ vector<ClassBean*> JsonParser::parseClassTable(QString srcStr, QString className
  */
 QString JsonParser::getSemester (){
     QByteArray data = jsonStr;
-    QJsonParseError jsonError;//Qt5新类
-    QJsonDocument json = QJsonDocument::fromJson(data, &jsonError);//Qt5新类
-    if(jsonError.error == QJsonParseError::NoError)//Qt5新类
+    QJsonParseError jsonError;
+    QJsonDocument json = QJsonDocument::fromJson(data, &jsonError);
+    if(jsonError.error == QJsonParseError::NoError)
     {
-        QJsonObject obj = json.object();//Qt5新类
+        QJsonObject obj = json.object();
         QJsonArray array = obj["selectedCourses"].toArray ();
         for (int i = 0; i < array.size ();i++){
             QJsonObject obj2 = array.at (i).toObject ();
@@ -168,12 +174,12 @@ QString JsonParser::getSemester (){
 
 QString JsonParser::getSoftWareUpdateInfo(){
     QByteArray data = jsonStr;
-    QJsonParseError jsonError;//Qt5新类
-    QJsonDocument json = QJsonDocument::fromJson(data, &jsonError);//Qt5新类
+    QJsonParseError jsonError;
+    QJsonDocument json = QJsonDocument::fromJson(data, &jsonError);
     QString message = "";
-    if(jsonError.error == QJsonParseError::NoError)//Qt5新类
+    if(jsonError.error == QJsonParseError::NoError)
     {
-        QJsonObject obj = json.object();//Qt5新类
+        QJsonObject obj = json.object();
         double version = obj["version"].toDouble ();
         QString appName = obj["app_name"].toString ();
         QString updateNote = obj["update_note"].toString ();
@@ -201,11 +207,11 @@ QString JsonParser::getSoftWareUpdateInfo(){
 //QString JsonParser::getChooseCourseResult (){
 //    QByteArray data = jsonStr;
 //    qDebug()<<data;
-//    QJsonParseError jsonError;//Qt5新类
-//    QJsonDocument json = QJsonDocument::fromJson(data, &jsonError);//Qt5新类
-//    if(jsonError.error == QJsonParseError::NoError)//Qt5新类
+//    QJsonParseError jsonError;
+//    QJsonDocument json = QJsonDocument::fromJson(data, &jsonError);
+//    if(jsonError.error == QJsonParseError::NoError)
 //    {
-//        QJsonObject obj = json.object();//Qt5新类
+//        QJsonObject obj = json.object();
 //        qDebug()<<obj.keys ();
 //        QJsonValue value = obj.value (obj.keys ().at (1));
 

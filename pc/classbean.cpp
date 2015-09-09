@@ -7,13 +7,18 @@
  * @param teacher
  * @param timeAndPosition
  */
-ClassBean::ClassBean(QString id, QString className, QString teacher, QString timeAndPosition, QString credit)
+ClassBean::ClassBean(QString id, QString className, QString teacher
+                     , QString timeAndPosition, QString credit, QString ratio
+                     , QString KXH, QString DYKCH)
 {
     this->id = id;
     this->className = className;
     this->teacher = teacher;
     this->timeAndPosition = timeAndPosition;
     this->credit = credit;
+    this->ratio = ratio;
+    this->KXH = KXH;
+    this->DYKCH = DYKCH;
 }
 
 /**

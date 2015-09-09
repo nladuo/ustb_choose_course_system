@@ -8,8 +8,8 @@ ControllWindow::ControllWindow(QWidget *parent) :
     ui(new Ui::ControllWindow)
 {
     ui->setupUi(this);
-    this->setMaximumSize (490, 367);
-    this->setMinimumSize (490, 367);
+    this->setMaximumSize (542, 367);
+    this->setMinimumSize (542, 367);
     //设置居中
     QDesktopWidget* pDw = QApplication::desktop();//获得桌面窗体
     QRect rect = pDw->screenGeometry ();
@@ -138,10 +138,8 @@ void ControllWindow::on_alternativeListWidget_itemDoubleClicked(QListWidgetItem 
     QNetworkReply* reply = HttpUtil::post (ADD_COURSE_URL, postData, this->mCookieJar);
 
     QByteArray data = reply->readAll ();
-    QString msg = QString(data.split (':').at (2));
-    msg.remove ( msg.length () -2 ,2);
-    msg.remove (0, 1);
-    QMessageBox::about (this, "选课结果", msg);
+    QMessageBox::about (this, "选课结果", data);
+    searchClasses ();
 }
 
 /**
@@ -151,14 +149,47 @@ void ControllWindow::on_alternativeListWidget_itemDoubleClicked(QListWidgetItem 
  */
 void ControllWindow::on_selectedListWidget_itemDoubleClicked(QListWidgetItem *item)
 {
-    QByteArray postData;
-    postData.append("id=").append (item->text ()).append ("&");
-    postData.append("uid=").append (UserInfo::getInstance ()->getName ());
-    QNetworkReply* reply = HttpUtil::post (REMOVE_COURSE_URL, postData, this->mCookieJar);
-
-    QByteArray data = reply->readAll ();
-    QString msg = QString(data.split (':').at (2));
-    msg.remove ( msg.length () -2 ,2);
-    msg.remove (0, 1);
-    QMessageBox::about (this, "选课结果", msg);
+    if( QMessageBox::warning (this, "退课", "你确定要退掉这门课？",
+                          QMessageBox::Yes | QMessageBox::No, QMessageBox::No)
+            == QMessageBox::Yes){
+            qDebug()<<"Yes";
+            ClassBean*bean = getSelectedClassBeanByCourseId (item->text ());
+            QByteArray postData;
+            postData.append("kch=").append (bean->getDYKCH ()).append ("&");
+            postData.append ("kxh=").append (bean->getKXH ()).append ("&");
+            postData.append ("xh=").append ("&");
+            postData.append("uid=").append (UserInfo::getInstance ()->getName ());
+            QNetworkReply* reply = HttpUtil::post (REMOVE_COURSE_URL, postData, this->mCookieJar);
+            QByteArray data = reply->readAll ();
+            qDebug()<<data;
+            QMessageBox::about (this, "退课结果", data);
+    }else{
+        //qDebug()<<"No";
+    }
+    searchClasses ();
 }
+
+ClassBean* ControllWindow::getSelectedClassBeanByCourseId(QString id){
+
+    vector<ClassBean*>::iterator iter;
+    //add alternative classes
+    for (iter = selectedClasses.begin(); iter != selectedClasses.end(); iter++){
+        if(  ((ClassBean *)(*iter))->getId () == id){
+
+            ClassBean bean = *(ClassBean *)(*iter);
+
+            return new ClassBean(bean.getId (),
+                                 bean.getClassName (),
+                                 bean.getTeacher (),
+                                 bean.getTimeAndPosition (),
+                                 bean.getCredit (),
+                                 bean.getRatio (),
+                                 bean.getKXH (),
+                                 bean.getDYKCH ());
+        }
+    }
+
+    return NULL;
+}
+
+

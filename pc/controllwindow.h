@@ -40,10 +40,10 @@ private slots:
     void on_actionAbout_clicked();
     void on_actionUpdate_clicked();
     void on_actionNotice_clicked();
-
     void on_selectedListWidget_itemDoubleClicked(QListWidgetItem *item);
 
 private:
+    ClassBean* getSelectedClassBeanByCourseId(QString id);
     Ui::ControllWindow *ui;
     QNetworkCookieJar* mCookieJar;
     vector<ClassBean*> alternativeClasses;
