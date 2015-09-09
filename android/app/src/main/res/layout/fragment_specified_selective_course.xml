@@ -3,11 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="specified_selective"
-        android:id="@+id/textView2"
-        android:layout_gravity="center_horizontal" />
+    <ListView
+        android:id="@+id/specified_course_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
 </LinearLayout>

@@ -15,6 +15,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,10 @@ public class HttpUtils {
         HttpResponse response=new DefaultHttpClient().execute(httppost, context);
         if(response.getStatusLine().getStatusCode() == 200){
             //如果状态码为200,就是得到Json
-            return  EntityUtils.toString(response.getEntity());
+
+            String result1 = EntityUtils.toString(response.getEntity(), "utf-8");
+            String utf8Result = URLDecoder.decode(result1, "utf-8");
+            return  utf8Result;
         }else{
             throw new Exception();
         }
@@ -89,7 +93,7 @@ public class HttpUtils {
         //设置编码
         HttpResponse response=new DefaultHttpClient().execute(httppost, context);
 
-        System.out.println(EntityUtils.toString(response.getEntity()));
+        //System.out.println(EntityUtils.toString(response.getEntity()));
         if(response.getStatusLine().getStatusCode() == 200){
             //如果状态码为200,就是得到了cookie
             return  cookieStore;

@@ -9,10 +9,11 @@
 基本使用swift编写，开发环境：xcode6.1.1<br>
 功能：课表的查询，公共选修课信息的查询
 
-##Android
+##Android版
 使用android-studio1.3开发
-功能：课表的查询，公共选修课信息的查询
+缺点: 目前写了一堆asynctask,还没有封装好
+功能: 课表的查询，公共选修课信息的查询
 
-##服务器端
+##Server
 用nodejs(v0.12.4)(express+mysql)编写<br>
 功能:软件的介绍与下载,可以发表留言板<br>

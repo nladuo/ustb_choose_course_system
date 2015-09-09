@@ -3,6 +3,7 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
+    android:background="@color/light_gray"
     android:layout_height="match_parent">
     <TextView
         android:padding="3dp"
@@ -12,7 +13,7 @@
         android:text="111"
         android:maxLines="1"
         android:ellipsize="end"
-        android:layout_weight="2"
+        android:layout_weight="1.8"
         android:layout_width="0dp"
         android:layout_height="wrap_content" />
 
@@ -24,7 +25,7 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:textColor="@color/black"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:layout_width="0dp"
         android:layout_height="wrap_content" />
 
@@ -36,9 +37,23 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:textColor="@color/black"
+        android:layout_weight="0.8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:padding="3dp"
+        android:id="@+id/item_search_ratio"
+        android:textSize="10sp"
+        android:text="111"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/black"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content" />
+
+
 
     <TextView
         android:padding="3dp"
@@ -47,7 +62,7 @@
         android:textSize="12sp"
         android:text="111"
         android:textColor="@color/black"
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:layout_width="0dp"
         android:maxLines="1"
         android:ellipsize="end"

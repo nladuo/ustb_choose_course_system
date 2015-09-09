@@ -23,6 +23,10 @@ public class JsonParser {
         jsonObject = (JSONObject) jsonTokener.nextValue();
     }
 
+    public JSONObject getJsonObject(){
+        return jsonObject;
+    }
+
     /**
      *
      * @return
@@ -39,6 +43,25 @@ public class JsonParser {
     public List<ClassBean> getAlternativeCourses() throws JSONException {
 
         return getCourses("alternativeCourses");
+    }
+
+    public List<ClassBean> getPrerequisiteCourses() throws Exception{
+        List<ClassBean> classes = new ArrayList<>();
+        JSONArray array = jsonObject.getJSONArray("teachingPrograms");
+
+        for(int i = 0; i < array.length(); i++){
+            JSONObject item = array.getJSONObject(i);
+            String className = item.getString("KCM");
+            String kch = item.getString("KCH");
+            String score = "null";
+            if(item.has("DYCCJ")){
+                score = item.getString("DYCCJ");
+            }
+
+
+            classes.add(new ClassBean(className, score, kch));
+        }
+        return classes;
     }
 
     /**
@@ -86,7 +109,11 @@ public class JsonParser {
             JSONObject item = array.getJSONObject(i);
             String id = item.getInt("ID") + "";
             String className = item.getString("DYKCM");
-            String teacher = "";
+            String KXH = item.getString("KXH");
+            String DYKCH = item.getString("DYKCH");
+            String ratio = item.getString("SKRS") + "/" + item.getString("KRL");
+
+            String teacher;
             try {
                 teacher = item.getJSONArray("JSM").getJSONObject(0)
                         .getString("JSM");
@@ -96,7 +123,8 @@ public class JsonParser {
             String credit = item.getString("XF");
             String time_and_position = item.getString("SKSJDDSTR");
             classes.add(new ClassBean(id, className,
-                    teacher, time_and_position ,credit));
+                    teacher, time_and_position ,credit,
+                    ratio, KXH, DYKCH));
 
         }
         return classes;

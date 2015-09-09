@@ -19,6 +19,9 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import kalen.app.ustb_choose_course_system.R;
 import kalen.app.ustb_choose_course_system.model.ConstVal;
 import kalen.app.ustb_choose_course_system.model.UserInfo;
@@ -75,7 +78,6 @@ public class HomeActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.home_rl_search_class_table:
                 GetSemesterAsyncTask task = new GetSemesterAsyncTask();
                 task.execute();
-
                 break;
 
             case R.id.home_rl_about_soft:
@@ -83,9 +85,7 @@ public class HomeActivity extends ActionBarActivity implements View.OnClickListe
                 break;
 
             case R.id.home_rl_checkout_update:
-                Toast.makeText(this, "开始下载...", Toast.LENGTH_SHORT).show();
-                startDownload("android-v0.10.apk",
-                        ConstVal.APP_UPDATE_DOWNLOAD_URL);
+                new CheckUpdateAsynctask().execute();
                 break;
 
             case R.id.home_rl_pre_choose_course:
@@ -129,7 +129,7 @@ public class HomeActivity extends ActionBarActivity implements View.OnClickListe
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = ProgressDialog.show(HomeActivity.this,
-                    "请等待...", "正在登陆中...", true, false);
+                    "请等待...", "正在加载中...", true, false);
         }
 
         @Override
@@ -157,6 +157,88 @@ public class HomeActivity extends ActionBarActivity implements View.OnClickListe
                 Toast.makeText(HomeActivity.this,
                         "加载失败，请检查网络配置", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    class CheckUpdateAsynctask extends AsyncTask<Void, Void, String>{
+        ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(HomeActivity.this,
+                    "请等待...", "正在加载中...", true, false);
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            String jsonData = "";
+            try {
+                jsonData = HttpUtils.get(ConstVal.APP_UPDATE_CHECK_URL,null);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+            return jsonData;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            progressDialog.dismiss();
+            if (s == null){
+                Toast.makeText(HomeActivity.this,
+                        "加载失败，请检查网络配置", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            try {
+                JsonParser parser = new JsonParser(s);
+                JSONObject object = parser.getJsonObject();
+                double version = object.getDouble("version");
+                //Check whether need to update
+                if ((version - ConstVal.VERSION) > 0.001){
+                    // need to update
+
+                    String releasedNote = object.getString("note");
+                    final String appName = object.getString("app_name");
+                    AlertDialog dialog = new AlertDialog
+                            .Builder(HomeActivity.this)
+                            .setTitle("提示")
+                            .setMessage("当前版本号:" + ConstVal.VERSION
+                                    + "\n最新版本号:" + version
+                                    + "\n更新说明:" + releasedNote)
+                            .setNegativeButton("确定", null)
+                            .setPositiveButton("下载更新", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Toast.makeText(HomeActivity.this, "开始下载...", Toast.LENGTH_SHORT).show();
+                                    startDownload(appName,
+                                            ConstVal.APP_DOWNLOAD_URL);
+                                }
+                            })
+                            .create();
+                    dialog.show();
+
+
+                }else{
+                    AlertDialog dialog = new AlertDialog
+                            .Builder(HomeActivity.this)
+                            .setTitle("提示")
+                            .setMessage("已经是最新版本")
+                            .setNegativeButton("确定", null)
+                            .create();
+                    dialog.show();
+
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(HomeActivity.this,
+                        "内部解析错误", Toast.LENGTH_SHORT).show();
+            }
+
+
+
+
         }
     }
 

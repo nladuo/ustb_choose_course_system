@@ -27,6 +27,11 @@
         <activity android:name=".ui.choose_course.ChooseCourseActivity"/>
         <activity android:name=".ui.AboutActivity" />
 
+        <activity
+            android:name=".ui.choose_course.DetailActivity"
+            android:theme="@android:style/Theme.Dialog"
+            android:configChanges="orientation|keyboardHidden"/>
+
         <service android:name=".service.DownLoadService" />
     </application>
 

@@ -1,18 +1,15 @@
 package kalen.app.ustb_choose_course_system.ui.choose_course;
 
-import android.app.ActionBar;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Window;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -78,7 +75,7 @@ public class ChooseCourseActivity extends ActionBarActivity {
         mFragments = new ArrayList<>();
         Fragment mTab01 = new PrerequsiteCourseFragment();
         Fragment mTab02 = new SpecifiedSelectiveCourseFragment();
-        Fragment mTab03 = new PublicSelctiveCourseFragment();
+        Fragment mTab03 = new PublicSelectiveCourseFragment();
         mFragments.add(mTab01);
         mFragments.add(mTab02);
         mFragments.add(mTab03);

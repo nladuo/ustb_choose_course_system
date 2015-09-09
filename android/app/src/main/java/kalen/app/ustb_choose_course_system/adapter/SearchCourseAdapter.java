@@ -55,7 +55,8 @@ public class SearchCourseAdapter extends BaseExpandableListAdapter {
         final String className = bean.getClassName();
         final String teacher = bean.getTeacher();
         final String credit = bean.getCredit() + "学分";
-        String time_and_position_or_score = "";
+        String time_and_position_or_score;
+        final String ratio = bean.getRatio();
         if(groupPosition == 2){
             time_and_position_or_score = "得分：" + bean.getScore();
         }else{
@@ -77,11 +78,14 @@ public class SearchCourseAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.item_search_credit);
         TextView timeAndPositionOrScoreTv = (TextView) convertView
                 .findViewById(R.id.item_search_time_and_position_or_score);
+        TextView ratioTv = (TextView) convertView
+                .findViewById(R.id.item_search_ratio);
 
         classNameTv.setText(className);
         teacherTv.setText(teacher);
         creditTv.setText(credit);
         timeAndPositionOrScoreTv.setText(time_and_position_or_score);
+        ratioTv.setText(ratio);
 
         return convertView;
     }

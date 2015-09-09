@@ -1,9 +1,11 @@
 package kalen.app.ustb_choose_course_system.model;
 
+import java.io.Serializable;
+
 /**
  * Created by kalen on 15-8-11.
  */
-public class ClassBean {
+public class ClassBean implements Serializable{
     private String id = "";
     private String className = "";
     private String teacher = "";
@@ -13,6 +15,18 @@ public class ClassBean {
     private String time_and_postion = "";
     private String credit = "";
     private String score = "";
+    private String kch = "";
+    private String ratio = "";
+    private String KXH = "";
+    private String DYKCH = "";
+
+
+
+    public ClassBean(String className, String score, String kch){
+        this.className = className;
+        this.score = score;
+        this.kch = kch;
+    }
 
     /**
      * for class table
@@ -30,9 +44,11 @@ public class ClassBean {
         this.position = position;
     }
 
+
     /**
      * for learned course
      * @param className
+
      * @param teacher
      * @param credit
      * @param score
@@ -44,6 +60,22 @@ public class ClassBean {
         this.score = score;
     }
 
+    @Override
+    public String toString() {
+        return "ClassBean{" +
+                "id='" + id + '\'' +
+                ", className='" + className + '\'' +
+                ", teacher='" + teacher + '\'' +
+                ", where=" + where +
+                ", time='" + time + '\'' +
+                ", position='" + position + '\'' +
+                ", time_and_postion='" + time_and_postion + '\'' +
+                ", credit='" + credit + '\'' +
+                ", score='" + score + '\'' +
+                ", kch='" + kch + '\'' +
+                '}';
+    }
+
     /**
      * for choose course
      * @param id
@@ -53,12 +85,16 @@ public class ClassBean {
      * @param credit
      */
     public ClassBean(String id, String className, String teacher,
-                     String time_and_postion, String credit) {
+                     String time_and_postion, String credit,
+                     String ratio, String KXH, String DYKCH) {
         this.id = id;
         this.className = className;
         this.teacher = teacher;
         this.time_and_postion = time_and_postion;
         this.credit = credit;
+        this.ratio = ratio;
+        this.KXH = KXH;
+        this.DYKCH = DYKCH;
     }
 
     public String getClassName() {
@@ -131,5 +167,38 @@ public class ClassBean {
 
     public void setScore(String score) {
         this.score = score;
+    }
+
+    public String getKch() {
+        return kch;
+    }
+
+    public void setKch(String kch) {
+        this.kch = kch;
+    }
+
+
+    public String getDYKCH() {
+        return DYKCH;
+    }
+
+    public void setDYKCH(String DYKCH) {
+        this.DYKCH = DYKCH;
+    }
+
+    public String getKXH() {
+        return KXH;
+    }
+
+    public void setKXH(String KXH) {
+        this.KXH = KXH;
+    }
+
+    public String getRatio() {
+        return ratio;
+    }
+
+    public void setRatio(String ratio) {
+        this.ratio = ratio;
     }
 }
