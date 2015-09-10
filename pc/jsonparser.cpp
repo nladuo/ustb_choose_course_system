@@ -50,7 +50,9 @@ vector<ClassBean*> JsonParser::getCourses (QString type)
             QString credit = obj2["XF"].toString ().append ("学分");
             QString KXH = obj2["KXH"].toString ();
             QString DYKCH = obj2["DYKCH"].toString ();
-            QString ratio =QString::number (obj2["SKRS"].toInt ())
+
+
+            QString ratio = (obj2["SKRS"].isString () ? obj2["SKRS"].toString () : QString::number (obj2["SKRS"].toInt ()))
                     .append ("/")
                     .append (QString::number (obj2["KRL"].toInt ()));
             QString teacher;
