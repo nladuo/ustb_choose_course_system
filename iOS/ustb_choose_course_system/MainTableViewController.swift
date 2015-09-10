@@ -26,7 +26,7 @@ class MainTableViewController: UITableViewController{
         
         self.tableView.scrollEnabled = false
 
-        var vc = self.navigationController as MainNavigationController
+        var vc = self.navigationController as! MainNavigationController
         //取出cookie
         cookieData = vc.cookieData
         
@@ -97,10 +97,10 @@ class MainTableViewController: UITableViewController{
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "classTableSegue"{
             
-            var vc = segue.destinationViewController as ClassTableViewController
+            var vc = segue.destinationViewController as! ClassTableViewController
             vc.cookieData = cookieData
         }else if segue.identifier == "chooseCourseSegue" {
-            var vc = segue.destinationViewController as ChooseCourseTabBarController
+            var vc = segue.destinationViewController as! ChooseCourseTabBarController
             vc.cookieData = cookieData
         }
         

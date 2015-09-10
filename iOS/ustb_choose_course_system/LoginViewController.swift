@@ -42,8 +42,7 @@ class LoginViewController: UIViewController, HttpDelegate{
         }
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         username.resignFirstResponder()
         password.resignFirstResponder()
     }
@@ -56,11 +55,11 @@ class LoginViewController: UIViewController, HttpDelegate{
         
         //取出用户名
         if let name:AnyObject = userDefaults.objectForKey("username"){
-            username.text = name as String
+            username.text = name as! String
         }
         //取出密码
         if let pass:AnyObject = userDefaults.objectForKey("password"){
-            password.text = pass as String
+            password.text = pass as! String
         }
     }
 
@@ -74,7 +73,7 @@ class LoginViewController: UIViewController, HttpDelegate{
             MBProgressHUD.showError("请输入密码")
         }else{
             MBProgressHUD.showMessage("正在登录中")
-            var params = ["j_username": uname + ",undergraduate","j_password": passwd]
+            var params = ["j_username": ((uname as String) as String) + ",undergraduate","j_password": passwd]
             httpUtil = kalen.app.HttpUtil(delegate: self)
             httpUtil?.postWithCookie(kalen.app.ConstVal.LOGIN_URL, params: params)
         }
@@ -127,7 +126,7 @@ class LoginViewController: UIViewController, HttpDelegate{
         if segue.identifier == "loginSegue"{
             savePro() //是否保存用户名密码
             
-            var vc = segue.destinationViewController as MainNavigationController
+            var vc = segue.destinationViewController as! MainNavigationController
             vc.cookieData = cookieData
 
             var userInfo = kalen.app.UserInfo.getInstance()

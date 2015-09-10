@@ -19,7 +19,7 @@ class SpecifiedSelectiveCourseController: UIViewController, UITableViewDelegate,
     override func loadView(){
         super.loadView()
         
-        parentVc = self.tabBarController as ChooseCourseTabBarController
+        parentVc = self.tabBarController as! ChooseCourseTabBarController
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -52,7 +52,7 @@ class SpecifiedSelectiveCourseController: UIViewController, UITableViewDelegate,
             MBProgressHUD.showError("网络连接错误")
             return
         }
-        var parser = kalen.app.JsonParser(jsonStr: data!)
+        var parser = kalen.app.JsonParser(jsonStr: data! as String)
         var classes = parser.getAlternativeCourses()
         if classes.count == 0{
             MBProgressHUD.showError("本学期尚未开课")
@@ -71,10 +71,10 @@ class SpecifiedSelectiveCourseController: UIViewController, UITableViewDelegate,
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("SpecifiedCourseCell", forIndexPath: indexPath) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("SpecifiedCourseCell", forIndexPath: indexPath) as! UITableViewCell
         
         var bean = datas[indexPath.row]
-        var classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as UILabel
+        var classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as! UILabel
         
         classNameLabel.text = bean.className
 
@@ -92,8 +92,8 @@ class SpecifiedSelectiveCourseController: UIViewController, UITableViewDelegate,
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SpecifiedShowDetail"{
             
-            var vc = segue.destinationViewController as DetailTableViewController
-            vc.datas = (sender as [kalen.app.ClassBean])
+            var vc = segue.destinationViewController as! DetailTableViewController
+            vc.datas = (sender as! [kalen.app.ClassBean])
             vc.cookieData = parentVc.cookieData
             vc.addUrl = kalen.app.ConstVal.ADD_SPECIFIED_COURSE_URL
             vc.classType = "专业选修课"

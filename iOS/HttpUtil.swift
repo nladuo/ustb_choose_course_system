@@ -58,9 +58,9 @@ extension kalen.app{
                 if str.length != 0{
                     str.appendString("&")
                 }
-                str.appendString(key)
+                str.appendString(key as String)
                 str.appendString("=")
-                str.appendString(value)
+                str.appendString(value as String)
             }
             req.HTTPBody = str.dataUsingEncoding(NSUTF8StringEncoding)
             var error:NSError?
@@ -93,9 +93,9 @@ extension kalen.app{
                 if str.length != 0{
                     str.appendString("&")
                 }
-                str.appendString(key)
+                str.appendString(key as String)
                 str.appendString("=")
-                str.appendString(value)
+                str.appendString(value as String)
             }
             req.HTTPBody = str.dataUsingEncoding(NSUTF8StringEncoding)
 
@@ -111,8 +111,8 @@ extension kalen.app{
                     if let resp = response as? NSHTTPURLResponse{
                         //println(resp.statusCode)
                         for (key, val) in resp.allHeaderFields{
-                            if(key as String) == "Set-Cookie"{
-                                self.cookieData = val as String
+                            if(key as! String) == "Set-Cookie"{
+                                self.cookieData = val as! String
                                 //println(self.cookieData)
                             }
                         }

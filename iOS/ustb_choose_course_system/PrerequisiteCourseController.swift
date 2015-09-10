@@ -21,7 +21,7 @@ class PrerequisiteCourseController: UIViewController, UITableViewDelegate, UITab
     override func loadView(){
         super.loadView()
         
-        parentVc = self.tabBarController as ChooseCourseTabBarController
+        parentVc = self.tabBarController as! ChooseCourseTabBarController
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -62,7 +62,7 @@ class PrerequisiteCourseController: UIViewController, UITableViewDelegate, UITab
             MBProgressHUD.showError("网络连接错误")
             return
         }
-        var parser = kalen.app.JsonParser(jsonStr: data!)
+        var parser = kalen.app.JsonParser(jsonStr: data! as String)
         var classes = parser.getAlternativeCourses()
         if classes.count == 0{
             MBProgressHUD.showError("本学期尚未开课")
@@ -81,11 +81,11 @@ class PrerequisiteCourseController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("PrerequisteCourseCell", forIndexPath: indexPath) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("PrerequisteCourseCell", forIndexPath: indexPath) as! UITableViewCell
         
         var bean = datas[indexPath.row]
-        var classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as UILabel
-        var scoreLabel = cell.viewWithTag(SCORE_TAG) as UILabel
+        var classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as! UILabel
+        var scoreLabel = cell.viewWithTag(SCORE_TAG) as! UILabel
         
         classNameLabel.text = bean.className
         scoreLabel.text = bean.score
@@ -104,8 +104,8 @@ class PrerequisiteCourseController: UIViewController, UITableViewDelegate, UITab
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "PrerequisiteShowDetail"{
             
-            var vc = segue.destinationViewController as DetailTableViewController
-            vc.datas = (sender as [kalen.app.ClassBean])
+            var vc = segue.destinationViewController as! DetailTableViewController
+            vc.datas = (sender as! [kalen.app.ClassBean])
             vc.cookieData = parentVc.cookieData
             vc.addUrl = kalen.app.ConstVal.ADD_PREREQUISITE_COURSE_URL
             vc.classType = "必修课"

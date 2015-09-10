@@ -45,7 +45,7 @@ class ChooseCourseTabBarController: UITabBarController {
         var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL, cookieStr: cookieData)
         MBProgressHUD.hideHUD()
         if data != nil{
-            var parser = kalen.app.JsonParser(jsonStr: data!)
+            var parser = kalen.app.JsonParser(jsonStr: data! as String)
             notFullPublicClasses = parser.getAlternativeCourses()
             selectedClasses = parser.getSelectedCourses()
             learnedPublicClasses = parser.getLearnedPublicCourses()
@@ -67,12 +67,12 @@ class ChooseCourseTabBarController: UITabBarController {
         MBProgressHUD.hideHUD()
         if (dataForPrerequisiteCourses != nil) && (dataForSelectedCoureses != nil){
             //必修课如果已经选择了的话，再向服务器post数据，服务器会抛出异常
-            var parser = kalen.app.JsonParser(jsonStr: dataForSelectedCoureses!)
+            var parser = kalen.app.JsonParser(jsonStr: dataForSelectedCoureses! as String)
             selectedClasses = parser.getSelectedCourses()
             
             //添加必修课列表
             //parser = nil
-            parser = kalen.app.JsonParser(jsonStr: dataForPrerequisiteCourses!)
+            parser = kalen.app.JsonParser(jsonStr: dataForPrerequisiteCourses! as String)
             prerequisiteClasses = parser.getTechingCourses()
             
         }else{
@@ -91,7 +91,7 @@ class ChooseCourseTabBarController: UITabBarController {
         var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_SPECIFIED_COURSE_URL, cookieStr: cookieData)
         MBProgressHUD.hideHUD()
         if data != nil{
-            var parser = kalen.app.JsonParser(jsonStr: data!)
+            var parser = kalen.app.JsonParser(jsonStr: data! as String)
             specifiedClasses = parser.getTechingCourses()
             
         }else{
@@ -109,7 +109,7 @@ class ChooseCourseTabBarController: UITabBarController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var vc = segue.destinationViewController as ClassTableViewController
+        var vc = segue.destinationViewController as! ClassTableViewController
         vc.cookieData = cookieData
 
     }

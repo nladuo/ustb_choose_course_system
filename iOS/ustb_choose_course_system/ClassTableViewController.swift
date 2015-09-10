@@ -76,7 +76,7 @@ class ClassTableViewController: UIViewController{
         
         var jsonStr = kalen.app.HttpUtil.get(url, cookieStr: self.cookieData)
         if jsonStr != nil{
-            jsonParser = kalen.app.JsonParser(jsonStr: jsonStr!)
+            jsonParser = kalen.app.JsonParser(jsonStr: jsonStr! as String)
             semester.text = jsonParser.getSemester()
             //2、初始化课程数组所有的内容
             assignStringsContent()
@@ -113,7 +113,7 @@ class ClassTableViewController: UIViewController{
             return
         }
 
-        var parser = kalen.app.JsonParser(jsonStr: data!)
+        var parser = kalen.app.JsonParser(jsonStr: data! as String)
         var beans:[kalen.app.ClassBean] = parser.getClassTableItems()
 
         for bean in beans{

@@ -44,7 +44,7 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
     override func loadView(){
         super.loadView()
         
-        parentVc = self.tabBarController as
+        parentVc = self.tabBarController as!
         ChooseCourseTabBarController
         tableView.delegate = self
         tableView.dataSource = self
@@ -76,7 +76,7 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
                     MBProgressHUD.showError("网络连接错误")
                     return
                 }
-                var alert = UIAlertView(title: "提示", message: data, delegate: nil, cancelButtonTitle: "确定")
+                var alert = UIAlertView(title: "提示", message: data! as String, delegate: nil, cancelButtonTitle: "确定")
                 alert.show()
                 
                 parentVc.updateNotFullPublicSelectiveCourses(self)
@@ -110,7 +110,7 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
                     MBProgressHUD.showError("网络连接错误")
                     return
                 }
-                var alert = UIAlertView(title: "提示", message: data, delegate: nil, cancelButtonTitle: "确定")
+                var alert = UIAlertView(title: "提示", message: data! as String, delegate: nil, cancelButtonTitle: "确定")
                 alert.show()
                 
                 parentVc.updateNotFullPublicSelectiveCourses(self)
@@ -192,14 +192,14 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("publicCourseCell", forIndexPath: indexPath) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("publicCourseCell", forIndexPath: indexPath) as! UITableViewCell
         
         
-        var classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as UILabel
-        var teacherLabel = cell.viewWithTag(TEACHER_TAG) as UILabel
-        var creditLabel = cell.viewWithTag(CREDIT_TAG) as UILabel
-        var ratioOrScoreLabel = cell.viewWithTag(RATIO_OR_SCORE_TAG) as UILabel
-        var timeAndPositionOrSemesterLabel = cell.viewWithTag(TIME_AND_POSITION_OR_SEMESTER_TAG) as UILabel
+        var classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as! UILabel
+        var teacherLabel = cell.viewWithTag(TEACHER_TAG) as! UILabel
+        var creditLabel = cell.viewWithTag(CREDIT_TAG) as! UILabel
+        var ratioOrScoreLabel = cell.viewWithTag(RATIO_OR_SCORE_TAG) as! UILabel
+        var timeAndPositionOrSemesterLabel = cell.viewWithTag(TIME_AND_POSITION_OR_SEMESTER_TAG) as! UILabel
         
         
         var bean = datas[indexPath.section][indexPath.row]

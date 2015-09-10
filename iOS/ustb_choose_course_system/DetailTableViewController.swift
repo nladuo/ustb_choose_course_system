@@ -66,7 +66,9 @@ class DetailTableViewController: UITableViewController, UIAlertViewDelegate {
                 MBProgressHUD.showError("网络连接错误")
                 return
             }
-            var alert = UIAlertView(title: "提示", message: data, delegate: nil, cancelButtonTitle: "确定")
+            var alert = UIAlertView(title: "提示", message: data! as String, delegate: nil, cancelButtonTitle: "确定")
+            
+//            var alert = UIAlertView(title: "提示", message: data, delegate: nil, cancelButtonTitle: "确定")
             alert.show()
             
             //self.popoverPresentationController
@@ -96,15 +98,15 @@ class DetailTableViewController: UITableViewController, UIAlertViewDelegate {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("DetailTableCell", forIndexPath: indexPath) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("DetailTableCell", forIndexPath: indexPath) as! UITableViewCell
         
         
         
-        var classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as UILabel
-        var teacherLabel = cell.viewWithTag(TEACHER_TAG) as UILabel
-        var creditLabel = cell.viewWithTag(CREDIT_TAG) as UILabel
-        var ratioLabel = cell.viewWithTag(RATIO_TAG) as UILabel
-        var timeAndPositionLabel = cell.viewWithTag(TIME_AND_POSITION_TAG) as UILabel
+        var classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as! UILabel
+        var teacherLabel = cell.viewWithTag(TEACHER_TAG) as! UILabel
+        var creditLabel = cell.viewWithTag(CREDIT_TAG)as! UILabel
+        var ratioLabel = cell.viewWithTag(RATIO_TAG) as! UILabel
+        var timeAndPositionLabel = cell.viewWithTag(TIME_AND_POSITION_TAG) as! UILabel
         
         
         var bean = datas[indexPath.row]
