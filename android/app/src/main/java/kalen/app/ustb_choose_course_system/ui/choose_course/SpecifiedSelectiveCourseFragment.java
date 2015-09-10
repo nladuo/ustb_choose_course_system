@@ -9,18 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import kalen.app.ustb_choose_course_system.R;
 import kalen.app.ustb_choose_course_system.adapter.PrerequisiteAndSpecifiedCourseAdapter;
-import kalen.app.ustb_choose_course_system.adapter.SearchCourseAdapter;
 import kalen.app.ustb_choose_course_system.model.ClassBean;
 import kalen.app.ustb_choose_course_system.model.ConstVal;
 import kalen.app.ustb_choose_course_system.model.UserInfo;

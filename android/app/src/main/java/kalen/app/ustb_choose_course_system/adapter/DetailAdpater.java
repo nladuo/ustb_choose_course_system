@@ -60,10 +60,10 @@ public class DetailAdpater extends BaseAdapter {
                     .findViewById(R.id.item_search_teacher);
             holder.creditTv = (TextView) convertView
                     .findViewById(R.id.item_search_credit);
-            holder.timeAndPositionOrScoreTv = (TextView) convertView
-                    .findViewById(R.id.item_search_time_and_position_or_score);
-            holder.ratioTv = (TextView) convertView
-                    .findViewById(R.id.item_search_ratio);
+            holder.timeAndPositionOrSemesterTv = (TextView) convertView
+                    .findViewById(R.id.item_search_time_and_position_or_semester);
+            holder.ratioOrScoreTv = (TextView) convertView
+                    .findViewById(R.id.item_search_ratio_or_score);
             convertView.setTag(holder);
         }else
         {
@@ -75,8 +75,8 @@ public class DetailAdpater extends BaseAdapter {
         holder.classNameTv.setText(bean.getClassName());
         holder.teacherTv.setText(bean.getTeacher());
         holder.creditTv.setText(bean.getCredit() + "学分");
-        holder.timeAndPositionOrScoreTv.setText(bean.getTime_and_postion());
-        holder.ratioTv.setText(bean.getRatio());
+        holder.timeAndPositionOrSemesterTv.setText(bean.getTime_and_postion());
+        holder.ratioOrScoreTv.setText(bean.getRatio());
 
         return convertView;
     }
@@ -86,7 +86,7 @@ public class DetailAdpater extends BaseAdapter {
         public TextView classNameTv;
         public TextView teacherTv;
         public TextView creditTv;
-        public TextView timeAndPositionOrScoreTv;
-        public TextView ratioTv;
+        public TextView timeAndPositionOrSemesterTv;
+        public TextView ratioOrScoreTv;
     }
 }

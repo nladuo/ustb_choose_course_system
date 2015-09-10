@@ -19,6 +19,7 @@ public class ClassBean implements Serializable{
     private String ratio = "";
     private String KXH = "";
     private String DYKCH = "";
+    private String semester = "";
 
 
 
@@ -53,11 +54,13 @@ public class ClassBean implements Serializable{
      * @param credit
      * @param score
      */
-    public ClassBean(String className, String teacher, String credit, String score) {
+    public ClassBean(String className, String teacher,
+                     String credit, String score, String semester) {
         this.className = className;
         this.teacher = teacher;
         this.credit = credit;
         this.score = score;
+        this.semester = semester;
     }
 
     @Override
@@ -95,6 +98,14 @@ public class ClassBean implements Serializable{
         this.ratio = ratio;
         this.KXH = KXH;
         this.DYKCH = DYKCH;
+    }
+
+    public String getSemester() {
+        return semester;
+    }
+
+    public void setSemester(String semester) {
+        this.semester = semester;
     }
 
     public String getClassName() {

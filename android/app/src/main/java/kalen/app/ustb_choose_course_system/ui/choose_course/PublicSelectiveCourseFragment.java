@@ -14,14 +14,13 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import kalen.app.ustb_choose_course_system.R;
-import kalen.app.ustb_choose_course_system.adapter.SearchCourseAdapter;
+import kalen.app.ustb_choose_course_system.adapter.PublicCourseAdapter;
 import kalen.app.ustb_choose_course_system.model.ClassBean;
 import kalen.app.ustb_choose_course_system.model.ConstVal;
 import kalen.app.ustb_choose_course_system.model.UserInfo;
@@ -33,7 +32,7 @@ import kalen.app.ustb_choose_course_system.utils.JsonParser;
  */
 public class PublicSelectiveCourseFragment extends Fragment implements ExpandableListView.OnChildClickListener{
     View view;
-    SearchCourseAdapter mAdapter;
+    PublicCourseAdapter mAdapter;
     ExpandableListView expListView;
     List<String> mHeaders;
     HashMap<String, List<ClassBean>> mDataChild;
@@ -79,7 +78,7 @@ public class PublicSelectiveCourseFragment extends Fragment implements Expandabl
         expListView = (ExpandableListView) view.findViewById(
                 R.id.public_selective_expand_lv);
 
-        mAdapter = new SearchCourseAdapter(this.getActivity(),
+        mAdapter = new PublicCourseAdapter(this.getActivity(),
                 mHeaders, mDataChild);
 
         // setting list adapter

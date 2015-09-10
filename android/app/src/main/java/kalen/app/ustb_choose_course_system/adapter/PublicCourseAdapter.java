@@ -17,7 +17,7 @@ import kalen.app.ustb_choose_course_system.model.ClassBean;
 /**
  * Created by kalen on 15-8-17.
  */
-public class SearchCourseAdapter extends BaseExpandableListAdapter {
+public class PublicCourseAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> mHeaders; // header titles
     // child data in format of header title, child title
@@ -28,8 +28,8 @@ public class SearchCourseAdapter extends BaseExpandableListAdapter {
         notifyDataSetChanged();
     }
 
-    public SearchCourseAdapter(Context context, List<String> headers,
-                                 HashMap<String, List<ClassBean>> childData) {
+    public PublicCourseAdapter(Context context, List<String> headers,
+                               HashMap<String, List<ClassBean>> childData) {
         this.context = context;
         this.mHeaders = headers;
         this.mDataChild = childData;
@@ -55,13 +55,17 @@ public class SearchCourseAdapter extends BaseExpandableListAdapter {
         final String className = bean.getClassName();
         final String teacher = bean.getTeacher();
         final String credit = bean.getCredit() + "学分";
-        String time_and_position_or_score;
-        final String ratio = bean.getRatio();
+        String time_and_position_or_semester;
+        String ratio_or_score;
         if(groupPosition == 2){
-            time_and_position_or_score = "得分：" + bean.getScore();
+            time_and_position_or_semester = bean.getSemester();
+            ratio_or_score = "得分：" + bean.getScore();
         }else{
-            time_and_position_or_score = bean.getTime_and_postion();
+            time_and_position_or_semester = bean.getTime_and_postion();
+            ratio_or_score = bean.getRatio();
         }
+
+
 
 
         if (convertView == null) {
@@ -77,15 +81,15 @@ public class SearchCourseAdapter extends BaseExpandableListAdapter {
         TextView creditTv = (TextView) convertView
                 .findViewById(R.id.item_search_credit);
         TextView timeAndPositionOrScoreTv = (TextView) convertView
-                .findViewById(R.id.item_search_time_and_position_or_score);
-        TextView ratioTv = (TextView) convertView
-                .findViewById(R.id.item_search_ratio);
+                .findViewById(R.id.item_search_time_and_position_or_semester);
+        TextView ratioOrScoreTv = (TextView) convertView
+                .findViewById(R.id.item_search_ratio_or_score );
 
         classNameTv.setText(className);
         teacherTv.setText(teacher);
         creditTv.setText(credit);
-        timeAndPositionOrScoreTv.setText(time_and_position_or_score);
-        ratioTv.setText(ratio);
+        timeAndPositionOrScoreTv.setText(time_and_position_or_semester);
+        ratioOrScoreTv.setText(ratio_or_score);
 
         return convertView;
     }

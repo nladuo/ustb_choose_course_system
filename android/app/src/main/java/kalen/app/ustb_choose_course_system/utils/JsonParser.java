@@ -78,8 +78,9 @@ public class JsonParser {
             String teacher = item.getString("LRR");
             String credit = item.getString("XF");
             String score = item.getString("GPACJ");
+            String semester = item.getString("XNXQ");
             classes.add(new ClassBean(className,
-                    teacher,credit, score));
+                    teacher,credit, score, semester));
 
         }
         return classes;
