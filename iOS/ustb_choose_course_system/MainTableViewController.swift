@@ -32,6 +32,7 @@ class MainTableViewController: UITableViewController{
         
     }
     
+
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
         if section == 0{
             return 15
@@ -54,7 +55,15 @@ class MainTableViewController: UITableViewController{
                 alert.show()
                 
             }
+            
+            //课表查询
+            if indexPath.row == 2 {
+                
+                performSegueWithIdentifier("classTableSegue", sender: nil)
+                
+            }
         }
+        
         
         tableView.cellForRowAtIndexPath(indexPath)?.selected = false
     }

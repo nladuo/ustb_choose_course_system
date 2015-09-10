@@ -32,6 +32,27 @@ extension kalen.app{
             return getCourses ("alternativeCourses")
         }
         
+        //必修课和专业选修课列表
+        func getTechingCourses()-> [ClassBean]{
+            var classes:[ClassBean] = []
+            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
+            
+            var obj : AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            var array = obj.objectForKey("teachingPrograms") as [AnyObject]
+            for obj2 in array {
+                var className = obj2.objectForKey("KCM") as String
+                var kch = obj2.objectForKey("KCH") as String
+                var score = ""
+                if let scoreTemp = obj2.objectForKey("DYCCJ") as? String{
+                    score = scoreTemp
+                }
+                classes.append(ClassBean(className: className, score: score, kch: kch))
+                
+            }
+            return classes
+        }
+        
+        
         //已选公选课
         func getLearnedPublicCourses() -> [ClassBean]{
             var classes:[ClassBean] = []
@@ -44,8 +65,9 @@ extension kalen.app{
                 var teacher = obj2.objectForKey("LRR") as String
                 var credit = obj2.objectForKey("XF") as String
                 var score = obj2.objectForKey("GPACJ") as String
+                var semester = obj2.objectForKey("XNXQ") as String
                
-                classes.append(ClassBean(className: className, teacher: teacher, credit: credit, score: score))
+                classes.append(ClassBean(className: className, teacher: teacher, credit: credit, score: score, semester: semester))
                 
             }
             return classes
@@ -62,7 +84,17 @@ extension kalen.app{
             for obj2 in array {
                 var id:Int = obj2.objectForKey("ID") as Int
                 var className = obj2.objectForKey("DYKCM") as String
-                var deadline = obj2.objectForKey("TKJZRQ") as String
+                var KXH = obj2.objectForKey("KXH") as String
+                var DYKCH = obj2.objectForKey("DYKCH") as String
+                var SKRS = 0
+                if let temp = obj2.objectForKey("SKRS") as? Int{
+                    SKRS = temp
+                }
+                
+                var KRL = obj2.objectForKey("KRL") as Int
+                
+                var ratio = "\(SKRS)/\(KRL)"
+                
                 var tup:[AnyObject] = obj2.objectForKey("JSM")! as [AnyObject]
                 var teacher:String = ""
                 if tup.count != 0 {
@@ -77,7 +109,7 @@ extension kalen.app{
                 var credit = obj2.objectForKey("XF") as String
                 var time_and_position = obj2.objectForKey("SKSJDDSTR") as String
 
-                classes.append(ClassBean(id: "\(id)", className: className, teacher: teacher, time_and_position: time_and_position, credit: credit))
+                classes.append(ClassBean(id: "\(id)", className: className, teacher: teacher, time_and_position: time_and_position, credit: credit, ratio: ratio, KXH: KXH, DYKCH: DYKCH))
                 
             }
             return classes
@@ -147,7 +179,7 @@ extension kalen.app{
                 }
 
             }
-            println( "课程数目：---》\(classes.count)")
+            //println( "课程数目：---》\(classes.count)")
             return classes
         }
         
@@ -173,7 +205,7 @@ extension kalen.app{
             var datas:[String] = split(srcStr) {$0 == " "}
             var i = 0
 
-            println(teacher + "--> \(datas.count)")
+            //println(teacher + "--> \(datas.count)")
             while i < datas.count {
                 //上课地点
                 var position:String = (split(datas[i + 1]) {$0 == ")"} )[0]
@@ -194,7 +226,5 @@ extension kalen.app{
         }
 
     }
-    
-    
 
 }

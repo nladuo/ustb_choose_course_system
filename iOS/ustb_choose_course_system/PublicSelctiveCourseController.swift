@@ -13,18 +13,27 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet var tableView: UITableView!
     //显示课程名称
     let CLASSNAME_TAG = 101
-    //侠士老师姓名
+    
+    //显示老师姓名
     let TEACHER_TAG = 102
+    
     //显示学分
     let CREDIT_TAG = 103
+    
+    //显示人数比例
+    let RATIO_OR_SCORE_TAG = 104
+    
     //显示课程上课地点或者显示得分
-    let TIME_AND_POSITION_OR_SCORE_TAG = 104
+    let TIME_AND_POSITION_OR_SEMESTER_TAG = 105
+    
     //选课的tag
     let ALTERNATIVE_COURSE_TAG = 0
+    
     //退课的tag
     let SELECTED_COURSE_TAG = 1
     
-    var selectedId:String = ""
+    //当前选中的课程ID
+    var selectedId = ""
     
     var datas:[[kalen.app.ClassBean]] = [[],[],[]]
     
@@ -34,11 +43,11 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
 
     override func loadView(){
         super.loadView()
+        
         parentVc = self.tabBarController as
         ChooseCourseTabBarController
         tableView.delegate = self
         tableView.dataSource = self
-        
         parentVc.updateNotFullPublicSelectiveCourses(self)
     }
     
@@ -47,16 +56,82 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
         datas[1] = parentVc.selectedClasses
         datas[2] = parentVc.learnedPublicClasses
         tableView.reloadData()
+        
     }
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
-        println("tag ---> \(alertView.tag)")
-        println("now_id ----> " + selectedId)
-        println("buttonIndex ----> \(buttonIndex)")
-//        if buttonIndex == self.LOGOUT_BTN_INDEX {
-//            self.dismissViewControllerAnimated(true, completion: nil)
-//        }
+
+        if buttonIndex == 1{
         
+            if alertView.tag == 0{
+                
+                MBProgressHUD.showMessage("加载中..")
+                
+                //获取json数据
+                var params = ["id": selectedId,"uid": kalen.app.UserInfo.getInstance().username]
+                var data = kalen.app.HttpUtil.post(kalen.app.ConstVal.ADD_PUBLIC_COURSE_URL, params: params, cookieStr: parentVc.cookieData)
+                
+                MBProgressHUD.hideHUD()
+                if data == nil{
+                    MBProgressHUD.showError("网络连接错误")
+                    return
+                }
+                var alert = UIAlertView(title: "提示", message: data, delegate: nil, cancelButtonTitle: "确定")
+                alert.show()
+                
+                parentVc.updateNotFullPublicSelectiveCourses(self)
+                
+                println("添加选修课")
+                
+            }else if alertView.tag == 1{
+                var bean = findCourseBeanByCourseID(selectedId, beans: datas[1])
+                
+                var alert = UIAlertView(title: "课程详情", message: "你确定要退掉：\(bean.className)吗？", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定")
+                alert.tag = 2
+                alert.show()
+                
+                println("退补选修课")
+                
+            }else if alertView.tag == 2{
+                var bean = findCourseBeanByCourseID(selectedId, beans: datas[1])
+                
+                MBProgressHUD.showMessage("加载中..")
+                
+                //获取json数据
+                var params = [
+                    "kch": bean.DYKCH,
+                    "xh": "",
+                    "kxh": bean.KXH,
+                    "uid": kalen.app.UserInfo.getInstance().username]
+                var data = kalen.app.HttpUtil.post(kalen.app.ConstVal.REMOVE_COURSE_URL, params: params, cookieStr: parentVc.cookieData)
+                
+                MBProgressHUD.hideHUD()
+                if data == nil{
+                    MBProgressHUD.showError("网络连接错误")
+                    return
+                }
+                var alert = UIAlertView(title: "提示", message: data, delegate: nil, cancelButtonTitle: "确定")
+                alert.show()
+                
+                parentVc.updateNotFullPublicSelectiveCourses(self)
+                println("确定退选修课")
+            }
+            
+        }
+        
+    }
+    
+    func findCourseBeanByCourseID(id: String, beans: [kalen.app.ClassBean]) -> kalen.app.ClassBean{
+        
+        var bean:kalen.app.ClassBean!
+        for b in beans{
+            if b.id == id{
+                bean = b
+                break
+            }
+        }
+        
+        return bean
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -123,7 +198,9 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
         var classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as UILabel
         var teacherLabel = cell.viewWithTag(TEACHER_TAG) as UILabel
         var creditLabel = cell.viewWithTag(CREDIT_TAG) as UILabel
-        var timeAndPositionOrScoreLabel = cell.viewWithTag(TIME_AND_POSITION_OR_SCORE_TAG) as UILabel
+        var ratioOrScoreLabel = cell.viewWithTag(RATIO_OR_SCORE_TAG) as UILabel
+        var timeAndPositionOrSemesterLabel = cell.viewWithTag(TIME_AND_POSITION_OR_SEMESTER_TAG) as UILabel
+        
         
         var bean = datas[indexPath.section][indexPath.row]
         
@@ -131,11 +208,15 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
         teacherLabel.text = bean.teacher
         creditLabel.text = bean.credit + "学分"
         if indexPath.section == 2 {
-            timeAndPositionOrScoreLabel.text = "得分:" + bean.score
-            timeAndPositionOrScoreLabel.textAlignment = NSTextAlignment.Center
+            ratioOrScoreLabel.text = "得分:" + bean.score
+
+            timeAndPositionOrSemesterLabel.text = bean.semester
+            timeAndPositionOrSemesterLabel.textAlignment = NSTextAlignment.Center
         }else{
-            timeAndPositionOrScoreLabel.text = bean.time_and_postion
+            ratioOrScoreLabel.text = bean.ratio
+            timeAndPositionOrSemesterLabel.text = bean.time_and_postion
         }
+        ratioOrScoreLabel.textAlignment = NSTextAlignment.Center
 
         return cell
 

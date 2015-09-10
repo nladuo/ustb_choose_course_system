@@ -34,6 +34,7 @@ extension kalen.app{
             var error:NSError?;
 
             var data = NSURLConnection.sendSynchronousRequest(req, returningResponse: nil, error: &error)
+            
             if error != nil{
                 return nil;
             }
@@ -108,11 +109,11 @@ extension kalen.app{
                     self.isError = false
                     //由于拦截了302，设置了completionHandler参数为nil，所以忽略了重定向请求，这里返回的Response就是包含302状态码的Response了。
                     if let resp = response as? NSHTTPURLResponse{
-                        println(resp.statusCode)
+                        //println(resp.statusCode)
                         for (key, val) in resp.allHeaderFields{
                             if(key as String) == "Set-Cookie"{
                                 self.cookieData = val as String
-                                println(self.cookieData)
+                                //println(self.cookieData)
                             }
                         }
                     }

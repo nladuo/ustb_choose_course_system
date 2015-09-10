@@ -10,8 +10,8 @@
 功能：课表的查询，公共选修课信息的查询
 
 ##Android版
-使用android-studio1.3开发
-缺点: 目前写了一堆asynctask,还没有封装好
+使用android-studio1.3开发<br>
+缺点: 目前写了一堆asynctask,还没有封装好<br>
 功能: 课表的查询，公共选修课信息的查询
 
 ##Server

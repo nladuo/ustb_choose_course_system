@@ -82,8 +82,8 @@ class LoginViewController: UIViewController, HttpDelegate{
     }
     
     func afterPostWithCookie() {
-        println("in viewController")
-        println("is Error --->\(httpUtil!.isError)")
+        //println("in viewController")
+        //println("is Error --->\(httpUtil!.isError)")
         
         if httpUtil!.isError {
             //网络请求出现错误

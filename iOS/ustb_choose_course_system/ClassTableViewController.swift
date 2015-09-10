@@ -37,19 +37,20 @@ class ClassTableViewController: UIViewController{
         manipulateClassStringCollections(semester.text)
         //3、更新UI，把数组里面所有的内容更新到UI中
         updateClassTableUI()
-
     }
 
     override func loadView() {
         super.loadView()
-        CELL_HEIGHT = (UIScreen.mainScreen().bounds.size.height - topView.frame.size.height) / 8.0
+        //20为显示时间、运营商等等的高度，3为bottomMargin
+        CELL_HEIGHT = (UIScreen.mainScreen().bounds.size.height - topView.frame.size.height - self.navigationController!.navigationBar.frame.size.height - 20 - 3
+            ) / CGFloat(8.0)
         scrollView.contentSize.width = 8 * CELL_WIDTH
         //scrollView.contentSize.height = UIScreen.mainScreen().bounds.size.height - 70.0
         searchBtn.layer.cornerRadius = 7.0   //添加圆角
 
-        println(scrollView.contentSize)
-        println(UIScreen.mainScreen().bounds.size)
-
+        //println(scrollView.contentSize)
+        //println(UIScreen.mainScreen().bounds.size)
+        
         //添加所有标题的label
         addTitleLabels()
 
@@ -61,11 +62,15 @@ class ClassTableViewController: UIViewController{
 
         //初始化课表img标签
         initTagImageCollections()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        MBProgressHUD.showMessage("加载中，请稍后")
+        
+        //show waiting message
+        //MBProgressHUD.showMessage("加载中")
+        
         //1、先获取当前的学期
         var url = kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL + kalen.app.UserInfo.getInstance().username;
         
@@ -82,7 +87,7 @@ class ClassTableViewController: UIViewController{
         }else{
             assignStringsContent()
             semester.text = "无法获取当前学期"
-            MBProgressHUD.hideHUD()
+
             MBProgressHUD.showError("网络错误")
         }
         
@@ -158,10 +163,10 @@ class ClassTableViewController: UIViewController{
             var yPoint: CGFloat = 0
             if i < 8 {
                 xPoint = CGFloat(i) * CELL_WIDTH
-                yPoint = -CELL_HEIGHT
+                yPoint = 0 //-CELL_HEIGHT
             }else{
                 xPoint = 0
-                yPoint = CGFloat(i - 8) * CELL_HEIGHT
+                yPoint = CGFloat(i - 7) * CELL_HEIGHT
             }
 
             var label = UILabel(frame: CGRectMake(xPoint, yPoint, CELL_WIDTH, CELL_HEIGHT))
@@ -181,7 +186,7 @@ class ClassTableViewController: UIViewController{
             var labelCollection:[UILabel] = []
             for j in 0...5{
                 var xPoint:CGFloat = CGFloat(i + 1) * CELL_WIDTH
-                var yPoint:CGFloat = CGFloat(j) * CELL_HEIGHT
+                var yPoint:CGFloat = CGFloat(j + 1) * CELL_HEIGHT
                 var btn = UIButton(frame: CGRectMake(xPoint, yPoint, CELL_WIDTH, CELL_HEIGHT))
 
                 var label = UILabel(frame: CGRectMake(0, 0, CELL_WIDTH, CELL_HEIGHT))
@@ -210,10 +215,12 @@ class ClassTableViewController: UIViewController{
 
     @IBAction func classBtnClicked(sender: UIButton){
 
-        println(sender.tag)
+        //println(sender.tag)
         if sender.tag == -1 {
-            let alert = UIAlertView(title: nil, message: unkownClassItem, delegate: nil, cancelButtonTitle: "确定")
-            alert.show()
+            if unkownClassItem != ""{
+                let alert = UIAlertView(title: nil, message: unkownClassItem, delegate: nil, cancelButtonTitle: "确定")
+                alert.show()
+            }
         }else{
             var i = sender.tag / 6
             var j = sender.tag % 6
@@ -241,7 +248,7 @@ class ClassTableViewController: UIViewController{
 
     //添加未知课程的label
     func addUnkownClassLabel(){
-        var btn = UIButton(frame: CGRectMake( CELL_WIDTH , 6 * CELL_HEIGHT, 7 * CELL_WIDTH, CELL_HEIGHT))
+        var btn = UIButton(frame: CGRectMake( CELL_WIDTH , 7 * CELL_HEIGHT, 7 * CELL_WIDTH, CELL_HEIGHT))
         btn.layer.borderWidth = 0.3
         btn.layer.borderColor = UIColor.blackColor().CGColor
         btn.tag = -1
@@ -249,7 +256,6 @@ class ClassTableViewController: UIViewController{
         
 
         unkownClassLabel = UILabel(frame: CGRectMake(0, 0, 7 * CELL_WIDTH, CELL_HEIGHT))
-        //unkownClassLabel.textAlignment = NSTextAlignment.Center
         unkownClassLabel.font = UIFont(name: "Helvetica", size: 10.0)
         unkownClassLabel.numberOfLines = 0
         unkownClassLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping

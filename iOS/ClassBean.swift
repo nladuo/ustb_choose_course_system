@@ -19,22 +19,38 @@ extension kalen.app{
         var time_and_postion:String = ""
         var credit = ""
         var score = "0"
+        var kch = ""
+        var ratio = ""
+        var KXH = ""
+        var DYKCH = ""
+        var semester = ""
+        
+        //for prerequisite class and specified class
+        init(className: String, score: String, kch: String){
+            self.className = className
+            self.score = score
+            self.kch = kch
+        }
         
         //for search class
-        init(id: String, className: String, teacher:String, time_and_position:String, credit:String){
+        init(id: String, className: String, teacher:String, time_and_position:String, credit:String, ratio: String, KXH: String, DYKCH: String){
             self.id = id
             self.className = className
             self.teacher = teacher
             self.time_and_postion = time_and_position
             self.credit = credit
+            self.ratio = ratio
+            self.KXH = KXH
+            self.DYKCH = DYKCH
         }
         
         //for learned class
-        init(className: String, teacher:String, credit:String, score: String){
+        init(className: String, teacher:String, credit:String, score: String, semester: String){
             self.className = className
             self.teacher = teacher
             self.credit = credit
             self.score = score
+            self.semester = semester
         }
         
         //for get class table
