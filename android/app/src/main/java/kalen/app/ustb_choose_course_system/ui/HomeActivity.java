@@ -198,7 +198,7 @@ public class HomeActivity extends ActionBarActivity implements View.OnClickListe
                 if ((version - ConstVal.VERSION) > 0.001){
                     // need to update
 
-                    String releasedNote = object.getString("note");
+                    String releasedNote = object.getString("update_note");
                     final String appName = object.getString("app_name");
                     AlertDialog dialog = new AlertDialog
                             .Builder(HomeActivity.this)
