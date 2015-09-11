@@ -87,7 +87,8 @@ void SearchClassTableWidget::on_searchBtn_clicked()
     }
 
     QWidget* classTableWidget = new QWidget;
-    classTableWidget->setWindowTitle ("2014-2015-3课程表");
+    classTableWidget->setWindowTitle (ui->whichSemesterLineEdit->text ()
+                                      .append ("课程表"));
     QGridLayout* layout = new QGridLayout;
     layout->setSpacing(0);
     layout->setMargin(0);

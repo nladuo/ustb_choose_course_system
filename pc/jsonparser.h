@@ -17,6 +17,7 @@ public:
     vector<ClassBean*> getSelectedCourses();
     vector<ClassBean*> getAlternativeCourses();
     vector<ClassBean*> getClassTableItems();
+    QString getResultMsg ();
     QString getSemester();
     bool isNeedUpdate();
     QString getSoftWareUpdateInfo();

@@ -206,19 +206,18 @@ QString JsonParser::getSoftWareUpdateInfo(){
     return "发生错误";
 }
 
-//QString JsonParser::getChooseCourseResult (){
-//    QByteArray data = jsonStr;
-//    qDebug()<<data;
-//    QJsonParseError jsonError;
-//    QJsonDocument json = QJsonDocument::fromJson(data, &jsonError);
-//    if(jsonError.error == QJsonParseError::NoError)
-//    {
-//        QJsonObject obj = json.object();
-//        qDebug()<<obj.keys ();
-//        QJsonValue value = obj.value (obj.keys ().at (1));
+QString JsonParser::getResultMsg (){
+    QByteArray data = jsonStr;
 
-//        return value.toString ();
-//    }
-//    return "发生错误";
-//}
+    qDebug()<<data<<"\n\n"<<jsonStr;
+    QJsonParseError jsonError;
+    QJsonDocument json = QJsonDocument::fromJson(data, &jsonError);
+    if(jsonError.error == QJsonParseError::NoError)
+    {
+        QJsonObject obj = json.object();
+        return obj["msg"].toString ();
+    }
+    return jsonStr.split ('g').at (1).split (':').at (1).split (' ').at (0).split ('\'').at (1);
+}
+
 

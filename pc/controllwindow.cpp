@@ -138,7 +138,9 @@ void ControllWindow::on_alternativeListWidget_itemDoubleClicked(QListWidgetItem 
     QNetworkReply* reply = HttpUtil::post (ADD_COURSE_URL, postData, this->mCookieJar);
 
     QByteArray data = reply->readAll ();
-    QMessageBox::about (this, "选课结果", data);
+    JsonParser parser = JsonParser(data);
+    QString msg = parser.getResultMsg ();
+    QMessageBox::about (this, "选课结果", msg);
     searchClasses ();
 }
 
@@ -152,7 +154,7 @@ void ControllWindow::on_selectedListWidget_itemDoubleClicked(QListWidgetItem *it
     if( QMessageBox::warning (this, "退课", "你确定要退掉这门课？",
                           QMessageBox::Yes | QMessageBox::No, QMessageBox::No)
             == QMessageBox::Yes){
-            qDebug()<<"Yes";
+            //qDebug()<<"Yes";
             ClassBean*bean = getSelectedClassBeanByCourseId (item->text ());
             QByteArray postData;
             postData.append("kch=").append (bean->getDYKCH ()).append ("&");
@@ -161,10 +163,10 @@ void ControllWindow::on_selectedListWidget_itemDoubleClicked(QListWidgetItem *it
             postData.append("uid=").append (UserInfo::getInstance ()->getName ());
             QNetworkReply* reply = HttpUtil::post (REMOVE_COURSE_URL, postData, this->mCookieJar);
             QByteArray data = reply->readAll ();
-            qDebug()<<data;
-            QMessageBox::about (this, "退课结果", data);
-    }else{
-        //qDebug()<<"No";
+            JsonParser parser = JsonParser(data);
+            QString msg = parser.getResultMsg ();
+            //qDebug()<<data;
+            QMessageBox::about (this, "退课结果", msg);
     }
     searchClasses ();
 }
@@ -188,7 +190,6 @@ ClassBean* ControllWindow::getSelectedClassBeanByCourseId(QString id){
                                  bean.getDYKCH ());
         }
     }
-
     return NULL;
 }
 

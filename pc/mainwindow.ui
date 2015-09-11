@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>USTB选课系统V0.10</string>
+   <string>USTB选课系统</string>
   </property>
   <property name="windowIcon">
    <iconset resource="ustb_app.qrc">
@@ -90,7 +90,7 @@
      </font>
     </property>
     <property name="text">
-     <string>USTB选课系统V0.11</string>
+     <string>USTB选课系统V0.12</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="savePrpCheckBox">
