@@ -247,7 +247,9 @@ public class PublicSelectiveCourseFragment extends Fragment implements Expandabl
             try {
                 String data = HttpUtils.post(ConstVal.ADD_PUBLIC_COURSE_URL, map,
                         UserInfo.getInstance().getCookieStore());
-                msg = data;
+                JsonParser parser = new JsonParser(data);
+                msg = parser.getResultMsg();
+
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
@@ -300,7 +302,10 @@ public class PublicSelectiveCourseFragment extends Fragment implements Expandabl
             try {
                 String data = HttpUtils.post(ConstVal.REMOVE_COURSE_URL, map,
                         UserInfo.getInstance().getCookieStore());
-                msg = data;
+                msg = data.split("g")[1]
+                        .split(":")[1]
+                        .split(" ")[0]
+                        .split("\'")[1];
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;

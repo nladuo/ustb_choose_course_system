@@ -210,4 +210,13 @@ public class JsonParser {
         return classes;
     }
 
+    public String getResultMsg(){
+        try {
+            return jsonObject.getString("msg");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
 }

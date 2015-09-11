@@ -22,6 +22,7 @@ import kalen.app.ustb_choose_course_system.adapter.DetailAdpater;
 import kalen.app.ustb_choose_course_system.model.ClassBean;
 import kalen.app.ustb_choose_course_system.model.UserInfo;
 import kalen.app.ustb_choose_course_system.utils.HttpUtils;
+import kalen.app.ustb_choose_course_system.utils.JsonParser;
 
 /**
  * Created by kalen on 15-9-9.
@@ -116,8 +117,10 @@ public class DetailActivity extends Activity
             try {
                 String data = HttpUtils.post(addUrl, map,
                         UserInfo.getInstance().getCookieStore());
-                msg = data;
-                System.out.println(data);
+
+                JsonParser parser = new JsonParser(data);
+                msg = parser.getResultMsg();
+                //System.out.println(data);
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
