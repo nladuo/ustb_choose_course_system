@@ -31,12 +31,20 @@ class ClassTableViewController: UIViewController{
 
     @IBAction func searchBtnClicked(sender: AnyObject) {
         MBProgressHUD.showMessage("加载中")
-        //1、清楚课程String数组所有的内容
-        clearStringsContent()
-        //2、根据学期来把相应的内容放到数组里面
-        manipulateClassStringCollections(semester.text)
-        //3、更新UI，把数组里面所有的内容更新到UI中
-        updateClassTableUI()
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            //1、清楚课程String数组所有的内容
+            self.clearStringsContent()
+            //2、根据学期来把相应的内容放到数组里面
+            self.manipulateClassStringCollections(self.semester.text)
+            dispatch_async(dispatch_get_main_queue()
+                , {
+                    MBProgressHUD.hideHUD()
+                    //3、更新UI，把数组里面所有的内容更新到UI中
+                    self.updateClassTableUI()
+            })
+        })
+        
+        
     }
 
     override func loadView() {
@@ -69,28 +77,33 @@ class ClassTableViewController: UIViewController{
         super.viewDidLoad()
         
         //show waiting message
-        //MBProgressHUD.showMessage("加载中")
-        
-        //1、先获取当前的学期
-        var url = kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL + kalen.app.UserInfo.getInstance().username;
-        
-        var jsonStr = kalen.app.HttpUtil.get(url, cookieStr: self.cookieData)
-        if jsonStr != nil{
-            jsonParser = kalen.app.JsonParser(jsonStr: jsonStr! as String)
-            semester.text = jsonParser.getSemester()
-            //2、初始化课程数组所有的内容
-            assignStringsContent()
-            //3、根据学期来把相应的内容放到数组里面
-            manipulateClassStringCollections(semester.text)
-            //4、更新UI，把数组里面所有的内容更新到UI中
-            updateClassTableUI()
-        }else{
-            assignStringsContent()
-            semester.text = "无法获取当前学期"
-
-            MBProgressHUD.showError("网络错误")
-        }
-        
+        MBProgressHUD.showMessage("加载中")
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+          
+            //1、先获取当前的学期
+            var url = kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL + kalen.app.UserInfo.getInstance().username;
+            
+            var jsonStr = kalen.app.HttpUtil.get(url, cookieStr: self.cookieData)
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                MBProgressHUD.hideHUD()
+                if jsonStr != nil{
+                    self.jsonParser = kalen.app.JsonParser(jsonStr: jsonStr! as String)
+                    self.semester.text = self.jsonParser.getSemester()
+                    //2、初始化课程数组所有的内容
+                    self.assignStringsContent()
+                    //3、根据学期来把相应的内容放到数组里面
+                    self.manipulateClassStringCollections(self.semester.text)
+                    //4、更新UI，把数组里面所有的内容更新到UI中
+                    self.updateClassTableUI()
+                }else{
+                    self.assignStringsContent()
+                    self.semester.text = "无法获取当前学期"
+                    
+                    MBProgressHUD.showError("网络错误")
+                }
+            })
+        })
         
     }
 

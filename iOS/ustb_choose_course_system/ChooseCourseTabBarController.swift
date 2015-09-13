@@ -42,64 +42,82 @@ class ChooseCourseTabBarController: UITabBarController {
     
     func updateNotFullPublicSelectiveCourses(_delegate:ChooseCourseDelegate){
         MBProgressHUD.showMessage("加载中")
-        var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL, cookieStr: cookieData)
-        MBProgressHUD.hideHUD()
-        if data != nil{
-            var parser = kalen.app.JsonParser(jsonStr: data! as String)
-            notFullPublicClasses = parser.getAlternativeCourses()
-            selectedClasses = parser.getSelectedCourses()
-            learnedPublicClasses = parser.getLearnedPublicCourses()
-        }else{
-            notFullPublicClasses = []
-            selectedClasses = []
-            learnedPublicClasses = []
-            MBProgressHUD.showError("网络连接错误")
-        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL, cookieStr: self.cookieData)
+            dispatch_async(dispatch_get_main_queue(), {
+                MBProgressHUD.hideHUD()
+                if data != nil{
+                    var parser = kalen.app.JsonParser(jsonStr: data! as String)
+                    self.notFullPublicClasses = parser.getAlternativeCourses()
+                    self.selectedClasses = parser.getSelectedCourses()
+                    self.learnedPublicClasses = parser.getLearnedPublicCourses()
+                }else{
+                    self.notFullPublicClasses = []
+                    self.selectedClasses = []
+                    self.learnedPublicClasses = []
+                    MBProgressHUD.showError("网络连接错误")
+                }
+                
+                _delegate.afterParseDatas()
+            })
+            
+        })
         
-        _delegate.afterParseDatas()
+        
     }
     
     func updatePrerequisiteCourses(_delegate: ChooseCourseDelegate){
         //var data
         MBProgressHUD.showMessage("加载中")
-        var dataForSelectedCoureses = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL, cookieStr: cookieData)
-        var dataForPrerequisiteCourses = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_PREREQUISITE_COURSE_URL, cookieStr: cookieData)
-        MBProgressHUD.hideHUD()
-        if (dataForPrerequisiteCourses != nil) && (dataForSelectedCoureses != nil){
-            //必修课如果已经选择了的话，再向服务器post数据，服务器会抛出异常
-            var parser = kalen.app.JsonParser(jsonStr: dataForSelectedCoureses! as String)
-            selectedClasses = parser.getSelectedCourses()
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            var dataForSelectedCoureses = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL, cookieStr: self.cookieData)
+            var dataForPrerequisiteCourses = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_PREREQUISITE_COURSE_URL, cookieStr: self.cookieData)
             
-            //添加必修课列表
-            //parser = nil
-            parser = kalen.app.JsonParser(jsonStr: dataForPrerequisiteCourses! as String)
-            prerequisiteClasses = parser.getTechingCourses()
-            
-        }else{
-            prerequisiteClasses = []
-            selectedClasses = []
-            MBProgressHUD.showError("网络连接错误")
-        }
+            dispatch_async(dispatch_get_main_queue(), {
+                MBProgressHUD.hideHUD()
+                if (dataForPrerequisiteCourses != nil) && (dataForSelectedCoureses != nil){
+                    //必修课如果已经选择了的话，再向服务器post数据，服务器会抛出异常
+                    var parser = kalen.app.JsonParser(jsonStr: dataForSelectedCoureses! as String)
+                    self.selectedClasses = parser.getSelectedCourses()
+                    
+                    //添加必修课列表
+                    //parser = nil
+                    parser = kalen.app.JsonParser(jsonStr: dataForPrerequisiteCourses! as String)
+                    self.prerequisiteClasses = parser.getTechingCourses()
+                    
+                }else{
+                    self.prerequisiteClasses = []
+                    self.selectedClasses = []
+                    MBProgressHUD.showError("网络连接错误")
+                }
+                _delegate.afterParseDatas()
+                
+            })
+        })
         
-        _delegate.afterParseDatas()
 
     }
     
     func updateSpecifiedCourses(_delegate: ChooseCourseDelegate){
         //var data
         MBProgressHUD.showMessage("加载中")
-        var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_SPECIFIED_COURSE_URL, cookieStr: cookieData)
-        MBProgressHUD.hideHUD()
-        if data != nil{
-            var parser = kalen.app.JsonParser(jsonStr: data! as String)
-            specifiedClasses = parser.getTechingCourses()
-            
-        }else{
-            specifiedClasses = []
-            MBProgressHUD.showError("网络连接错误")
-        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
         
-        _delegate.afterParseDatas()
+            var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_SPECIFIED_COURSE_URL, cookieStr: self.cookieData)
+            dispatch_async(dispatch_get_main_queue(), {
+                MBProgressHUD.hideHUD()
+                if data != nil{
+                    var parser = kalen.app.JsonParser(jsonStr: data! as String)
+                    self.specifiedClasses = parser.getTechingCourses()
+                    
+                }else{
+                    self.specifiedClasses = []
+                    MBProgressHUD.showError("网络连接错误")
+                }
+                
+                _delegate.afterParseDatas()
+            })
+        })
         
     }
 

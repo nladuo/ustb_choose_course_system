@@ -19,7 +19,7 @@ class SpecifiedSelectiveCourseController: UIViewController, UITableViewDelegate,
     override func loadView(){
         super.loadView()
         
-        parentVc = self.tabBarController as! ChooseCourseTabBarController
+        parentVc = self.tabBarController as? ChooseCourseTabBarController
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -45,23 +45,23 @@ class SpecifiedSelectiveCourseController: UIViewController, UITableViewDelegate,
         var bean = datas[indexPath.row]
         
         MBProgressHUD.showMessage("加载中...")
-        var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.getSpecifiedCourseUrl(bean.kch, uid: kalen.app.UserInfo.getInstance().username), cookieStr: parentVc.cookieData)
-        
-        MBProgressHUD.hideHUD()
-        if data == nil{
-            MBProgressHUD.showError("网络连接错误")
-            return
-        }
-        var parser = kalen.app.JsonParser(jsonStr: data! as String)
-        var classes = parser.getAlternativeCourses()
-        if classes.count == 0{
-            MBProgressHUD.showError("本学期尚未开课")
-        }else{
-            performSegueWithIdentifier("SpecifiedShowDetail", sender: classes)
-        }
-        
-        
-        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.getSpecifiedCourseUrl(bean.kch, uid: kalen.app.UserInfo.getInstance().username), cookieStr: self.parentVc.cookieData)
+            dispatch_async(dispatch_get_main_queue(), {
+                MBProgressHUD.hideHUD()
+                if data == nil{
+                    MBProgressHUD.showError("网络连接错误")
+                    return
+                }
+                var parser = kalen.app.JsonParser(jsonStr: data! as String)
+                var classes = parser.getAlternativeCourses()
+                if classes.count == 0{
+                    MBProgressHUD.showError("本学期尚未开课")
+                }else{
+                    self.performSegueWithIdentifier("SpecifiedShowDetail", sender: classes)
+                }
+            })
+        })
     }
     
     override func didReceiveMemoryWarning() {

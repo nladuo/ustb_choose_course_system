@@ -18,18 +18,46 @@ extension kalen.app{
             self.jsonStr = jsonStr
         }
         
+        //如果用户在别的地方登陆的话，服务器返回的信息不实json对象
+        func isJsonData() -> Bool{
+            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
+            
+            var obj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            if obj == nil{
+                println(jsonStr)
+                return false
+            }
+            return true
+        }
+        
         //已选课
         func getSelectedCourses() ->[ClassBean]{
             
             return getCourses ("selectedCourses")
         }
         
-        
-        
         //可选课
         func getAlternativeCourses() ->[ClassBean]{
             
             return getCourses ("alternativeCourses")
+        }
+        
+        func getMsg() -> String{
+            var resultStr:String = ""
+            
+            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
+            
+            var obj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            
+            if obj == nil{
+                return jsonStr.componentsSeparatedByString("g")[1].componentsSeparatedByString(":")[1].componentsSeparatedByString(" ")[0].componentsSeparatedByString("\'")[1]
+            }
+            
+            if let temp = obj!.objectForKey("msg") as? String{
+                resultStr = temp
+            }
+            
+            return resultStr
         }
         
         //必修课和专业选修课列表
@@ -86,14 +114,19 @@ extension kalen.app{
                 var className = obj2.objectForKey("DYKCM") as! String
                 var KXH = obj2.objectForKey("KXH") as! String
                 var DYKCH = obj2.objectForKey("DYKCH") as! String
-                var SKRS = 0
-                if let temp = obj2.objectForKey("SKRS") as? Int{
-                    SKRS = temp
-                }
                 
                 var KRL = obj2.objectForKey("KRL") as! Int
-                
-                var ratio = "\(SKRS)/\(KRL)"
+                var ratio = ""
+                //SKRS有可能是int也有可能是String
+                if let temp = obj2.objectForKey("SKRS") as? Int{
+                    //SKRS = temp
+                    ratio = "\(temp)/\(KRL)"
+                }else if let temp2 = obj2.objectForKey("SKRS") as? String{
+                    ratio = "\(temp2)/\(KRL)"
+                }else{
+                    //如果都错就是当成0个人
+                    ratio = "0/\(KRL)"
+                }
                 
                 var tup:[AnyObject] = obj2.objectForKey("JSM")! as! [AnyObject]
                 var teacher:String = ""
@@ -125,7 +158,7 @@ extension kalen.app{
             var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
             
             var obj : AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-            var array = obj.objectForKey("selectedCourses")as! [AnyObject]
+            var array = obj.objectForKey("selectedCourses") as! [AnyObject]
 
             for obj2 in array {
                 //println(obj2)
@@ -190,7 +223,7 @@ extension kalen.app{
             var obj : AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
             var array = obj.objectForKey("selectedCourses") as! [AnyObject]
             
-            return array[0].objectForKey("XNXQ")as! String
+            return array[0].objectForKey("XNXQ") as! String
             
         }
         
@@ -210,9 +243,9 @@ extension kalen.app{
                 //上课地点
                 var position:String = (split(datas[i + 1]) {$0 == ")"} )[0]
                 //周几
-                var weekTime:Int = (Int)( ((split(datas[i]) {$0 == ","})[0] as NSString).characterAtIndex(2)) - 48
+                var weekTime:Int = Int(((split(datas[i]) {$0 == ","})[0] as NSString).characterAtIndex(2)) - 48
                 //第几节
-                var whichNum:Int = (Int)(((split(datas[i]) {$0 == ","})[1] as NSString).characterAtIndex(1)) - 48
+                var whichNum:Int = Int(((split(datas[i]) {$0 == ","})[1] as NSString).characterAtIndex(1)) - 48
                 //摆放的位置
                 var _where:Int = (weekTime - 1) * 6 + whichNum - 1;
                 //上课时间

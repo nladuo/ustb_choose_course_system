@@ -73,7 +73,7 @@ class LoginViewController: UIViewController, HttpDelegate{
             MBProgressHUD.showError("请输入密码")
         }else{
             MBProgressHUD.showMessage("正在登录中")
-            var params = ["j_username": ((uname as String) as String) + ",undergraduate","j_password": passwd]
+            var params = ["j_username": (uname as String) + ",undergraduate","j_password": passwd]
             httpUtil = kalen.app.HttpUtil(delegate: self)
             httpUtil?.postWithCookie(kalen.app.ConstVal.LOGIN_URL, params: params)
         }

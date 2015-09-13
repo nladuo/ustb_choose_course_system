@@ -48,34 +48,32 @@ class DetailTableViewController: UITableViewController, UIAlertViewDelegate {
         
         if buttonIndex == 1{
             MBProgressHUD.showMessage("加载中..")
-            
-            var bean = datas[selectedPos]
-            
-            //获取json数据
-            var params = [
-                            "id": bean.id,
-                            "uid": kalen.app.UserInfo.getInstance().username,
-                            "xkfs": self.classType,
-                            "xf": bean.credit,
-                            "NJ": "",
-                            "ZYH": ""]
-            var data = kalen.app.HttpUtil.post(self.addUrl, params: params, cookieStr: self.cookieData)
-            
-            MBProgressHUD.hideHUD()
-            if data == nil{
-                MBProgressHUD.showError("网络连接错误")
-                return
-            }
-            var alert = UIAlertView(title: "提示", message: data! as String, delegate: nil, cancelButtonTitle: "确定")
-            
-//            var alert = UIAlertView(title: "提示", message: data, delegate: nil, cancelButtonTitle: "确定")
-            alert.show()
-            
-            //self.popoverPresentationController
-            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                var bean = self.datas[self.selectedPos]
+                
+                //获取json数据
+                var params = [
+                    "id": bean.id,
+                    "uid": kalen.app.UserInfo.getInstance().username,
+                    "xkfs": self.classType,
+                    "xf": bean.credit,
+                    "NJ": "",
+                    "ZYH": ""]
+                var data = kalen.app.HttpUtil.post(self.addUrl, params: params, cookieStr: self.cookieData)
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    MBProgressHUD.hideHUD()
+                    if data == nil{
+                        MBProgressHUD.showError("网络连接错误")
+                        return
+                    }
+                    var parser = kalen.app.JsonParser(jsonStr: data! as String)
+                    var msg = parser.getMsg()
+                    var alert = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
+                    alert.show()
+                })
+            })
         }
-        
-        
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
@@ -104,7 +102,7 @@ class DetailTableViewController: UITableViewController, UIAlertViewDelegate {
         
         var classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as! UILabel
         var teacherLabel = cell.viewWithTag(TEACHER_TAG) as! UILabel
-        var creditLabel = cell.viewWithTag(CREDIT_TAG)as! UILabel
+        var creditLabel = cell.viewWithTag(CREDIT_TAG) as! UILabel
         var ratioLabel = cell.viewWithTag(RATIO_TAG) as! UILabel
         var timeAndPositionLabel = cell.viewWithTag(TIME_AND_POSITION_TAG) as! UILabel
         

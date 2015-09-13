@@ -10,6 +10,7 @@
 		9AAFB3811B7DB3D200AE1D6F /* PrerequisiteCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAFB3801B7DB3D200AE1D6F /* PrerequisiteCourseController.swift */; };
 		9AAFB3831B7DB3FB00AE1D6F /* PublicSelctiveCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAFB3821B7DB3FB00AE1D6F /* PublicSelctiveCourseController.swift */; };
 		9AAFB3851B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAFB3841B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift */; };
+		EC21931A1BA33406006B3956 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EC2193191BA33406006B3956 /* icon.png */; };
 		F41BB2421B90C0E200F0495C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41BB2411B90C0E200F0495C /* AboutViewController.swift */; };
 		F42B1C591B779ECB004C14A4 /* HttpDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42B1C581B779ECB004C14A4 /* HttpDelegate.swift */; };
 		F4343F1E1B801E8800AEAB1D /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343F1A1B801E8800AEAB1D /* MBProgressHUD+MJ.m */; };
@@ -49,6 +50,7 @@
 		9AAFB3801B7DB3D200AE1D6F /* PrerequisiteCourseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrerequisiteCourseController.swift; sourceTree = "<group>"; };
 		9AAFB3821B7DB3FB00AE1D6F /* PublicSelctiveCourseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicSelctiveCourseController.swift; sourceTree = "<group>"; };
 		9AAFB3841B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecifiedSelectiveCourseController.swift; sourceTree = "<group>"; };
+		EC2193191BA33406006B3956 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		F41BB2411B90C0E200F0495C /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		F42B1C581B779ECB004C14A4 /* HttpDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpDelegate.swift; sourceTree = "<group>"; };
 		F4343F191B801E8800AEAB1D /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		F4BA6A1C1B7758CB006C8B91 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EC2193191BA33406006B3956 /* icon.png */,
 				F4BA6A1D1B7758CB006C8B91 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -325,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4BA6A291B7758CB006C8B91 /* LaunchScreen.xib in Resources */,
+				EC21931A1BA33406006B3956 /* icon.png in Resources */,
 				F4343F1F1B801E8800AEAB1D /* MBProgressHUD.bundle in Resources */,
 				F4BA6A261B7758CB006C8B91 /* Images.xcassets in Resources */,
 				F4F0F5F61B7A1C7900E9549D /* Main.storyboard in Resources */,
@@ -485,6 +489,7 @@
 				INFOPLIST_FILE = ustb_choose_course_system/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ustb_choose_course_system/OC-Bridge.h";
@@ -500,6 +505,7 @@
 				INFOPLIST_FILE = ustb_choose_course_system/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ustb_choose_course_system/OC-Bridge.h";

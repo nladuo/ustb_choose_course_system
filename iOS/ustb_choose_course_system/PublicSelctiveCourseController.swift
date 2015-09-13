@@ -66,22 +66,26 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
             if alertView.tag == 0{
                 
                 MBProgressHUD.showMessage("加载中..")
-                
-                //获取json数据
-                var params = ["id": selectedId,"uid": kalen.app.UserInfo.getInstance().username]
-                var data = kalen.app.HttpUtil.post(kalen.app.ConstVal.ADD_PUBLIC_COURSE_URL, params: params, cookieStr: parentVc.cookieData)
-                
-                MBProgressHUD.hideHUD()
-                if data == nil{
-                    MBProgressHUD.showError("网络连接错误")
-                    return
-                }
-                var alert = UIAlertView(title: "提示", message: data! as String, delegate: nil, cancelButtonTitle: "确定")
-                alert.show()
-                
-                parentVc.updateNotFullPublicSelectiveCourses(self)
-                
-                println("添加选修课")
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                    //获取json数据
+                    var params = ["id": self.selectedId,"uid": kalen.app.UserInfo.getInstance().username]
+                    var data = kalen.app.HttpUtil.post(kalen.app.ConstVal.ADD_PUBLIC_COURSE_URL, params: params, cookieStr: self.parentVc.cookieData)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        MBProgressHUD.hideHUD()
+                        if data == nil{
+                            MBProgressHUD.showError("网络连接错误")
+                            return
+                        }
+                        var parser = kalen.app.JsonParser(jsonStr: data as String!)
+                        var msg = parser.getMsg()
+                        var alert = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
+                        alert.show()
+                        
+                        self.parentVc.updateNotFullPublicSelectiveCourses(self)
+                        
+                        println("添加选修课")
+                    })
+                })
                 
             }else if alertView.tag == 1{
                 var bean = findCourseBeanByCourseID(selectedId, beans: datas[1])
@@ -97,23 +101,29 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
                 
                 MBProgressHUD.showMessage("加载中..")
                 
-                //获取json数据
-                var params = [
-                    "kch": bean.DYKCH,
-                    "xh": "",
-                    "kxh": bean.KXH,
-                    "uid": kalen.app.UserInfo.getInstance().username]
-                var data = kalen.app.HttpUtil.post(kalen.app.ConstVal.REMOVE_COURSE_URL, params: params, cookieStr: parentVc.cookieData)
-                
-                MBProgressHUD.hideHUD()
-                if data == nil{
-                    MBProgressHUD.showError("网络连接错误")
-                    return
-                }
-                var alert = UIAlertView(title: "提示", message: data! as String, delegate: nil, cancelButtonTitle: "确定")
-                alert.show()
-                
-                parentVc.updateNotFullPublicSelectiveCourses(self)
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                    //获取json数据
+                    var params = [
+                        "kch": bean.DYKCH,
+                        "xh": "",
+                        "kxh": bean.KXH,
+                        "uid": kalen.app.UserInfo.getInstance().username]
+                    var data = kalen.app.HttpUtil.post(kalen.app.ConstVal.REMOVE_COURSE_URL, params: params, cookieStr: self.parentVc.cookieData)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        MBProgressHUD.hideHUD()
+                        if data == nil{
+                            MBProgressHUD.showError("网络连接错误")
+                            return
+                        }
+                        var parser = kalen.app.JsonParser(jsonStr: data! as String)
+                        var msg = parser.getMsg()
+                        var alert = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
+                        alert.show()
+                        
+                        self.parentVc.updateNotFullPublicSelectiveCourses(self)
+                    })
+                    
+                })
                 println("确定退选修课")
             }
             
@@ -216,6 +226,7 @@ class PublicSelctiveCourseController: UIViewController, UITableViewDelegate, UIT
             ratioOrScoreLabel.text = bean.ratio
             timeAndPositionOrSemesterLabel.text = bean.time_and_postion
         }
+        
         ratioOrScoreLabel.textAlignment = NSTextAlignment.Center
 
         return cell
