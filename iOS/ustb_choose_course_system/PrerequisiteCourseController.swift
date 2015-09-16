@@ -55,24 +55,23 @@ class PrerequisiteCourseController: UIViewController, UITableViewDelegate, UITab
         var bean = datas[indexPath.row]
         
         MBProgressHUD.showMessage("加载中...")
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.getRequiredCourseURL(bean.kch, uid: kalen.app.UserInfo.getInstance().username), cookieStr: self.parentVc.cookieData)
-                MBProgressHUD.hideHUD()
-                if data == nil{
-                    MBProgressHUD.showError("网络连接错误")
-                    return
-                }
-                var parser = kalen.app.JsonParser(jsonStr: data! as String)
-                var classes = parser.getAlternativeCourses()
-                if classes.count == 0{
-                    MBProgressHUD.showError("本学期尚未开课")
-                }else{
-                    self.performSegueWithIdentifier("PrerequisiteShowDetail", sender: classes)
-                }
-            })
-        })
+        var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.getRequiredCourseURL(bean.kch, uid: kalen.app.UserInfo.getInstance().username), cookieStr: parentVc.cookieData)
+        
+        MBProgressHUD.hideHUD()
+        if data == nil{
+            MBProgressHUD.showError("网络连接错误")
+            return
+        }
+        var parser = kalen.app.JsonParser(jsonStr: data! as String)
+        var classes = parser.getAlternativeCourses()
+        if classes.count == 0{
+            MBProgressHUD.showError("本学期尚未开课")
+        }else{
+            performSegueWithIdentifier("PrerequisiteShowDetail", sender: classes)
+        }
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

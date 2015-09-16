@@ -18,18 +18,6 @@ extension kalen.app{
             self.jsonStr = jsonStr
         }
         
-        //如果用户在别的地方登陆的话，服务器返回的信息不实json对象
-        func isJsonData() -> Bool{
-            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
-            
-            var obj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-            if obj == nil{
-                println(jsonStr)
-                return false
-            }
-            return true
-        }
-        
         //已选课
         func getSelectedCourses() ->[ClassBean]{
             
@@ -42,6 +30,23 @@ extension kalen.app{
             return getCourses ("alternativeCourses")
         }
         
+        //获取软件更新信息
+        func getUpdateMsg() -> (version:Double, update_note:String)?{
+            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
+            
+            var obj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            
+            if obj == nil{
+                return nil
+            }
+            
+            var version = obj!.objectForKey("version") as! Double
+            var update_note = obj!.objectForKey("update_note") as! String
+            
+            return (version: version, update_note: update_note)
+        }
+        
+        //获取选课结果
         func getMsg() -> String{
             var resultStr:String = ""
             

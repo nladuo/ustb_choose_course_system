@@ -14,7 +14,6 @@ class MainTableViewController: UITableViewController{
     
     private var loginAlertView:UIAlertView!
     
-    
     private let LOGOUT_BTN_INDEX = 0
     
     required init(coder aDecoder: NSCoder) {
@@ -54,15 +53,42 @@ class MainTableViewController: UITableViewController{
                 alert.addButtonWithTitle("确定")
                 alert.show()
                 
-            }
-            
-            //课表查询
-            if indexPath.row == 2 {
-                
+            }else if indexPath.row == 2 { //课表查询
                 performSegueWithIdentifier("classTableSegue", sender: nil)
                 
             }
+        }else if indexPath.section == 1 {
+            if indexPath.row == 1{
+                MBProgressHUD.showMessage("加载中")
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                    var jsonData = kalen.app.HttpUtil.get(kalen.app.ConstVal.APP_CHECK_UPDATE_URL, cookieStr: "")
+                    dispatch_async(dispatch_get_main_queue(), {
+                        MBProgressHUD.hideHUD()
+                        if jsonData == nil{
+                            MBProgressHUD.showError("网络错误")
+                            return
+                        }
+                        var parser = kalen.app.JsonParser(jsonStr: jsonData! as String)
+                        var msg = parser.getUpdateMsg()
+                        if msg == nil{
+                            MBProgressHUD.showError("内部错误")
+                            return
+                        }
+                        var msgStr:String = "当前版本: \(kalen.app.ConstVal.VERSION)\n最新版本: \(msg!.version)\n更新说明: \(msg!.update_note)\n注: 请到“官网”下载二维码进行扫描安装"
+                        
+                        if (msg!.version - 0.0001) < kalen.app.ConstVal.VERSION{
+                            msgStr = "已经是最新版本"
+                        }
+                        
+                        var alert = UIAlertView(title: "提示", message: msgStr, delegate: nil, cancelButtonTitle: "确定")
+                        alert.show()
+                    })
+                })
+            }
         }
+        
+        
         
         
         tableView.cellForRowAtIndexPath(indexPath)?.selected = false
@@ -80,7 +106,6 @@ class MainTableViewController: UITableViewController{
         }))
         
         self.presentViewController(alert, animated: true, completion: nil)
-        
     }
 
     
@@ -103,9 +128,5 @@ class MainTableViewController: UITableViewController{
             var vc = segue.destinationViewController as! ChooseCourseTabBarController
             vc.cookieData = cookieData
         }
-        
-        
     }
-    
-
 }

@@ -8,9 +8,8 @@
 
 import UIKit
 //专业选修课
-class SpecifiedSelectiveCourseController: UIViewController, UITableViewDelegate, UITableViewDataSource, ChooseCourseDelegate {
-    
-    @IBOutlet weak var tableView: UITableView!
+class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDelegate {
+
     var datas:[kalen.app.ClassBean] = []
     let CLASSNAME_TAG = 501
     var parentVc:ChooseCourseTabBarController!
@@ -19,12 +18,12 @@ class SpecifiedSelectiveCourseController: UIViewController, UITableViewDelegate,
     override func loadView(){
         super.loadView()
         
-        parentVc = self.tabBarController as? ChooseCourseTabBarController
-        
-        tableView.delegate = self
-        tableView.dataSource = self
+        parentVc = self.tabBarController as! ChooseCourseTabBarController
+        //代理请求网络
         parentVc.updateSpecifiedCourses(self)
         
+        self.navigationController!.navigationBar.translucent = false
+        self.tabBarController!.tabBar.translucent = false
     }
     
     override func viewDidLoad() {
@@ -38,30 +37,30 @@ class SpecifiedSelectiveCourseController: UIViewController, UITableViewDelegate,
         tableView.reloadData()
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         tableView.cellForRowAtIndexPath(indexPath)?.selected = false
         
         var bean = datas[indexPath.row]
         
         MBProgressHUD.showMessage("加载中...")
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.getSpecifiedCourseUrl(bean.kch, uid: kalen.app.UserInfo.getInstance().username), cookieStr: self.parentVc.cookieData)
-            dispatch_async(dispatch_get_main_queue(), {
-                MBProgressHUD.hideHUD()
-                if data == nil{
-                    MBProgressHUD.showError("网络连接错误")
-                    return
-                }
-                var parser = kalen.app.JsonParser(jsonStr: data! as String)
-                var classes = parser.getAlternativeCourses()
-                if classes.count == 0{
-                    MBProgressHUD.showError("本学期尚未开课")
-                }else{
-                    self.performSegueWithIdentifier("SpecifiedShowDetail", sender: classes)
-                }
-            })
-        })
+        var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.getSpecifiedCourseUrl(bean.kch, uid: kalen.app.UserInfo.getInstance().username), cookieStr: parentVc.cookieData)
+        
+        MBProgressHUD.hideHUD()
+        if data == nil{
+            MBProgressHUD.showError("网络连接错误")
+            return
+        }
+        var parser = kalen.app.JsonParser(jsonStr: data! as String)
+        var classes = parser.getAlternativeCourses()
+        if classes.count == 0{
+            MBProgressHUD.showError("本学期尚未开课")
+        }else{
+            performSegueWithIdentifier("SpecifiedShowDetail", sender: classes)
+        }
+        
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,7 +68,7 @@ class SpecifiedSelectiveCourseController: UIViewController, UITableViewDelegate,
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell = tableView.dequeueReusableCellWithIdentifier("SpecifiedCourseCell", forIndexPath: indexPath) as! UITableViewCell
         
@@ -81,11 +80,11 @@ class SpecifiedSelectiveCourseController: UIViewController, UITableViewDelegate,
         return cell
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return datas.count
     }
     

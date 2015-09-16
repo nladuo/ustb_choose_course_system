@@ -40,8 +40,10 @@ extension kalen.app{
         //添加专业选修课URL
         static let ADD_SPECIFIED_COURSE_URL = "http://elearning.ustb.edu.cn/choose_courses/choosecourse/normalChooseCourse_normalMajorSelective_addFormalNormalMajorSelectiveCourse.action"
         
+        static let APP_CHECK_UPDATE_URL = "http://vps.kalen25115.cn:3000/update?id=5"
+        
         //当前软件版本
-        static let VERSION:Double = 0.10
+        static let VERSION:Double = 1.0
         
         //APP官网
         static let APP_WEBSITE_URL = "http://vps.kalen25115.cn:3000"
