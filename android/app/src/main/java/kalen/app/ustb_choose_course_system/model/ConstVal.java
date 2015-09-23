@@ -24,7 +24,7 @@ public class ConstVal {
 
     public static final String ADD_SPECIFIED_COURSE_URL = "http://elearning.ustb.edu.cn/choose_courses/choosecourse/normalChooseCourse_normalMajorSelective_addFormalNormalMajorSelectiveCourse.action";
 
-    public static final double VERSION = 0.11;
+    public static final double VERSION = 0.20;
 
     public static final int APP_ID = 4;
 

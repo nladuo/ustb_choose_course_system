@@ -1,32 +1,32 @@
 package kalen.app.ustb_choose_course_system.ui;
 
-import android.app.ActionBar;
-import android.app.Activity;
+
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import kalen.app.ustb_choose_course_system.R;
 import kalen.app.ustb_choose_course_system.adapter.ClassTableAdapter;
+import kalen.app.ustb_choose_course_system.db.DBManager;
 import kalen.app.ustb_choose_course_system.model.ClassBean;
+import kalen.app.ustb_choose_course_system.model.ClassTableBean;
 import kalen.app.ustb_choose_course_system.model.ConstVal;
 import kalen.app.ustb_choose_course_system.model.UserInfo;
 import kalen.app.ustb_choose_course_system.utils.HttpUtils;
@@ -37,17 +37,20 @@ import kalen.app.ustb_choose_course_system.utils.JsonParser;
  */
 public class ClassTableActivity extends ActionBarActivity{
 
-    //List<ClassBean> classes;
+    DBManager dbManager;
     private String[] mDatas;
     RecyclerView recyclerView;
     ClassTableAdapter mAdapter;
     EditText semesterEdit;
+
+    private String metaJsonData;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_table);
+        dbManager = new DBManager(this);
         initDatas();
         initViews();
         initToolBar();
@@ -59,6 +62,12 @@ public class ClassTableActivity extends ActionBarActivity{
                 semesterEdit.getText().toString());
         task.execute();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbManager.close();
     }
 
     private void initToolBar() {
@@ -78,8 +87,6 @@ public class ClassTableActivity extends ActionBarActivity{
         });
         mToolBarTextView.setText(R.string.app_name);
     }
-
-
 
 
     private void initViews() {
@@ -139,16 +146,15 @@ public class ClassTableActivity extends ActionBarActivity{
             map.put("listXnxq", semester);
             map.put("uid", UserInfo.getInstance().getUsername());
             try {
-                String data = HttpUtils.post(ConstVal.FETCH_CLASS_TABLE_PAGE_URL, map,
+                metaJsonData = HttpUtils.post(ConstVal.FETCH_CLASS_TABLE_PAGE_URL, map,
                         UserInfo.getInstance().getCookieStore());
-                JsonParser parser = new JsonParser(data);
+                JsonParser parser = new JsonParser(metaJsonData);
                 List<ClassBean> classes = parser.getClassTableItems();
                 handleClasses(classes);
             } catch (Exception e) {
                 e.printStackTrace();
                 return false;
             }
-
             return true;
         }
 
@@ -217,5 +223,52 @@ public class ClassTableActivity extends ActionBarActivity{
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        new MenuInflater(getApplication())
+                .inflate(R.menu.menu_class_table, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_add_to_desktop_shortcut:
+                addShortCut();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void addShortCut(){
+        insertDataToDb();
+
+        // 自定义action
+        Intent intent = new Intent("kalen.classtable.intent.action.SHORTCUT");
+        // 创建桌面快捷方式
+        Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+        // 是否允许重复创建
+        shortcutIntent.putExtra("duplicate", false);
+        // 需要显示的名称
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME,
+                "USTB课表");
+        // 快捷图片
+        Parcelable icon = Intent.ShortcutIconResource.fromContext(
+                getApplicationContext(), R.mipmap.ic_launcher);
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
+        // 点击快捷图片，运行的程序主入口
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
+        // 发送广播执行操作
+        sendBroadcast(shortcutIntent);
+
+    }
+
+    private void insertDataToDb(){
+        dbManager.insertClassTableIfNotExist(new ClassTableBean(
+                UserInfo.getInstance().getUsername(),
+                UserInfo.getInstance().getPassword(),
+                semesterEdit.getText().toString(),
+                metaJsonData));
+
+    }
 }
