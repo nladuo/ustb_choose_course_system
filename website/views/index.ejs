@@ -4,30 +4,16 @@
       <title>北科大选课系统第三方客户端</title>
       <meta charset="UTF-8"/>
       <link rel='stylesheet' href='/stylesheets/style.css' />
-      <script type="text/javascript">
-            Date.prototype.Format = function (fmt) { //author: meizz 
-                var o = {
-                    "M+": this.getMonth() + 1, //月份 
-                    "d+": this.getDate(), //日 
-                    "h+": this.getHours(), //小时 
-                    "m+": this.getMinutes(), //分 
-                    "s+": this.getSeconds(), //秒 
-                    "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-                    "S": this.getMilliseconds() //毫秒 
-                };
-                if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-                for (var k in o)
-                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-                return fmt;
-            }
-      </script>
+      <script type="text/javascript" src="/javascripts/date_format.js"></script>
+      <script type="text/javascript" src="/javascripts/jquery-1.11.3.js"></script>
+      <script type="text/javascript" src="/javascripts/assign_comments.js"></script>
+      <script type="text/javascript" src="/javascripts/assign_replys.js"></script>
+      <script type="text/javascript" src="/javascripts/verifier.js"></script>
     </head>
     <body>
-
     <h2>北科大选课系统第三方客户端</h2>
-    <h3>作者：叁公子</h3>
-    <h3>软件说明：本软件为开源软件，仅供学习参考</h3>
     <h3>源码地址：<a href="https://github.com/nladuo/ustb_choose_course_system">https://github.com/nladuo/ustb_choose_course_system</a></h3>
+    <h3>软件说明：本软件为开源软件，仅供学习使用</h3>
     <h3>下载列表：</h3>
     <table border="1">
     <tr>
@@ -39,7 +25,7 @@
     <% for(var i=0; i<app_results.length; i++) {%>
     <tr>
         <td><%=app_results[i].type_name %></td>
-        <td><%=app_results[i].version.toFixed(2) %></td>
+        <td><%=app_results[i].version %></td>
         <td><a href="/download?id=<%=app_results[i].id %>"><%=app_results[i].app_name %></a></td>
         <td><%=app_results[i].note %></td>
     </tr>
@@ -47,17 +33,19 @@
     </table>
 
     <div id="comments">
-      <form name="commentform" onsubmit="return isEmpty();" action="/add"  method="post" >
+      <form name="commentform" onsubmit="return isCommentEmpty();" action="/add"  method="post" >
         <h3>对软件不满意？吐个槽：</h3>
         <p>
           <label for="comment">吐槽内容</label>
-          <textarea name="message" id="comment" placeholder="您可以在这里输入您的吐槽....." ></textarea>
+          <textarea name="comment" id="comment" placeholder="您可以在这里输入您的吐槽....." ></textarea>
         </p>
-        <p>
+        <p id="name1">
           <label for="name">你的昵称</label>
-          <textarea name="name" id="name" placeholder="输入您的名字" ></textarea>
+          <textarea name="name" id="name" placeholder="输入您的昵称" ></textarea>
         </p>
-        <p><input type="submit" value="发表吐槽"  /></p>
+        <input name="parent_id" type="hidden" value="0"  />
+        <input name="replyer_name" type="hidden" value="  "  />
+        <p><input id="submit" type="submit" value="发表吐槽"  /></p>
       </form>
       <section id="commentlist">
         <h3>吐槽列表：</h3>
@@ -65,14 +53,8 @@
         <% if ( message_results.length == 0) { %>
             暂无吐糟
         <% } else { %>    
-            <% for(var i = message_results.length - 1; i >= 0; i--) {%>
-                <article>
-                  <header>
-                    <p><%= message_results[i].nickname %></p> <b>on</b> <time datetime="2015-08-11T23:35:20+01:00"><%= new Date(message_results[i].time).Format("yyyy-MM-dd hh:mm:ss") %></time>
-                  </header>
-                  <p><%= message_results[i].content %></p>
-                </article>
-            <% } %>
+            <ul id="comment_list">
+            </ul>
         <% } %>
       </section>
     </div>
@@ -85,30 +67,23 @@
       </p>
         </ul>
     </div>
-
-    <script>
-        function isEmpty(){
-            if (document.commentform.message.value.trim() == "") {
-                alert("评论信息不得为空");
-                document.commentform.message.focus();
-                return false;
-            }
-            
-            if (document.commentform.name.value.trim() == "") {
-                alert("请输入您的昵称!");
-                document.commentform.name.focus();
-                return false;
-            }
-            return true;
-        }
-        function  trim(str)
-        {
-            for(var  i  =  0  ;  i<str.length  &&  str.charAt(i)=="  "  ;  i++  )  ;
-            for(var  j  =str.length;  j>0  &&  str.charAt(j-1)=="  "  ;  j--)  ;
-                if(i>j)  return  "";  
-            return  str.substring(i,j);  
-        }
-    </script>
-
   </body>
+
+  <script type="text/javascript">
+     $.ajax({ 
+                type: "get", 
+                url: "/view_comments", 
+                dataType: "json", 
+                success: function (data) { 
+                        assign_comments(data);
+                        assign_replys();
+                }, 
+                error: function (XMLHttpRequest, textStatus, errorThrown) { 
+                        var comment_list = document.getElementById("comment_list");
+                        comment_list.innerHTML = "加载评论失败，您的浏览器可能不支持ajax协议";
+                } 
+        });
+  </script>
+
+  
 </html>

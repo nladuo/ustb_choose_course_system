@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 		db.queryMessageBoard(function(message_results){
 			res.render('index', { 
 				app_results: app_results,
-				message_results: message_results
+				message_results: message_results,
 			});
 		});
 	});
@@ -24,23 +24,36 @@ router.get('/', function(req, res, next) {
  * @return {[type]}       [description]
  */
 router.post('/add', function(req, res, next) {
+
+             if (req.body.parent_id == undefined ||req.body.comment == '' 
+                || req.body.name == undefined || req.body.name == '' 
+                || req.body.parent_id == undefined || req.body.parent_id == ''
+                || req.body.replyer_name == undefined || req.body.replyer_name == '') {
+                  res.render('404', {});   
+                  return;
+             }
 	var message = {
+                            parent_id: req.body.parent_id,
 		nickname: req.body.name,
-		content: req.body.message,
+                            replyer_name: req.body.replyer_name,
+		content: req.body.comment,
 		time: new Date().Format("yyyy-MM-dd hh:mm:ss")
 	};
-	if( (message.nickname != "") && (message.content != "") ){
-		db.addMessage(message, function(){
-        	        res.redirect("/");
-	        });
-	}else{
-		res.render('404', {});
-	}
+	console.log(message);
+	db.addMessage(message, function(){
+		res.redirect("/");
+	});
 
 });
 
 router.get('/add', function(req, res, next) {
         res.render('404', {});    
+});
+
+router.get('/view_comments', function(req, res, next) {
+        db.queryMessageBoard(function(message_results){
+            res.send( JSON.stringify(message_results));
+        });
 });
 
 /**
@@ -54,7 +67,7 @@ router.get('/download', function(req, res, next) {
 	var id = req.query.id;
 	db.queryAPPInfo(function(results){
 		var filename = results[id - 1].app_name;
-		var filepath = path.join('../public', 'downloads', filename);
+		var filepath = path.join('public', 'downloads', filename);
 		res.download(filepath);
 	});
 });

@@ -10,7 +10,6 @@ var conn = mysql.createConnection({
 conn.connect();
 
 
-
 var db = {
 	queryAPPInfo: function(operation){
 		conn.query('select * from `app`',
@@ -26,9 +25,11 @@ var db = {
 
 	addMessage: function(param, operation){
 
-		conn.query('INSERT INTO message_board(id, nickname, content, time) VALUES(0,?,?, ?)',
+		conn.query('INSERT INTO message_board(id, parent_id ,nickname , replyer_name, content, time) VALUES(0, ?, ?, ?, ?, ?)',
 			[
+				param.parent_id,
 				param.nickname,
+				param.replyer_name,
 				param.content,
 				param.time
 			],
