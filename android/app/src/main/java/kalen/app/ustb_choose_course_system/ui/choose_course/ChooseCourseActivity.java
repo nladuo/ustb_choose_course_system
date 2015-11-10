@@ -4,23 +4,20 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.TextView;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import kalen.app.ustb_choose_course_system.R;
 
 /**
  * Created by kalen on 15-8-16.
  */
-public class ChooseCourseActivity extends ActionBarActivity {
+public class ChooseCourseActivity extends FragmentActivity {
 
 
     private FragmentPagerAdapter mAdapter;
@@ -33,28 +30,9 @@ public class ChooseCourseActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_course);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         initPager();
-        initToolBar();
     }
-
-    private void initToolBar() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.top_bar);
-        TextView mToolBarTextView = (TextView) findViewById(R.id.top_bar_title);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mToolbar.setNavigationIcon(R.mipmap.btn_back);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-        mToolBarTextView.setText(R.string.app_name);
-    }
-
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
@@ -102,5 +80,15 @@ public class ChooseCourseActivity extends ActionBarActivity {
         };
         pager.setAdapter(mAdapter);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

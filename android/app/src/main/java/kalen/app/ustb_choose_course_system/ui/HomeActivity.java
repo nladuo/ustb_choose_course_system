@@ -1,6 +1,5 @@
 package kalen.app.ustb_choose_course_system.ui;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -12,11 +11,7 @@ import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Window;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -33,7 +28,7 @@ import kalen.app.ustb_choose_course_system.utils.JsonParser;
 /**
  * Created by kalen on 15-8-12.
  */
-public class HomeActivity extends ActionBarActivity implements View.OnClickListener{
+public class HomeActivity extends Activity implements View.OnClickListener{
 
 
     @Override
@@ -41,20 +36,6 @@ public class HomeActivity extends ActionBarActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initViews();
-        initToolBar();
-    }
-
-    private void initToolBar() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.top_bar);
-        TextView mToolBarTextView = (TextView) findViewById(R.id.top_bar_title);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mToolbar.setNavigationIcon(null);
-        //mToolbar.setLogo(R.mipmap.ic_launcher);
-        //mToolbar.set
-        mToolBarTextView.setText(R.string.app_name);
     }
 
     private void initViews() {

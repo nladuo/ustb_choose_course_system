@@ -1,18 +1,15 @@
 package kalen.app.ustb_choose_course_system.ui;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.client.CookieStore;
@@ -24,7 +21,7 @@ import kalen.app.ustb_choose_course_system.model.UserInfo;
 import kalen.app.ustb_choose_course_system.utils.HttpUtils;
 
 
-public class LoginActivity extends ActionBarActivity {
+public class LoginActivity extends Activity {
 
     EditText unameEdit;
     EditText passEdit;
@@ -33,23 +30,8 @@ public class LoginActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
         initViews();
-        initToolBar();
-
-    }
-
-    private void initToolBar() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.top_bar);
-        TextView mToolBarTextView = (TextView) findViewById(R.id.top_bar_title);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mToolbar.setNavigationIcon(null);
-        //mToolbar.setNavigationIcon();
-        mToolBarTextView.setText(R.string.app_name);
     }
 
     private void initViews() {
@@ -142,7 +124,6 @@ public class LoginActivity extends ActionBarActivity {
             super.onPostExecute(s);
 
             progressDialog.dismiss();
-
             String result = s;
 
             if (result == null){
@@ -178,34 +159,5 @@ public class LoginActivity extends ActionBarActivity {
                 finish();
             }
         }
-
-
     }
-
-
-
-    //
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_class_table, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_about) {
-//            startActivity(new Intent(LoginActivity.this,
-//                    AboutActivity.class));
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 }

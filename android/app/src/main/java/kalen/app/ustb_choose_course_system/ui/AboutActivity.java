@@ -4,24 +4,18 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.webkit.JavascriptInterface;
+import android.view.MenuItem;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import kalen.app.ustb_choose_course_system.R;
 import kalen.app.ustb_choose_course_system.model.ConstVal;
 
 /**
  * Created by kalen on 15-8-28.
  */
-public class AboutActivity extends ActionBarActivity{
+public class AboutActivity extends Activity{
     ProgressDialog dialog;
     WebView webView;
 
@@ -29,7 +23,7 @@ public class AboutActivity extends ActionBarActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        initToolBar();
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         webView = (WebView) findViewById(R.id.about_wview);
         WebSettings settings = webView.getSettings();
@@ -59,22 +53,14 @@ public class AboutActivity extends ActionBarActivity{
         webView.loadUrl(ConstVal.APP_WEBSIT_URL);
     }
 
-    private void initToolBar() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.top_bar);
-        TextView mToolBarTextView = (TextView) findViewById(R.id.top_bar_title);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mToolbar.setNavigationIcon(R.mipmap.btn_back);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-        mToolBarTextView.setText(R.string.app_name);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

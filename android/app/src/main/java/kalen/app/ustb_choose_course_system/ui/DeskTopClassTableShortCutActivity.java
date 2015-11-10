@@ -1,14 +1,11 @@
 package kalen.app.ustb_choose_course_system.ui;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONException;
 import java.util.List;
@@ -22,7 +19,7 @@ import kalen.app.ustb_choose_course_system.utils.JsonParser;
 /**
  * Created by kalen on 15-9-23.
  */
-public class DeskTopClassTableShortCutActivity extends ActionBarActivity {
+public class DeskTopClassTableShortCutActivity extends Activity {
 
     private String[] mDatas;
     RecyclerView recyclerView;
@@ -36,6 +33,7 @@ public class DeskTopClassTableShortCutActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_desktop_shortcut_class_table);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         dbManager = new DBManager(this);
         tableBeans = dbManager.getClassTables();
         if (tableBeans.size() == 0){
@@ -47,8 +45,6 @@ public class DeskTopClassTableShortCutActivity extends ActionBarActivity {
         initDatas();
         assignDatas();
         initViews();
-        initToolBar();
-
     }
 
 
@@ -65,27 +61,6 @@ public class DeskTopClassTableShortCutActivity extends ActionBarActivity {
         }
 
     }
-
-    private void initToolBar() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.top_bar);
-        TextView mToolBarTextView = (TextView) findViewById(R.id.top_bar_title);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mToolbar.setNavigationIcon(R.mipmap.btn_back);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-        mToolBarTextView.setText(R.string.app_name);
-    }
-
-
-
 
     private void initViews() {
         recyclerView = (RecyclerView) findViewById(R.id.desktop_shortcut_class_table_recyclerview);
@@ -187,5 +162,15 @@ public class DeskTopClassTableShortCutActivity extends ActionBarActivity {
                 mAdapter.setDatas(mDatas);
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

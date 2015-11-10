@@ -1,27 +1,23 @@
 package kalen.app.ustb_choose_course_system.ui;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import kalen.app.ustb_choose_course_system.R;
 import kalen.app.ustb_choose_course_system.adapter.ClassTableAdapter;
 import kalen.app.ustb_choose_course_system.db.DBManager;
@@ -35,7 +31,7 @@ import kalen.app.ustb_choose_course_system.utils.JsonParser;
 /**
  * Created by kalen on 15-8-12.
  */
-public class ClassTableActivity extends ActionBarActivity{
+public class ClassTableActivity extends Activity{
 
     DBManager dbManager;
     private String[] mDatas;
@@ -50,10 +46,10 @@ public class ClassTableActivity extends ActionBarActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_table);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         dbManager = new DBManager(this);
         initDatas();
         initViews();
-        initToolBar();
 
         semesterEdit.setText(getIntent().getStringExtra("semester"));
 
@@ -69,25 +65,6 @@ public class ClassTableActivity extends ActionBarActivity{
         super.onDestroy();
         dbManager.close();
     }
-
-    private void initToolBar() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.top_bar);
-        TextView mToolBarTextView = (TextView) findViewById(R.id.top_bar_title);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mToolbar.setNavigationIcon(R.mipmap.btn_back);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-        mToolBarTextView.setText(R.string.app_name);
-    }
-
 
     private void initViews() {
         recyclerView = (RecyclerView) findViewById(R.id.class_table_recyclerview);
@@ -217,10 +194,7 @@ public class ClassTableActivity extends ActionBarActivity{
                     mDatas[i + (x + 10)] = classStrs[i];
                 }
             }
-
-
         }
-
     }
 
     @Override
@@ -236,7 +210,11 @@ public class ClassTableActivity extends ActionBarActivity{
             case R.id.action_add_to_desktop_shortcut:
                 addShortCut();
                 break;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
