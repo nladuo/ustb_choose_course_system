@@ -17,7 +17,7 @@ class MainTableViewController: UITableViewController{
     private let LOGOUT_BTN_INDEX = 0
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
 
     override func viewDidLoad() {
@@ -25,7 +25,7 @@ class MainTableViewController: UITableViewController{
         
         self.tableView.scrollEnabled = false
 
-        var vc = self.navigationController as! MainNavigationController
+        let vc = self.navigationController as! MainNavigationController
         //取出cookie
         cookieData = vc.cookieData
         
@@ -62,15 +62,15 @@ class MainTableViewController: UITableViewController{
                 MBProgressHUD.showMessage("加载中")
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                    var jsonData = kalen.app.HttpUtil.get(kalen.app.ConstVal.APP_CHECK_UPDATE_URL, cookieStr: "")
+                    let jsonData = kalen.app.HttpUtil.get(kalen.app.ConstVal.APP_CHECK_UPDATE_URL, cookieStr: "")
                     dispatch_async(dispatch_get_main_queue(), {
                         MBProgressHUD.hideHUD()
                         if jsonData == nil{
                             MBProgressHUD.showError("网络错误")
                             return
                         }
-                        var parser = kalen.app.JsonParser(jsonStr: jsonData! as String)
-                        var msg = parser.getUpdateMsg()
+                        let parser = kalen.app.JsonParser(jsonStr: jsonData! as String)
+                        let msg = parser.getUpdateMsg()
                         if msg == nil{
                             MBProgressHUD.showError("内部错误")
                             return
@@ -81,22 +81,19 @@ class MainTableViewController: UITableViewController{
                             msgStr = "已经是最新版本"
                         }
                         
-                        var alert = UIAlertView(title: "提示", message: msgStr, delegate: nil, cancelButtonTitle: "确定")
+                        let alert = UIAlertView(title: "提示", message: msgStr, delegate: nil, cancelButtonTitle: "确定")
                         alert.show()
                     })
                 })
             }
         }
         
-        
-        
-        
         tableView.cellForRowAtIndexPath(indexPath)?.selected = false
     }
     
 
     @IBAction func logoutBarItemClicked(sender: AnyObject) {
-        var alert = UIAlertController(title: "是否要退出账户", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let alert = UIAlertController(title: "是否要退出账户", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
         
@@ -122,10 +119,10 @@ class MainTableViewController: UITableViewController{
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "classTableSegue"{
             
-            var vc = segue.destinationViewController as! ClassTableViewController
+            let vc = segue.destinationViewController as! ClassTableViewController
             vc.cookieData = cookieData
         }else if segue.identifier == "chooseCourseSegue" {
-            var vc = segue.destinationViewController as! ChooseCourseTabBarController
+            let vc = segue.destinationViewController as! ChooseCourseTabBarController
             vc.cookieData = cookieData
         }
     }

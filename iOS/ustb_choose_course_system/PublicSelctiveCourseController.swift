@@ -67,44 +67,44 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
                 MBProgressHUD.showMessage("加载中..")
                 
                 //获取json数据
-                var params = ["id": selectedId,"uid": kalen.app.UserInfo.getInstance().username]
-                var data = kalen.app.HttpUtil.post(kalen.app.ConstVal.ADD_PUBLIC_COURSE_URL, params: params, cookieStr: parentVc.cookieData)
+                let params = ["id": selectedId,"uid": kalen.app.UserInfo.getInstance().username]
+                let data = kalen.app.HttpUtil.post(kalen.app.ConstVal.ADD_PUBLIC_COURSE_URL, params: params, cookieStr: parentVc.cookieData)
                 
                 MBProgressHUD.hideHUD()
                 if data == nil{
                     MBProgressHUD.showError("网络连接错误")
                     return
                 }
-                var parser = kalen.app.JsonParser(jsonStr: data! as String)
-                var msg = parser.getMsg()
-                var alert = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
+                let parser = kalen.app.JsonParser(jsonStr: data! as String)
+                let msg = parser.getMsg()
+                let alert = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
                 alert.show()
                 
                 parentVc.updateNotFullPublicSelectiveCourses(self)
                 
-                println("添加选修课")
+                print("添加选修课")
                 
             }else if alertView.tag == 1{
-                var bean = findCourseBeanByCourseID(selectedId, beans: datas[1])
+                let bean = findCourseBeanByCourseID(selectedId, beans: datas[1])
                 
-                var alert = UIAlertView(title: "课程详情", message: "你确定要退掉：\(bean.className)吗？", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定")
+                let alert = UIAlertView(title: "课程详情", message: "你确定要退掉：\(bean.className)吗？", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定")
                 alert.tag = 2
                 alert.show()
                 
-                println("退补选修课")
+                print("退补选修课")
                 
             }else if alertView.tag == 2{
-                var bean = findCourseBeanByCourseID(selectedId, beans: datas[1])
+                let bean = findCourseBeanByCourseID(selectedId, beans: datas[1])
                 
                 MBProgressHUD.showMessage("加载中..")
                 
                 //获取json数据
-                var params = [
+                let params = [
                     "kch": bean.DYKCH,
                     "xh": "",
                     "kxh": bean.KXH,
                     "uid": kalen.app.UserInfo.getInstance().username]
-                var data = kalen.app.HttpUtil.post(kalen.app.ConstVal.REMOVE_COURSE_URL, params: params, cookieStr: parentVc.cookieData)
+                let data = kalen.app.HttpUtil.post(kalen.app.ConstVal.REMOVE_COURSE_URL, params: params, cookieStr: parentVc.cookieData)
                 
                 
                 MBProgressHUD.hideHUD()
@@ -112,13 +112,13 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
                     MBProgressHUD.showError("网络连接错误")
                     return
                 }
-                var parser = kalen.app.JsonParser(jsonStr: data! as String)
-                var msg = parser.getMsg()
-                var alert = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
+                let parser = kalen.app.JsonParser(jsonStr: data! as String)
+                let msg = parser.getMsg()
+                let alert = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
                 alert.show()
                 
                 parentVc.updateNotFullPublicSelectiveCourses(self)
-                println("确定退选修课")
+                print("确定退选修课")
             }
             
         }
@@ -142,7 +142,7 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
 
         tableView.cellForRowAtIndexPath(indexPath)?.selected = false
         
-        var bean = datas[indexPath.section][indexPath.row]
+        let bean = datas[indexPath.section][indexPath.row]
         //设置当前选中课程的ID
         selectedId = bean.id
         
@@ -182,7 +182,7 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
     }
 
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var headerLabel = UILabel(frame: CGRectMake(0, 0, 320, 22))
+        let headerLabel = UILabel(frame: CGRectMake(0, 0, 320, 22))
         headerLabel.textColor = UIColor.grayColor()
         headerLabel.font = UIFont(name: "Helvetica-Bold", size: 15)
         headerLabel.text = "  " + sectionName[section]
@@ -196,17 +196,17 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("publicCourseCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("publicCourseCell", forIndexPath: indexPath) as UITableViewCell
         
         
-        var classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as! UILabel
-        var teacherLabel = cell.viewWithTag(TEACHER_TAG) as! UILabel
-        var creditLabel = cell.viewWithTag(CREDIT_TAG) as! UILabel
-        var ratioOrScoreLabel = cell.viewWithTag(RATIO_OR_SCORE_TAG) as! UILabel
-        var timeAndPositionOrSemesterLabel = cell.viewWithTag(TIME_AND_POSITION_OR_SEMESTER_TAG) as! UILabel
+        let classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as! UILabel
+        let teacherLabel = cell.viewWithTag(TEACHER_TAG) as! UILabel
+        let creditLabel = cell.viewWithTag(CREDIT_TAG) as! UILabel
+        let ratioOrScoreLabel = cell.viewWithTag(RATIO_OR_SCORE_TAG) as! UILabel
+        let timeAndPositionOrSemesterLabel = cell.viewWithTag(TIME_AND_POSITION_OR_SEMESTER_TAG) as! UILabel
         
         
-        var bean = datas[indexPath.section][indexPath.row]
+        let bean = datas[indexPath.section][indexPath.row]
         
         classNameLabel.text = bean.className
         teacherLabel.text = bean.teacher

@@ -32,16 +32,16 @@ extension kalen.app{
         
         //获取软件更新信息
         func getUpdateMsg() -> (version:Double, update_note:String)?{
-            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
+            let data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
             
-            var obj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            let obj : AnyObject? = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
             
             if obj == nil{
                 return nil
             }
             
-            var version = obj!.objectForKey("version") as! Double
-            var update_note = obj!.objectForKey("update_note") as! String
+            let version = obj!.objectForKey("version") as! Double
+            let update_note = obj!.objectForKey("update_note") as! String
             
             return (version: version, update_note: update_note)
         }
@@ -50,9 +50,9 @@ extension kalen.app{
         func getMsg() -> String{
             var resultStr:String = ""
             
-            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
+            let data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
             
-            var obj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            let obj : AnyObject? = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
             
             if obj == nil{
                 return jsonStr.componentsSeparatedByString("g")[1].componentsSeparatedByString(":")[1].componentsSeparatedByString(" ")[0].componentsSeparatedByString("\'")[1]
@@ -68,13 +68,13 @@ extension kalen.app{
         //必修课和专业选修课列表
         func getTechingCourses()-> [ClassBean]{
             var classes:[ClassBean] = []
-            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
+            let data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
             
-            var obj : AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-            var array = obj.objectForKey("teachingPrograms") as! [AnyObject]
+            let obj : AnyObject! = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+            let array = obj.objectForKey("teachingPrograms") as! [AnyObject]
             for obj2 in array {
-                var className = obj2.objectForKey("KCM") as! String
-                var kch = obj2.objectForKey("KCH") as! String
+                let className = obj2.objectForKey("KCM") as! String
+                let kch = obj2.objectForKey("KCH") as! String
                 var score = ""
                 if let scoreTemp = obj2.objectForKey("DYCCJ") as? String{
                     score = scoreTemp
@@ -89,16 +89,16 @@ extension kalen.app{
         //已选公选课
         func getLearnedPublicCourses() -> [ClassBean]{
             var classes:[ClassBean] = []
-            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
+            let data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
             
-            var obj : AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-            var array = obj.objectForKey("learnedPublicCourses") as! [AnyObject]
+            let obj : AnyObject! = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+            let array = obj.objectForKey("learnedPublicCourses") as! [AnyObject]
             for obj2 in array {
-                var className = obj2.objectForKey("DYKCM") as! String
-                var teacher = obj2.objectForKey("LRR") as! String
-                var credit = obj2.objectForKey("XF") as! String
-                var score = obj2.objectForKey("GPACJ") as! String
-                var semester = obj2.objectForKey("XNXQ") as! String
+                let className = obj2.objectForKey("DYKCM") as! String
+                let teacher = obj2.objectForKey("LRR") as! String
+                let credit = obj2.objectForKey("XF") as! String
+                let score = obj2.objectForKey("GPACJ") as! String
+                let semester = obj2.objectForKey("XNXQ") as! String
                
                 classes.append(ClassBean(className: className, teacher: teacher, credit: credit, score: score, semester: semester))
                 
@@ -110,17 +110,17 @@ extension kalen.app{
         private func getCourses(type:String) ->[ClassBean]{
             
             var classes:[ClassBean] = []
-            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
+            let data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
             
-            var obj : AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-            var array = obj.objectForKey(type) as! [AnyObject]
+            let obj : AnyObject! = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+            let array = obj.objectForKey(type) as! [AnyObject]
             for obj2 in array {
-                var id:Int = obj2.objectForKey("ID") as! Int
-                var className = obj2.objectForKey("DYKCM") as! String
-                var KXH = obj2.objectForKey("KXH") as! String
-                var DYKCH = obj2.objectForKey("DYKCH") as! String
+                let id:Int = obj2.objectForKey("ID") as! Int
+                let className = obj2.objectForKey("DYKCM") as! String
+                let KXH = obj2.objectForKey("KXH") as! String
+                let DYKCH = obj2.objectForKey("DYKCH") as! String
                 
-                var KRL = obj2.objectForKey("KRL") as! Int
+                let KRL = obj2.objectForKey("KRL") as! Int
                 var ratio = ""
                 //SKRS有可能是int也有可能是String
                 if let temp = obj2.objectForKey("SKRS") as? Int{
@@ -144,8 +144,8 @@ extension kalen.app{
                 }else{
                     teacher = "未知老师"
                 }
-                var credit = obj2.objectForKey("XF") as! String
-                var time_and_position = obj2.objectForKey("SKSJDDSTR") as! String
+                let credit = obj2.objectForKey("XF") as! String
+                let time_and_position = obj2.objectForKey("SKSJDDSTR") as! String
 
                 classes.append(ClassBean(id: "\(id)", className: className, teacher: teacher, time_and_position: time_and_position, credit: credit, ratio: ratio, KXH: KXH, DYKCH: DYKCH))
                 
@@ -153,21 +153,18 @@ extension kalen.app{
             return classes
         }
         
-        
-        
-        
         //获取课表
         func getClassTableItems() ->[ClassBean]{
             
             var classes:[ClassBean] = []
-            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
+            let data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
             
-            var obj : AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-            var array = obj.objectForKey("selectedCourses") as! [AnyObject]
+            let obj : AnyObject! = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+            let array = obj.objectForKey("selectedCourses") as! [AnyObject]
 
             for obj2 in array {
                 //println(obj2)
-                var className = obj2.objectForKey("DYKCM") as! String
+                let className = obj2.objectForKey("DYKCM") as! String
                 
                 //获取第一个老师的姓名
                 var tup:[AnyObject] = obj2.objectForKey("JSM")! as! [AnyObject]
@@ -178,7 +175,7 @@ extension kalen.app{
                     teacher = "未知老师"
                 }
 
-                var srcStr = obj2.objectForKey("SKSJDDSTR") as! String
+                let srcStr = obj2.objectForKey("SKSJDDSTR") as! String
                 if srcStr == "" {
                     classes.append(ClassBean(_where: -1, className: className, teacher: teacher, time: "", position: ""))
                     continue;
@@ -190,10 +187,10 @@ extension kalen.app{
                 }
                 
                 //添加配套课
-                var array3:[AnyObject] = obj2.objectForKey("PTK") as! [AnyObject]
+                let array3:[AnyObject] = obj2.objectForKey("PTK") as! [AnyObject]
 
                 for obj3 in array3 {
-                    var ClassName = obj3.objectForKey("DYKCM") as! String
+                    _ = obj3.objectForKey("DYKCM") as! String
                     //获取第一个老师的姓名
                     var array4 = obj3.objectForKey("JSM") as! [AnyObject]
                     var teacher = ""
@@ -203,7 +200,7 @@ extension kalen.app{
                         teacher = "未知老师"
                     }
                     
-                    var srcStr = obj3.objectForKey("SKSJDDSTR") as! String
+                    let srcStr = obj3.objectForKey("SKSJDDSTR") as! String
                     if srcStr == "" {
                         classes.append(ClassBean(_where: -1, className: className, teacher: teacher, time: "", position: ""))
                         continue;
@@ -223,9 +220,9 @@ extension kalen.app{
         
         //获取学期
         func getSemester() ->String{
-            var data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
+            let data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
             
-            var obj : AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            let obj : AnyObject! = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
             var array = obj.objectForKey("selectedCourses") as! [AnyObject]
             
             return array[0].objectForKey("XNXQ") as! String
@@ -239,22 +236,29 @@ extension kalen.app{
             
             
             var classes:[ClassBean] = []
-            var srcStr = srcString.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " "))
-            var datas:[String] = split(srcStr) {$0 == " "}
+            let srcStr = srcString.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " "))
+            var datas:[String] = srcStr.characters.split {$0 == " "}.map { String($0) }
+            
+           // var datas:[String] = srcStr.characters.split {$0 == " "}.map { String($0) }
+            
             var i = 0
 
             //println(teacher + "--> \(datas.count)")
             while i < datas.count {
                 //上课地点
-                var position:String = (split(datas[i + 1]) {$0 == ")"} )[0]
+                let position:String = (datas[i + 1].characters.split {$0 == ")"}.map { String($0) } )[0]
+//                //周几
+//                var weekTime:Int = ((datas[i].split {$0 == ","})[0] as NSString).characterAtIndex(2) - 48
                 //周几
-                var weekTime:Int = Int(((split(datas[i]) {$0 == ","})[0] as NSString).characterAtIndex(2)) - 48
+                
+                let weekTime:Int = Int((datas[i].componentsSeparatedByString(",")[0] as NSString).characterAtIndex(2)) - 48
                 //第几节
-                var whichNum:Int = Int(((split(datas[i]) {$0 == ","})[1] as NSString).characterAtIndex(1)) - 48
+                let whichNum:Int = Int((datas[i].componentsSeparatedByString(",")[1] as NSString).characterAtIndex(1)) - 48
+                
                 //摆放的位置
-                var _where:Int = (weekTime - 1) * 6 + whichNum - 1;
+                let _where:Int = (weekTime - 1) * 6 + whichNum - 1;
                 //上课时间
-                var time = (datas[i] as NSString).substringFromIndex(8) as String
+                let time = (datas[i] as NSString).substringFromIndex(8) as String
                 
                 classes.append(ClassBean(_where: _where, className: className, teacher: teacher, time: time, position: position))
                 i += 2

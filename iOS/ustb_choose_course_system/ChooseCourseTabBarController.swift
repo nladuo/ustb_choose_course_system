@@ -43,11 +43,11 @@ class ChooseCourseTabBarController: UITabBarController {
     func updateNotFullPublicSelectiveCourses(_delegate:ChooseCourseDelegate){
         MBProgressHUD.showMessage("加载中")
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL, cookieStr: self.cookieData)
+            let data = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL, cookieStr: self.cookieData)
             dispatch_async(dispatch_get_main_queue(), {
                 MBProgressHUD.hideHUD()
                 if data != nil{
-                    var parser = kalen.app.JsonParser(jsonStr: data! as String)
+                    let parser = kalen.app.JsonParser(jsonStr: data! as String)
                     self.notFullPublicClasses = parser.getAlternativeCourses()
                     self.selectedClasses = parser.getSelectedCourses()
                     self.learnedPublicClasses = parser.getLearnedPublicCourses()
@@ -70,8 +70,8 @@ class ChooseCourseTabBarController: UITabBarController {
         //var data
         MBProgressHUD.showMessage("加载中")
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            var dataForSelectedCoureses = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL, cookieStr: self.cookieData)
-            var dataForPrerequisiteCourses = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_PREREQUISITE_COURSE_URL, cookieStr: self.cookieData)
+            let dataForSelectedCoureses = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL, cookieStr: self.cookieData)
+            let dataForPrerequisiteCourses = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_PREREQUISITE_COURSE_URL, cookieStr: self.cookieData)
             
             dispatch_async(dispatch_get_main_queue(), {
                 MBProgressHUD.hideHUD()
@@ -103,11 +103,11 @@ class ChooseCourseTabBarController: UITabBarController {
         MBProgressHUD.showMessage("加载中")
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
         
-            var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_SPECIFIED_COURSE_URL, cookieStr: self.cookieData)
+            let data = kalen.app.HttpUtil.get(kalen.app.ConstVal.SEARCH_SPECIFIED_COURSE_URL, cookieStr: self.cookieData)
             dispatch_async(dispatch_get_main_queue(), {
                 MBProgressHUD.hideHUD()
                 if data != nil{
-                    var parser = kalen.app.JsonParser(jsonStr: data! as String)
+                    let parser = kalen.app.JsonParser(jsonStr: data! as String)
                     self.specifiedClasses = parser.getTechingCourses()
                     
                 }else{
@@ -127,7 +127,7 @@ class ChooseCourseTabBarController: UITabBarController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var vc = segue.destinationViewController as! ClassTableViewController
+        let vc = segue.destinationViewController as! ClassTableViewController
         vc.cookieData = cookieData
 
     }

@@ -23,7 +23,7 @@ class LoginViewController: UIViewController, HttpDelegate{
     
     
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
     }
@@ -41,13 +41,11 @@ class LoginViewController: UIViewController, HttpDelegate{
             userDefaults.setObject( "", forKey: "password")
         }
     }
-    
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         username.resignFirstResponder()
         password.resignFirstResponder()
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         password.secureTextEntry = true
@@ -55,17 +53,35 @@ class LoginViewController: UIViewController, HttpDelegate{
         
         //取出用户名
         if let name:AnyObject = userDefaults.objectForKey("username"){
-            username.text = name as! String
+            username.text = name as? String
         }
         //取出密码
         if let pass:AnyObject = userDefaults.objectForKey("password"){
-            password.text = pass as! String
+            password.text = pass as? String
         }
+    }
+    
+    @IBAction func localClassTableBtnClicked(sender: AnyObject) {
+        
+        var cList:[String] = []
+        var tempStr:String = ""
+        if let class_list:AnyObject = userDefaults.objectForKey("class_list"){
+            tempStr = class_list as! String
+            cList = tempStr.componentsSeparatedByString("\n")
+        }
+        
+        if (cList.count == 0) || (tempStr == ""){
+            let alert = UIAlertView(title: "提示", message: "你还没有添加本地课表，请登陆后添加", delegate: nil, cancelButtonTitle: "确定")
+            alert.show()
+            return
+        }
+        self.performSegueWithIdentifier("localClassTableSegue", sender: cList)
+        
     }
 
     @IBAction func loginBtnClicked(sender: AnyObject) {
-        var uname:NSString = username.text
-        var passwd:NSString = password.text
+        let uname:NSString = username.text!
+        let passwd:NSString = password.text!
         
         if uname == "" {
             MBProgressHUD.showError("请输入用户名")
@@ -73,7 +89,7 @@ class LoginViewController: UIViewController, HttpDelegate{
             MBProgressHUD.showError("请输入密码")
         }else{
             MBProgressHUD.showMessage("正在登录中")
-            var params = ["j_username": (uname as String) + ",undergraduate","j_password": passwd]
+            let params = ["j_username": (uname as String) + ",undergraduate","j_password": passwd]
             httpUtil = kalen.app.HttpUtil(delegate: self)
             httpUtil?.postWithCookie(kalen.app.ConstVal.LOGIN_URL, params: params)
         }
@@ -94,7 +110,7 @@ class LoginViewController: UIViewController, HttpDelegate{
         }else{//联网正常
             
             self.cookieData = httpUtil!.cookieData.componentsSeparatedByString(";")[0]
-            var result:NSString? = kalen.app.HttpUtil.get(kalen.app.ConstVal.CHECK_LOGIN_SUCCESS_URL, cookieStr: self.cookieData)
+            let result:NSString? = kalen.app.HttpUtil.get(kalen.app.ConstVal.CHECK_LOGIN_SUCCESS_URL, cookieStr: self.cookieData)
             
             
             dispatch_sync(dispatch_get_main_queue()) {
@@ -126,12 +142,21 @@ class LoginViewController: UIViewController, HttpDelegate{
         if segue.identifier == "loginSegue"{
             savePro() //是否保存用户名密码
             
-            var vc = segue.destinationViewController as! MainNavigationController
+            let vc = segue.destinationViewController as! MainNavigationController
             vc.cookieData = cookieData
 
-            var userInfo = kalen.app.UserInfo.getInstance()
-            userInfo.username = username.text
-            userInfo.password = password.text
+            let userInfo = kalen.app.UserInfo.getInstance()
+            userInfo.username = username.text!
+            userInfo.password = password.text!
+        }else if segue.identifier == "localClassTableSegue"{
+            let vc = segue.destinationViewController as! LocalClassTableViewController
+            let list = sender as! [String]
+            vc.cList = []
+            for str in list{
+                if str != ""{
+                    vc.cList.append(str)
+                }
+            }
         }
         
     }

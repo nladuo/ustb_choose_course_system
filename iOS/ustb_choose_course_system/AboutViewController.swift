@@ -10,7 +10,7 @@ import UIKit
 
 class AboutViewController: UIViewController {
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -20,7 +20,7 @@ class AboutViewController: UIViewController {
         //屏幕自适应
         wv.scalesPageToFit = true
         //加载URL
-        var request = NSURLRequest(URL: NSURL(string: kalen.app.ConstVal.APP_WEBSITE_URL)!)
+        let request = NSURLRequest(URL: NSURL(string: kalen.app.ConstVal.APP_WEBSITE_URL)!)
         wv.loadRequest(request)
         
     }

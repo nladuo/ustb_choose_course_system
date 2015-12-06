@@ -27,13 +27,19 @@ extension kalen.app{
             类方法
         */
         class func get(url:String, cookieStr:String)->NSString?{
-            var req:NSMutableURLRequest = NSMutableURLRequest(URL: NSURL(string: url)!);
+            let req:NSMutableURLRequest = NSMutableURLRequest(URL: NSURL(string: url)!);
             req.addValue(cookieStr, forHTTPHeaderField: "Cookie")
             req.HTTPMethod = "GET"
             
             var error:NSError?;
 
-            var data = NSURLConnection.sendSynchronousRequest(req, returningResponse: nil, error: &error)
+            var data: NSData?
+            do {
+                data = try NSURLConnection.sendSynchronousRequest(req, returningResponse: nil)
+            } catch let error1 as NSError {
+                error = error1
+                data = nil
+            }
             
             if error != nil{
                 return nil;
@@ -49,11 +55,11 @@ extension kalen.app{
             类方法
         */
         class func post(url:String, params:Dictionary<NSString, NSString>, cookieStr:String)->NSString?{
-            var req = NSMutableURLRequest(URL: NSURL(string: url)!)
+            let req = NSMutableURLRequest(URL: NSURL(string: url)!)
             req.addValue(cookieStr, forHTTPHeaderField: "Cookie")
             req.HTTPMethod = "POST"
             req.addValue(cookieStr, forHTTPHeaderField: "Cookie")
-            var str:NSMutableString = NSMutableString(string: "")
+            let str:NSMutableString = NSMutableString(string: "")
             for (key,value) in params{
                 if str.length != 0{
                     str.appendString("&")
@@ -64,7 +70,13 @@ extension kalen.app{
             }
             req.HTTPBody = str.dataUsingEncoding(NSUTF8StringEncoding)
             var error:NSError?
-            var data = NSURLConnection.sendSynchronousRequest(req, returningResponse: nil, error: &error)
+            var data: NSData?
+            do {
+                data = try NSURLConnection.sendSynchronousRequest(req, returningResponse: nil)
+            } catch let error1 as NSError {
+                error = error1
+                data = nil
+            }
             if error != nil{
                 return nil
             }
@@ -75,7 +87,7 @@ extension kalen.app{
             处理重定向请求，直接使用nil来取消重定向请求
             Note：这个方法一定要写在postWithCookie的前面，如果写在后面页面还是会重定向
         */
-        func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse, newRequest request: NSURLRequest, completionHandler: (NSURLRequest!) -> Void) {
+        func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse, newRequest request: NSURLRequest, completionHandler: (NSURLRequest?) -> Void) {
             completionHandler(nil)
         }
         
@@ -86,9 +98,9 @@ extension kalen.app{
         */
         func postWithCookie(url:String, params:Dictionary<NSString, NSString>){
             
-            var req = NSMutableURLRequest(URL: NSURL(string: url)!)
+            let req = NSMutableURLRequest(URL: NSURL(string: url)!)
             req.HTTPMethod = "POST"
-            var str:NSMutableString = NSMutableString(string: "")
+            let str:NSMutableString = NSMutableString(string: "")
             for (key,value) in params{
                 if str.length != 0{
                     str.appendString("&")
@@ -104,7 +116,7 @@ extension kalen.app{
             let session:NSURLSession? = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
             
             
-            let task = session!.dataTaskWithRequest(req, completionHandler: { (data : NSData!, response : NSURLResponse!, error : NSError!) -> Void in
+            let task = session!.dataTaskWithRequest(req, completionHandler: { (data : NSData?, response : NSURLResponse?, error : NSError?) -> Void in
                 if error == nil{
                     self.isError = false
                     //由于拦截了302，设置了completionHandler参数为nil，所以忽略了重定向请求，这里返回的Response就是包含302状态码的Response了。

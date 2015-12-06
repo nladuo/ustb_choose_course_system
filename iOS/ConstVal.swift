@@ -43,7 +43,7 @@ extension kalen.app{
         static let APP_CHECK_UPDATE_URL = "http://vps.kalen25115.cn:3000/update?id=5"
         
         //当前软件版本
-        static let VERSION:Double = 1.0
+        static let VERSION:Double = 0.11
         
         //APP官网
         static let APP_WEBSITE_URL = "http://vps.kalen25115.cn:3000"

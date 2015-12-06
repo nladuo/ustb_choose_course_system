@@ -41,18 +41,18 @@ class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDel
         
         tableView.cellForRowAtIndexPath(indexPath)?.selected = false
         
-        var bean = datas[indexPath.row]
+        let bean = datas[indexPath.row]
         
         MBProgressHUD.showMessage("加载中...")
-        var data = kalen.app.HttpUtil.get(kalen.app.ConstVal.getSpecifiedCourseUrl(bean.kch, uid: kalen.app.UserInfo.getInstance().username), cookieStr: parentVc.cookieData)
+        let data = kalen.app.HttpUtil.get(kalen.app.ConstVal.getSpecifiedCourseUrl(bean.kch, uid: kalen.app.UserInfo.getInstance().username), cookieStr: parentVc.cookieData)
         
         MBProgressHUD.hideHUD()
         if data == nil{
             MBProgressHUD.showError("网络连接错误")
             return
         }
-        var parser = kalen.app.JsonParser(jsonStr: data! as String)
-        var classes = parser.getAlternativeCourses()
+        let parser = kalen.app.JsonParser(jsonStr: data! as String)
+        let classes = parser.getAlternativeCourses()
         if classes.count == 0{
             MBProgressHUD.showError("本学期尚未开课")
         }else{
@@ -70,10 +70,10 @@ class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDel
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("SpecifiedCourseCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SpecifiedCourseCell", forIndexPath: indexPath) as UITableViewCell
         
-        var bean = datas[indexPath.row]
-        var classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as! UILabel
+        let bean = datas[indexPath.row]
+        let classNameLabel = cell.viewWithTag(CLASSNAME_TAG) as! UILabel
         
         classNameLabel.text = bean.className
 
@@ -91,7 +91,7 @@ class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDel
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SpecifiedShowDetail"{
             
-            var vc = segue.destinationViewController as! DetailTableViewController
+            let vc = segue.destinationViewController as! DetailTableViewController
             vc.datas = (sender as! [kalen.app.ClassBean])
             vc.cookieData = parentVc.cookieData
             vc.addUrl = kalen.app.ConstVal.ADD_SPECIFIED_COURSE_URL

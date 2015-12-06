@@ -27,6 +27,9 @@
 		F4BA6A421B775970006C8B91 /* HttpUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA6A411B775970006C8B91 /* HttpUtil.swift */; };
 		F4BA6A441B775C1A006C8B91 /* ConstVal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA6A431B775C1A006C8B91 /* ConstVal.swift */; };
 		F4BA6A461B775DA6006C8B91 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA6A451B775DA6006C8B91 /* UserInfo.swift */; };
+		F4EE08291BF796FC00E02F8F /* DbUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EE08281BF796FC00E02F8F /* DbUtil.swift */; };
+		F4EE082B1BF79AEA00E02F8F /* LocalClassTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EE082A1BF79AEA00E02F8F /* LocalClassTableController.swift */; };
+		F4EE082F1BF79E9700E02F8F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EE082E1BF79E9700E02F8F /* CoreData.framework */; };
 		F4F0F5F61B7A1C7900E9549D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F0F5F51B7A1C7900E9549D /* Main.storyboard */; };
 		F4F0F5F81B7A1D9700E9549D /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F0F5F71B7A1D9700E9549D /* MainTableViewController.swift */; };
 		F4F823CD1B7B41A900128B88 /* ClassTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F823CC1B7B41A900128B88 /* ClassTableViewController.swift */; };
@@ -73,6 +76,9 @@
 		F4BA6A411B775970006C8B91 /* HttpUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpUtil.swift; sourceTree = "<group>"; };
 		F4BA6A431B775C1A006C8B91 /* ConstVal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstVal.swift; sourceTree = "<group>"; };
 		F4BA6A451B775DA6006C8B91 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		F4EE08281BF796FC00E02F8F /* DbUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DbUtil.swift; sourceTree = "<group>"; };
+		F4EE082A1BF79AEA00E02F8F /* LocalClassTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalClassTableController.swift; sourceTree = "<group>"; };
+		F4EE082E1BF79E9700E02F8F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F4F0F5F51B7A1C7900E9549D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F4F0F5F71B7A1D9700E9549D /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		F4F823CC1B7B41A900128B88 /* ClassTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassTableViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4EE082F1BF79E9700E02F8F /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +159,6 @@
 				F4BA6A1E1B7758CB006C8B91 /* AppDelegate.swift */,
 				F4BA6A251B7758CB006C8B91 /* Images.xcassets */,
 				F4343F281B80243C00AEAB1D /* OC-Bridge.h */,
-				F4BA6A271B7758CB006C8B91 /* LaunchScreen.xib */,
 				F4BA6A1C1B7758CB006C8B91 /* Supporting Files */,
 			);
 			path = ustb_choose_course_system;
@@ -161,6 +167,7 @@
 		F4BA6A1C1B7758CB006C8B91 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F4EE082E1BF79E9700E02F8F /* CoreData.framework */,
 				F4BA6A1D1B7758CB006C8B91 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -200,6 +207,7 @@
 			children = (
 				F4BA6A411B775970006C8B91 /* HttpUtil.swift */,
 				F4FA26181B78B93D00CA0F3B /* JsonParser.swift */,
+				F4EE08281BF796FC00E02F8F /* DbUtil.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -232,6 +240,7 @@
 				F44904541B7B2B9300CB9C06 /* MainNavigationController.swift */,
 				F4F823CC1B7B41A900128B88 /* ClassTableViewController.swift */,
 				F41BB2411B90C0E200F0495C /* AboutViewController.swift */,
+				F4EE082A1BF79AEA00E02F8F /* LocalClassTableController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -246,6 +255,7 @@
 		F4FA26251B78C5B100CA0F3B /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				F4BA6A271B7758CB006C8B91 /* LaunchScreen.xib */,
 				F4F0F5F51B7A1C7900E9549D /* Main.storyboard */,
 			);
 			name = ui;
@@ -295,7 +305,9 @@
 		F4BA6A111B7758CB006C8B91 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "kalen blue";
 				TargetAttributes = {
 					F4BA6A181B7758CB006C8B91 = {
@@ -354,10 +366,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4634FBA1BA13AEB00B784C7 /* DetailTableViewController.swift in Sources */,
+				F4EE08291BF796FC00E02F8F /* DbUtil.swift in Sources */,
 				F4343F1E1B801E8800AEAB1D /* MBProgressHUD+MJ.m in Sources */,
 				F44904551B7B2B9300CB9C06 /* MainNavigationController.swift in Sources */,
 				9AAFB3831B7DB3FB00AE1D6F /* PublicSelctiveCourseController.swift in Sources */,
 				F4BA6A401B775930006C8B91 /* kalen.app.swift in Sources */,
+				F4EE082B1BF79AEA00E02F8F /* LocalClassTableController.swift in Sources */,
 				F4BA6A441B775C1A006C8B91 /* ConstVal.swift in Sources */,
 				F4F823D11B7B44C700128B88 /* ClassBean.swift in Sources */,
 				F4F823CF1B7B421800128B88 /* ChooseCourseTabBarController.swift in Sources */,
@@ -427,6 +441,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -495,6 +510,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "kalen.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ustb_choose_course_system/OC-Bridge.h";
@@ -512,6 +528,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "kalen.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ustb_choose_course_system/OC-Bridge.h";
@@ -532,6 +549,7 @@
 				);
 				INFOPLIST_FILE = ustb_choose_course_systemTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "kalen.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ustb_choose_course_system.app/ustb_choose_course_system";
 			};
@@ -547,6 +565,7 @@
 				);
 				INFOPLIST_FILE = ustb_choose_course_systemTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "kalen.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ustb_choose_course_system.app/ustb_choose_course_system";
 			};
