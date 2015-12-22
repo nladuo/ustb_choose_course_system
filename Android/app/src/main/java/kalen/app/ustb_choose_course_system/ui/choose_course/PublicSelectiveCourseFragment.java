@@ -85,7 +85,7 @@ public class PublicSelectiveCourseFragment extends Fragment implements Expandabl
         expListView.setAdapter(mAdapter);
         expListView.setOnChildClickListener(this);
 
-        expandAllGroups();
+        expandGroups();
     }
 
 
@@ -93,8 +93,9 @@ public class PublicSelectiveCourseFragment extends Fragment implements Expandabl
     /**
      * to expand every group
      */
-    private void expandAllGroups(){
-        for(int i = 0; i < mAdapter.getGroupCount(); i++){
+    private void expandGroups(){
+        //expand from the second group
+        for(int i = 1; i < mAdapter.getGroupCount(); i++){
             expListView.expandGroup(i);
         }
     }
@@ -117,8 +118,6 @@ public class PublicSelectiveCourseFragment extends Fragment implements Expandabl
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             new AddCourseAsyncTask(courseId).execute();
-//                            Toast.makeText(getActivity(), courseId,
-//                                    Toast.LENGTH_SHORT).show();
                         }
                     })
                     .create();

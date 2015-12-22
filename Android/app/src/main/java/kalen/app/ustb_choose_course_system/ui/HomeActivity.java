@@ -39,7 +39,7 @@ public class HomeActivity extends Activity implements View.OnClickListener{
     }
 
     private void initViews() {
-        findViewById(R.id.home_rl_about_soft).setOnClickListener(this);
+        //findViewById(R.id.home_rl_about_soft).setOnClickListener(this);
         findViewById(R.id.home_rl_after_choose_course).setOnClickListener(this);
         findViewById(R.id.home_rl_checkout_update).setOnClickListener(this);
         findViewById(R.id.home_rl_pre_choose_course).setOnClickListener(this);
@@ -61,10 +61,6 @@ public class HomeActivity extends Activity implements View.OnClickListener{
                 GetSemesterAsyncTask task = new GetSemesterAsyncTask(
                         new Intent(HomeActivity.this, ClassTableActivity.class));
                 task.execute();
-                break;
-
-            case R.id.home_rl_about_soft:
-                startActivity(new Intent(this, AboutActivity.class));
                 break;
 
             case R.id.home_rl_checkout_update:

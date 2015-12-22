@@ -85,6 +85,11 @@ public class LoginActivity extends Activity {
             case R.id.action_local_class_table:
                 startActivity(new Intent(LoginActivity.this, DeskTopClassTableShortCutActivity.class));
                 return true;
+
+            case R.id.action_about:
+                startActivity(new Intent(this, AboutActivity.class));
+                return true;
+
 //            case R.id.action_library:
 //                startActivity(new Intent(LoginActivity.this, LibraryActivity.class));
 //                return true;
