@@ -11,6 +11,9 @@ import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -39,7 +42,6 @@ public class HomeActivity extends Activity implements View.OnClickListener{
     }
 
     private void initViews() {
-        //findViewById(R.id.home_rl_about_soft).setOnClickListener(this);
         findViewById(R.id.home_rl_after_choose_course).setOnClickListener(this);
         findViewById(R.id.home_rl_checkout_update).setOnClickListener(this);
         findViewById(R.id.home_rl_pre_choose_course).setOnClickListener(this);
@@ -53,8 +55,9 @@ public class HomeActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.home_rl_after_choose_course:
-                startActivity(new Intent(HomeActivity.this,
-                        ChooseCourseActivity.class));
+                Intent i1 = new Intent(HomeActivity.this, ChooseCourseActivity.class);
+                UserInfo.getInstance().setChooseCourseType(ConstVal.AfterChooseCourse);
+                startActivity(i1);
                 break;
 
             case R.id.home_rl_search_class_table:
@@ -64,7 +67,7 @@ public class HomeActivity extends Activity implements View.OnClickListener{
                 break;
 
             case R.id.home_rl_checkout_update:
-                new CheckUpdateAsynctask().execute();
+                new CheckUpdateAsyncTask().execute();
                 break;
 
             case R.id.home_rl_search_innovate_credit:
@@ -78,12 +81,9 @@ public class HomeActivity extends Activity implements View.OnClickListener{
                 break;
 
             case R.id.home_rl_pre_choose_course:
-                AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-                builder.setTitle("提示");
-                builder.setMessage("此功能会在选课系统更新后添加");
-                builder.setNegativeButton("确定", null);
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+                Intent i2 = new Intent(HomeActivity.this, ChooseCourseActivity.class);
+                UserInfo.getInstance().setChooseCourseType(ConstVal.PreChooseCourse);
+                startActivity(i2);
                 break;
             case R.id.home_rl_logout:
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(HomeActivity.this);
@@ -153,7 +153,7 @@ public class HomeActivity extends Activity implements View.OnClickListener{
         }
     }
 
-    class CheckUpdateAsynctask extends AsyncTask<Void, Void, String>{
+    class CheckUpdateAsyncTask extends AsyncTask<Void, Void, String>{
         ProgressDialog progressDialog;
         @Override
         protected void onPreExecute() {
@@ -164,7 +164,7 @@ public class HomeActivity extends Activity implements View.OnClickListener{
 
         @Override
         protected String doInBackground(Void... voids) {
-            String jsonData = "";
+            String jsonData;
             try {
                 jsonData = HttpUtils.get(ConstVal.APP_UPDATE_CHECK_URL,null);
             } catch (Exception e) {
@@ -190,7 +190,6 @@ public class HomeActivity extends Activity implements View.OnClickListener{
                 //Check whether need to update
                 if ((version - ConstVal.VERSION) > 0.001){
                     // need to update
-
                     String releasedNote = object.getString("update_note");
                     final String appName = object.getString("app_name");
                     AlertDialog dialog = new AlertDialog
@@ -228,10 +227,6 @@ public class HomeActivity extends Activity implements View.OnClickListener{
                 Toast.makeText(HomeActivity.this,
                         "内部解析错误", Toast.LENGTH_SHORT).show();
             }
-
-
-
-
         }
     }
 
@@ -257,6 +252,24 @@ public class HomeActivity extends Activity implements View.OnClickListener{
             public void onServiceDisconnected(ComponentName componentName) {}
         }, Context.BIND_AUTO_CREATE);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        new MenuInflater(getApplication())
+                .inflate(R.menu.menu_login, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_about:
+                startActivity(new Intent(this, AboutActivity.class));
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

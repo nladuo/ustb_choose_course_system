@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 import kalen.app.ustb_choose_course_system.R;
+import kalen.app.ustb_choose_course_system.model.ConstVal;
 
 /**
  * Created by kalen on 15-8-16.
@@ -36,6 +37,7 @@ public class ChooseCourseActivity extends FragmentActivity {
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        // do nothing for avoiding activity exception
         //super.onSaveInstanceState(outState, outPersistentState);
     }
 

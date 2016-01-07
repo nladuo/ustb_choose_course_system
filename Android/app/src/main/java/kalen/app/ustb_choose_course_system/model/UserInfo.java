@@ -20,6 +20,7 @@ public class UserInfo {
     private String username;
     private String password;
     private CookieStore cookieStore;
+    private String chooseCourseType;
 
     public CookieStore getCookieStore() {
         return cookieStore;
@@ -45,4 +46,11 @@ public class UserInfo {
         this.username = username;
     }
 
+    public String getChooseCourseType() {
+        return chooseCourseType;
+    }
+
+    public void setChooseCourseType(String chooseCourseType) {
+        this.chooseCourseType = chooseCourseType;
+    }
 }

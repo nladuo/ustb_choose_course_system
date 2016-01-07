@@ -14,7 +14,7 @@
         <RelativeLayout
             android:id="@+id/home_rl_after_choose_course"
             android:layout_width="match_parent"
-            android:layout_height="45dip"
+            android:layout_height="50dip"
             android:background="@drawable/nor_up_concor"
             android:orientation="horizontal" >
 
@@ -45,7 +45,7 @@
         <RelativeLayout
             android:id="@+id/home_rl_pre_choose_course"
             android:layout_width="match_parent"
-            android:layout_height="45dip"
+            android:layout_height="50dip"
             android:background="@drawable/nor_up_concor"
             android:orientation="horizontal" >
 
@@ -76,7 +76,7 @@
         <RelativeLayout
             android:id="@+id/home_rl_search_class_table"
             android:layout_width="match_parent"
-            android:layout_height="45dip"
+            android:layout_height="50dip"
             android:background="@drawable/nor_up_concor"
             android:orientation="horizontal" >
 
@@ -107,7 +107,7 @@
         <RelativeLayout
             android:id="@+id/home_rl_search_innovate_credit"
             android:layout_width="match_parent"
-            android:layout_height="45dip"
+            android:layout_height="50dip"
             android:background="@drawable/nor_up_concor"
             android:orientation="horizontal" >
 
@@ -139,7 +139,7 @@
         <RelativeLayout
             android:id="@+id/home_rl_search_exam_alignment"
             android:layout_width="match_parent"
-            android:layout_height="45dip"
+            android:layout_height="50dip"
             android:background="@drawable/nor_up_concor"
             android:orientation="horizontal" >
 
@@ -174,7 +174,7 @@
         <RelativeLayout
             android:id="@+id/home_rl_checkout_update"
             android:layout_width="match_parent"
-            android:layout_height="45dip"
+            android:layout_height="50dip"
             android:background="@drawable/nor_up_concor"
             android:orientation="horizontal" >
 
@@ -196,7 +196,7 @@
         <RelativeLayout
             android:id="@+id/home_rl_logout"
             android:layout_width="match_parent"
-            android:layout_height="45dip"
+            android:layout_height="50dip"
             android:background="@drawable/nor_up_concor"
             android:orientation="horizontal" >
 

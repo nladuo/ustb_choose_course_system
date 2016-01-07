@@ -61,7 +61,11 @@ public class PublicSelectiveCourseFragment extends Fragment implements Expandabl
         mLearnedCourses = new ArrayList<>();
 
         // Adding child data
-        mHeaders.add("未满公选课");
+        if (UserInfo.getInstance().getChooseCourseType().equals(ConstVal.AfterChooseCourse)){
+            mHeaders.add("未满公选课");
+        }else{
+            mHeaders.add("全部公选课");
+        }
         mHeaders.add("已选课程");
         mHeaders.add("已修公选课");
 
@@ -190,8 +194,13 @@ public class PublicSelectiveCourseFragment extends Fragment implements Expandabl
         protected Boolean doInBackground(Void... voids) {
 
             try {
-                String data = HttpUtils.get(ConstVal.
-                                SEARCH_NOT_FULL_PUBLIC_SELECTIVE_COURSE_URL,
+                String reqUrl;
+                if (UserInfo.getInstance().getChooseCourseType().equals(ConstVal.AfterChooseCourse)){
+                    reqUrl = ConstVal.SEARCH_NOT_FULL_PUBLIC_SELECTIVE_COURSE_URL;
+                }else{
+                    reqUrl = ConstVal.SEARCH_PRE_PUBLIC_SELECTIVE_COURSE_URL;
+                }
+                String data = HttpUtils.get(reqUrl,
                         UserInfo.getInstance().getCookieStore());
                 JsonParser parser = new JsonParser(data);
                 mAlternativeCourses = parser.getAlternativeCourses();
@@ -244,7 +253,13 @@ public class PublicSelectiveCourseFragment extends Fragment implements Expandabl
             map.put("id", this.courseId);
             map.put("uid", UserInfo.getInstance().getUsername());
             try {
-                String data = HttpUtils.post(ConstVal.ADD_PUBLIC_COURSE_URL, map,
+                String reqUrl;
+                if (UserInfo.getInstance().getChooseCourseType().equals(ConstVal.AfterChooseCourse)){
+                    reqUrl = ConstVal.ADD_PUBLIC_COURSE_URL;
+                }else{
+                    reqUrl = ConstVal.ADD_PRE_PUBLIC_COURSE_URL;
+                }
+                String data = HttpUtils.post(reqUrl, map,
                         UserInfo.getInstance().getCookieStore());
                 JsonParser parser = new JsonParser(data);
                 msg = parser.getResultMsg();
@@ -299,7 +314,13 @@ public class PublicSelectiveCourseFragment extends Fragment implements Expandabl
             map.put("kxh", this.bean.getKXH());
             map.put("uid", UserInfo.getInstance().getUsername());
             try {
-                String data = HttpUtils.post(ConstVal.REMOVE_COURSE_URL, map,
+                String reqUrl;
+                if (UserInfo.getInstance().getChooseCourseType().equals(ConstVal.AfterChooseCourse)){
+                    reqUrl = ConstVal.REMOVE_COURSE_URL;
+                }else{
+                    reqUrl = ConstVal.REMOVE_PRE_COURSE_URL;
+                }
+                String data = HttpUtils.post(reqUrl, map,
                         UserInfo.getInstance().getCookieStore());
                 msg = data.split("g")[1]
                         .split(":")[1]

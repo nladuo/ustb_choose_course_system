@@ -16,7 +16,7 @@
 ##Android版
 使用android-studio1.3开发<br>
 缺点: 目前写了一堆asynctask,还没有封装好<br>
-功能: 退补选课，课表的查询，创新学分查询，考试安排查询
+功能: 退补选课，预选课，课表的查询，创新学分查询，考试安排查询
 
 ##WebSite
 用nodejs(v0.12.4)(express+mysql)编写<br>

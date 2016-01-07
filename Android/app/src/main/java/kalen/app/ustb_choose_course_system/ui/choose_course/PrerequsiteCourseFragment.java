@@ -78,9 +78,13 @@ public class PrerequsiteCourseFragment extends Fragment
         protected Boolean doInBackground(Void... voids) {
 
             try {
-                String data = HttpUtils.get(ConstVal.
-                                SEARCH_PREREQUISITE_COURSE_URL
-                                + UserInfo.getInstance().getUsername(),
+                String reqUrl;
+                if (UserInfo.getInstance().getChooseCourseType().equals(ConstVal.AfterChooseCourse)){
+                    reqUrl = ConstVal.SEARCH_PREREQUISITE_COURSE_URL;
+                }else{
+                    reqUrl = ConstVal.SEARCH_PRE_PREREQUISITE_COURSE_URL;
+                }
+                String data = HttpUtils.get(reqUrl + UserInfo.getInstance().getUsername(),
                         UserInfo.getInstance().getCookieStore());
                 JsonParser parser = new JsonParser(data);
                 mDatas.clear();
@@ -134,10 +138,17 @@ public class PrerequsiteCourseFragment extends Fragment
         protected List<ClassBean> doInBackground(Void... voids) {
 
             try {
-                String data = HttpUtils.get(ConstVal.
-                                getRequiredCourseURL(this.kch
-                                        ,UserInfo.getInstance().getUsername())
-                                + UserInfo.getInstance().getUsername(),
+
+                String reqUrl;
+                if (UserInfo.getInstance().getChooseCourseType().equals(ConstVal.AfterChooseCourse)){
+                    reqUrl = ConstVal.getRequiredCourseURL(this.kch
+                                    ,UserInfo.getInstance().getUsername());
+                }else{
+                    reqUrl = ConstVal.getPreRequiredCourseURL(this.kch
+                            ,UserInfo.getInstance().getUsername());
+                }
+
+                String data = HttpUtils.get(reqUrl + UserInfo.getInstance().getUsername(),
                         UserInfo.getInstance().getCookieStore());
                 JsonParser parser = new JsonParser(data);
                 //check is choose
@@ -175,7 +186,13 @@ public class PrerequsiteCourseFragment extends Fragment
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("classes", (Serializable) classes);
                 intent.putExtra("classType", "必修课");
-                intent.putExtra("addUrl", ConstVal.ADD_PREREQUISITE_COURSE_URL);
+                String reqUrl;
+                if (UserInfo.getInstance().getChooseCourseType().equals(ConstVal.AfterChooseCourse)){
+                    reqUrl = ConstVal.ADD_PREREQUISITE_COURSE_URL;
+                }else{
+                    reqUrl = ConstVal.ADD_PRE_PREREQUISITE_COURSE_URL;
+                }
+                intent.putExtra("addUrl", reqUrl);
                 startActivity(intent);
             }else {
                 Toast.makeText(getActivity(), "加载失败，请检查网络配置"

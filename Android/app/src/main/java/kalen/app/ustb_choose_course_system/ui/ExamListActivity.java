@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,12 +34,23 @@ public class ExamListActivity extends Activity{
     private ExamInfoAdapter mAdapter;
     private ListView mListView;
     private List<ExamInfo> mDatas;
+    private EditText semesterEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_examinfo);
         this.semester = getIntent().getStringExtra("semester");
+        semesterEdit = (EditText) findViewById(R.id.exam_info_semester_et);
+        semesterEdit.setText(this.semester);
+        findViewById(R.id.exam_info_search_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                semester = semesterEdit.getText().toString();
+                mDatas.clear();
+                new GetExamListAsyncTask().execute();
+            }
+        });
         getActionBar().setDisplayHomeAsUpEnabled(true);
         initListView();
         new GetExamListAsyncTask().execute();

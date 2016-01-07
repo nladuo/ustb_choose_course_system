@@ -3,15 +3,7 @@
     tools:context=".ui.DeskTopClassTableShortCutActivity">
 
     <item
-        android:id="@+id/action_local_class_table"
-        android:title="本地课表" />
-
-    <item
         android:id="@+id/action_about"
         android:title="关于本软件" />
-
-    <!--<item-->
-        <!--android:id="@+id/action_library"-->
-        <!--android:title="图书检索" />-->
 
 </menu>

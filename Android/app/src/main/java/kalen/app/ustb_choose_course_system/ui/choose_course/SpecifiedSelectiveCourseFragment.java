@@ -58,15 +58,11 @@ public class SpecifiedSelectiveCourseFragment extends Fragment
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//        Toast.makeText(getActivity(),
-//                mDatas.get(i).getKch(), Toast.LENGTH_SHORT).show();
         new ShowRequiredClassAsyncTask(mDatas.get(i).getKch()).execute();
     }
 
     class GetDataAsyncTask extends AsyncTask<Void, Void, Boolean> {
-
         ProgressDialog progressDialog;
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -78,12 +74,15 @@ public class SpecifiedSelectiveCourseFragment extends Fragment
         protected Boolean doInBackground(Void... voids) {
 
             try {
-                String data = HttpUtils.get(ConstVal.
-                                SEARCH_SPECIFIED_COURSE_URL
-                                + UserInfo.getInstance().getUsername(),
+                String reqUrl;
+                if (UserInfo.getInstance().getChooseCourseType().equals(ConstVal.AfterChooseCourse)){
+                    reqUrl = ConstVal.SEARCH_SPECIFIED_COURSE_URL;
+                }else {
+                    reqUrl = ConstVal.SEARCH_PRE_SPECIFIED_COURSE_URL;
+                }
+                String data = HttpUtils.get(reqUrl + UserInfo.getInstance().getUsername(),
                         UserInfo.getInstance().getCookieStore());
                 JsonParser parser = new JsonParser(data);
-                //mDatas.clear();
                 mDatas = parser.getPrerequisiteCourses();
 
             } catch (Exception e) {
@@ -131,11 +130,17 @@ public class SpecifiedSelectiveCourseFragment extends Fragment
         protected List<ClassBean> doInBackground(Void... voids) {
 
             try {
-                String data = HttpUtils.get(ConstVal.
-                                getSpecifiedCourseUrl(this.kch
-                                        ,UserInfo.getInstance().getUsername())
-                                + UserInfo.getInstance().getUsername(),
-                        UserInfo.getInstance().getCookieStore());
+                String reqUrl;
+                if (UserInfo.getInstance().getChooseCourseType().equals(ConstVal.AfterChooseCourse)){
+                    reqUrl = ConstVal.getSpecifiedCourseUrl(this.kch,
+                                UserInfo.getInstance().getUsername())
+                            + UserInfo.getInstance().getUsername();
+                }else {
+                    reqUrl = ConstVal.getPreSpecifiedCourseUrl(this.kch,
+                                UserInfo.getInstance().getUsername())
+                            + UserInfo.getInstance().getUsername();
+                }
+                String data = HttpUtils.get(reqUrl, UserInfo.getInstance().getCookieStore());
                 JsonParser parser = new JsonParser(data);
                 return parser.getAlternativeCourses();
 
@@ -159,7 +164,13 @@ public class SpecifiedSelectiveCourseFragment extends Fragment
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("classes", (Serializable) classes);
                 intent.putExtra("classType", "专业选修课");
-                intent.putExtra("addUrl", ConstVal.ADD_SPECIFIED_COURSE_URL);
+                if (UserInfo.getInstance().getChooseCourseType()
+                        .equals(ConstVal.AfterChooseCourse)){
+                    intent.putExtra("addUrl", ConstVal.ADD_SPECIFIED_COURSE_URL);
+                }else{
+                    intent.putExtra("addUrl", ConstVal.ADD_PRE_SPECIFIED_COURSE_URL);
+                }
+
                 startActivity(intent);
             }else {
                 Toast.makeText(getActivity(), "加载失败，请检查网络配置"

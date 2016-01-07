@@ -68,6 +68,7 @@ public class HttpUtils {
             //如果状态码为200,就是得到Json
             return  EntityUtils.toString(response.getEntity());
         }else{
+            System.out.println(EntityUtils.toString(response.getEntity()));
             throw new Exception();
         }
     }
