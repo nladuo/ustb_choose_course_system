@@ -45,18 +45,20 @@ class MainTableViewController: UITableViewController{
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         if indexPath.section == 0 {
-            //预选课 和 考试安排查询
-            if (indexPath.row == 1) || (indexPath.row == 3){
-                let alert = UIAlertView()
-                alert.title = "提示"
-                alert.message = "此功能会等到选课系统更新后添加"
-                alert.addButtonWithTitle("确定")
-                alert.show()
-                
-            }else if indexPath.row == 2 { //课表查询
+//            //预选课 和 考试安排查询
+//            if (indexPath.row == 1) || (indexPath.row == 3){
+//                let alert = UIAlertView()
+//                alert.title = "提示"
+//                alert.message = "此功能会等到选课系统更新后添加"
+//                alert.addButtonWithTitle("确定")
+//                alert.show()
+//                
+//            }else
+            if indexPath.row == 2 { //课表查询
                 performSegueWithIdentifier("classTableSegue", sender: nil)
-                
             }
+            
+            
         }else if indexPath.section == 1 {
             if indexPath.row == 1{
                 MBProgressHUD.showMessage("加载中")
@@ -121,8 +123,19 @@ class MainTableViewController: UITableViewController{
             
             let vc = segue.destinationViewController as! ClassTableViewController
             vc.cookieData = cookieData
-        }else if segue.identifier == "chooseCourseSegue" {
+        }else if segue.identifier == "chooseCourseSegue" { //退补选课
             let vc = segue.destinationViewController as! ChooseCourseTabBarController
+            vc.cookieData = cookieData
+            vc.chooseCourseType = kalen.app.ConstVal.AfterChooseCourse
+        }else if segue.identifier == "preChooseCourseSegue"{//预选课
+            let vc = segue.destinationViewController as! ChooseCourseTabBarController
+            vc.cookieData = cookieData
+            vc.chooseCourseType = kalen.app.ConstVal.PreChooseCourse
+        }else if segue.identifier == "innovativeCreditSegue"{
+            let vc = segue.destinationViewController as! InnovativeCreditController
+            vc.cookieData = cookieData
+        }else if segue.identifier == "examListSegue"{
+            let vc = segue.destinationViewController as! ExamListController
             vc.cookieData = cookieData
         }
     }

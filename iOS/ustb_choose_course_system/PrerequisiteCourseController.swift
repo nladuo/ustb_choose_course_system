@@ -55,7 +55,13 @@ class PrerequisiteCourseController: UIViewController, UITableViewDelegate, UITab
         let bean = datas[indexPath.row]
         
         MBProgressHUD.showMessage("加载中...")
-        let data = kalen.app.HttpUtil.get(kalen.app.ConstVal.getRequiredCourseURL(bean.kch, uid: kalen.app.UserInfo.getInstance().username), cookieStr: parentVc.cookieData)
+        var url = ""
+        if parentVc.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
+            url = kalen.app.ConstVal.getRequiredCourseURL(bean.kch, uid: kalen.app.UserInfo.getInstance().username)
+        }else{
+            url = kalen.app.ConstVal.getPreRequiredCourseURL(bean.kch, uid: kalen.app.UserInfo.getInstance().username)
+        }
+        let data = kalen.app.HttpUtil.get(url, cookieStr: parentVc.cookieData)
         
         MBProgressHUD.hideHUD()
         if data == nil{
@@ -107,9 +113,12 @@ class PrerequisiteCourseController: UIViewController, UITableViewDelegate, UITab
             let vc = segue.destinationViewController as! DetailTableViewController
             vc.datas = (sender as! [kalen.app.ClassBean])
             vc.cookieData = parentVc.cookieData
-            vc.addUrl = kalen.app.ConstVal.ADD_PREREQUISITE_COURSE_URL
+            if parentVc.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
+                vc.addUrl = kalen.app.ConstVal.ADD_PREREQUISITE_COURSE_URL
+            }else{
+                vc.addUrl = kalen.app.ConstVal.ADD_PRE_PREREQUISITE_COURSE_URL
+            }
             vc.classType = "必修课"
-            
         }
     }
     

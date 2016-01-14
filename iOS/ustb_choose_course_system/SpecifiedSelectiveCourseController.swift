@@ -44,7 +44,13 @@ class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDel
         let bean = datas[indexPath.row]
         
         MBProgressHUD.showMessage("加载中...")
-        let data = kalen.app.HttpUtil.get(kalen.app.ConstVal.getSpecifiedCourseUrl(bean.kch, uid: kalen.app.UserInfo.getInstance().username), cookieStr: parentVc.cookieData)
+        var url = ""
+        if parentVc.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
+            url = kalen.app.ConstVal.getSpecifiedCourseUrl(bean.kch, uid: kalen.app.UserInfo.getInstance().username)
+        }else{
+            url = kalen.app.ConstVal.getPreSpecifiedCourseUrl(bean.kch, uid: kalen.app.UserInfo.getInstance().username)
+        }
+        let data = kalen.app.HttpUtil.get(url, cookieStr: parentVc.cookieData)
         
         MBProgressHUD.hideHUD()
         if data == nil{
@@ -94,9 +100,12 @@ class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDel
             let vc = segue.destinationViewController as! DetailTableViewController
             vc.datas = (sender as! [kalen.app.ClassBean])
             vc.cookieData = parentVc.cookieData
-            vc.addUrl = kalen.app.ConstVal.ADD_SPECIFIED_COURSE_URL
+            if parentVc.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
+                vc.addUrl = kalen.app.ConstVal.ADD_SPECIFIED_COURSE_URL
+            }else{
+                vc.addUrl = kalen.app.ConstVal.ADD_PRE_SPECIFIED_COURSE_URL
+            }
             vc.classType = "专业选修课"
-            
         }
     }
 

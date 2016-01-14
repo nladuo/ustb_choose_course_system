@@ -41,9 +41,13 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
     var parentVc:ChooseCourseTabBarController!
 
     override func loadView(){
+        
         super.loadView()
         parentVc = self.tabBarController as!
         ChooseCourseTabBarController
+        if parentVc.chooseCourseType == kalen.app.ConstVal.PreChooseCourse{
+            sectionName[0] = "全部公选课"
+        }
         parentVc.updateNotFullPublicSelectiveCourses(self)
         
         self.navigationController!.navigationBar.translucent = false
@@ -104,7 +108,13 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
                     "xh": "",
                     "kxh": bean.KXH,
                     "uid": kalen.app.UserInfo.getInstance().username]
-                let data = kalen.app.HttpUtil.post(kalen.app.ConstVal.REMOVE_COURSE_URL, params: params, cookieStr: parentVc.cookieData)
+                var removeUrl = ""
+                if parentVc.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
+                    removeUrl = kalen.app.ConstVal.REMOVE_COURSE_URL
+                }else{
+                    removeUrl = kalen.app.ConstVal.REMOVE_PRE_COURSE_URL
+                }
+                let data = kalen.app.HttpUtil.post(removeUrl, params: params, cookieStr: parentVc.cookieData)
                 
                 
                 MBProgressHUD.hideHUD()
