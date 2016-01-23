@@ -2,7 +2,7 @@
 //  RequiredClassViewController.swift
 //  ustb_choose_course_system
 //
-//  Created by TheMoonBird on 15/8/14.
+//  Created by kalen blue on 15/8/14.
 //  Copyright (c) 2015年 kalen blue. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  InnovativeCreditController.swift
 //  ustb_choose_course_system
 //
-//  Created by 李鑫 on 16/1/14.
+//  Created by kalen blue on 16/1/14.
 //  Copyright © 2016年 kalen blue. All rights reserved.
 //
 
