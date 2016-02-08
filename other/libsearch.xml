@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/linearlayout"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@drawable/bg" >
+
+	<TextView
+		android:id="@+id/textview"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="20dp"
+		android:focusable="true"
+		android:focusableInTouchMode="true"
+		android:text="书目检索"
+		android:textColor="@color/blue"
+		android:textSize="20sp" />
+
+	<ProgressBar
+		android:id="@+id/pb"
+		style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="2dp"
+		android:layout_below="@id/textview"
+		android:background="@drawable/green" />
+
+	<LinearLayout
+		android:id="@+id/linearlayout2"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/pb"
+		android:layout_marginTop="10dp"
+		android:orientation="horizontal" >
+
+		<EditText
+			android:id="@+id/keyword"
+			android:layout_width="256dp"
+			android:layout_height="match_parent"
+			android:layout_marginLeft="2dp"
+			android:layout_marginRight="5dp"
+			android:background="#10000000"
+			android:ems="10"
+			android:lines="1"
+			android:textSize="30sp" >
+
+			<requestFocus />
+		</EditText>
+
+		<Button
+			android:id="@+id/searchbtn"
+			android:layout_width="fill_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@drawable/button_style"
+			android:text="搜索" />
+	</LinearLayout>
+
+	<Button
+		android:id="@+id/more"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:background="@drawable/tablerow_click"
+		android:paddingBottom="5dp"
+		android:paddingTop="5dp"
+		android:text="点击加载下一页"
+		android:visibility="invisible" />
+
+	<ListView
+		android:id="@+id/listView1"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_above="@id/more"
+		android:layout_below="@id/linearlayout2" >
+	</ListView>
+
+</RelativeLayout>

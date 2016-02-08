@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@drawable/bg"
+	android:orientation="vertical" >
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="10dp"
+		android:text="图书详情"
+		android:textColor="@color/blue"
+		android:textSize="20dp" />
+
+	<ProgressBar
+		android:id="@+id/pb"
+		style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginTop="5dp"
+		android:background="@drawable/green" />
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" >
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical" >
+
+			<TextView
+				android:id="@+id/textview"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textColor="@color/gray"
+				android:textSize="16sp" />
+
+			<TableLayout
+				android:id="@+id/tablelayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:shrinkColumns="1" >
+			</TableLayout>
+		</LinearLayout>
+	</ScrollView>
+
+</LinearLayout>
