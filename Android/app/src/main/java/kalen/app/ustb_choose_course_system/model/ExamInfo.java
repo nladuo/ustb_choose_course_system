@@ -4,37 +4,37 @@ package kalen.app.ustb_choose_course_system.model;
  * Created by kalen on 15-12-22.
  */
 public class ExamInfo {
-    private String ClassName;
-    private String ExamTime;
-    private String ExamLocation;
+    private String className;
+    private String examTime;
+    private String examLocation;
 
     public ExamInfo(String className, String examTime, String examLocation) {
-        ClassName = className;
-        ExamTime = examTime;
-        ExamLocation = examLocation;
+        this.className = className;
+        this.examTime = examTime;
+        this.examLocation = examLocation;
     }
 
     public String getClassName() {
-        return ClassName;
+        return className;
     }
 
     public void setClassName(String className) {
-        ClassName = className;
+        this.className = className;
     }
 
     public String getExamTime() {
-        return ExamTime;
+        return examTime;
     }
 
     public void setExamTime(String examTime) {
-        ExamTime = examTime;
+        this.examTime = examTime;
     }
 
     public String getExamLocation() {
-        return ExamLocation;
+        return examLocation;
     }
 
     public void setExamLocation(String examLocation) {
-        ExamLocation = examLocation;
+        this.examLocation = examLocation;
     }
 }
