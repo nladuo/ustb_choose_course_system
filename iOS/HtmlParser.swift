@@ -16,7 +16,7 @@ extension kalen.app{
             let doc = try? HTMLDocument(string: html, encoding: NSUTF8StringEncoding)
             var index = 0
             for tr in doc!.css("tbody, tr") {
-                index++
+                index += 1
                 let tds = tr.css("td")
                 var i = 0
                 let credit = InnovativeCredit(credit: "", name: "", type: "")
@@ -28,7 +28,7 @@ extension kalen.app{
                     case 3:credit.credit = td.stringValue
                     default: break
                     }
-                    i++
+                    i += 1
                 }
                 print(index,credit.name)
                 credits.append(credit)
@@ -53,7 +53,7 @@ extension kalen.app{
                     case 3:exam.examLocation = td.stringValue
                     default: break
                     }
-                    i++
+                    i += 1
                 }
                 list.append(exam)
             }

@@ -17,7 +17,6 @@ class LocalClassTableViewController: UIViewController{
     private var CELL_HEIGHT:CGFloat = 0 //一个单元格最小的高度
     private let CELL_WIDTH:CGFloat = 100.0//一个单元格的宽
     
-    
   //  @IBOutlet var topView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     //存放所有的课名称的btn集合
@@ -29,9 +28,11 @@ class LocalClassTableViewController: UIViewController{
     
     override func loadView() {
         super.loadView()
+        print("loadView", self.navigationController)
         //20为显示时间、运营商等等的高度，3为bottomMargin
         CELL_HEIGHT = (UIScreen.mainScreen().bounds.size.height - self.navigationController!.navigationBar.frame.size.height - 20 - 3
-            ) / CGFloat(8.0)
+                ) / CGFloat(8.0)
+        //CELL_HEIGHT = 100
         scrollView.contentSize.width = 8 * CELL_WIDTH
 
         //添加所有标题的label
@@ -47,6 +48,7 @@ class LocalClassTableViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("ViewDIDLoad", self.navigationController)
         
         jsonParser = kalen.app.JsonParser(jsonStr: userDefaults.objectForKey(cList[0]) as! String)
         //2、初始化课程数组所有的内容

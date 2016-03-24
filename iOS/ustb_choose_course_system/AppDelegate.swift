@@ -8,15 +8,90 @@
 
 import UIKit
 
+@available(iOS 9.0, *)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var launchedShortcutItem: UIApplicationShortcutItem?
+    
+    enum ShortcutIdentifier: String {
+        
+        case First
+        
+        init?(fullType: String) {
+            guard let last = fullType.componentsSeparatedByString(".").last else { return nil }
+            
+            self.init(rawValue: last)
+        }
+        
+        var type: String {
+            return NSBundle.mainBundle().bundleIdentifier! + ".\(self.rawValue)"
+        }
+        
+    }
+    
+    func handleShortCutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
+        
+        var handled = false
+        
+        guard ShortcutIdentifier(fullType: shortcutItem.type) != nil else { return false }
+        
+        guard let shortCutType = shortcutItem.type as String? else { return false }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        
+        switch (shortCutType) {
+        case ShortcutIdentifier.First.type:
+            // Handle shortcut 1
+            var cList:[String] = []
+            var tempStr:String = ""
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            if let class_list:AnyObject = userDefaults.objectForKey("class_list"){
+                tempStr = class_list as! String
+                cList = tempStr.componentsSeparatedByString("\n")
+            }
+            
+            if (cList.count == 0) || (tempStr == ""){
+                let alert = UIAlertView(title: "提示", message: "你还没有添加本地课表，请登陆后添加", delegate: nil, cancelButtonTitle: "确定")
+                alert.show()
+                return true
+            }
+            var vc = LocalClassTableViewController()
+            vc = storyboard.instantiateViewControllerWithIdentifier("LocalClassTableVC") as! LocalClassTableViewController
+            vc.cList = []
+            for str in cList{
+                if str != ""{
+                    vc.cList.append(str)
+                }
+            }
+            print("Hello")
+            let navGC = window!.rootViewController as? UINavigationController
+            navGC?.pushViewController(vc, animated: true)
+            print("dasdasda")
+            handled = true
+            break
+        default:
+            break
+        }
+        
+        return handled
+    }
+    
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        let handledShortCutItem = handleShortCutItem(shortcutItem)
+        completionHandler(handledShortCutItem)
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem {
+            launchedShortcutItem = shortcutItem
+        }
+        
         return true
     }
+    
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -33,7 +108,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        guard let shortcut = launchedShortcutItem else { return }
+        
+        handleShortCutItem(shortcut)
+        launchedShortcutItem = nil
     }
 
     func applicationWillTerminate(application: UIApplication) {
