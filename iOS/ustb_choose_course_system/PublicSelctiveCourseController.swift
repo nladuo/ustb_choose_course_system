@@ -48,11 +48,24 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
         if parentVc.chooseCourseType == kalen.app.ConstVal.PreChooseCourse{
             sectionName[0] = "全部公选课"
         }
+        //添加下拉刷新
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
+        self.tableView.addSubview(self.refreshControl!)
+        
         parentVc.updateNotFullPublicSelectiveCourses(self)
         
         self.navigationController!.navigationBar.translucent = false
         self.tabBarController!.tabBar.translucent = false
     }
+    
+    //下拉刷新
+    func refresh(refreshControl: UIRefreshControl) {
+        parentVc.updateNotFullPublicSelectiveCourses(self)
+        refreshControl.endRefreshing()
+    }
+    
+    
     
     func afterParseDatas() {
         datas[0] = parentVc.notFullPublicClasses

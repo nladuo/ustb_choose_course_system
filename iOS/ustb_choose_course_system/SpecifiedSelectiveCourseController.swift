@@ -22,6 +22,12 @@ class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDel
         //代理请求网络
         parentVc.updateSpecifiedCourses(self)
         
+        //添加下拉刷新
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
+        self.tableView.addSubview(self.refreshControl!)
+        
+        
         self.navigationController!.navigationBar.translucent = false
         self.tabBarController!.tabBar.translucent = false
     }
@@ -31,6 +37,13 @@ class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDel
         
         // Do any additional setup after loading the view.
     }
+    
+    //下拉刷新
+    func refresh(refreshControl: UIRefreshControl) {
+        parentVc.updateSpecifiedCourses(self)
+        refreshControl.endRefreshing()
+    }
+    
     
     func afterParseDatas() {
         datas = parentVc.specifiedClasses

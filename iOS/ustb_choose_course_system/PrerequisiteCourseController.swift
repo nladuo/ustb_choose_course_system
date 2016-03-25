@@ -17,12 +17,18 @@ class PrerequisiteCourseController: UIViewController, UITableViewDelegate, UITab
     let SCORE_TAG = 202
     var parentVc:ChooseCourseTabBarController!
     
+    var refreshControl = UIRefreshControl()
+    
     
     override func loadView(){
         super.loadView()
         
         parentVc = self.tabBarController as! ChooseCourseTabBarController
         
+        //添加下拉刷新
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl)
         tableView.delegate = self
         tableView.dataSource = self
         parentVc.updatePrerequisiteCourses(self)
@@ -31,8 +37,12 @@ class PrerequisiteCourseController: UIViewController, UITableViewDelegate, UITab
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    //下拉刷新
+    func refresh(refreshControl: UIRefreshControl) {
+        parentVc.updatePrerequisiteCourses(self)
+        refreshControl.endRefreshing()
     }
     
     func afterParseDatas() {
