@@ -1,12 +1,12 @@
 package kalen.app.ustb_choose_course_system.ui;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,11 +21,10 @@ import java.util.Map;
 import kalen.app.ustb_choose_course_system.R;
 import kalen.app.ustb_choose_course_system.model.ConstVal;
 import kalen.app.ustb_choose_course_system.model.UserInfo;
-import kalen.app.ustb_choose_course_system.ui.library.LibraryActivity;
 import kalen.app.ustb_choose_course_system.utils.HttpUtils;
 
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity {
 
     EditText unameEdit;
     EditText passEdit;

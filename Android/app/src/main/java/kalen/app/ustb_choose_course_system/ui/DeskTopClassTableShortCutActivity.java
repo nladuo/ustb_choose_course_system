@@ -2,6 +2,7 @@ package kalen.app.ustb_choose_course_system.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
@@ -19,7 +20,7 @@ import kalen.app.ustb_choose_course_system.utils.JsonParser;
 /**
  * Created by kalen on 15-9-23.
  */
-public class DeskTopClassTableShortCutActivity extends Activity {
+public class DeskTopClassTableShortCutActivity extends AppCompatActivity {
 
     private String[] mDatas;
     RecyclerView recyclerView;
@@ -33,7 +34,11 @@ public class DeskTopClassTableShortCutActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_desktop_shortcut_class_table);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }catch (Exception e){}
+
         dbManager = new DBManager(this);
         tableBeans = dbManager.getClassTables();
         System.out.println("size--->" + tableBeans.size());

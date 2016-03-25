@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,7 +30,7 @@ import kalen.app.ustb_choose_course_system.utils.JsonParser;
 /**
  * Created by kalen on 15-11-24.
  */
-public class InnovateCreditActivity extends Activity{
+public class InnovateCreditActivity extends AppCompatActivity {
 
     private InnovateCreditAdapter mAdapter;
     private ListView mListView;
@@ -39,7 +40,9 @@ public class InnovateCreditActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_innovate_credit);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }catch (Exception e){}
         initListView();
         new GetInnovateCreditInfoAsyncTask().execute();
     }

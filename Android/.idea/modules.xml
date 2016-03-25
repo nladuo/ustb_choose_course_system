@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$USER_HOME$/Desktop/Android/AndroidStudioProjects/ustb_choose_course_system/app/app.iml" filepath="$USER_HOME$/Desktop/Android/AndroidStudioProjects/ustb_choose_course_system/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ustb_choose_course_system.iml" filepath="$PROJECT_DIR$/ustb_choose_course_system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ustb_choose_course.iml" filepath="$PROJECT_DIR$/ustb_choose_course.iml" />
     </modules>
   </component>
 </project>

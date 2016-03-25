@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -15,7 +16,7 @@ import kalen.app.ustb_choose_course_system.model.ConstVal;
 /**
  * Created by kalen on 15-8-28.
  */
-public class AboutActivity extends Activity{
+public class AboutActivity extends AppCompatActivity {
     ProgressDialog dialog;
     WebView webView;
 
@@ -23,7 +24,9 @@ public class AboutActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }catch (Exception e){}
 
         webView = (WebView) findViewById(R.id.about_wview);
         WebSettings settings = webView.getSettings();

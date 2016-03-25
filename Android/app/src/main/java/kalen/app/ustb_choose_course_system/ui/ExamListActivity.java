@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -28,7 +29,7 @@ import kalen.app.ustb_choose_course_system.utils.HttpUtils;
 /**
  * Created by kalen on 15-11-24.
  */
-public class ExamListActivity extends Activity{
+public class ExamListActivity extends AppCompatActivity {
 
     private String semester;
     private ExamInfoAdapter mAdapter;
@@ -40,6 +41,11 @@ public class ExamListActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_examinfo);
+
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }catch (Exception e){}
+
         this.semester = getIntent().getStringExtra("semester");
         semesterEdit = (EditText) findViewById(R.id.exam_info_semester_et);
         semesterEdit.setText(this.semester);
@@ -51,7 +57,6 @@ public class ExamListActivity extends Activity{
                 new GetExamListAsyncTask().execute();
             }
         });
-        getActionBar().setDisplayHomeAsUpEnabled(true);
         initListView();
         new GetExamListAsyncTask().execute();
     }

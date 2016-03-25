@@ -44,7 +44,7 @@ public class ConstVal {
 
     public static final String INNOVITATE_CREDIT_URL = "http://elearning.ustb.edu.cn/choose_courses/information/singleStuInfo_singleStuInfo_loadSingleStuCxxfPage.action";
 
-    public static final double VERSION = 1.00;
+    public static final double VERSION = 1.10;
 
     public static final int APP_ID = 4;
 

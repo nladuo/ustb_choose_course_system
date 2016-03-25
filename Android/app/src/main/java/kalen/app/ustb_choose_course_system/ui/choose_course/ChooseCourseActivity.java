@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
@@ -18,8 +19,7 @@ import kalen.app.ustb_choose_course_system.model.ConstVal;
 /**
  * Created by kalen on 15-8-16.
  */
-public class ChooseCourseActivity extends FragmentActivity {
-
+public class ChooseCourseActivity extends AppCompatActivity {
 
     private FragmentPagerAdapter mAdapter;
     private List<Fragment> mFragments;
@@ -31,7 +31,7 @@ public class ChooseCourseActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_course);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initPager();
     }
 

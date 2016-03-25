@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
@@ -31,7 +32,7 @@ import kalen.app.ustb_choose_course_system.utils.JsonParser;
 /**
  * Created by kalen on 15-8-12.
  */
-public class ClassTableActivity extends Activity{
+public class ClassTableActivity extends AppCompatActivity {
 
     DBManager dbManager;
     private String[] mDatas;
@@ -46,12 +47,14 @@ public class ClassTableActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_table);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
         dbManager = new DBManager(this);
         initDatas();
         initViews();
 
         semesterEdit.setText(getIntent().getStringExtra("semester"));
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }catch (Exception e){}
 
         //search class table from internet
         GetClassItemAsyncTask task = new GetClassItemAsyncTask(
