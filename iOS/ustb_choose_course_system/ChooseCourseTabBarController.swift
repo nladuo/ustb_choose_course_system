@@ -43,8 +43,11 @@ class ChooseCourseTabBarController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
-    func updateNotFullPublicSelectiveCourses(_delegate:ChooseCourseDelegate){
-        MBProgressHUD.showMessage("加载中")
+    func updateNotFullPublicSelectiveCourses(_delegate:ChooseCourseDelegate, isPullToRefresh: Bool){
+        if !isPullToRefresh{
+            MBProgressHUD.showMessage("加载中")
+        }
+        
         var url:String = ""
         if self.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
             url = kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL
@@ -67,7 +70,7 @@ class ChooseCourseTabBarController: UITabBarController {
                     MBProgressHUD.showError("网络连接错误")
                 }
                 
-                _delegate.afterParseDatas()
+                _delegate.afterParseDatas(isPullToRefresh)
             })
             
         })
@@ -75,9 +78,12 @@ class ChooseCourseTabBarController: UITabBarController {
         
     }
     
-    func updatePrerequisiteCourses(_delegate: ChooseCourseDelegate){
+    func updatePrerequisiteCourses(_delegate: ChooseCourseDelegate, isPullToRefresh: Bool){
         //var data
-        MBProgressHUD.showMessage("加载中")
+        if !isPullToRefresh{
+            MBProgressHUD.showMessage("加载中")
+        }
+        
         var urlPrerequisite:String = ""
         var urlPublic:String = ""
         if self.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
@@ -108,7 +114,7 @@ class ChooseCourseTabBarController: UITabBarController {
                     self.selectedClasses = []
                     MBProgressHUD.showError("网络连接错误")
                 }
-                _delegate.afterParseDatas()
+                _delegate.afterParseDatas(isPullToRefresh)
                 
             })
         })
@@ -116,9 +122,12 @@ class ChooseCourseTabBarController: UITabBarController {
 
     }
     
-    func updateSpecifiedCourses(_delegate: ChooseCourseDelegate){
+    func updateSpecifiedCourses(_delegate: ChooseCourseDelegate, isPullToRefresh: Bool){
         //var data
-        MBProgressHUD.showMessage("加载中")
+        if !isPullToRefresh{
+            MBProgressHUD.showMessage("加载中")
+        }
+        
         var url:String = ""
         if self.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
             url = kalen.app.ConstVal.SEARCH_SPECIFIED_COURSE_URL
@@ -139,7 +148,7 @@ class ChooseCourseTabBarController: UITabBarController {
                     MBProgressHUD.showError("网络连接错误")
                 }
                 
-                _delegate.afterParseDatas()
+                _delegate.afterParseDatas(isPullToRefresh)
             })
         })
         
@@ -155,5 +164,5 @@ class ChooseCourseTabBarController: UITabBarController {
         vc.cookieData = cookieData
     }
 
-
+    
 }

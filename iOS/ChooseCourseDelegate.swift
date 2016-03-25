@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ChooseCourseDelegate{
-    func afterParseDatas()
+    func afterParseDatas(isPullToRefresh: Bool)
 }

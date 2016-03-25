@@ -53,7 +53,7 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
         self.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
         self.tableView.addSubview(self.refreshControl!)
         
-        parentVc.updateNotFullPublicSelectiveCourses(self)
+        parentVc.updateNotFullPublicSelectiveCourses(self, isPullToRefresh: false)
         
         self.navigationController!.navigationBar.translucent = false
         self.tabBarController!.tabBar.translucent = false
@@ -61,17 +61,20 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
     
     //下拉刷新
     func refresh(refreshControl: UIRefreshControl) {
-        parentVc.updateNotFullPublicSelectiveCourses(self)
-        refreshControl.endRefreshing()
+        parentVc.updateNotFullPublicSelectiveCourses(self, isPullToRefresh: true)
     }
     
     
     
-    func afterParseDatas() {
+    func afterParseDatas(isPullToRefresh: Bool) {
         datas[0] = parentVc.notFullPublicClasses
         datas[1] = parentVc.selectedClasses
         datas[2] = parentVc.learnedPublicClasses
         tableView.reloadData()
+        if isPullToRefresh{
+            //如果是下拉刷新的，重新刷新
+            self.refreshControl!.endRefreshing()
+        }
         
     }
     
@@ -97,7 +100,7 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
                 let alert = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
                 alert.show()
                 
-                parentVc.updateNotFullPublicSelectiveCourses(self)
+                parentVc.updateNotFullPublicSelectiveCourses(self, isPullToRefresh: false)
                 
                 print("添加选修课")
                 
@@ -140,7 +143,7 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
                 let alert = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
                 alert.show()
                 
-                parentVc.updateNotFullPublicSelectiveCourses(self)
+                parentVc.updateNotFullPublicSelectiveCourses(self, isPullToRefresh: false)
                 print("确定退选修课")
             }
             

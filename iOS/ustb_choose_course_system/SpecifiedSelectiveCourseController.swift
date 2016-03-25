@@ -20,7 +20,7 @@ class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDel
         
         parentVc = self.tabBarController as! ChooseCourseTabBarController
         //代理请求网络
-        parentVc.updateSpecifiedCourses(self)
+        parentVc.updateSpecifiedCourses(self, isPullToRefresh: false)
         
         //添加下拉刷新
         self.refreshControl = UIRefreshControl()
@@ -40,14 +40,17 @@ class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDel
     
     //下拉刷新
     func refresh(refreshControl: UIRefreshControl) {
-        parentVc.updateSpecifiedCourses(self)
-        refreshControl.endRefreshing()
+        parentVc.updateSpecifiedCourses(self, isPullToRefresh: true)
     }
     
     
-    func afterParseDatas() {
+    func afterParseDatas(isPullToRefresh: Bool) {
         datas = parentVc.specifiedClasses
         tableView.reloadData()
+        if isPullToRefresh{
+            //如果是下拉刷新的，重新刷新
+            self.refreshControl!.endRefreshing()
+        }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

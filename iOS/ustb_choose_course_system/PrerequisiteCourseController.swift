@@ -26,12 +26,11 @@ class PrerequisiteCourseController: UIViewController, UITableViewDelegate, UITab
         parentVc = self.tabBarController as! ChooseCourseTabBarController
         
         //添加下拉刷新
-        let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
         tableView.delegate = self
         tableView.dataSource = self
-        parentVc.updatePrerequisiteCourses(self)
+        parentVc.updatePrerequisiteCourses(self, isPullToRefresh: false)
 
     }
 
@@ -41,13 +40,16 @@ class PrerequisiteCourseController: UIViewController, UITableViewDelegate, UITab
     
     //下拉刷新
     func refresh(refreshControl: UIRefreshControl) {
-        parentVc.updatePrerequisiteCourses(self)
-        refreshControl.endRefreshing()
+        parentVc.updatePrerequisiteCourses(self, isPullToRefresh: true)
     }
     
-    func afterParseDatas() {
+    func afterParseDatas(isPullToRefresh: Bool) {
         datas = parentVc.prerequisiteClasses
         tableView.reloadData()
+        if isPullToRefresh{
+            //如果是下拉刷新的，重新刷新
+            refreshControl.endRefreshing()
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
