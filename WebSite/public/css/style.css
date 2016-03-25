@@ -1,0 +1,239 @@
+body {
+    margin: 0 auto;
+    padding: 22px 0;
+    width: 940px;
+    font: 14px Helvetica, Arial, sans-serif;
+    background: #F0F0F0;
+}
+
+
+h1, h2 {
+    font-size: 28px;
+    line-height: 44px;
+    padding: 22px 0;
+
+}
+
+h3 {
+    font-size: 18px;
+    font-family: 微软雅黑;
+    line-height: 22px;
+    padding: 11px 0;
+}
+ a {
+    text-decoration: none;
+}
+
+ a:hover{
+    color: #3f94dc;
+}
+
+p {
+    padding-bottom: 22px;
+}
+table {
+    border-collapse:collapse;
+    border:solid #f87530; 
+    border-width:1px 0px 0px 1px;
+}
+}
+td {
+    border:solid #f87530; 
+    border-width:0px 1px 1px 0px; 
+    padding:10px 0px;
+}
+
+form [name="commentform"] {
+    margin-top: 21px;
+    padding-top: 22px;
+    border-top: 2px solid #d7d7d7;
+}
+
+form p {
+    display: table;
+    margin-bottom: 22px;
+    padding: 0 22px;
+}
+
+form label {
+    display: table-cell;
+    width: 140px;
+    padding-right: 20px;
+    text-align: right;
+    font-weight: bold;
+    vertical-align: top;
+    font-family: 微软雅黑;
+}
+
+
+form textarea[name="comment"] {
+    width: 600px;
+    height: 100px;
+    border: 1px solid #d7d7d7;
+    border-radius: 11px;
+    -moz-border-radius: 11px;
+    -webkit-border-radius: 11px;
+    outline: none;
+}
+form textarea[name="comment"]:focus {
+    width: 600px;
+    height: 100px;
+    border: 1px solid #f87530;
+    border-radius: 11px;
+    -moz-border-radius: 11px;
+    -webkit-border-radius: 11px;
+}
+form textarea[name="name"] {
+    width: 600px;
+    height: 20px;
+    border: 1px solid #d7d7d7;
+    border-radius: 11px;
+    -moz-border-radius: 11px;
+    -webkit-border-radius: 11px;
+    outline: none;
+}
+form textarea[name="name"]:focus {
+    width: 600px;
+    height: 20px;
+    border: 1px solid #f87530;
+    border-radius: 11px;
+    -moz-border-radius: 11px;
+    -webkit-border-radius: 11px;
+}
+
+form input[type="textarea"] {
+    width: 300px;
+}
+
+form input[id="submit"] {
+    margin-left: 200px;
+
+
+}
+
+form input[type="submit"]:hover {
+    background: #f87530;
+    cursor:pointer;
+
+}
+form input [type="button"]:hover {
+    cursor:pointer;
+}
+
+form input[id="show"] {
+    margin-left: 430px;
+
+
+}
+form input[id="show"]:hover {
+    background:#f87530;
+    cursor:pointer;
+
+}
+
+
+
+#commentlist {
+    margin-top: 21px;
+    padding-top: 22px;
+    border-top: 2px solid #d7d7d7;
+
+}
+#commentlist  ul li {
+    list-style: none;
+}
+#commentlist  ul li div{
+    border-top: 1px solid #d7d7d7;
+    width: 900px;
+
+}
+#commentlist #reply article header p {
+    padding-left: 70px;
+    padding-right: 0px;
+    display: inline-block;
+
+}
+#commentlist #reply article header p c {
+    color: #000;
+    font-weight: normal;
+
+}
+#commentlist #reply article header time {
+    padding-left: 70px;
+    padding-right: 0px;
+
+}
+
+
+#commentlist article {
+
+    display: table;
+    padding: 21px 0px 21px 130px;
+
+}
+
+
+#commentlist article header {
+    display: table-cell;
+    width: 220px;
+    padding-right: 22px;
+}
+
+#commentlist article header p {
+    display: block;
+    font-weight: bold;
+    color: #f87530;
+}
+#commentlist article header time {
+    display: block;
+    color: #646464;
+    font-family: 宋体;
+}
+
+
+#commentlist article p {
+    padding: 0;
+
+}
+
+#commentlist article span {
+    display:block;
+    width: 30px;
+    color: #0000ff;
+
+
+}
+#commentlist article span:hover {
+
+    color: #f87530;
+    cursor:pointer;
+}
+
+#commentlist article input[name="btn_reply"] {
+    position:absolute;
+    right:260px;
+}
+#commentlist article textarea {
+
+    border: 1px solid #d7d7d7;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    outline: none;
+}
+#commentlist article textarea:focus  {
+    border: 1px solid #f87530;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+#commentlist article input[type="button"]:hover  {
+    background-color: #f87530;
+}
+
+#footer {
+    background: transparent url(../imgs/footer-line.png) repeat-x top center;
+    overflow: hidden;
+    padding: 20px 0 0 0;
+    margin-top: 40px;
+}

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ControllWindow</class>
+ <widget class="QMainWindow" name="ControllWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>542</width>
+    <height>367</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>选课系统后台</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="ustb_app.qrc">
+    <normaloff>:/new/prefix1/imgs/icon.png</normaloff>:/new/prefix1/imgs/icon.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="searchClassBtn">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>10</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>刷新未满讲台</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="getClassTableBtn">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>10</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>查看课表</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>201</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>可选课程：(双击选课)</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>220</y>
+      <width>151</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>已选课程：(双击退课)</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="selectedListWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>240</y>
+      <width>521</width>
+      <height>91</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="alternativeListWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>521</width>
+      <height>141</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>542</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuXiangguan">
+    <property name="title">
+     <string>软件相关</string>
+    </property>
+    <addaction name="action_about"/>
+    <addaction name="action_notice"/>
+    <addaction name="action_update"/>
+   </widget>
+   <addaction name="menuXiangguan"/>
+  </widget>
+  <action name="action_update">
+   <property name="text">
+    <string>检查更新</string>
+   </property>
+  </action>
+  <action name="action_about">
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
+  <action name="action_notice">
+   <property name="text">
+    <string>注意事项</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="ustb_app.qrc"/>
+ </resources>
+ <connections/>
+</ui>
