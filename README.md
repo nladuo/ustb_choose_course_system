@@ -18,7 +18,7 @@
 
 ## WebSite(开发中...)
 后端:Go语言编写接口，框架用的gin，数据库用mysql<br>
-前端:VueJS+ES6编写，使用npm、webpack构建
+前端:VueJS+ES6编写，使用npm、webpack构建<br>
 功能:软件的介绍与下载,可以发表留言板<br>
 
 ## WebSite-Old(旧版)
