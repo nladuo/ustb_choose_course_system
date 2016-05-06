@@ -27,6 +27,7 @@ type App struct {
 
 type MessageBoard struct {
 	Id          int
+	BaseId      int
 	ParentId    int
 	Nickname    string
 	ReplyerName string
@@ -35,23 +36,16 @@ type MessageBoard struct {
 }
 
 func main() {
-	db, err := connectDB()
-	if err != nil {
-		panic(err)
-	}
-	var apps []App
-	db.Find(&apps)
-
 	router := gin.Default()
 
-	router.Static("/css", "./public/css")
-	router.Static("/js", "./public/js")
-	router.Static("/imgs", "./public/imgs")
-	router.Static("/downloads", "./public/downloads")
-	router.StaticFile("/", "./public")
-	router.GET("/app_list", handleAppList)
-	router.GET("/comment_list", handleCommentList)
-	router.POST("/add", handleAddComment)
+	router.Static("/css", "./www/css")
+	router.Static("/js", "./www/js")
+	router.Static("/imgs", "./www/imgs")
+	router.Static("/downloads", "./www/downloads")
+	router.StaticFile("/", "./www")
+	router.GET("/api/app_list", handleAppList)
+	router.GET("/api/comment_list", handleCommentList)
+	router.POST("/api/add", handleAddComment)
 	router.Run(":3000")
 }
 
