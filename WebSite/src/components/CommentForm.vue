@@ -1,5 +1,5 @@
 <template>
-    <form class="form-horizontal" name="commentform" onsubmit="return isCommentEmpty();" action="/add" method="post">
+    <form class="form-horizontal" name="commentform" onsubmit="return isCommentEmpty();" action="/api/add" method="post">
         <fieldset>
             <div class="form-group">
                 <label for="textArea" class="col-lg-2 control-label">吐槽内容：</label>
@@ -25,7 +25,6 @@
         </fieldset>
     </form>
 </template>
-
 <script>
     export default{}
 </script>

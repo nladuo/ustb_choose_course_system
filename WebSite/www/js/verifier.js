@@ -13,7 +13,6 @@ function isCommentEmpty(){
     return true;
 }
 
-
 function isReplyEmpty(){
     if (document.replyform.comment.value.trim() == "") {
         alert("回复内容不得为空");

@@ -6,8 +6,12 @@ import (
 	"github.com/jinzhu/gorm"
 	"net/http"
 	"time"
+	"strconv"
+	"fmt"
+	"os"
 )
 
+// database config
 const (
 	DB_USER   = "root"
 	DB_PASSWD = "root"
@@ -16,8 +20,10 @@ const (
 	DBNAME    = "ustb_choose_course"
 )
 
+const DEFAULT_POST  = "DEFAULT_POST"
+
 type App struct {
-	Id         int
+	Id         int `sql:"AUTO_INCREMENT"`
 	TypeName   string
 	AppName    string
 	Version    float64
@@ -26,8 +32,7 @@ type App struct {
 }
 
 type MessageBoard struct {
-	Id          int
-	BaseId      int
+	Id          int `sql:"AUTO_INCREMENT"`
 	ParentId    int
 	Nickname    string
 	ReplyerName string
@@ -45,12 +50,40 @@ func main() {
 	router.StaticFile("/", "./www")
 	router.GET("/api/app_list", handleAppList)
 	router.GET("/api/comment_list", handleCommentList)
+	router.GET("/api/add", func(c *gin.Context) {
+		c.Redirect(http.StatusOK, "/")
+	})
 	router.POST("/api/add", handleAddComment)
 	router.Run(":3000")
 }
 
 func handleAddComment(c *gin.Context) {
+	db, err := connectDB()
+	if err != nil {
+		c.Redirect(http.StatusFound, "/")
+		return
+	}
+	parent_id := c.DefaultPostForm("parent_id", DEFAULT_POST)
+	name := c.DefaultPostForm("name", DEFAULT_POST)
+	comment := c.DefaultPostForm("comment", DEFAULT_POST)
+	replyer_name := c.DefaultPostForm("replyer_name", DEFAULT_POST)
+	fmt.Fprintln(os.Stderr, parent_id, name, comment, replyer_name)
+	if !(parent_id == DEFAULT_POST || name == DEFAULT_POST ||
+		replyer_name == DEFAULT_POST || comment == DEFAULT_POST){
 
+		i_parent_id, err := strconv.ParseInt(parent_id, 10, 32)
+		if err == nil {
+			db.Create(&MessageBoard{
+				ParentId: int(i_parent_id),
+				Nickname:name,
+				ReplyerName:replyer_name,
+				Content:comment,
+				Time: time.Now(),
+			})
+		}
+	}
+	db.Close()
+	c.Redirect(http.StatusFound, "/")
 }
 
 func handleAppList(c *gin.Context) {

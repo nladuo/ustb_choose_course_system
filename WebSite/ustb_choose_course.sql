@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015-11-02 12:24:51
--- 服务器版本: 5.5.44-0ubuntu0.14.04.1
--- PHP 版本: 5.5.9-1ubuntu4.13
+-- 生成日期: 2016-05-07 00:53:17
+-- 服务器版本: 5.5.47-0ubuntu0.14.04.1
+-- PHP 版本: 5.5.34-1+deb.sury.org~trusty+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 表的结构 `app`
+-- 表的结构 `apps`
 --
 
-CREATE TABLE IF NOT EXISTS `app` (
+CREATE TABLE IF NOT EXISTS `apps` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type_name` varchar(100) NOT NULL,
   `app_name` varchar(100) DEFAULT NULL,
@@ -37,11 +37,11 @@ CREATE TABLE IF NOT EXISTS `app` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- 转存表中的数据 `app`
+-- 转存表中的数据 `apps`
 --
 
-INSERT INTO `app` (`id`, `type_name`, `app_name`, `version`, `note`, `update_note`) VALUES
-(1, 'Windows', 'win-32bit-v0.12.rar', 0.12, 'PC版', '修复了人数显示的bug，修改了选课后的显示，修改了课表一直都是2014-2015-3的错误。'),
+INSERT INTO `apps` (`id`, `type_name`, `app_name`, `version`, `note`, `update_note`) VALUES
+(1, 'Windows', 'win-32bit-v0.12.rar', 0.12, 'PC版', '修复了人数显示的bug， 修改了选课后的显示，修改了课表一直都是2014-2015-3的错误。'),
 (2, 'Ubuntu', 'ubuntu-64bit-v0.12.tar.gz', 0.12, 'PC版 64bit(仅在ubuntu14.04-destop-LTS做过测试)使用方法:进入解压后的目录,输入命令:chmod +x ./install.sh & sudo bash ./install.sh & chmod +x USTB选课系统', '修复了人数显示的bug，修改了选课后的显示，修改了课表一直都是2014-2015-3的错误。'),
 (3, 'Mac', 'mac-64bit-v0.12.zip', 0.12, 'PC版 clang-64bit（mac版记住密码不管用，尝试解决方法：打开命令行，输入sudo chmod -R 777，然后把程序拖到控制台中，输入电脑root密码，就可以了）（如果实在不行的话，可以联系我。）', '修复了人数显示的bug，修改了选课后的显示，修改了课表一直都是2014-2015-3的错误。'),
 (4, 'Android', 'android-v0.20.apk', 0.2, '移动版 (android3.0以上版本)', '新增了将课表添加到桌面的功能，可以添加多人的课表，随时看基友、男友、女友的课程安排。'),
@@ -50,10 +50,10 @@ INSERT INTO `app` (`id`, `type_name`, `app_name`, `version`, `note`, `update_not
 -- --------------------------------------------------------
 
 --
--- 表的结构 `message_board`
+-- 表的结构 `message_boards`
 --
 
-CREATE TABLE IF NOT EXISTS `message_board` (
+CREATE TABLE IF NOT EXISTS `message_boards` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) NOT NULL,
   `nickname` varchar(100) NOT NULL,
@@ -61,18 +61,24 @@ CREATE TABLE IF NOT EXISTS `message_board` (
   `content` text NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
--- 转存表中的数据 `message_board`
+-- 转存表中的数据 `message_boards`
 --
 
-INSERT INTO `message_board` (`id`, `parent_id`, `nickname`, `replyer_name`, `content`, `time`) VALUES
+INSERT INTO `message_boards` (`id`, `parent_id`, `nickname`, `replyer_name`, `content`, `time`) VALUES
 (1, 0, 'cwc', ' ', 'mac版查询课表标题永远是2014-2015-3。。。。。。。', '2015-09-10 20:17:57'),
 (2, 0, 'holo@kuluosi.com', ' ', '被坑来一次。。。\r\n这东西可以强行选课和强行退课。\r\n某物理课因为学生名单是老师指定，不能选。但这软件可以选.但,选了就不能退了。\r\n\r\n不喜欢某物理课，不过夜幸好可以强行退课。', '2015-09-14 11:00:14'),
 (3, 1, '管理员', 'cwc', '已修复错误。', '2015-10-10 02:23:07'),
 (4, 2, '管理员', 'holo@kuluosi.com', '这个是因为学校的选课系统只在前台做了排错处理，却没有在后台没有做排错处理的缘故。', '2015-10-10 02:24:38'),
-(5, 1, 'zxl', 'cwc', '你是陈文聪，嘿嘿', '2015-10-10 22:02:17');
+(5, 1, 'zxl', 'cwc', '你是陈文聪，嘿嘿', '2015-10-10 22:02:17'),
+(6, 0, 'kalen', 'kalen', 'test', '2016-05-06 16:21:00'),
+(9, 6, '哈哈哈', 'kalen', 'test回复', '2016-05-06 16:26:57'),
+(11, 0, '211', ' ', '测试111', '2016-05-06 16:41:32'),
+(12, 11, 'kalen Blue', '211', '测试2222', '2016-05-06 16:43:27'),
+(13, 12, 'admin', 'kalen Blue', '测试33333', '2016-05-06 16:44:52'),
+(14, 13, 'kalen', 'admin', '测试44444', '2016-05-06 16:45:05');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
