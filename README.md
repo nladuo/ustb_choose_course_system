@@ -17,7 +17,8 @@
 功能: 退补选课，预选课，课表的查询，创新学分查询，考试安排查询
 
 ## WebSite(开发中...)
-Go语言编写接口，框架用的gin，数据库用mysql<br>
+后端:Go语言编写接口，框架用的gin，数据库用mysql<br>
+前端:VueJS+ES6编写，使用npm、webpack构建
 功能:软件的介绍与下载,可以发表留言板<br>
 
 ## WebSite-Old(旧版)
