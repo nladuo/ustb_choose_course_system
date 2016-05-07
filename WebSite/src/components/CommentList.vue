@@ -14,7 +14,6 @@
                         <div class="col-xs-10">
                             <p> {{comment.Content}} </p>
                             <div v-if="comment.show_reply_form" >
-                                <button class="btn btn-primary btn-xs" v-on:click="show_reply_form(comment)">收起</button><br/>
                                 <reply_form :comment="comment"></reply_form>
                             </div>
                             <button class="btn btn-primary btn-xs" v-else v-on:click="show_reply_form(comment)">回复</button><br/>
@@ -30,7 +29,6 @@
                                 <div class="col-xs-10">
                                     <p> {{reply.Content}} </p>
                                     <div v-if="reply.show_reply_form" >
-                                        <button class="btn btn-primary btn-xs" v-on:click="show_reply_form(reply)">收起</button><br/>
                                         <reply_form :comment="reply"></reply_form>
                                     </div>
                                     <button class="btn btn-primary btn-xs" v-else v-on:click="show_reply_form(reply)">回复</button><br/>
@@ -69,9 +67,18 @@
         },
         methods:{
             no_reply_form(){
+                for (var i = 0; i < this.comments.length; i++) {
+                    var comment = this.comments[i];
+                    comment.show_reply_form = false;
+                    for (var j = 0; j < comment.Replys.length; j++){
+                        var reply = comment.Replys[j]
+                        reply.show_reply_form = false;
+                    }
+                }
 
             },
             show_reply_form(comment){
+                this.no_reply_form();
                 comment.show_reply_form = ~comment.show_reply_form;
             },
             parse_comments(list){//解析评论

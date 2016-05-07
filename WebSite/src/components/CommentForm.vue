@@ -25,6 +25,3 @@
         </fieldset>
     </form>
 </template>
-<script>
-    export default{}
-</script>

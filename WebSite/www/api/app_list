@@ -1,0 +1,45 @@
+{
+    "code": "0",
+    "data": [
+        {
+            "Id": 1,
+            "TypeName": "Windows",
+            "AppName": "win-32bit-v0.12.rar",
+            "Version": 0.12,
+            "Note": "PC版",
+            "UpdateNote": "修复了人数显示的bug， 修改了选课后的显示，修改了课表一直都是2014-2015-3的错误。"
+        },
+        {
+            "Id": 2,
+            "TypeName": "Ubuntu",
+            "AppName": "ubuntu-64bit-v0.12.tar.gz",
+            "Version": 0.12,
+            "Note": "PC版 64bit(仅在ubuntu14.04-destop-LTS做过测试)使用方法:进入解压后的目录,输入命令:chmod +x ./install.sh & sudo bash ./install.sh & chmod +x USTB选课系统",
+            "UpdateNote": "修复了人数显示的bug，修改了选课后的显示，修改了课表一直都是2014-2015-3的错误。"
+        },
+        {
+            "Id": 3,
+            "TypeName": "Mac",
+            "AppName": "mac-64bit-v0.12.zip",
+            "Version": 0.12,
+            "Note": "PC版 clang-64bit（mac版记住密码不管用，尝试解决方法：打开命令行，输入sudo chmod -R 777，然后把程序拖到控制台中，输入电脑root密码，就可以了）（如果实在不行的话，可以联系我。）",
+            "UpdateNote": "修复了人数显示的bug，修改了选课后的显示，修改了课表一直都是2014-2015-3的错误。"
+        },
+        {
+            "Id": 4,
+            "TypeName": "Android",
+            "AppName": "android-v0.20.apk",
+            "Version": 0.2,
+            "Note": "移动版 (android3.0以上版本)",
+            "UpdateNote": "新增了将课表添加到桌面的功能，可以添加多人的课表，随时看基友、男友、女友的课程安排。"
+        },
+        {
+            "Id": 5,
+            "TypeName": "iOS",
+            "AppName": "ios-qrcode-v1.0.jpg",
+            "Version": 1,
+            "Note": "移动版 (iOS-8.0以上版本可以运行，下载内容为二维码，手机扫描即可，如果没网。访问可能会卡顿。)",
+            "UpdateNote": " "
+        }
+    ]
+}

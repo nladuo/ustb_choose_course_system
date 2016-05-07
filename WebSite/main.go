@@ -1,3 +1,4 @@
+//The Website BackEnd of ustb_choose_course_system
 package main
 
 import (
@@ -7,8 +8,6 @@ import (
 	"net/http"
 	"time"
 	"strconv"
-	"fmt"
-	"os"
 )
 
 // database config
@@ -67,7 +66,6 @@ func handleAddComment(c *gin.Context) {
 	name := c.DefaultPostForm("name", DEFAULT_POST)
 	comment := c.DefaultPostForm("comment", DEFAULT_POST)
 	replyer_name := c.DefaultPostForm("replyer_name", DEFAULT_POST)
-	fmt.Fprintln(os.Stderr, parent_id, name, comment, replyer_name)
 	if !(parent_id == DEFAULT_POST || name == DEFAULT_POST ||
 		replyer_name == DEFAULT_POST || comment == DEFAULT_POST){
 
