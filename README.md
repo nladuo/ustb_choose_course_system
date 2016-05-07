@@ -22,4 +22,4 @@
 功能:软件的介绍与下载,可以发表留言板<br>
 
 ## WebSite-Old(旧版)
-用nodejs(v0.12.4)(express+mysql)编写<br>
+用nodejs(express框架+mysql数据库)编写<br>
