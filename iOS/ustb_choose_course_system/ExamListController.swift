@@ -27,6 +27,7 @@ class ExamListController: UIViewController, UITableViewDelegate, UITableViewData
     }
     override func loadView() {
         super.loadView()
+        self.automaticallyAdjustsScrollViewInsets = true;
         tableview.dataSource = self
         tableview.delegate = self
         searchBtn.layer.cornerRadius = 5.0   //添加圆角
