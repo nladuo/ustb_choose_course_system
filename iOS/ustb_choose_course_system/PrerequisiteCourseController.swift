@@ -65,30 +65,32 @@ class PrerequisiteCourseController: UIViewController, UITableViewDelegate, UITab
         }
         
         let bean = datas[indexPath.row]
-        
         MBProgressHUD.showMessage("加载中...")
-        var url = ""
-        if parentVc.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
-            url = kalen.app.ConstVal.getRequiredCourseURL(bean.kch, uid: kalen.app.UserInfo.getInstance().username)
-        }else{
-            url = kalen.app.ConstVal.getPreRequiredCourseURL(bean.kch, uid: kalen.app.UserInfo.getInstance().username)
-        }
-        let data = kalen.app.HttpUtil.get(url, cookieStr: parentVc.cookieData)
-        
-        MBProgressHUD.hideHUD()
-        if data == nil{
-            MBProgressHUD.showError("网络连接错误")
-            return
-        }
-        let parser = kalen.app.JsonParser(jsonStr: data! as String)
-        let classes = parser.getAlternativeCourses()
-        if classes.count == 0{
-            MBProgressHUD.showError("本学期尚未开课")
-        }else{
-            performSegueWithIdentifier("PrerequisiteShowDetail", sender: classes)
-        }
-        
-        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            var url = ""
+            if self.parentVc.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
+                url = kalen.app.ConstVal.getRequiredCourseURL(bean.kch, uid: kalen.app.UserInfo.getInstance().username)
+            }else{
+                url = kalen.app.ConstVal.getPreRequiredCourseURL(bean.kch, uid: kalen.app.UserInfo.getInstance().username)
+            }
+            let data = kalen.app.HttpUtil.get(url, cookieStr: self.parentVc.cookieData)
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                MBProgressHUD.hideHUD()
+                if data == nil{
+                    MBProgressHUD.showError("网络连接错误")
+                    return
+                }
+                let parser = kalen.app.JsonParser(jsonStr: data! as String)
+                let classes = parser.getAlternativeCourses()
+                if classes.count == 0{
+                    MBProgressHUD.showError("本学期尚未开课")
+                }else{
+                    self.performSegueWithIdentifier("PrerequisiteShowDetail", sender: classes)
+                }
+            })
+            
+        })
         
     }
 

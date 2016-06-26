@@ -47,35 +47,35 @@ class DetailTableViewController: UITableViewController, UIAlertViewDelegate {
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
         
         if buttonIndex == 1{
-            MBProgressHUD.showMessage("加载中..")
             
             let bean = datas[selectedPos]
             
-            //获取json数据
-            let params = [
-                            "id": bean.id,
-                            "uid": kalen.app.UserInfo.getInstance().username,
-                            "xkfs": self.classType,
-                            "xf": bean.credit,
-                            "NJ": "",
-                            "ZYH": ""]
-            let data = kalen.app.HttpUtil.post(self.addUrl, params: params, cookieStr: self.cookieData)
-            
-            MBProgressHUD.hideHUD()
-            if data == nil{
-                MBProgressHUD.showError("网络连接错误")
-                return
-            }
-            let parser = kalen.app.JsonParser(jsonStr: data! as String)
-            let msg = parser.getMsg()
-            let alert = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
-            alert.show()
-            
-            //self.popoverPresentationController
-            
-        }
-        
-        
+            MBProgressHUD.showMessage("加载中...")
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                //获取json数据
+                let params = [
+                    "id": bean.id,
+                    "uid": kalen.app.UserInfo.getInstance().username,
+                    "xkfs": self.classType,
+                    "xf": bean.credit,
+                    "NJ": "",
+                    "ZYH": ""]
+                let data = kalen.app.HttpUtil.post(self.addUrl, params: params, cookieStr: self.cookieData)
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    MBProgressHUD.hideHUD()
+                    if data == nil{
+                        MBProgressHUD.showError("网络连接错误")
+                        return
+                    }
+                    let parser = kalen.app.JsonParser(jsonStr: data! as String)
+                    let msg = parser.getMsg()
+                    let alert = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
+                    alert.show()
+                })
+                
+            })
+        }        
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){

@@ -116,39 +116,39 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
             }else if alertView.tag == 2{
                 let bean = findCourseBeanByCourseID(selectedId, beans: datas[1])
                 
-                MBProgressHUD.showMessage("加载中..")
-                
-                //获取json数据
-                let params = [
-                    "kch": bean.DYKCH,
-                    "xh": "",
-                    "kxh": bean.KXH,
-                    "uid": kalen.app.UserInfo.getInstance().username]
-                var removeUrl = ""
-                if parentVc.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
-                    removeUrl = kalen.app.ConstVal.REMOVE_COURSE_URL
-                }else{
-                    removeUrl = kalen.app.ConstVal.REMOVE_PRE_COURSE_URL
-                }
-                let data = kalen.app.HttpUtil.post(removeUrl, params: params, cookieStr: parentVc.cookieData)
-                
-                
-                MBProgressHUD.hideHUD()
-                if data == nil{
-                    MBProgressHUD.showError("网络连接错误")
-                    return
-                }
-                let parser = kalen.app.JsonParser(jsonStr: data! as String)
-                let msg = parser.getMsg()
-                let alert = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
-                alert.show()
-                
-                parentVc.updateNotFullPublicSelectiveCourses(self, isPullToRefresh: false)
-                print("确定退选修课")
+                MBProgressHUD.showMessage("加载中...")
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                    //获取json数据
+                    let params = [
+                        "kch": bean.DYKCH,
+                        "xh": "",
+                        "kxh": bean.KXH,
+                        "uid": kalen.app.UserInfo.getInstance().username]
+                    var removeUrl = ""
+                    if self.parentVc.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
+                        removeUrl = kalen.app.ConstVal.REMOVE_COURSE_URL
+                    }else{
+                        removeUrl = kalen.app.ConstVal.REMOVE_PRE_COURSE_URL
+                    }
+                    let data = kalen.app.HttpUtil.post(removeUrl, params: params, cookieStr: self.parentVc.cookieData)
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        MBProgressHUD.hideHUD()
+                        if data == nil{
+                            MBProgressHUD.showError("网络连接错误")
+                            return
+                        }
+                        let parser = kalen.app.JsonParser(jsonStr: data! as String)
+                        let msg = parser.getMsg()
+                        let alert = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
+                        alert.show()
+                        
+                        self.parentVc.updateNotFullPublicSelectiveCourses(self, isPullToRefresh: false)
+                        print("确定退选修课")
+                    })
+                })
             }
-            
         }
-        
     }
     
     func findCourseBeanByCourseID(id: String, beans: [kalen.app.ClassBean]) -> kalen.app.ClassBean{
