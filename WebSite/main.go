@@ -82,6 +82,7 @@ func handleCheckUpdate(c *gin.Context) {
 	db, err := connectDB()
 	if err != nil {
 		responseErr(c)
+		return
 	}
 	id := c.Query("id")
 	if len(id) == 0 {
@@ -130,6 +131,7 @@ func handleAppList(c *gin.Context) {
 	db, err := connectDB()
 	if err != nil {
 		responseErr(c)
+		return
 	}
 	apps := []App{}
 	db.Find(&apps)
@@ -140,6 +142,7 @@ func handleCommentList(c *gin.Context) {
 	db, err := connectDB()
 	if err != nil {
 		responseErr(c)
+		return
 	}
 	msgs := []MessageBoard{}
 	db.Find(&msgs)
