@@ -1,5 +1,5 @@
 <template>
-    <h4>下载列表：</h4>
+    <h4 style="font-weight: bold ;margin:18px 0">下载列表：</h4>
     <div class="list-group">
         <table class="table table-striped table-hover table-bordered">
             <thead>

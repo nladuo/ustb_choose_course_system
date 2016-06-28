@@ -1,3 +1,30 @@
+<style>
+    .comment-offset{
+        margin-left: 10px;
+    }
+    .comment-offset2{
+        margin-left: 30px;
+    }
+    .comment-btn-offset{
+        margin-bottom: 10px;
+    }
+    .time1{
+        font-size: small;
+        position:absolute;
+        right:25px;
+        bottom:12px;
+    }
+    .time2{
+        font-size: small;
+        position:absolute;
+        right:10px;
+        bottom: 0;
+    }
+    .reply{
+        font-size: small;
+        color: #95a5a6;
+    }
+</style>
 <template>
     <div id="commentlist">
         <h4>吐槽列表：</h4>
@@ -8,30 +35,40 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-2">
-                            <span class='name'> {{comment.Nickname}} </span><br>
-                            <time class='time'> {{new Date(comment.Time).Format("yyyy-MM-dd hh:mm:ss")}} </time>
+                            <center class="comment-offset2">
+                                <span style="word-break: break-all;"> {{comment.Nickname}} </span><br>
+                            </center>
                         </div>
                         <div class="col-xs-10">
-                            <p> {{comment.Content}} </p>
+                            <p class="comment-offset"> {{comment.Content}} </p><br>
                             <div v-if="comment.show_reply_form" >
                                 <reply_form :comment="comment"></reply_form>
                             </div>
-                            <button class="btn btn-primary btn-xs" v-else v-on:click="show_reply_form(comment)">回复</button><br/>
+                            <button class="btn btn-primary btn-xs comment-offset comment-btn-offset" v-else v-on:click="show_reply_form(comment)">回复</button>
+                            <time class="time1"> {{new Date(comment.Time).Format("yyyy-MM-dd  hh:mm:ss")}} </time>
+                            <br/>
                         </div>
                     </div>
                     <ul class="list-group">
                         <li v-for="reply in comment.Replys" class="list-group-item">
                             <div class="row">
                                 <div class="col-xs-2">
-                                    <span> {{reply.Nickname}}&nbsp;&nbsp;<c>回复</c>&nbsp;&nbsp; {{reply.ReplyerName}}  </span><br>
-                                    <time> {{new Date(reply.Time).Format("yyyy-MM-dd hh:mm:ss")}} </time>
+                                    <center style="word-break: break-all;">
+                                        <span> {{reply.Nickname}}&nbsp;&nbsp;
+                                            <span class="reply">回复</span>&nbsp;&nbsp;
+                                            {{reply.ReplyerName}}
+                                        </span><br>
+                                    </center>
+
                                 </div>
                                 <div class="col-xs-10">
                                     <p> {{reply.Content}} </p>
                                     <div v-if="reply.show_reply_form" >
                                         <reply_form :comment="reply"></reply_form>
                                     </div>
-                                    <button class="btn btn-primary btn-xs" v-else v-on:click="show_reply_form(reply)">回复</button><br/>
+                                    <button class="btn btn-primary btn-xs" v-else v-on:click="show_reply_form(reply)">回复</button>
+                                    <time class="time2"> {{new Date(reply.Time).Format("yyyy-MM-dd  hh:mm:ss")}} </time>
+                                    <br/>
                                 </div>
                             </div>
                         </li>

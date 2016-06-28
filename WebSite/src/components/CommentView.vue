@@ -1,5 +1,5 @@
 <template>
-    <h4>对软件不满意？吐个槽：</h4>
+    <h4 style="font-weight: bold;">对软件不满意？吐个槽：</h4>
     <div id="comments" class="list-group">
         <comment_form></comment_form>
         <comment_list></comment_list>
