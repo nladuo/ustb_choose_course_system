@@ -42,7 +42,7 @@
                         <div class="col-xs-10">
                             <p class="comment-offset"> {{comment.Content}} </p><br>
                             <div v-if="comment.show_reply_form" >
-                                <reply_form :comment=comment"></reply_form>
+                                <reply_form :comment="comment"></reply_form>
                             </div>
                             <button class="btn btn-primary btn-xs comment-offset comment-btn-offset" v-else v-on:click="show_reply_form(comment)">回复</button>
                             <time class="time1"> {{new Date(comment.Time).Format("yyyy-MM-dd  hh:mm:ss")}} </time>
@@ -84,7 +84,7 @@
 
     export default {
         components:{
-            reply_form: ReplyFrom,
+            reply_form: ReplyFrom
         },
         data(){
             return{
