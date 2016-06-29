@@ -31,18 +31,18 @@
         <ul id="comment_list" class="list-group">
             <h5 v-if="{{comments.length == 0}}">暂无吐糟</h5>
 
-            <li v-for="comment in comments" class="list-group-item">
-                <div class="container-fluid">
+            <li v-for="comment in comments" class="list-group-item" style="padding-left: 6px;padding-right: 6px;">
+                <div class="container-fluid" style="padding-left: 0;padding-right: 0;">
                     <div class="row">
-                        <div class="col-xs-2">
+                        <div class="col-xs-2" style="padding: 0;">
                             <center class="comment-offset2">
-                                <span style="word-break: break-all;"> {{comment.Nickname}} </span><br>
+                                <span style="word-break: break-all;font-size: 14px;"> {{comment.Nickname}} </span><br>
                             </center>
                         </div>
                         <div class="col-xs-10">
                             <p class="comment-offset"> {{comment.Content}} </p><br>
                             <div v-if="comment.show_reply_form" >
-                                <reply_form :comment="comment"></reply_form>
+                                <reply_form :comment=comment"></reply_form>
                             </div>
                             <button class="btn btn-primary btn-xs comment-offset comment-btn-offset" v-else v-on:click="show_reply_form(comment)">回复</button>
                             <time class="time1"> {{new Date(comment.Time).Format("yyyy-MM-dd  hh:mm:ss")}} </time>
@@ -52,10 +52,10 @@
                     <ul class="list-group">
                         <li v-for="reply in comment.Replys" class="list-group-item">
                             <div class="row">
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" style="padding-right:0;margin: 0;">
                                     <center style="word-break: break-all;">
-                                        <span> {{reply.Nickname}}&nbsp;&nbsp;
-                                            <span class="reply">回复</span>&nbsp;&nbsp;
+                                        <span style="font-size: 14px;"> {{reply.Nickname}}&nbsp;
+                                            <span class="reply">回复</span>&nbsp;
                                             {{reply.ReplyerName}}
                                         </span><br>
                                     </center>
