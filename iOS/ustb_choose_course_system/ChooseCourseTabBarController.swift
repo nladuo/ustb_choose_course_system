@@ -24,6 +24,7 @@ class ChooseCourseTabBarController: UITabBarController {
     //var publicClasses:[kalen.app.ClassBean] = []
     
     //专业选修课列表
+    @IBOutlet weak var showClassTableBarItem: UIBarButtonItem!
     var specifiedClasses:[kalen.app.ClassBean] = []
     
     //必修课列表
@@ -32,10 +33,25 @@ class ChooseCourseTabBarController: UITabBarController {
     //上课类型
     var chooseCourseType = kalen.app.ConstVal.AfterChooseCourse
     
+    override func loadView() {
+        super.loadView()
+        self.view.backgroundColor = UIColor.cloudsColor()
+        self.navigationController?.navigationBar.configureFlatNavigationBarWithColor(UIColor.midnightBlueColor())
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
+        showClassTableBarItem.configureFlatButtonWithColor(UIColor.peterRiverColor(), highlightedColor: UIColor.belizeHoleColor(), cornerRadius: 3)
+        showClassTableBarItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: UIControlState.Normal)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        let barItem = UIBarButtonItem(title: "返回 ", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        barItem.configureFlatButtonWithColor(UIColor.peterRiverColor(), highlightedColor: UIColor.belizeHoleColor(), cornerRadius: 3)
+        barItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: UIControlState.Normal)
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = barItem
     }
 
     override func didReceiveMemoryWarning() {

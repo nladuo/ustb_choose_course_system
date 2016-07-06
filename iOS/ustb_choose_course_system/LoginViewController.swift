@@ -14,12 +14,13 @@ class LoginViewController: UIViewController, HttpDelegate{
     var userDefaults = NSUserDefaults.standardUserDefaults()
     var cookieData = ""
     
-    @IBOutlet weak var username: UITextField!
-    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var username: FUITextField!
+    @IBOutlet weak var password: FUITextField!
     @IBOutlet weak var saveProSwitch: UISwitch!
     private var httpUtil:kalen.app.HttpUtil?
     
-    @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var loginBtn: FUIButton!
+    @IBOutlet weak var localClassTableBarItem: UIBarButtonItem!
     
     
     
@@ -46,8 +47,28 @@ class LoginViewController: UIViewController, HttpDelegate{
         password.resignFirstResponder()
     }
     
+    override func loadView() {
+        super.loadView()
+        //navigationbar
+        self.view.backgroundColor = UIColor.cloudsColor()
+        self.navigationController?.navigationBar.configureFlatNavigationBarWithColor(UIColor.midnightBlueColor())
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
+        username.layer.borderColor = UIColor.turquoiseColor().CGColor
+        password.layer.borderColor = UIColor.turquoiseColor().CGColor
+        
+        localClassTableBarItem.configureFlatButtonWithColor(UIColor.peterRiverColor(), highlightedColor: UIColor.belizeHoleColor(), cornerRadius: 3)
+        localClassTableBarItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: UIControlState.Normal)
+  
+        loginBtn.backgroundColor = UIColor.turquoiseColor()
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         password.secureTextEntry = true
         loginBtn.layer.cornerRadius = 7.0   //添加圆角
         

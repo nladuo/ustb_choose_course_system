@@ -28,6 +28,13 @@ class LocalClassTableViewController: UIViewController{
     
     override func loadView() {
         super.loadView()
+        
+        self.view.backgroundColor = UIColor.cloudsColor()
+        self.navigationController?.navigationBar.configureFlatNavigationBarWithColor(UIColor.midnightBlueColor())
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
         print("loadView", self.navigationController)
         //20为显示时间、运营商等等的高度，3为bottomMargin
         CELL_HEIGHT = (UIScreen.mainScreen().bounds.size.height - self.navigationController!.navigationBar.frame.size.height - 20 - 3
@@ -48,7 +55,12 @@ class LocalClassTableViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ViewDIDLoad", self.navigationController)
+        let barItem = UIBarButtonItem(title: "返回 ", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        barItem.configureFlatButtonWithColor(UIColor.peterRiverColor(), highlightedColor: UIColor.belizeHoleColor(), cornerRadius: 3)
+        barItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: UIControlState.Normal)
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = barItem
+        
+//        print("ViewDidLoad", self.navigationController)
         
         jsonParser = kalen.app.JsonParser(jsonStr: userDefaults.objectForKey(cList[0]) as! String)
         //2、初始化课程数组所有的内容

@@ -26,7 +26,7 @@ class PrerequisiteCourseController: UIViewController, UITableViewDelegate, UITab
         parentVc = self.tabBarController as! ChooseCourseTabBarController
         
         //添加下拉刷新
-        refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(PrerequisiteCourseController.refresh(_:)), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
         tableView.delegate = self
         tableView.dataSource = self

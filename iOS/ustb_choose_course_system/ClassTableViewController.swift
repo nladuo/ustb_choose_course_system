@@ -29,6 +29,7 @@ class ClassTableViewController: UIViewController{
     var labelCollections:[[UILabel]] = []
     var tagImgCollections:[[UIImageView]] = []
     var unkownClassLabel:UILabel!
+    
 
     @IBAction func moreBarBtnClicked(sender: AnyObject) {
         
@@ -63,6 +64,9 @@ class ClassTableViewController: UIViewController{
             if !isExist{
                 cList.append(oneClass)
                 userDefaults.setObject(cList.joinWithSeparator("\n"), forKey: "class_list")
+                MBProgressHUD.showSuccess("添加成功")
+            }else{
+                MBProgressHUD.showError("课表已经存在")
             }
         }))
         alert.addAction(UIAlertAction(title: "清除历史数据", style: UIAlertActionStyle.Destructive, handler: { (UIAlertAction) -> Void in
@@ -76,6 +80,7 @@ class ClassTableViewController: UIViewController{
                 userDefaults.setObject("", forKey: c)
             }
             userDefaults.setObject("", forKey: "class_list")
+            MBProgressHUD.showSuccess("清除成功")
             
         }))
         self.presentViewController(alert, animated: true, completion: nil)
@@ -100,6 +105,13 @@ class ClassTableViewController: UIViewController{
 
     override func loadView() {
         super.loadView()
+        searchBtn.backgroundColor = UIColor.turquoiseColor()
+        self.view.backgroundColor = UIColor.cloudsColor()
+        self.navigationController?.navigationBar.configureFlatNavigationBarWithColor(UIColor.midnightBlueColor())
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
         //20为显示时间、运营商等等的高度，3为bottomMargin
         CELL_HEIGHT = (UIScreen.mainScreen().bounds.size.height - topView.frame.size.height - self.navigationController!.navigationBar.frame.size.height - 20 - 3
             ) / CGFloat(8.0)
@@ -119,6 +131,11 @@ class ClassTableViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let barItem = UIBarButtonItem(title: "返回 ", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        barItem.configureFlatButtonWithColor(UIColor.peterRiverColor(), highlightedColor: UIColor.belizeHoleColor(), cornerRadius: 3)
+        barItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: UIControlState.Normal)
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = barItem
         
         //show waiting message
         MBProgressHUD.showMessage("加载中")
@@ -258,7 +275,7 @@ class ClassTableViewController: UIViewController{
 
                 btn.tag = i * 6 + j
                 btn.addSubview(label)
-                btn.addTarget(self, action: "classBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+                btn.addTarget(self, action: #selector(ClassTableViewController.classBtnClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
 
 
                 //添加到集合中
@@ -311,7 +328,7 @@ class ClassTableViewController: UIViewController{
         btn.layer.borderWidth = 0.3
         btn.layer.borderColor = UIColor.blackColor().CGColor
         btn.tag = -1
-        btn.addTarget(self, action: "classBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+        btn.addTarget(self, action: #selector(ClassTableViewController.classBtnClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
 
         unkownClassLabel = UILabel(frame: CGRectMake(0, 0, 7 * CELL_WIDTH, CELL_HEIGHT))

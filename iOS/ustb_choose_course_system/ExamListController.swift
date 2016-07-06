@@ -27,13 +27,26 @@ class ExamListController: UIViewController, UITableViewDelegate, UITableViewData
     }
     override func loadView() {
         super.loadView()
+        self.view.backgroundColor = UIColor.cloudsColor()
+        self.navigationController?.navigationBar.configureFlatNavigationBarWithColor(UIColor.midnightBlueColor())
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
         self.automaticallyAdjustsScrollViewInsets = true;
         tableview.dataSource = self
         tableview.delegate = self
         searchBtn.layer.cornerRadius = 5.0   //添加圆角
+        searchBtn.backgroundColor =  UIColor.turquoiseColor()
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        let barItem = UIBarButtonItem(title: "返回 ", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        barItem.configureFlatButtonWithColor(UIColor.peterRiverColor(), highlightedColor: UIColor.belizeHoleColor(), cornerRadius: 3)
+        barItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: UIControlState.Normal)
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = barItem
+        
         initDatas()
         // Do any additional setup after loading the view.
         //show waiting message

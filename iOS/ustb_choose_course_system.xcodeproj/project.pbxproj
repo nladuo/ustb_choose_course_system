@@ -40,6 +40,37 @@
 		F4BA6A421B775970006C8B91 /* HttpUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA6A411B775970006C8B91 /* HttpUtil.swift */; };
 		F4BA6A441B775C1A006C8B91 /* ConstVal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA6A431B775C1A006C8B91 /* ConstVal.swift */; };
 		F4BA6A461B775DA6006C8B91 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA6A451B775DA6006C8B91 /* UserInfo.swift */; };
+		F4DE56AE1D2D0F2900871E5E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F4DE56771D2D0F2900871E5E /* .gitignore */; };
+		F4DE56AF1D2D0F2900871E5E /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = F4DE56781D2D0F2900871E5E /* .travis.yml */; };
+		F4DE56B01D2D0F2900871E5E /* FUIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE567D1D2D0F2900871E5E /* FUIAlertView.m */; };
+		F4DE56B11D2D0F2900871E5E /* FUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE567F1D2D0F2900871E5E /* FUIButton.m */; };
+		F4DE56B21D2D0F2900871E5E /* FUICellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE56811D2D0F2900871E5E /* FUICellBackgroundView.m */; };
+		F4DE56B31D2D0F2900871E5E /* FUIPopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE56831D2D0F2900871E5E /* FUIPopoverBackgroundView.m */; };
+		F4DE56B41D2D0F2900871E5E /* FUISegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE56851D2D0F2900871E5E /* FUISegmentedControl.m */; };
+		F4DE56B51D2D0F2900871E5E /* FUISwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE56871D2D0F2900871E5E /* FUISwitch.m */; };
+		F4DE56B61D2D0F2900871E5E /* FUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE56891D2D0F2900871E5E /* FUITextField.m */; };
+		F4DE56B71D2D0F2900871E5E /* NSString+Icons.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE568B1D2D0F2900871E5E /* NSString+Icons.m */; };
+		F4DE56B81D2D0F2900871E5E /* UIBarButtonItem+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE568D1D2D0F2900871E5E /* UIBarButtonItem+FlatUI.m */; };
+		F4DE56B91D2D0F2900871E5E /* UIColor+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE568F1D2D0F2900871E5E /* UIColor+FlatUI.m */; };
+		F4DE56BA1D2D0F2900871E5E /* UIFont+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE56911D2D0F2900871E5E /* UIFont+FlatUI.m */; };
+		F4DE56BB1D2D0F2900871E5E /* UIImage+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE56931D2D0F2900871E5E /* UIImage+FlatUI.m */; };
+		F4DE56BC1D2D0F2900871E5E /* UINavigationBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE56951D2D0F2900871E5E /* UINavigationBar+FlatUI.m */; };
+		F4DE56BD1D2D0F2900871E5E /* UIPopoverController+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE56971D2D0F2900871E5E /* UIPopoverController+FlatUI.m */; };
+		F4DE56BE1D2D0F2900871E5E /* UIProgressView+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE56991D2D0F2900871E5E /* UIProgressView+FlatUI.m */; };
+		F4DE56BF1D2D0F2900871E5E /* UISlider+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE569B1D2D0F2900871E5E /* UISlider+FlatUI.m */; };
+		F4DE56C01D2D0F2900871E5E /* UIStepper+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE569D1D2D0F2900871E5E /* UIStepper+FlatUI.m */; };
+		F4DE56C11D2D0F2900871E5E /* UITabBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE569F1D2D0F2900871E5E /* UITabBar+FlatUI.m */; };
+		F4DE56C21D2D0F2900871E5E /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE56A11D2D0F2900871E5E /* UITableViewCell+FlatUI.m */; };
+		F4DE56C31D2D0F2900871E5E /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE56A31D2D0F2900871E5E /* UIToolbar+FlatUI.m */; };
+		F4DE56C41D2D0F2900871E5E /* FlatUIKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = F4DE56A41D2D0F2900871E5E /* FlatUIKit.podspec */; };
+		F4DE56C51D2D0F2900871E5E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F4DE56A51D2D0F2900871E5E /* LICENSE */; };
+		F4DE56C61D2D0F2900871E5E /* Rakefile in Resources */ = {isa = PBXBuildFile; fileRef = F4DE56A61D2D0F2900871E5E /* Rakefile */; };
+		F4DE56C71D2D0F2900871E5E /* README.markdown in Sources */ = {isa = PBXBuildFile; fileRef = F4DE56A71D2D0F2900871E5E /* README.markdown */; };
+		F4DE56C81D2D0F2900871E5E /* flat-ui-icons-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4DE56A91D2D0F2900871E5E /* flat-ui-icons-regular.ttf */; };
+		F4DE56C91D2D0F2900871E5E /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4DE56AA1D2D0F2900871E5E /* Lato-Bold.ttf */; };
+		F4DE56CA1D2D0F2900871E5E /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4DE56AB1D2D0F2900871E5E /* Lato-Italic.ttf */; };
+		F4DE56CB1D2D0F2900871E5E /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4DE56AC1D2D0F2900871E5E /* Lato-Light.ttf */; };
+		F4DE56CC1D2D0F2900871E5E /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4DE56AD1D2D0F2900871E5E /* Lato-Regular.ttf */; };
 		F4EE082B1BF79AEA00E02F8F /* LocalClassTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EE082A1BF79AEA00E02F8F /* LocalClassTableController.swift */; };
 		F4EE082F1BF79E9700E02F8F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EE082E1BF79E9700E02F8F /* CoreData.framework */; };
 		F4F0F5F61B7A1C7900E9549D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F0F5F51B7A1C7900E9549D /* Main.storyboard */; };
@@ -104,6 +135,58 @@
 		F4BA6A411B775970006C8B91 /* HttpUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpUtil.swift; sourceTree = "<group>"; };
 		F4BA6A431B775C1A006C8B91 /* ConstVal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstVal.swift; sourceTree = "<group>"; };
 		F4BA6A451B775DA6006C8B91 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		F4DE56771D2D0F2900871E5E /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		F4DE56781D2D0F2900871E5E /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		F4DE567B1D2D0F2900871E5E /* FlatUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatUIKit.h; sourceTree = "<group>"; };
+		F4DE567C1D2D0F2900871E5E /* FUIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAlertView.h; sourceTree = "<group>"; };
+		F4DE567D1D2D0F2900871E5E /* FUIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAlertView.m; sourceTree = "<group>"; };
+		F4DE567E1D2D0F2900871E5E /* FUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIButton.h; sourceTree = "<group>"; };
+		F4DE567F1D2D0F2900871E5E /* FUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIButton.m; sourceTree = "<group>"; };
+		F4DE56801D2D0F2900871E5E /* FUICellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICellBackgroundView.h; sourceTree = "<group>"; };
+		F4DE56811D2D0F2900871E5E /* FUICellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICellBackgroundView.m; sourceTree = "<group>"; };
+		F4DE56821D2D0F2900871E5E /* FUIPopoverBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPopoverBackgroundView.h; sourceTree = "<group>"; };
+		F4DE56831D2D0F2900871E5E /* FUIPopoverBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPopoverBackgroundView.m; sourceTree = "<group>"; };
+		F4DE56841D2D0F2900871E5E /* FUISegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISegmentedControl.h; sourceTree = "<group>"; };
+		F4DE56851D2D0F2900871E5E /* FUISegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISegmentedControl.m; sourceTree = "<group>"; };
+		F4DE56861D2D0F2900871E5E /* FUISwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISwitch.h; sourceTree = "<group>"; };
+		F4DE56871D2D0F2900871E5E /* FUISwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISwitch.m; sourceTree = "<group>"; };
+		F4DE56881D2D0F2900871E5E /* FUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUITextField.h; sourceTree = "<group>"; };
+		F4DE56891D2D0F2900871E5E /* FUITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUITextField.m; sourceTree = "<group>"; };
+		F4DE568A1D2D0F2900871E5E /* NSString+Icons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Icons.h"; sourceTree = "<group>"; };
+		F4DE568B1D2D0F2900871E5E /* NSString+Icons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Icons.m"; sourceTree = "<group>"; };
+		F4DE568C1D2D0F2900871E5E /* UIBarButtonItem+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+FlatUI.h"; sourceTree = "<group>"; };
+		F4DE568D1D2D0F2900871E5E /* UIBarButtonItem+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+FlatUI.m"; sourceTree = "<group>"; };
+		F4DE568E1D2D0F2900871E5E /* UIColor+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FlatUI.h"; sourceTree = "<group>"; };
+		F4DE568F1D2D0F2900871E5E /* UIColor+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FlatUI.m"; sourceTree = "<group>"; };
+		F4DE56901D2D0F2900871E5E /* UIFont+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FlatUI.h"; sourceTree = "<group>"; };
+		F4DE56911D2D0F2900871E5E /* UIFont+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FlatUI.m"; sourceTree = "<group>"; };
+		F4DE56921D2D0F2900871E5E /* UIImage+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FlatUI.h"; sourceTree = "<group>"; };
+		F4DE56931D2D0F2900871E5E /* UIImage+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FlatUI.m"; sourceTree = "<group>"; };
+		F4DE56941D2D0F2900871E5E /* UINavigationBar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+FlatUI.h"; sourceTree = "<group>"; };
+		F4DE56951D2D0F2900871E5E /* UINavigationBar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+FlatUI.m"; sourceTree = "<group>"; };
+		F4DE56961D2D0F2900871E5E /* UIPopoverController+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPopoverController+FlatUI.h"; sourceTree = "<group>"; };
+		F4DE56971D2D0F2900871E5E /* UIPopoverController+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPopoverController+FlatUI.m"; sourceTree = "<group>"; };
+		F4DE56981D2D0F2900871E5E /* UIProgressView+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+FlatUI.h"; sourceTree = "<group>"; };
+		F4DE56991D2D0F2900871E5E /* UIProgressView+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+FlatUI.m"; sourceTree = "<group>"; };
+		F4DE569A1D2D0F2900871E5E /* UISlider+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISlider+FlatUI.h"; sourceTree = "<group>"; };
+		F4DE569B1D2D0F2900871E5E /* UISlider+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISlider+FlatUI.m"; sourceTree = "<group>"; };
+		F4DE569C1D2D0F2900871E5E /* UIStepper+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStepper+FlatUI.h"; sourceTree = "<group>"; };
+		F4DE569D1D2D0F2900871E5E /* UIStepper+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStepper+FlatUI.m"; sourceTree = "<group>"; };
+		F4DE569E1D2D0F2900871E5E /* UITabBar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+FlatUI.h"; sourceTree = "<group>"; };
+		F4DE569F1D2D0F2900871E5E /* UITabBar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+FlatUI.m"; sourceTree = "<group>"; };
+		F4DE56A01D2D0F2900871E5E /* UITableViewCell+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+FlatUI.h"; sourceTree = "<group>"; };
+		F4DE56A11D2D0F2900871E5E /* UITableViewCell+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+FlatUI.m"; sourceTree = "<group>"; };
+		F4DE56A21D2D0F2900871E5E /* UIToolbar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIToolbar+FlatUI.h"; sourceTree = "<group>"; };
+		F4DE56A31D2D0F2900871E5E /* UIToolbar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+FlatUI.m"; sourceTree = "<group>"; };
+		F4DE56A41D2D0F2900871E5E /* FlatUIKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FlatUIKit.podspec; sourceTree = "<group>"; };
+		F4DE56A51D2D0F2900871E5E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		F4DE56A61D2D0F2900871E5E /* Rakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Rakefile; sourceTree = "<group>"; };
+		F4DE56A71D2D0F2900871E5E /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.markdown; sourceTree = "<group>"; };
+		F4DE56A91D2D0F2900871E5E /* flat-ui-icons-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "flat-ui-icons-regular.ttf"; sourceTree = "<group>"; };
+		F4DE56AA1D2D0F2900871E5E /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		F4DE56AB1D2D0F2900871E5E /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
+		F4DE56AC1D2D0F2900871E5E /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		F4DE56AD1D2D0F2900871E5E /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		F4EE082A1BF79AEA00E02F8F /* LocalClassTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalClassTableController.swift; sourceTree = "<group>"; };
 		F4EE082E1BF79E9700E02F8F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F4F0F5F51B7A1C7900E9549D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -161,6 +244,7 @@
 		8270D04C1C47B43900B49F00 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				F4DE56761D2D0F2900871E5E /* FlatUIKit */,
 				F4343F181B801E8800AEAB1D /* MBProgressHUD */,
 				8270D0371C47B2E400B49F00 /* libxml2 */,
 				8270D03A1C47B2F600B49F00 /* Fuzi */,
@@ -261,6 +345,89 @@
 			);
 			name = kalen.app;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		F4DE56761D2D0F2900871E5E /* FlatUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				F4DE56771D2D0F2900871E5E /* .gitignore */,
+				F4DE56781D2D0F2900871E5E /* .travis.yml */,
+				F4DE56791D2D0F2900871E5E /* Classes */,
+				F4DE56A41D2D0F2900871E5E /* FlatUIKit.podspec */,
+				F4DE56A51D2D0F2900871E5E /* LICENSE */,
+				F4DE56A61D2D0F2900871E5E /* Rakefile */,
+				F4DE56A71D2D0F2900871E5E /* README.markdown */,
+				F4DE56A81D2D0F2900871E5E /* Resources */,
+			);
+			path = FlatUIKit;
+			sourceTree = "<group>";
+		};
+		F4DE56791D2D0F2900871E5E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F4DE567A1D2D0F2900871E5E /* ios */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		F4DE567A1D2D0F2900871E5E /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				F4DE567B1D2D0F2900871E5E /* FlatUIKit.h */,
+				F4DE567C1D2D0F2900871E5E /* FUIAlertView.h */,
+				F4DE567D1D2D0F2900871E5E /* FUIAlertView.m */,
+				F4DE567E1D2D0F2900871E5E /* FUIButton.h */,
+				F4DE567F1D2D0F2900871E5E /* FUIButton.m */,
+				F4DE56801D2D0F2900871E5E /* FUICellBackgroundView.h */,
+				F4DE56811D2D0F2900871E5E /* FUICellBackgroundView.m */,
+				F4DE56821D2D0F2900871E5E /* FUIPopoverBackgroundView.h */,
+				F4DE56831D2D0F2900871E5E /* FUIPopoverBackgroundView.m */,
+				F4DE56841D2D0F2900871E5E /* FUISegmentedControl.h */,
+				F4DE56851D2D0F2900871E5E /* FUISegmentedControl.m */,
+				F4DE56861D2D0F2900871E5E /* FUISwitch.h */,
+				F4DE56871D2D0F2900871E5E /* FUISwitch.m */,
+				F4DE56881D2D0F2900871E5E /* FUITextField.h */,
+				F4DE56891D2D0F2900871E5E /* FUITextField.m */,
+				F4DE568A1D2D0F2900871E5E /* NSString+Icons.h */,
+				F4DE568B1D2D0F2900871E5E /* NSString+Icons.m */,
+				F4DE568C1D2D0F2900871E5E /* UIBarButtonItem+FlatUI.h */,
+				F4DE568D1D2D0F2900871E5E /* UIBarButtonItem+FlatUI.m */,
+				F4DE568E1D2D0F2900871E5E /* UIColor+FlatUI.h */,
+				F4DE568F1D2D0F2900871E5E /* UIColor+FlatUI.m */,
+				F4DE56901D2D0F2900871E5E /* UIFont+FlatUI.h */,
+				F4DE56911D2D0F2900871E5E /* UIFont+FlatUI.m */,
+				F4DE56921D2D0F2900871E5E /* UIImage+FlatUI.h */,
+				F4DE56931D2D0F2900871E5E /* UIImage+FlatUI.m */,
+				F4DE56941D2D0F2900871E5E /* UINavigationBar+FlatUI.h */,
+				F4DE56951D2D0F2900871E5E /* UINavigationBar+FlatUI.m */,
+				F4DE56961D2D0F2900871E5E /* UIPopoverController+FlatUI.h */,
+				F4DE56971D2D0F2900871E5E /* UIPopoverController+FlatUI.m */,
+				F4DE56981D2D0F2900871E5E /* UIProgressView+FlatUI.h */,
+				F4DE56991D2D0F2900871E5E /* UIProgressView+FlatUI.m */,
+				F4DE569A1D2D0F2900871E5E /* UISlider+FlatUI.h */,
+				F4DE569B1D2D0F2900871E5E /* UISlider+FlatUI.m */,
+				F4DE569C1D2D0F2900871E5E /* UIStepper+FlatUI.h */,
+				F4DE569D1D2D0F2900871E5E /* UIStepper+FlatUI.m */,
+				F4DE569E1D2D0F2900871E5E /* UITabBar+FlatUI.h */,
+				F4DE569F1D2D0F2900871E5E /* UITabBar+FlatUI.m */,
+				F4DE56A01D2D0F2900871E5E /* UITableViewCell+FlatUI.h */,
+				F4DE56A11D2D0F2900871E5E /* UITableViewCell+FlatUI.m */,
+				F4DE56A21D2D0F2900871E5E /* UIToolbar+FlatUI.h */,
+				F4DE56A31D2D0F2900871E5E /* UIToolbar+FlatUI.m */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		F4DE56A81D2D0F2900871E5E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F4DE56A91D2D0F2900871E5E /* flat-ui-icons-regular.ttf */,
+				F4DE56AA1D2D0F2900871E5E /* Lato-Bold.ttf */,
+				F4DE56AB1D2D0F2900871E5E /* Lato-Italic.ttf */,
+				F4DE56AC1D2D0F2900871E5E /* Lato-Light.ttf */,
+				F4DE56AD1D2D0F2900871E5E /* Lato-Regular.ttf */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		F4FA26161B78B90300CA0F3B /* util */ = {
@@ -405,9 +572,19 @@
 			files = (
 				F4BA6A291B7758CB006C8B91 /* LaunchScreen.xib in Resources */,
 				F4343F1F1B801E8800AEAB1D /* MBProgressHUD.bundle in Resources */,
+				F4DE56CA1D2D0F2900871E5E /* Lato-Italic.ttf in Resources */,
+				F4DE56C41D2D0F2900871E5E /* FlatUIKit.podspec in Resources */,
 				F4BA6A261B7758CB006C8B91 /* Images.xcassets in Resources */,
+				F4DE56C81D2D0F2900871E5E /* flat-ui-icons-regular.ttf in Resources */,
 				8270D0481C47B2F600B49F00 /* Info.plist in Resources */,
+				F4DE56CC1D2D0F2900871E5E /* Lato-Regular.ttf in Resources */,
+				F4DE56C61D2D0F2900871E5E /* Rakefile in Resources */,
+				F4DE56C91D2D0F2900871E5E /* Lato-Bold.ttf in Resources */,
+				F4DE56AE1D2D0F2900871E5E /* .gitignore in Resources */,
+				F4DE56C51D2D0F2900871E5E /* LICENSE in Resources */,
+				F4DE56AF1D2D0F2900871E5E /* .travis.yml in Resources */,
 				F4F0F5F61B7A1C7900E9549D /* Main.storyboard in Resources */,
+				F4DE56CB1D2D0F2900871E5E /* Lato-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,25 +602,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4DE56B01D2D0F2900871E5E /* FUIAlertView.m in Sources */,
 				F4634FBA1BA13AEB00B784C7 /* DetailTableViewController.swift in Sources */,
+				F4DE56BB1D2D0F2900871E5E /* UIImage+FlatUI.m in Sources */,
 				F4343F1E1B801E8800AEAB1D /* MBProgressHUD+MJ.m in Sources */,
+				F4DE56BD1D2D0F2900871E5E /* UIPopoverController+FlatUI.m in Sources */,
 				F44904551B7B2B9300CB9C06 /* MainNavigationController.swift in Sources */,
 				9AAFB3831B7DB3FB00AE1D6F /* PublicSelctiveCourseController.swift in Sources */,
 				F4BA6A401B775930006C8B91 /* kalen.app.swift in Sources */,
+				F4DE56B71D2D0F2900871E5E /* NSString+Icons.m in Sources */,
 				8270D0541C47BD7400B49F00 /* InnovativeCreditController.swift in Sources */,
 				F4EE082B1BF79AEA00E02F8F /* LocalClassTableController.swift in Sources */,
+				F4DE56C71D2D0F2900871E5E /* README.markdown in Sources */,
 				F4BA6A441B775C1A006C8B91 /* ConstVal.swift in Sources */,
 				8270D0561C47C63D00B49F00 /* ExamListController.swift in Sources */,
 				8270D0441C47B2F600B49F00 /* Document.swift in Sources */,
 				F4F823D11B7B44C700128B88 /* ClassBean.swift in Sources */,
+				F4DE56B41D2D0F2900871E5E /* FUISegmentedControl.m in Sources */,
+				F4DE56BA1D2D0F2900871E5E /* UIFont+FlatUI.m in Sources */,
 				F4F823CF1B7B421800128B88 /* ChooseCourseTabBarController.swift in Sources */,
 				F4343F201B801E8800AEAB1D /* MBProgressHUD.m in Sources */,
+				F4DE56BF1D2D0F2900871E5E /* UISlider+FlatUI.m in Sources */,
+				F4DE56B11D2D0F2900871E5E /* FUIButton.m in Sources */,
+				F4DE56B81D2D0F2900871E5E /* UIBarButtonItem+FlatUI.m in Sources */,
 				F4FA26191B78B93D00CA0F3B /* JsonParser.swift in Sources */,
 				F464D5AE1B7F266C009657B6 /* ChooseCourseDelegate.swift in Sources */,
+				F4DE56BE1D2D0F2900871E5E /* UIProgressView+FlatUI.m in Sources */,
 				8270D0451C47B2F600B49F00 /* Element.swift in Sources */,
+				F4DE56C21D2D0F2900871E5E /* UITableViewCell+FlatUI.m in Sources */,
 				8270D0501C47B58600B49F00 /* InnovativeCredit.swift in Sources */,
+				F4DE56B51D2D0F2900871E5E /* FUISwitch.m in Sources */,
+				F4DE56BC1D2D0F2900871E5E /* UINavigationBar+FlatUI.m in Sources */,
 				F4BA6A461B775DA6006C8B91 /* UserInfo.swift in Sources */,
 				8270D0461C47B2F600B49F00 /* Error.swift in Sources */,
+				F4DE56C31D2D0F2900871E5E /* UIToolbar+FlatUI.m in Sources */,
+				F4DE56C01D2D0F2900871E5E /* UIStepper+FlatUI.m in Sources */,
+				F4DE56B31D2D0F2900871E5E /* FUIPopoverBackgroundView.m in Sources */,
 				F4F0F5F81B7A1D9700E9549D /* MainTableViewController.swift in Sources */,
 				8270D04E1C47B48600B49F00 /* HtmlParser.swift in Sources */,
 				9AAFB3851B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift in Sources */,
@@ -453,10 +647,14 @@
 				F4BA6A211B7758CB006C8B91 /* LoginViewController.swift in Sources */,
 				F4BA6A1F1B7758CB006C8B91 /* AppDelegate.swift in Sources */,
 				8270D0471C47B2F600B49F00 /* Helpers.swift in Sources */,
+				F4DE56B61D2D0F2900871E5E /* FUITextField.m in Sources */,
 				F4F823CD1B7B41A900128B88 /* ClassTableViewController.swift in Sources */,
 				F4BA6A421B775970006C8B91 /* HttpUtil.swift in Sources */,
 				8270D04A1C47B2F600B49F00 /* NodeSet.swift in Sources */,
+				F4DE56C11D2D0F2900871E5E /* UITabBar+FlatUI.m in Sources */,
 				F41BB2421B90C0E200F0495C /* AboutViewController.swift in Sources */,
+				F4DE56B91D2D0F2900871E5E /* UIColor+FlatUI.m in Sources */,
+				F4DE56B21D2D0F2900871E5E /* FUICellBackgroundView.m in Sources */,
 				F42B1C591B779ECB004C14A4 /* HttpDelegate.swift in Sources */,
 				8270D0491C47B2F600B49F00 /* Node.swift in Sources */,
 			);

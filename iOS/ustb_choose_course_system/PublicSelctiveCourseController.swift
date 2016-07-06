@@ -50,7 +50,7 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
         }
         //添加下拉刷新
         self.refreshControl = UIRefreshControl()
-        self.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
+        self.refreshControl!.addTarget(self, action: #selector(PublicSelctiveCourseController.refresh(_:)), forControlEvents: .ValueChanged)
         self.tableView.addSubview(self.refreshControl!)
         
         parentVc.updateNotFullPublicSelectiveCourses(self, isPullToRefresh: false)

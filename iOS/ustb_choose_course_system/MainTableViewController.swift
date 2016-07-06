@@ -10,6 +10,7 @@ import UIKit
 
 class MainTableViewController: UITableViewController{
     
+    @IBOutlet weak var logoutBarItem: UIBarButtonItem!
     private var cookieData:String = ""
     
     private var loginAlertView:UIAlertView!
@@ -18,6 +19,18 @@ class MainTableViewController: UITableViewController{
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
+    }
+    
+    override func loadView() {
+        super.loadView()
+        self.view.backgroundColor = UIColor.cloudsColor()
+        self.navigationController?.navigationBar.configureFlatNavigationBarWithColor(UIColor.midnightBlueColor())
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
+        logoutBarItem.configureFlatButtonWithColor(UIColor.peterRiverColor(), highlightedColor: UIColor.belizeHoleColor(), cornerRadius: 3)
+        logoutBarItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: UIControlState.Normal)
     }
 
     override func viewDidLoad() {

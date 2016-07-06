@@ -169,6 +169,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="logoutBarItem" destination="UpS-hx-Y3l" id="Jgv-cL-Jdx"/>
                         <segue destination="rTu-ig-io5" kind="push" identifier="classTableSegue" id="2O5-a4-GQw"/>
                     </connections>
                 </tableViewController>
@@ -353,8 +354,8 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="105" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="position_and_time_or_semester" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMi-wk-D8q">
-                                            <rect key="frame" x="242" y="0.0" width="149" height="43"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="105" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="position_and_time_or_semester" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMi-wk-D8q">
+                                            <rect key="frame" x="242" y="0.0" width="78" height="43"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -381,20 +382,21 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="VdE-ak-FD2" firstAttribute="leading" secondItem="HSd-ct-xCI" secondAttribute="trailing" constant="13" id="5i5-Vc-dnv"/>
+                                        <constraint firstItem="kMi-wk-D8q" firstAttribute="leading" secondItem="VdE-ak-FD2" secondAttribute="trailing" constant="8" symbolic="YES" id="9Tx-jV-mT0"/>
                                         <constraint firstItem="jw4-JB-Oue" firstAttribute="firstBaseline" secondItem="HSd-ct-xCI" secondAttribute="firstBaseline" id="CQJ-Fi-HyT"/>
+                                        <constraint firstAttribute="trailing" secondItem="kMi-wk-D8q" secondAttribute="trailing" id="DFB-cR-feq"/>
                                         <constraint firstItem="VdE-ak-FD2" firstAttribute="firstBaseline" secondItem="HSd-ct-xCI" secondAttribute="firstBaseline" id="G9E-mP-JwW"/>
                                         <constraint firstItem="HSd-ct-xCI" firstAttribute="leading" secondItem="jw4-JB-Oue" secondAttribute="trailing" constant="8" symbolic="YES" id="XbR-0s-uCa"/>
                                         <constraint firstItem="KVq-l9-YXC" firstAttribute="top" secondItem="7Fi-hL-aUN" secondAttribute="top" id="a35-Hd-l5l"/>
                                         <constraint firstItem="jw4-JB-Oue" firstAttribute="firstBaseline" secondItem="KVq-l9-YXC" secondAttribute="firstBaseline" id="cUv-Kn-CGP"/>
                                         <constraint firstItem="jw4-JB-Oue" firstAttribute="leading" secondItem="KVq-l9-YXC" secondAttribute="trailing" constant="1" id="cZI-Zs-BEw"/>
                                         <constraint firstAttribute="bottom" secondItem="KVq-l9-YXC" secondAttribute="bottom" id="dXt-yX-vOi"/>
-                                        <constraint firstItem="kMi-wk-D8q" firstAttribute="firstBaseline" secondItem="VdE-ak-FD2" secondAttribute="firstBaseline" id="gOg-cB-49v"/>
                                         <constraint firstItem="KVq-l9-YXC" firstAttribute="leading" secondItem="7Fi-hL-aUN" secondAttribute="leadingMargin" id="hzV-GX-s2d"/>
-                                        <constraint firstItem="kMi-wk-D8q" firstAttribute="baseline" secondItem="VdE-ak-FD2" secondAttribute="baseline" id="nRS-qB-2tf"/>
                                         <constraint firstItem="HSd-ct-xCI" firstAttribute="baseline" secondItem="VdE-ak-FD2" secondAttribute="baseline" id="sEX-gn-6We"/>
-                                        <constraint firstItem="kMi-wk-D8q" firstAttribute="leading" secondItem="VdE-ak-FD2" secondAttribute="trailing" constant="8" symbolic="YES" id="tZW-Xp-R7m"/>
                                         <constraint firstItem="HSd-ct-xCI" firstAttribute="baseline" secondItem="jw4-JB-Oue" secondAttribute="baseline" id="uM3-aw-Dz0"/>
                                         <constraint firstItem="jw4-JB-Oue" firstAttribute="baseline" secondItem="KVq-l9-YXC" secondAttribute="baseline" id="uxI-b5-niS"/>
+                                        <constraint firstItem="kMi-wk-D8q" firstAttribute="firstBaseline" secondItem="VdE-ak-FD2" secondAttribute="firstBaseline" id="vxT-NB-bXd"/>
+                                        <constraint firstItem="kMi-wk-D8q" firstAttribute="baseline" secondItem="VdE-ak-FD2" secondAttribute="baseline" id="zxO-Ns-rql"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -537,6 +539,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <outlet property="showClassTableBarItem" destination="PYK-JD-LLM" id="9Ks-vn-Lbu"/>
                         <segue destination="cen-UW-aJT" kind="relationship" relationship="viewControllers" id="paL-py-m2j"/>
                         <segue destination="Pzg-BW-ATa" kind="relationship" relationship="viewControllers" id="uSd-Rm-E9u"/>
                         <segue destination="YT7-ao-jKJ" kind="relationship" relationship="viewControllers" id="tjR-xz-jYE"/>
@@ -674,7 +677,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="examListCell" id="o3w-Ip-2f7">
-                                        <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o3w-Ip-2f7" id="jU6-dl-dXy">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -808,7 +811,7 @@
                                     <constraint firstItem="bC7-cs-jgW" firstAttribute="top" secondItem="SMT-IJ-Uy8" secondAttribute="top" constant="13" id="yne-Vk-dgP"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rci-DY-cVu">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rci-DY-cVu">
                                 <rect key="frame" x="0.0" y="125" width="320" height="394"/>
                             </scrollView>
                         </subviews>
@@ -825,6 +828,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="课程表" id="Db6-rR-bTl">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="N4t-ON-mA9">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="moreBarBtnClicked:" destination="rTu-ig-io5" id="O4k-wH-Dt1"/>
                             </connections>
@@ -853,7 +857,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gwu-N6-Pfm">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gwu-N6-Pfm" customClass="FUITextField">
                                 <rect key="frame" x="81" y="231" width="194" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -879,14 +883,14 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zb1-dg-bLg">
                                 <rect key="frame" x="87" y="286" width="51" height="31"/>
                             </switch>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gjT-qg-grp">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gjT-qg-grp" customClass="FUITextField">
                                 <rect key="frame" x="81" y="141" width="194" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WlF-bc-6NW">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WlF-bc-6NW" customClass="FUIButton">
                                 <rect key="frame" x="45" y="390" width="230" height="33"/>
-                                <color key="backgroundColor" red="0.24408374783444425" green="0.86935292119565211" blue="0.34233231592992014" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.25098039215686274" green="0.8784313725490196" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <state key="normal" title="登陆">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -927,6 +931,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="localClassTableBarItem" destination="RV6-sb-bv0" id="8Kv-o9-OzP"/>
                         <outlet property="loginBtn" destination="WlF-bc-6NW" id="1pa-Er-KZU"/>
                         <outlet property="password" destination="gwu-N6-Pfm" id="sNT-9e-zYR"/>
                         <outlet property="saveProSwitch" destination="Zb1-dg-bLg" id="JaO-2D-LKv"/>
@@ -1001,6 +1006,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="课程表" id="wIP-wF-wIp">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="CKb-Of-ThT">
+                            <color key="tintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                             <connections>
                                 <action selector="lookUpOtherClassTableBtnClicked:" destination="XeO-Mz-EES" id="7w2-X9-m0d"/>
                             </connections>
@@ -1021,8 +1027,8 @@
         <image name="必修" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mCt-tp-Hkd"/>
         <segue reference="ogE-E1-AZd"/>
+        <segue reference="2O5-a4-GQw"/>
         <segue reference="aFj-EP-MOG"/>
     </inferredMetricsTieBreakers>
 </document>

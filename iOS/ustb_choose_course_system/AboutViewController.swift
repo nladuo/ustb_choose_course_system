@@ -15,8 +15,21 @@ class AboutViewController: UIViewController {
     }
     
     @IBOutlet weak var wv: UIWebView!
+    
+    override func loadView() {
+        super.loadView()
+        self.view.backgroundColor = UIColor.cloudsColor()
+        self.navigationController?.navigationBar.configureFlatNavigationBarWithColor(UIColor.midnightBlueColor())
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        let barItem = UIBarButtonItem(title: "返回 ", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        barItem.configureFlatButtonWithColor(UIColor.peterRiverColor(), highlightedColor: UIColor.belizeHoleColor(), cornerRadius: 3)
+        barItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: UIControlState.Normal)
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = barItem
         //屏幕自适应
         wv.scalesPageToFit = true
         //加载URL
