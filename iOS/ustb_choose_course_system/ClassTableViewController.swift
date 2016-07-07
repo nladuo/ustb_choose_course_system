@@ -150,7 +150,13 @@ class ClassTableViewController: UIViewController{
                 MBProgressHUD.hideHUD()
                 if self.jsonStr != nil{
                     self.jsonParser = kalen.app.JsonParser(jsonStr: self.jsonStr!)
-                    self.semester.text = self.jsonParser.getSemester()
+                    do{
+                        self.semester.text = try self.jsonParser.getSemester()
+                    }catch{
+                        self.semester.text = "无法获取学期"
+                        MBProgressHUD.showError("您已下线，请重新登录")
+                    }
+                    
                     //2、初始化课程数组所有的内容
                     self.assignStringsContent()
                     //3、根据学期来把相应的内容放到数组里面
@@ -188,7 +194,14 @@ class ClassTableViewController: UIViewController{
         }
         self.jsonStr = data as? String
         let parser = kalen.app.JsonParser(jsonStr: data! as String)
-        let beans:[kalen.app.ClassBean] = parser.getClassTableItems()
+        
+        var beans:[kalen.app.ClassBean] = []
+        do{
+            beans = try parser.getClassTableItems()
+        }catch{
+            MBProgressHUD.showError("您已下线，请重新登录")
+        }
+        
 
         for bean in beans{
             let _where = bean._where

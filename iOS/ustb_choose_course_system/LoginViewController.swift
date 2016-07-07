@@ -29,17 +29,22 @@ class LoginViewController: UIViewController, HttpDelegate{
         
     }
     
+    @IBAction func saveProSwitchToggled(sender: AnyObject) {
+        print("switch :\(saveProSwitch.on)")
+        if(!saveProSwitch.on){
+            userDefaults.setObject( "", forKey: "username")
+            userDefaults.setObject( "", forKey: "password")
+        }
+        userDefaults.setBool(saveProSwitch.on, forKey: "isOn")
+    }
+    
     /*
         根据switch来判断是否保存用户名密码
     */
     func savePro(){
-        if(!saveProSwitch.selected){
+        if(saveProSwitch.on){
             userDefaults.setObject(username.text, forKey: "username")
             userDefaults.setObject(password.text, forKey: "password")
-            
-        }else{
-            userDefaults.setObject( "", forKey: "username")
-            userDefaults.setObject( "", forKey: "password")
         }
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -80,6 +85,12 @@ class LoginViewController: UIViewController, HttpDelegate{
         if let pass:AnyObject = userDefaults.objectForKey("password"){
             password.text = pass as? String
         }
+        
+        //取出UISwitch是否选中
+        if let isOn:Bool = userDefaults.boolForKey("isOn"){
+            saveProSwitch.setOn(isOn, animated: false)
+        }
+        
     }
     
     @IBAction func localClassTableBtnClicked(sender: AnyObject) {

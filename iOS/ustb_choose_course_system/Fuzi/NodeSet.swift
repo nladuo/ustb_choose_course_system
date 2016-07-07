@@ -37,7 +37,7 @@ public class NodeSet: SequenceType {
   */
   public func generate() -> Generator {
     var index = 0
-    return anyGenerator {
+    return AnyGenerator {
       if index < self.count {
         return self[index++]
       }

@@ -19,15 +19,13 @@ extension kalen.app{
         }
         
         //已选课
-        func getSelectedCourses() ->[ClassBean]{
-            
-            return getCourses ("selectedCourses")
+        func getSelectedCourses() throws ->[ClassBean]{
+            return try getCourses ("selectedCourses")
         }
         
         //可选课
-        func getAlternativeCourses() ->[ClassBean]{
-            
-            return getCourses ("alternativeCourses")
+        func getAlternativeCourses() throws->[ClassBean]{
+            return try getCourses ("alternativeCourses")
         }
         
         //获取软件更新信息
@@ -66,11 +64,15 @@ extension kalen.app{
         }
         
         //必修课和专业选修课列表
-        func getTechingCourses()-> [ClassBean]{
+        func getTechingCourses()throws -> [ClassBean]{
             var classes:[ClassBean] = []
             let data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
             
             let obj : AnyObject! = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+            if obj == nil {
+                print("解析getTechingCourses()错误")
+                throw KBError.NotLogin
+            }
             let array = obj.objectForKey("teachingPrograms") as! [AnyObject]
             for obj2 in array {
                 let className = obj2.objectForKey("KCM") as! String
@@ -87,11 +89,15 @@ extension kalen.app{
         
         
         //已选公选课
-        func getLearnedPublicCourses() -> [ClassBean]{
+        func getLearnedPublicCourses() throws -> [ClassBean]{
             var classes:[ClassBean] = []
             let data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
             
             let obj : AnyObject! = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+            if obj == nil {
+                print("解析getLearnedPublicCourses()错误")
+                throw KBError.NotLogin
+            }
             let array = obj.objectForKey("learnedPublicCourses") as! [AnyObject]
             for obj2 in array {
                 let className = obj2.objectForKey("DYKCM") as! String
@@ -107,13 +113,18 @@ extension kalen.app{
         }
         
         //获取选课信息
-        private func getCourses(type:String) ->[ClassBean]{
+        private func getCourses(type:String) throws ->[ClassBean]{
             
             var classes:[ClassBean] = []
             let data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
             
             let obj : AnyObject! = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
-            let array = obj.objectForKey(type) as! [AnyObject]
+            if obj == nil {
+                print("解析getCourses(type: \(type))错误")
+                throw KBError.NotLogin
+            }
+            let array : [AnyObject] = obj.objectForKey(type) as! [AnyObject]
+            
             for obj2 in array {
                 let id:Int = obj2.objectForKey("ID") as! Int
                 let className = obj2.objectForKey("DYKCM") as! String
@@ -154,12 +165,17 @@ extension kalen.app{
         }
         
         //获取课表
-        func getClassTableItems() ->[ClassBean]{
+        func getClassTableItems() throws ->[ClassBean]{
             
             var classes:[ClassBean] = []
             let data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
             
             let obj : AnyObject! = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+            if obj == nil {
+                print("解析getClassTableItems()出错")
+                throw KBError.NotLogin
+            }
+            
             let array = obj.objectForKey("selectedCourses") as! [AnyObject]
 
             for obj2 in array {
@@ -219,16 +235,20 @@ extension kalen.app{
         }
         
         //获取学期
-        func getSemester() ->String{
+        func getSemester() throws ->String{
             let data = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
             
             let obj : AnyObject! = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+            if obj == nil {
+                print("解析getSemester()")
+                throw KBError.NotLogin
+            }
+            
             var array = obj.objectForKey("selectedCourses") as! [AnyObject]
             
             return array[0].objectForKey("XNXQ") as! String
             
         }
-        
         
         
         //提取课表信息

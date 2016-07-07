@@ -25,6 +25,7 @@
 		9AAFB3851B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAFB3841B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift */; };
 		F41BB2421B90C0E200F0495C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41BB2411B90C0E200F0495C /* AboutViewController.swift */; };
 		F42B1C591B779ECB004C14A4 /* HttpDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42B1C581B779ECB004C14A4 /* HttpDelegate.swift */; };
+		F43023A21D2E03DF00A19DFE /* errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43023A11D2E03DF00A19DFE /* errors.swift */; };
 		F4343F1E1B801E8800AEAB1D /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343F1A1B801E8800AEAB1D /* MBProgressHUD+MJ.m */; };
 		F4343F1F1B801E8800AEAB1D /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F4343F1B1B801E8800AEAB1D /* MBProgressHUD.bundle */; };
 		F4343F201B801E8800AEAB1D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343F1D1B801E8800AEAB1D /* MBProgressHUD.m */; };
@@ -113,6 +114,7 @@
 		9AAFB3841B7DB42800AE1D6F /* SpecifiedSelectiveCourseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecifiedSelectiveCourseController.swift; sourceTree = "<group>"; };
 		F41BB2411B90C0E200F0495C /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		F42B1C581B779ECB004C14A4 /* HttpDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpDelegate.swift; sourceTree = "<group>"; };
+		F43023A11D2E03DF00A19DFE /* errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = errors.swift; sourceTree = "<group>"; };
 		F4343F191B801E8800AEAB1D /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
 		F4343F1A1B801E8800AEAB1D /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
 		F4343F1B1B801E8800AEAB1D /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				F4FA26171B78B92500CA0F3B /* delegate */,
 				F4FA26161B78B90300CA0F3B /* util */,
 				F4BA6A3F1B775930006C8B91 /* kalen.app.swift */,
+				F43023A11D2E03DF00A19DFE /* errors.swift */,
 			);
 			name = kalen.app;
 			path = ..;
@@ -630,6 +633,7 @@
 				F4DE56BE1D2D0F2900871E5E /* UIProgressView+FlatUI.m in Sources */,
 				8270D0451C47B2F600B49F00 /* Element.swift in Sources */,
 				F4DE56C21D2D0F2900871E5E /* UITableViewCell+FlatUI.m in Sources */,
+				F43023A21D2E03DF00A19DFE /* errors.swift in Sources */,
 				8270D0501C47B58600B49F00 /* InnovativeCredit.swift in Sources */,
 				F4DE56B51D2D0F2900871E5E /* FUISwitch.m in Sources */,
 				F4DE56BC1D2D0F2900871E5E /* UINavigationBar+FlatUI.m in Sources */,

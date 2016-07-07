@@ -42,7 +42,7 @@ class DetailTableViewController: UITableViewController, UIAlertViewDelegate {
     
     override func loadView() {
         super.loadView()
-        self.view.backgroundColor = UIColor.cloudsColor()
+//        self.view.backgroundColor = UIColor.cloudsColor()
         self.navigationController?.navigationBar.configureFlatNavigationBarWithColor(UIColor.midnightBlueColor())
         
         self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()

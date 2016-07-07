@@ -12,8 +12,9 @@ let userInfo = kalen.app.UserInfo()
 
 extension kalen.app{
     class UserInfo{
-        var username:String = "";
-        var password:String = "";
+        var username:String = ""
+        var password:String = ""
+        var chooseCourseType:String = ""
         
         class func getInstance() -> UserInfo{
             

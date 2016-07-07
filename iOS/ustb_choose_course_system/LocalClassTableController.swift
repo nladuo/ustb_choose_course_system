@@ -107,7 +107,7 @@ class LocalClassTableViewController: UIViewController{
     //根据学期来操作课程显示
     func manipulateClassStringCollections(){
         
-        let beans:[kalen.app.ClassBean] = self.jsonParser.getClassTableItems()
+        let beans:[kalen.app.ClassBean] = try! self.jsonParser.getClassTableItems()
         
         for bean in beans{
             let _where = bean._where
@@ -194,7 +194,7 @@ class LocalClassTableViewController: UIViewController{
                 
                 btn.tag = i * 6 + j
                 btn.addSubview(label)
-                btn.addTarget(self, action: "classBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+                btn.addTarget(self, action: #selector(LocalClassTableViewController.classBtnClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 
                 
                 //添加到集合中
@@ -245,7 +245,7 @@ class LocalClassTableViewController: UIViewController{
         btn.layer.borderWidth = 0.3
         btn.layer.borderColor = UIColor.blackColor().CGColor
         btn.tag = -1
-        btn.addTarget(self, action: "classBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+        btn.addTarget(self, action: #selector(LocalClassTableViewController.classBtnClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         
         unkownClassLabel = UILabel(frame: CGRectMake(0, 0, 7 * CELL_WIDTH, CELL_HEIGHT))

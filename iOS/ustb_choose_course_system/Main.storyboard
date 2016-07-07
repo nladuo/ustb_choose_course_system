@@ -216,7 +216,7 @@
                             <outlet property="delegate" destination="Pzg-BW-ATa" id="NRP-7G-Arq"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="专选课" image="专选" id="dyc-eH-hXK">
+                    <tabBarItem key="tabBarItem" title="专选课" image="专选" selectedImage="专选" id="dyc-eH-hXK">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <connections>
@@ -282,7 +282,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="405" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="position_and_time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AA-KX-xto">
-                                            <rect key="frame" x="219" y="0.0" width="67" height="43"/>
+                                            <rect key="frame" x="219" y="0.0" width="101" height="43"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -291,7 +291,7 @@
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" secondItem="Atb-CD-g3X" secondAttribute="bottom" constant="-9" id="4I8-Td-qBs"/>
                                         <constraint firstItem="Atb-CD-g3X" firstAttribute="leading" secondItem="whO-OP-Wn5" secondAttribute="trailing" constant="8" symbolic="YES" id="5Oy-mQ-gGj"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="1AA-KX-xto" secondAttribute="trailing" constant="26" id="5ZL-lq-Ebe"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="1AA-KX-xto" secondAttribute="trailing" constant="-8" id="5ZL-lq-Ebe"/>
                                         <constraint firstItem="q0W-DA-ehY" firstAttribute="top" secondItem="KdK-Jx-eXD" secondAttribute="top" id="7li-dd-c1w"/>
                                         <constraint firstItem="c2i-51-jP8" firstAttribute="firstBaseline" secondItem="1AA-KX-xto" secondAttribute="firstBaseline" id="9No-JN-f4N"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="whO-OP-Wn5" secondAttribute="bottom" constant="-10" id="Agp-1X-E8T"/>
@@ -406,7 +406,7 @@
                             <outlet property="delegate" destination="YT7-ao-jKJ" id="Zu3-Vv-GVs"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="公选课" image="公选" id="1VX-yj-fjq">
+                    <tabBarItem key="tabBarItem" title="公选课" image="公选" selectedImage="公选" id="1VX-yj-fjq">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                 </tableViewController>
@@ -509,7 +509,7 @@
                             <constraint firstItem="eRn-6f-VSF" firstAttribute="top" secondItem="XwL-PC-BnK" secondAttribute="top" id="fYr-0G-kUV"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="必修" image="必修" id="eaN-2b-FF8">
+                    <tabBarItem key="tabBarItem" tag="1" title="必修" image="必修" selectedImage="必修" id="eaN-2b-FF8">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <connections>
@@ -882,6 +882,9 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zb1-dg-bLg">
                                 <rect key="frame" x="87" y="286" width="51" height="31"/>
+                                <connections>
+                                    <action selector="saveProSwitchToggled:" destination="Kra-lM-wHf" eventType="valueChanged" id="Umx-Rf-qPi"/>
+                                </connections>
                             </switch>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gjT-qg-grp" customClass="FUITextField">
                                 <rect key="frame" x="81" y="141" width="194" height="30"/>

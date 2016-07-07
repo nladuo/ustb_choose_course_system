@@ -67,10 +67,19 @@ class MainTableViewController: UITableViewController{
 //                alert.show()
 //                
 //            }else
-            if indexPath.row == 2 { //课表查询
-                performSegueWithIdentifier("classTableSegue", sender: nil)
-            }
             
+            switch indexPath.row {
+            case 0:
+                kalen.app.UserInfo.getInstance().chooseCourseType = kalen.app.ConstVal.AfterChooseCourse
+                print(kalen.app.UserInfo.getInstance().chooseCourseType)
+            case 1:
+                kalen.app.UserInfo.getInstance().chooseCourseType = kalen.app.ConstVal.PreChooseCourse
+                print(kalen.app.UserInfo.getInstance().chooseCourseType)
+            case 2:
+                performSegueWithIdentifier("classTableSegue", sender: nil)
+            default:
+                print("default")
+            }
             
         }else if indexPath.section == 1 {
             if indexPath.row == 1{
@@ -139,11 +148,9 @@ class MainTableViewController: UITableViewController{
         }else if segue.identifier == "chooseCourseSegue" { //退补选课
             let vc = segue.destinationViewController as! ChooseCourseTabBarController
             vc.cookieData = cookieData
-            vc.chooseCourseType = kalen.app.ConstVal.AfterChooseCourse
         }else if segue.identifier == "preChooseCourseSegue"{//预选课
             let vc = segue.destinationViewController as! ChooseCourseTabBarController
             vc.cookieData = cookieData
-            vc.chooseCourseType = kalen.app.ConstVal.PreChooseCourse
         }else if segue.identifier == "innovativeCreditSegue"{
             let vc = segue.destinationViewController as! InnovativeCreditController
             vc.cookieData = cookieData

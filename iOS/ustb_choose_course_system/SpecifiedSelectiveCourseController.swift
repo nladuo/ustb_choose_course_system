@@ -19,8 +19,7 @@ class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDel
         super.loadView()
         
         parentVc = self.tabBarController as! ChooseCourseTabBarController
-        //代理请求网络
-        parentVc.updateSpecifiedCourses(self, isPullToRefresh: false)
+        
         
         //添加下拉刷新
         self.refreshControl = UIRefreshControl()
@@ -36,6 +35,12 @@ class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDel
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        //代理请求网络
+        parentVc.updateSpecifiedCourses(self, isPullToRefresh: false)
     }
     
     //下拉刷新
@@ -63,7 +68,7 @@ class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDel
         MBProgressHUD.showMessage("加载中...")
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             var url = ""
-            if self.parentVc.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
+            if kalen.app.UserInfo.getInstance().chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
                 url = kalen.app.ConstVal.getSpecifiedCourseUrl(bean.kch, uid: kalen.app.UserInfo.getInstance().username)
             }else{
                 url = kalen.app.ConstVal.getPreSpecifiedCourseUrl(bean.kch, uid: kalen.app.UserInfo.getInstance().username)
@@ -77,12 +82,18 @@ class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDel
                     return
                 }
                 let parser = kalen.app.JsonParser(jsonStr: data! as String)
-                let classes = parser.getAlternativeCourses()
-                if classes.count == 0{
-                    MBProgressHUD.showError("本学期尚未开课")
-                }else{
-                    self.performSegueWithIdentifier("SpecifiedShowDetail", sender: classes)
+                var classes:[kalen.app.ClassBean] = []
+                do{
+                    classes = try parser.getAlternativeCourses()
+                    if classes.count == 0{
+                        MBProgressHUD.showError("本学期尚未开课")
+                    }else{
+                        self.performSegueWithIdentifier("SpecifiedShowDetail", sender: classes)
+                    }
+                }catch{
+                    MBProgressHUD.showError("您已下线，请重新登录")
                 }
+                
             })
             
         })
@@ -122,7 +133,7 @@ class SpecifiedSelectiveCourseController: UITableViewController, ChooseCourseDel
             let vc = segue.destinationViewController as! DetailTableViewController
             vc.datas = (sender as! [kalen.app.ClassBean])
             vc.cookieData = parentVc.cookieData
-            if parentVc.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
+            if kalen.app.UserInfo.getInstance().chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
                 vc.addUrl = kalen.app.ConstVal.ADD_SPECIFIED_COURSE_URL
             }else{
                 vc.addUrl = kalen.app.ConstVal.ADD_PRE_SPECIFIED_COURSE_URL

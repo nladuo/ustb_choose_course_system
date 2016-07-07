@@ -59,21 +59,30 @@ class ExamListController: UIViewController, UITableViewDelegate, UITableViewData
             let jsonStr = kalen.app.HttpUtil.get(url, cookieStr: self.cookieData)
             if jsonStr != nil{
                 let jsonParser = kalen.app.JsonParser(jsonStr: jsonStr as! String)
-                let semester = jsonParser.getSemester()
-                let params = ["listXnxq": semester,"uid": kalen.app.UserInfo.getInstance().username]
-                let html = kalen.app.HttpUtil.post(kalen.app.ConstVal.EXAMLIST_URL, params: params, cookieStr: self.cookieData)
-                dispatch_async(dispatch_get_main_queue(), {
-                    MBProgressHUD.hideHUD()
-                    self.semesterTextFiled.text = semester
-                    if html != nil{
-                        for exam in kalen.app.HtmlParser.getExamList(html as! String){
-                            self.datas.append(exam)
+                do{
+                    let semester = try jsonParser.getSemester()
+                    let params = ["listXnxq": semester,"uid": kalen.app.UserInfo.getInstance().username]
+                    let html = kalen.app.HttpUtil.post(kalen.app.ConstVal.EXAMLIST_URL, params: params, cookieStr: self.cookieData)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        MBProgressHUD.hideHUD()
+                        self.semesterTextFiled.text = semester
+                        if html != nil{
+                            for exam in kalen.app.HtmlParser.getExamList(html as! String){
+                                self.datas.append(exam)
+                            }
+                            self.tableview.reloadData()
+                        }else{
+                            MBProgressHUD.showError("网络错误")
                         }
-                        self.tableview.reloadData()
-                    }else{
-                        MBProgressHUD.showError("网络错误")
-                    }
-                })
+                    })
+                }catch{
+                    dispatch_async(dispatch_get_main_queue(), {
+                        MBProgressHUD.hideHUD()
+                        self.semesterTextFiled.text = "无法获得当前学期"
+                        MBProgressHUD.showError("您已下线，请重新登录")
+                    })
+                }
+                
             }else{
                 dispatch_async(dispatch_get_main_queue(), {
                     MBProgressHUD.hideHUD()
@@ -81,9 +90,6 @@ class ExamListController: UIViewController, UITableViewDelegate, UITableViewData
                     MBProgressHUD.showError("网络错误")
                 })
             }
-            dispatch_async(dispatch_get_main_queue(), {
-                MBProgressHUD.hideHUD()
-            })
         })
 
     }

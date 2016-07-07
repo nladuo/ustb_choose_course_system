@@ -77,7 +77,7 @@ internal struct LinkedCNodes: SequenceType {
   internal var types: [xmlElementType]
   func generate() -> Generator {
     var node = head
-    return anyGenerator {
+    return AnyGenerator {
       var ret = node
       while ret != nil && !self.types.contains({ $0 == ret.memory.type }) {
         ret = ret.memory.next

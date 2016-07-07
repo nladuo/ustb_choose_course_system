@@ -31,7 +31,7 @@ class ChooseCourseTabBarController: UITabBarController {
     var prerequisiteClasses:[kalen.app.ClassBean] = []
     
     //上课类型
-    var chooseCourseType = kalen.app.ConstVal.AfterChooseCourse
+//    var chooseCourseType = kalen.app.ConstVal.AfterChooseCourse
     
     override func loadView() {
         super.loadView()
@@ -53,19 +53,21 @@ class ChooseCourseTabBarController: UITabBarController {
         barItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: UIControlState.Normal)
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = barItem
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     func updateNotFullPublicSelectiveCourses(_delegate:ChooseCourseDelegate, isPullToRefresh: Bool){
+        print(kalen.app.UserInfo.getInstance().chooseCourseType)
+        
         if !isPullToRefresh{
             MBProgressHUD.showMessage("加载中")
         }
         
         var url:String = ""
-        if self.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
+        if kalen.app.UserInfo.getInstance().chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
             url = kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL
         }else{
             url = kalen.app.ConstVal.SEARCH_PRE_PUBLIC_SELECTIVE_COURSE_URL
@@ -76,9 +78,14 @@ class ChooseCourseTabBarController: UITabBarController {
                 MBProgressHUD.hideHUD()
                 if data != nil{
                     let parser = kalen.app.JsonParser(jsonStr: data! as String)
-                    self.notFullPublicClasses = parser.getAlternativeCourses()
-                    self.selectedClasses = parser.getSelectedCourses()
-                    self.learnedPublicClasses = parser.getLearnedPublicCourses()
+                    do{
+                        self.notFullPublicClasses = try parser.getAlternativeCourses()
+                        self.selectedClasses = try parser.getSelectedCourses()
+                        self.learnedPublicClasses = try parser.getLearnedPublicCourses()
+                    }catch{
+                        MBProgressHUD.showError("您已经下线，请重新登录")
+                    }
+                    
                 }else{
                     self.notFullPublicClasses = []
                     self.selectedClasses = []
@@ -95,6 +102,7 @@ class ChooseCourseTabBarController: UITabBarController {
     }
     
     func updatePrerequisiteCourses(_delegate: ChooseCourseDelegate, isPullToRefresh: Bool){
+        print(kalen.app.UserInfo.getInstance().chooseCourseType)
         //var data
         if !isPullToRefresh{
             MBProgressHUD.showMessage("加载中")
@@ -102,7 +110,7 @@ class ChooseCourseTabBarController: UITabBarController {
         
         var urlPrerequisite:String = ""
         var urlPublic:String = ""
-        if self.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
+        if kalen.app.UserInfo.getInstance().chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
             urlPrerequisite = kalen.app.ConstVal.SEARCH_PREREQUISITE_COURSE_URL
             urlPublic = kalen.app.ConstVal.SEARCH_NOT_FULL_PUBLIC_COURSE_URL
         }else{
@@ -116,14 +124,17 @@ class ChooseCourseTabBarController: UITabBarController {
             dispatch_async(dispatch_get_main_queue(), {
                 MBProgressHUD.hideHUD()
                 if (dataForPrerequisiteCourses != nil) && (dataForSelectedCoureses != nil){
-                    //必修课如果已经选择了的话，再向服务器post数据，服务器会抛出异常
-                    var parser = kalen.app.JsonParser(jsonStr: dataForSelectedCoureses! as String)
-                    self.selectedClasses = parser.getSelectedCourses()
                     
-                    //添加必修课列表
-                    //parser = nil
-                    parser = kalen.app.JsonParser(jsonStr: dataForPrerequisiteCourses! as String)
-                    self.prerequisiteClasses = parser.getTechingCourses()
+                    do{
+                        //必修课如果已经选择了的话，再向服务器post数据，服务器会抛出异常
+                        var parser = kalen.app.JsonParser(jsonStr: dataForSelectedCoureses! as String)
+                        self.selectedClasses = try parser.getSelectedCourses()
+                        //添加必修课列表
+                        parser = kalen.app.JsonParser(jsonStr: dataForPrerequisiteCourses! as String)
+                        self.prerequisiteClasses = try parser.getTechingCourses()
+                    }catch{
+                        MBProgressHUD.showError("您的账号已下线，请重新登录")
+                    }
                     
                 }else{
                     self.prerequisiteClasses = []
@@ -139,13 +150,14 @@ class ChooseCourseTabBarController: UITabBarController {
     }
     
     func updateSpecifiedCourses(_delegate: ChooseCourseDelegate, isPullToRefresh: Bool){
+        print(kalen.app.UserInfo.getInstance().chooseCourseType)
         //var data
         if !isPullToRefresh{
             MBProgressHUD.showMessage("加载中")
         }
         
         var url:String = ""
-        if self.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
+        if kalen.app.UserInfo.getInstance().chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
             url = kalen.app.ConstVal.SEARCH_SPECIFIED_COURSE_URL
         }else{
             url = kalen.app.ConstVal.SEARCH_PRE_SPECIFIED_COURSE_URL
@@ -157,8 +169,11 @@ class ChooseCourseTabBarController: UITabBarController {
                 MBProgressHUD.hideHUD()
                 if data != nil{
                     let parser = kalen.app.JsonParser(jsonStr: data! as String)
-                    self.specifiedClasses = parser.getTechingCourses()
-                    
+                    do{
+                        self.specifiedClasses = try parser.getTechingCourses()
+                    }catch{
+                        MBProgressHUD.showError("您已经下线，请重新登录")
+                    }
                 }else{
                     self.specifiedClasses = []
                     MBProgressHUD.showError("网络连接错误")

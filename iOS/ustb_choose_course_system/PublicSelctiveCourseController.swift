@@ -45,18 +45,24 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
         super.loadView()
         parentVc = self.tabBarController as!
         ChooseCourseTabBarController
-        if parentVc.chooseCourseType == kalen.app.ConstVal.PreChooseCourse{
-            sectionName[0] = "全部公选课"
-        }
+        
         //添加下拉刷新
         self.refreshControl = UIRefreshControl()
         self.refreshControl!.addTarget(self, action: #selector(PublicSelctiveCourseController.refresh(_:)), forControlEvents: .ValueChanged)
         self.tableView.addSubview(self.refreshControl!)
         
-        parentVc.updateNotFullPublicSelectiveCourses(self, isPullToRefresh: false)
+        
         
         self.navigationController!.navigationBar.translucent = false
         self.tabBarController!.tabBar.translucent = false
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if kalen.app.UserInfo.getInstance().chooseCourseType == kalen.app.ConstVal.PreChooseCourse{
+            sectionName[0] = "全部公选课"
+        }
+        parentVc.updateNotFullPublicSelectiveCourses(self, isPullToRefresh: false)
     }
     
     //下拉刷新
@@ -125,7 +131,7 @@ class PublicSelctiveCourseController: UITableViewController, ChooseCourseDelegat
                         "kxh": bean.KXH,
                         "uid": kalen.app.UserInfo.getInstance().username]
                     var removeUrl = ""
-                    if self.parentVc.chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
+                    if kalen.app.UserInfo.getInstance().chooseCourseType == kalen.app.ConstVal.AfterChooseCourse{
                         removeUrl = kalen.app.ConstVal.REMOVE_COURSE_URL
                     }else{
                         removeUrl = kalen.app.ConstVal.REMOVE_PRE_COURSE_URL
