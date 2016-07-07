@@ -35,7 +35,6 @@
 		F4BA6A1F1B7758CB006C8B91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA6A1E1B7758CB006C8B91 /* AppDelegate.swift */; };
 		F4BA6A211B7758CB006C8B91 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA6A201B7758CB006C8B91 /* LoginViewController.swift */; };
 		F4BA6A261B7758CB006C8B91 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4BA6A251B7758CB006C8B91 /* Images.xcassets */; };
-		F4BA6A291B7758CB006C8B91 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4BA6A271B7758CB006C8B91 /* LaunchScreen.xib */; };
 		F4BA6A351B7758CB006C8B91 /* ustb_choose_course_systemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA6A341B7758CB006C8B91 /* ustb_choose_course_systemTests.swift */; };
 		F4BA6A401B775930006C8B91 /* kalen.app.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA6A3F1B775930006C8B91 /* kalen.app.swift */; };
 		F4BA6A421B775970006C8B91 /* HttpUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA6A411B775970006C8B91 /* HttpUtil.swift */; };
@@ -129,7 +128,6 @@
 		F4BA6A1E1B7758CB006C8B91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4BA6A201B7758CB006C8B91 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F4BA6A251B7758CB006C8B91 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		F4BA6A281B7758CB006C8B91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		F4BA6A2E1B7758CB006C8B91 /* ustb_choose_course_systemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ustb_choose_course_systemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4BA6A331B7758CB006C8B91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4BA6A341B7758CB006C8B91 /* ustb_choose_course_systemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ustb_choose_course_systemTests.swift; sourceTree = "<group>"; };
@@ -483,7 +481,6 @@
 		F4FA26251B78C5B100CA0F3B /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				F4BA6A271B7758CB006C8B91 /* LaunchScreen.xib */,
 				F4F0F5F51B7A1C7900E9549D /* Main.storyboard */,
 			);
 			name = ui;
@@ -573,7 +570,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4BA6A291B7758CB006C8B91 /* LaunchScreen.xib in Resources */,
 				F4343F1F1B801E8800AEAB1D /* MBProgressHUD.bundle in Resources */,
 				F4DE56CA1D2D0F2900871E5E /* Lato-Italic.ttf in Resources */,
 				F4DE56C41D2D0F2900871E5E /* FlatUIKit.podspec in Resources */,
@@ -682,17 +678,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		F4BA6A271B7758CB006C8B91 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F4BA6A281B7758CB006C8B91 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		F4BA6A361B7758CB006C8B91 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -776,7 +761,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
@@ -797,7 +782,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";

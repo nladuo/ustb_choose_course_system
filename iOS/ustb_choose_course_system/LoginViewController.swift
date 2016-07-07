@@ -54,6 +54,7 @@ class LoginViewController: UIViewController, HttpDelegate{
     
     override func loadView() {
         super.loadView()
+        print(UIColor.turquoiseColor())
         //navigationbar
         self.view.backgroundColor = UIColor.cloudsColor()
         self.navigationController?.navigationBar.configureFlatNavigationBarWithColor(UIColor.midnightBlueColor())
@@ -73,6 +74,7 @@ class LoginViewController: UIViewController, HttpDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSThread.sleepForTimeInterval(2.0)
         
         password.secureTextEntry = true
         loginBtn.layer.cornerRadius = 7.0   //添加圆角
@@ -89,6 +91,8 @@ class LoginViewController: UIViewController, HttpDelegate{
         //取出UISwitch是否选中
         if let isOn:Bool = userDefaults.boolForKey("isOn"){
             saveProSwitch.setOn(isOn, animated: false)
+        }else{
+            saveProSwitch.setOn(true, animated: false)
         }
         
     }
