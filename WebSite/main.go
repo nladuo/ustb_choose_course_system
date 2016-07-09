@@ -94,7 +94,8 @@ func handleCheckUpdate(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"id":          app.Id,
 		"version":     app.Version,
-		"update_note": app.AppName,
+		"app_name":    app.AppName,
+		"update_note": app.UpdateNote,
 	})
 	db.Close()
 }
