@@ -4,14 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorCloud"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <com.astuetz.PagerSlidingTabStrip
-        android:id="@+id/tab_indicator"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        app:pstsShouldExpand="true"/>
 
     <LinearLayout
         android:paddingLeft="16dp"
@@ -48,7 +46,7 @@
         <TextView
             android:text="@string/password"
             android:textSize="19sp"
-            android:layout_marginRight="10dip"
+            android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
@@ -59,7 +57,8 @@
             android:layout_weight="1"/>
     </LinearLayout>
 
-    <CheckBox
+    <com.rey.material.widget.CheckBox
+        style="@style/Material.Drawable.CheckBox"
         android:layout_margin="20dp"
         android:id="@+id/login_is_save_pass"
         android:gravity="center"
@@ -69,14 +68,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <Button
+    <com.rey.material.widget.Button
+        style="@style/LightRaiseColorButtonRippleStyle"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:textSize="19sp"
+        android:textSize="17sp"
         android:text="@string/login"
         android:id="@+id/login_login_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="38dp"
+        app:rd_enable="true"
+        />
 
 </LinearLayout>

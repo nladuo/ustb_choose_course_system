@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_margin="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/colorCloud"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
-        android:background="#ffdddddd"
+        android:padding="2dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -19,15 +23,21 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
-        <Button
+
+        <com.rey.material.widget.Button
+            style="@style/LightRaiseColorButtonRippleStyle"
             android:id="@+id/exam_info_search_btn"
             android:textSize="17sp"
             android:text="@string/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="80dp"
+            android:layout_height="38dp"
+            app:rd_enable="true" />
+
     </LinearLayout>
 
     <LinearLayout
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -57,9 +67,13 @@
             android:text="考试地点"
             android:gravity="center"
             android:layout_height="wrap_content" />
-
-
     </LinearLayout>
+
+    <View
+        android:background="@drawable/shape_line"
+        android:layout_width="fill_parent"
+        android:layout_height="1.5px" />
+
     <ListView
         android:id="@+id/examinfos_lv"
         android:layout_width="match_parent"

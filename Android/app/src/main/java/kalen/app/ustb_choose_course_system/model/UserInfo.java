@@ -11,6 +11,7 @@ public class UserInfo {
     public static UserInfo getInstance(){
         if(userInfo == null){
             userInfo = new UserInfo();
+            userInfo.haveCheckUpdate = false;
         }
 
         return userInfo;
@@ -21,6 +22,15 @@ public class UserInfo {
     private String password;
     private CookieStore cookieStore;
     private String chooseCourseType;
+    private boolean haveCheckUpdate;
+
+    public boolean isHaveCheckUpdate() {
+        return haveCheckUpdate;
+    }
+
+    public void setHaveCheckUpdate(boolean haveCheckUpdate) {
+        this.haveCheckUpdate = haveCheckUpdate;
+    }
 
     public CookieStore getCookieStore() {
         return cookieStore;

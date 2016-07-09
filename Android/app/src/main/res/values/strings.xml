@@ -17,6 +17,5 @@
     <string name="about_soft">关于本软件</string>
     <string name="checkout_update">检查软件更新</string>
     <string name="save_pass">记住密码</string>
-
-
+    <string name="local_class_table">查看本地课表</string>
 </resources>

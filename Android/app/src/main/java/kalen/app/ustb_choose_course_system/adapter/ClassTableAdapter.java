@@ -61,7 +61,7 @@ public class ClassTableAdapter extends RecyclerView.Adapter<MyViewHolder> {
             }
         }else{
             holder.tView.setText(getFirstThreeLines(mDatas[position]));
-            holder.tView.setTextColor(Color.BLUE);
+            holder.tView.setTextColor(Color.argb(255, 0x03, 0xA9, 0xF4));
             if(holder.iView != null) {
                 holder.iView.setVisibility(View.VISIBLE);
             }

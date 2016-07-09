@@ -1,22 +1,15 @@
 package kalen.app.ustb_choose_course_system.ui;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import kalen.app.ustb_choose_course_system.R;
 import kalen.app.ustb_choose_course_system.adapter.InnovateCreditAdapter;
@@ -25,7 +18,6 @@ import kalen.app.ustb_choose_course_system.model.InnovateCredit;
 import kalen.app.ustb_choose_course_system.model.UserInfo;
 import kalen.app.ustb_choose_course_system.utils.HtmlParser;
 import kalen.app.ustb_choose_course_system.utils.HttpUtils;
-import kalen.app.ustb_choose_course_system.utils.JsonParser;
 
 /**
  * Created by kalen on 15-11-24.

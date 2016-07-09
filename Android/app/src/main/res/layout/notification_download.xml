@@ -3,8 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:padding="10dp"
-    >
+    android:padding="10dp">
     <ImageView android:id="@+id/download_noti_image"
         android:layout_width="40dp"
         android:layout_height="40dp"

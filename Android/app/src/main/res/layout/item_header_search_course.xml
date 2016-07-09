@@ -2,10 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:paddingBottom="5dp"
-    android:paddingTop="5dp"
+    android:paddingBottom="12dp"
+    android:paddingTop="12dp"
+    android:background="@color/colorCloud"
     android:orientation="vertical" >
     <TextView
+        android:background="@color/colorCloud"
         android:id="@+id/item_search_header"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

@@ -1,6 +1,5 @@
 package kalen.app.ustb_choose_course_system.ui;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
+import com.rey.material.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,6 +18,7 @@ import org.apache.http.client.CookieStore;
 import java.util.HashMap;
 import java.util.Map;
 import kalen.app.ustb_choose_course_system.R;
+import kalen.app.ustb_choose_course_system.async_task.CheckUpdateAsyncTask;
 import kalen.app.ustb_choose_course_system.model.ConstVal;
 import kalen.app.ustb_choose_course_system.model.UserInfo;
 import kalen.app.ustb_choose_course_system.utils.HttpUtils;
@@ -35,6 +35,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initViews();
+        //后台检查更新
+        if (!UserInfo.getInstance().isHaveCheckUpdate()){
+            new CheckUpdateAsyncTask(this, false).execute();
+            UserInfo.getInstance().setHaveCheckUpdate(true);
+        }
     }
 
     private void initViews() {

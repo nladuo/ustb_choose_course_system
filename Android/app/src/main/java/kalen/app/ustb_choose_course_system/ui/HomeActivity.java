@@ -1,33 +1,23 @@
 package kalen.app.ustb_choose_course_system.ui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import kalen.app.ustb_choose_course_system.R;
 import kalen.app.ustb_choose_course_system.model.ConstVal;
 import kalen.app.ustb_choose_course_system.model.UserInfo;
-import kalen.app.ustb_choose_course_system.service.DownLoadService;
 import kalen.app.ustb_choose_course_system.ui.choose_course.ChooseCourseActivity;
 import kalen.app.ustb_choose_course_system.utils.HttpUtils;
 import kalen.app.ustb_choose_course_system.utils.JsonParser;
+import kalen.app.ustb_choose_course_system.async_task.CheckUpdateAsyncTask;
 
 /**
  * Created by kalen on 15-8-12.
@@ -68,7 +58,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.home_rl_checkout_update:
-                new CheckUpdateAsyncTask().execute();
+                new CheckUpdateAsyncTask(HomeActivity.this, true).execute();
                 break;
 
             case R.id.home_rl_search_innovate_credit:
@@ -107,7 +97,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 builder2.setPositiveButton("取消", null);
                 AlertDialog alertDialog2 = builder2.create();
                 alertDialog2.show();
-
+                break;
         }
     }
 
@@ -154,123 +144,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    class CheckUpdateAsyncTask extends AsyncTask<Void, Void, String>{
-        ProgressDialog progressDialog;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog = ProgressDialog.show(HomeActivity.this,
-                    "请等待...", "正在加载中...", true, false);
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            String jsonData;
-            try {
-                jsonData = HttpUtils.get(ConstVal.APP_UPDATE_CHECK_URL,null);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-            return jsonData;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            progressDialog.dismiss();
-            if (s == null){
-                Toast.makeText(HomeActivity.this,
-                        "加载失败，请检查网络配置", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            try {
-                JsonParser parser = new JsonParser(s);
-                JSONObject object = parser.getJsonObject();
-                double version = object.getDouble("version");
-                //Check whether need to update
-                if ((version - ConstVal.VERSION) > 0.001){
-                    // need to update
-                    String releasedNote = object.getString("update_note");
-                    final String appName = object.getString("app_name");
-                    AlertDialog dialog = new AlertDialog
-                            .Builder(HomeActivity.this)
-                            .setTitle("提示")
-                            .setMessage("当前版本号:" + ConstVal.VERSION
-                                    + "\n最新版本号:" + version
-                                    + "\n更新说明:" + releasedNote)
-                            .setNegativeButton("确定", null)
-                            .setPositiveButton("下载更新", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Toast.makeText(HomeActivity.this, "开始下载...", Toast.LENGTH_SHORT).show();
-                                    startDownload(appName,
-                                            ConstVal.APP_DOWNLOAD_URL);
-                                }
-                            })
-                            .create();
-                    dialog.show();
 
 
-                }else{
-                    AlertDialog dialog = new AlertDialog
-                            .Builder(HomeActivity.this)
-                            .setTitle("提示")
-                            .setMessage("已经是最新版本")
-                            .setNegativeButton("确定", null)
-                            .create();
-                    dialog.show();
 
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-                Toast.makeText(HomeActivity.this,
-                        "内部解析错误", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    void startDownload(String filename, String url){
-
-        final String downloadFilename = filename;
-        final String downloadUrl = url;
-
-
-        Intent intent=new Intent(this,DownLoadService.class);
-        bindService(intent, new ServiceConnection(){
-            @Override
-            public void onServiceConnected(ComponentName componentName,
-                                           IBinder binder) {
-
-                DownLoadService downLoadService=((DownLoadService.MyBinder)binder)
-                        .getService();
-                downLoadService.getTask().execute(downloadFilename,
-                        downloadUrl);
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName componentName) {}
-        }, Context.BIND_AUTO_CREATE);
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        new MenuInflater(getApplication())
-                .inflate(R.menu.menu_login, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_about:
-                startActivity(new Intent(this, AboutActivity.class));
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="#77ff0000"
+    android:background="@color/material_grey_850"
     android:layout_width="140dp"
     android:layout_height="match_parent">
     <TextView
-        android:layout_margin="1dp"
-        android:background="@color/light_gray"
+        android:layout_margin="1px"
+        android:background="@color/colorCloud"
         android:id="@+id/item_normal_class"
         android:textColor="@color/black"
         android:textSize="12sp"

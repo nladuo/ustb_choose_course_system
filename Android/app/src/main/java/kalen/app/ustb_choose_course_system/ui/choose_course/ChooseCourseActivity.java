@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
@@ -14,7 +13,6 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 import kalen.app.ustb_choose_course_system.R;
-import kalen.app.ustb_choose_course_system.model.ConstVal;
 
 /**
  * Created by kalen on 15-8-16.
@@ -35,17 +33,14 @@ public class ChooseCourseActivity extends AppCompatActivity {
         initPager();
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        // do nothing for avoiding activity exception
-        //super.onSaveInstanceState(outState, outPersistentState);
-    }
+
 
     private void initPager() {
         pager = (ViewPager) findViewById(R.id.choose_course_viewpager);
         tabStrip = (PagerTabStrip) findViewById(R.id.choose_course_tabstrip);
         tabStrip.setDrawFullUnderline(false);
-        tabStrip.setTabIndicatorColor(Color.BLUE);
+
+        tabStrip.setTabIndicatorColor(Color.argb(255, 0x03, 0xA9, 0xF4));
         tabStrip.setTextSpacing(200);
 
         titleContainer.add("必修课");
@@ -82,6 +77,12 @@ public class ChooseCourseActivity extends AppCompatActivity {
         };
         pager.setAdapter(mAdapter);
 
+    }
+
+    // do nothing for avoiding activity exception
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        //super.onSaveInstanceState(outState, outPersistentState);
     }
 
     @Override
