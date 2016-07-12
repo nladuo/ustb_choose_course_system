@@ -14,7 +14,7 @@
                 <tr v-for="app in apps">
                     <td> {{app.type_name}} </td>
                     <td> {{app.version}} </td>
-                    <td><a href="/downloads/{{app.appName}}"> {{app.appName}}  </a></td>
+                    <td><a href="/downloads/{{app.app_name}}"> {{app.app_name}}  </a></td>
                     <td> {{app.note}} </td>
                 </tr>
             </tbody>
