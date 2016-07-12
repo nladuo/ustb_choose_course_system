@@ -36,38 +36,38 @@
                     <div class="row">
                         <div class="col-xs-2" style="padding: 0;">
                             <center class="comment-offset2">
-                                <span style="word-break: break-all;font-size: 14px;"> {{comment.Nickname}} </span><br>
+                                <span style="word-break: break-all;font-size: 14px;"> {{comment.nickname}} </span><br>
                             </center>
                         </div>
                         <div class="col-xs-10">
-                            <p class="comment-offset"> {{comment.Content}} </p><br>
+                            <p class="comment-offset"> {{comment.content}} </p><br>
                             <div v-if="comment.show_reply_form" >
                                 <reply_form :comment="comment"></reply_form>
                             </div>
                             <button class="btn btn-primary btn-xs comment-offset comment-btn-offset" v-else v-on:click="show_reply_form(comment)">回复</button>
-                            <time class="time1"> {{new Date(comment.Time).Format("yyyy-MM-dd  hh:mm:ss")}} </time>
+                            <time class="time1"> {{new Date(comment.time).Format("yyyy-MM-dd  hh:mm:ss")}} </time>
                             <br/>
                         </div>
                     </div>
                     <ul class="list-group">
-                        <li v-for="reply in comment.Replys" class="list-group-item">
+                        <li v-for="reply in comment.replys" class="list-group-item">
                             <div class="row">
                                 <div class="col-xs-2" style="padding-right:0;margin: 0;">
                                     <center style="word-break: break-all;">
-                                        <span style="font-size: 14px;"> {{reply.Nickname}}&nbsp;
+                                        <span style="font-size: 14px;"> {{reply.nickname}}&nbsp;
                                             <span class="reply">回复</span>&nbsp;
-                                            {{reply.ReplyerName}}
+                                            {{reply.replyer_name}}
                                         </span><br>
                                     </center>
 
                                 </div>
                                 <div class="col-xs-10">
-                                    <p> {{reply.Content}} </p>
+                                    <p> {{reply.content}} </p>
                                     <div v-if="reply.show_reply_form" >
                                         <reply_form :comment="reply"></reply_form>
                                     </div>
                                     <button class="btn btn-primary btn-xs" v-else v-on:click="show_reply_form(reply)">回复</button>
-                                    <time class="time2"> {{new Date(reply.Time).Format("yyyy-MM-dd  hh:mm:ss")}} </time>
+                                    <time class="time2"> {{new Date(reply.time).Format("yyyy-MM-dd  hh:mm:ss")}} </time>
                                     <br/>
                                 </div>
                             </div>
@@ -107,8 +107,8 @@
                 for (var i = 0; i < this.comments.length; i++) {
                     var comment = this.comments[i];
                     comment.show_reply_form = false;
-                    for (var j = 0; j < comment.Replys.length; j++){
-                        var reply = comment.Replys[j]
+                    for (var j = 0; j < comment.replys.length; j++){
+                        var reply = comment.replys[j]
                         reply.show_reply_form = false;
                     }
                 }
@@ -124,7 +124,7 @@
                 for (var i = 0; i < comment_list.length; i++) {
                     var comment = comment_list[i];
                     comment.show_reply_form = false;
-                    comment.Replys = this.parse_replys(list, comment.Id);
+                    comment.replys = this.parse_replys(list, comment.id);
                     this.comments.push(comment);
                 }
             },
@@ -132,7 +132,7 @@
                 var comments =[];
                 for (var i = 0; i < list.length; i++) {
                     var comment = list[i];
-                    if (comment.ParentId == parent_id) {
+                    if (comment.parent_id == parent_id) {
                         comments.push(comment);
                     }
                 }
@@ -148,7 +148,7 @@
                         reply.show_reply_form = false;
                         //递归添加回复，如果下面还有回复的话就添加
                         comment_replys.push(reply);
-                        parse_replys_by_parent_id(list, reply.Id);
+                        parse_replys_by_parent_id(list, reply.id);
                     }
                 }
                 parse_replys_by_parent_id(list, parent_id);

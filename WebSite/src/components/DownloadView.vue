@@ -12,10 +12,10 @@
             </thead>
             <tbody>
                 <tr v-for="app in apps">
-                    <td> {{app.TypeName}} </td>
-                    <td> {{app.Version}} </td>
-                    <td><a href="/downloads/{{app.AppName}}"> {{app.AppName}}  </a></td>
-                    <td> {{app.Note}} </td>
+                    <td> {{app.type_name}} </td>
+                    <td> {{app.version}} </td>
+                    <td><a href="/downloads/{{app.appName}}"> {{app.appName}}  </a></td>
+                    <td> {{app.note}} </td>
                 </tr>
             </tbody>
         </table>

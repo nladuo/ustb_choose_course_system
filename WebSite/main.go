@@ -22,21 +22,21 @@ const (
 const DEFAULT_POST = "DEFAULT_POST"
 
 type App struct {
-	Id         int `sql:"AUTO_INCREMENT"`
-	TypeName   string
-	AppName    string
-	Version    float64
-	Note       string
-	UpdateNote string
+	Id         int     `json:"id"`
+	TypeName   string  `json:"type_name"`
+	AppName    string  `json:"app_name"`
+	Version    float64 `json:"version"`
+	Note       string  `json:"note"`
+	UpdateNote string  `json:"update_note"`
 }
 
 type MessageBoard struct {
-	Id          int `sql:"AUTO_INCREMENT"`
-	ParentId    int
-	Nickname    string
-	ReplyerName string
-	Content     string
-	Time        time.Time
+	Id          int       `json:"id"`
+	ParentId    int       `json:"parent_id"`
+	Nickname    string    `json:"nickname"`
+	ReplyerName string    `json:"replyer_name"`
+	Content     string    `json:"content"`
+	Time        time.Time `json:"time"`
 }
 
 func main() {
