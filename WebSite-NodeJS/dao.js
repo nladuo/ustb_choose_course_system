@@ -12,7 +12,7 @@ conn.connect();
 
 var db = {
 	queryAPPInfo: function(operation){
-		conn.query('select * from `app`',
+		conn.query('select * from `apps`',
 			function(err, results){
 				if(err){
 					throw err;
@@ -25,7 +25,7 @@ var db = {
 
 	addMessage: function(param, operation){
 
-		conn.query('INSERT INTO message_board(id, parent_id ,nickname , replyer_name, content, time) VALUES(0, ?, ?, ?, ?, ?)',
+		conn.query('INSERT INTO message_boards(id, parent_id ,nickname , replyer_name, content, time) VALUES(0, ?, ?, ?, ?, ?)',
 			[
 				param.parent_id,
 				param.nickname,
@@ -45,7 +45,7 @@ var db = {
 	},
 
 	queryMessageBoard:  function(operation){
-		conn.query('select * from `message_board`',
+		conn.query('select * from `message_boards`',
 			function(err, results){
 				if(err){
 					throw err;
