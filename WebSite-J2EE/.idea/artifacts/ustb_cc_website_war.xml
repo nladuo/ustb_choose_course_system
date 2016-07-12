@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="ustb_cc_website:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="ustb_cc_wesite.war">
-      <element id="artifact" artifact-name="ustb_cc_website:war exploded" />
-    </root>
-  </artifact>
-</component>
