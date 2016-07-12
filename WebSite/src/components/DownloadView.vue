@@ -32,7 +32,7 @@
         },
         created () {
             let that = this;
-            request.get('/api/app_list')
+            request.get('api/app_list')
                     .set('Accept', 'application/json')
                     .end(function(err, res){
                         if (err == null){

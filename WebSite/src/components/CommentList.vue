@@ -93,7 +93,7 @@
         },
         created () {
             let that = this;
-            request.get('/api/comment_list')
+            request.get('api/comment_list')
                     .set('Accept', 'application/json')
                     .end(function(err, res){
                         if (err == null){
